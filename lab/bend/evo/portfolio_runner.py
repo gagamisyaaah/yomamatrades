@@ -18,7 +18,7 @@ from mine import ta  # noqa: E402
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--tag", default="_stop0"); ap.add_argument("--slots", type=int, default=15); ap.add_argument("--per-trade", type=float, default=10000)
-    ap.add_argument("--cap-min", type=float, default=5e8); ap.add_argument("--cap-max", type=float, default=5e9); ap.add_argument("--atr-min", type=float, default=5.0); ap.add_argument("--gate", action="store_true", help="skip entries while the 21-SMA is > 5 % below the 200-SMA")
+    ap.add_argument("--cap-min", type=float, default=5e8); ap.add_argument("--cap-max", type=float, default=5e9); ap.add_argument("--atr-min", type=float, default=5.0); ap.add_argument("--gate", action="store_true", help="skip entries while the 21-SMA is > 5 % below the 200-SMA"); ap.add_argument("--rank", default="", help="when slots are scarce on a day, take the highest values of this column first (e.g. bvol)"); ap.add_argument("--min-bvol", type=float, default=0.0)
     a = ap.parse_args()
     T = pd.read_csv(ROOT / f"bend/data/hole_flatten{a.tag}.csv", parse_dates=["date"])
     T = T[(T.kind == "hole up") & (T.cap >= a.cap_min) & (T.cap <= a.cap_max)].sort_values("date")
@@ -35,8 +35,10 @@ def main():
             ent = o[i + 1]; path = c[i + 1:j + 1] / ent - 1.0
             if r.reason == "stop":
                 path = np.minimum(path, r.ret / 100.0); path[-1] = r.ret / 100.0
-            kept.append({"ticker": t, "start": df.date.iloc[i + 1], "dates": df.date.iloc[i + 1:j + 1].values, "path": path})
-    kept.sort(key=lambda x: x["start"])
+            if a.min_bvol > 0 and not (getattr(r, "bvol", 0) >= a.min_bvol):
+                continue
+            kept.append({"ticker": t, "start": df.date.iloc[i + 1], "dates": df.date.iloc[i + 1:j + 1].values, "path": path, "rank": float(getattr(r, a.rank, 0) or 0) if a.rank else 0.0})
+    kept.sort(key=lambda x: (x["start"], -(x.get("rank") or 0)))
     # slot allocation in date order; equity marked daily = cash + open positions
     open_ = []; pnl = {}; taken = 0; missed = 0
     for tr in kept:
@@ -51,7 +53,7 @@ def main():
     eq = pd.Series(pnl).sort_index().cumsum(); base = a.slots * a.per_trade
     equity = base + eq; peak = equity.cummax(); dd = (equity / peak - 1.0)
     years = (equity.index[-1] - equity.index[0]).days / 365.25
-    print(f"RUNNER portfolio · {a.slots} slots × ${a.per_trade:,.0f} (base ${base:,.0f}) · cap ${a.cap_min/1e9:.1f}–{a.cap_max/1e9:.0f}B · ATR ≥ {a.atr_min} % · gate {'ON' if a.gate else 'off'} · stop tag {a.tag}")
+    print(f"RUNNER portfolio · {a.slots} slots × ${a.per_trade:,.0f} (base ${base:,.0f}) · cap ${a.cap_min/1e9:.1f}–{a.cap_max/1e9:.0f}B · ATR ≥ {a.atr_min} % · gate {'ON' if a.gate else 'off'} · stop tag {a.tag} · rank by {a.rank or 'date order'}{' · break volume ≥ ' + str(a.min_bvol) if a.min_bvol else ''}")
     print(f"  trades taken {taken}, missed (slots full) {missed}, skipped ATR {skipped_atr}, skipped gate {skipped_gate}")
     print(f"  final ${equity.iloc[-1]:,.0f} → {(equity.iloc[-1]/base)**(1/years)-1:+.1%}/yr over {years:.1f} y · max drawdown {dd.min():.1%} on {dd.idxmin().date()} · worst year {equity.resample('YE').last().pct_change().min():+.1%}")
     yr = equity.resample("YE").last(); print("  per year: " + "  ".join(f"{d.year} {v:+.0%}" for d, v in yr.pct_change().dropna().items()))

@@ -37,6 +37,7 @@ def scan_one(args):
     if gold is not None:
         B["gold"] = np.nan; B.loc[B.index[-1], "gold"] = gold[0]; B.loc[B.index[-2], "gold"] = gold[1]
     last = B.iloc[-1]; prev = B.iloc[-2]; atr = float(ta.atr(df, 14).iloc[-1]); close = float(df.close.iloc[-1]); res = []
+    downtrend = bool(df.close.rolling(21).mean().iloc[-1] < df.close.rolling(200).mean().iloc[-1] * 0.95)
     for fam, conds in rules.items():
         if any(b not in B for b, _, _ in conds):
             continue
@@ -46,7 +47,7 @@ def scan_one(args):
         if not on:
             continue
         was_on = holds(prev) and all(not np.isnan(prev[b]) for b, _, _ in conds)
-        res.append({"ticker": t, "family": fam, "new": not was_on, "date": str(df.date.iloc[-1].date()), "close": close, "atr": atr, "atr_pct": round(atr / close * 100, 2),
+        res.append({"ticker": t, "family": fam, "new": not was_on, "date": str(df.date.iloc[-1].date()), "close": close, "atr": atr, "atr_pct": round(atr / close * 100, 2), "downtrend": downtrend,
                     "blocks": [{"block": b, "op": op, "thr": thr, "value": round(float(last[b]), 4)} for b, op, thr in conds],
                     "plan": {"entry": "next open (or live price if within +0.5 ATR of the close)", "target": round(close + 2 * atr, 2), "stop": round(close - 4 * atr, 2), "time_stop_bars": 20},
                     "context": {"hi252": round(float(last.get("hi252", np.nan)), 1), "struct": float(last.get("struct", np.nan)), "retrace": round(float(last.get("retrace", np.nan)), 2), "eff20": round(float(last.get("eff20", np.nan)), 2), "rng20": round(float(last.get("rng20", np.nan)), 2), "volr20": round(float(last.get("volr20", np.nan)), 2), "dvol20_M": round(10 ** float(last.get("dvol20", np.nan)) / 1e6, 1)}})
@@ -80,11 +81,12 @@ def main():
             if brk is None:
                 continue
             atr = float(ta.atr(df, 14).iloc[-1]); close = float(df.close.iloc[-1]); atr_pct = atr / close * 100
+            downtrend = bool(df.close.rolling(21).mean().iloc[-1] < df.close.rolling(200).mean().iloc[-1] * 0.95)
             v = df.volume.astype(float); sma20 = float(v.rolling(20).mean().iloc[brk]) if brk >= 20 else float("nan")
             bvol = float(max(v.iloc[brk], v.iloc[brk - 1]) / sma20) if sma20 and sma20 > 0 else float("nan")
             dvol = float((df.close * df.volume).tail(20).mean() / 1e6)
             in_uni = (u["cap_min"] <= cap <= u["cap_max"]) and atr_pct >= u["atr_pct_min"] if not np.isnan(cap) else False
-            out.append({"ticker": t, "family": "RUNNER", "new": (n - 1 - brk) <= 3, "date": str(df.date.iloc[-1].date()), "close": close, "atr": atr, "atr_pct": round(atr_pct, 2), "cap_B": round(cap / 1e9, 2) if not np.isnan(cap) else None, "in_universe": bool(in_uni),
+            out.append({"ticker": t, "family": "RUNNER", "new": (n - 1 - brk) <= 3, "date": str(df.date.iloc[-1].date()), "close": close, "atr": atr, "atr_pct": round(atr_pct, 2), "cap_B": round(cap / 1e9, 2) if not np.isnan(cap) else None, "in_universe": bool(in_uni), "downtrend": downtrend,
                         "bars_since_break": int(n - 1 - brk), "break_vol_ratio": round(bvol, 2), "dvol20_M": round(dvol, 1), "hole_level": round(float(df.close.iloc[brk]), 2),
                         "blocks": [{"block": "hole_up", "op": "=", "thr": 1, "value": 1}, {"block": "fresh", "op": "=", "thr": 1, "value": int((n - 1 - brk) <= 3)}, {"block": "break volume ×20d", "op": "≥", "thr": 1.5, "value": round(bvol, 2)}, {"block": "ATR %", "op": "≥", "thr": u["atr_pct_min"], "value": round(atr_pct, 2)}],
                         "plan": {"entry": "next open (the break is confirmed at the close)", "target": None, "stop": "hole breaks down (two closes below the lower level) — the hold IS the trade", "time_stop_bars": None},

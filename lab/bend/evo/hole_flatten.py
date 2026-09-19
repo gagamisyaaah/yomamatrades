@@ -67,12 +67,15 @@ def main():
         if len(df) != len(f) or len(df) < 300:
             continue
         hole_up = (f & 1) > 0; hole_dn = (f & 2) > 0; slope = te_slope(df); atrv = ta.atr(df, 14).values
+        vol = df.volume.astype(float); sma20 = vol.rolling(20).mean().values; volv = vol.values
+        gate = (df.close.rolling(21).mean() < df.close.rolling(200).mean() * 0.95).values
         o, h, l, c = df.open.values, df.high.values, df.low.values, df.close.values
         rising = np.flatnonzero(hole_up & ~np.roll(hole_up, 1)); rising = rising[rising > 0]
         rand = np.flatnonzero(rng.rand(len(df)) < 0.03); rand = rand[rand > 250]
         for kind, ent in (("hole up", rising), ("random", rand)):
             for r in simulate(o, h, l, c, hole_up, hole_dn, slope, ent, a.k, a.floor, a.max_bars, a.stop, atrv):
-                rows.append({"ticker": t, "kind": kind, "date": df.date.iloc[r["bar"]], "cap": caps.get(t, np.nan), **r})
+                b = r["bar"]; bvol = float(max(volv[b], volv[b - 1]) / sma20[b]) if b >= 20 and sma20[b] > 0 else float("nan")
+                rows.append({"ticker": t, "kind": kind, "date": df.date.iloc[b], "cap": caps.get(t, np.nan), "bvol": bvol, "atr_pct": float(atrv[b] / c[b] * 100), "gate": bool(gate[b]), **r})
     T = pd.DataFrame(rows); T["band"] = pd.cut(T.cap, [0, 5e8, 2e9, 5e9, 1e15], labels=["100M-500M", "500M-2B", "2B-5B", ">5B"]); T["year"] = T.date.dt.year
     T.to_csv(ROOT / f"bend/data/hole_flatten{a.tag}.csv", index=False)
     pd.set_option("display.width", 250)

@@ -4,7 +4,7 @@ TradingView is the main program (the three super indicators live there as Pine);
 across the whole universe, why (which building blocks hold, with their values), the evidence (the family's evolution
 record and holdout), the plan (entry, target, stop, time stop, size), and Jev's typed verdicts on the selected name.
 
-keys: ↑/↓ select · ←/→ lane (RUNNER / BASE-HIT / STRUCTURE / FORCE / ENERGY) · j ask Jev about the selected name · r rescan
+keys: ↑/↓ select · ←/→ lane (TREE / RUNNER / BASE-HIT / STRUCTURE / FORCE / ENERGY) · j ask Jev about the selected name · r rescan
       (runs today.py) · s size (cycle 0.5 % / 1 % / 2 % per ATR) · q quit
 usage: python3.12 bend/evo/tree_of_life.py [--capital 100000]"""
 from __future__ import annotations
@@ -33,7 +33,7 @@ LOGO = r"""
                        |
                     ___|___
 """
-TABS = ["RUNNER", "BASE-HIT", "STRUCTURE", "FORCE", "ENERGY"]
+TABS = ["TREE", "RUNNER", "BASE-HIT", "STRUCTURE", "FORCE", "ENERGY"]
 SIZES = [0.005, 0.01, 0.02]
 
 
@@ -70,26 +70,30 @@ def draw(stdscr, sup, today, a):
         top = LOGO.count("\n") + 1
         lane = TABS[tab]
         def in_lane(c):
-            if lane == "RUNNER":
-                return c["family"] == "RUNNER" and c.get("in_universe", True) and (c.get("cap_B") or 0) >= sup["RUNNER"]["universe"]["cap_min"] / 1e9
+            runner_ok = c["family"] == "RUNNER" and c.get("in_universe", True) and (c.get("cap_B") or 0) >= sup["RUNNER"]["universe"]["cap_min"] / 1e9
             liquid = (c["context"].get("dvol20_M") or 0) >= 3.0
+            if lane == "TREE":   # exactly what DRAGON TREE shows: runner outside a long downtrend, washout inside one
+                return (runner_ok and not c.get("downtrend")) or (c["family"] == "STRUCTURE" and liquid and c.get("downtrend"))
+            if lane == "RUNNER":
+                return runner_ok and not c.get("downtrend")
             if lane == "BASE-HIT":
                 return c["family"] != "RUNNER" and liquid
             return c["family"] == lane and liquid
         cands = [c for c in today["candidates"] if in_lane(c)]
-        cands.sort(key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0) if lane == "RUNNER" else -c["atr_pct"]))
+        cands.sort(key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0) if lane in ("RUNNER", "TREE") else -c["atr_pct"]))
         sel = max(0, min(sel, len(cands) - 1))
         g = today.get("guard"); gtxt = "guard: not checked (rescan with quotes)" if not g else (f"guard ON  SPY {g['spy']:.0f} > 200d {g['sma200']:.0f}" if g["on"] else f"guard OFF SPY {g['spy']:.0f} < 200d {g['sma200']:.0f}")
         stdscr.addnstr(top, 0, f" {today['date']} · scanned {today['scanned']} · {gtxt} · size {SIZES[size_i]:.1%}/ATR of ${a.capital:,.0f} · " + "  ".join(("[" + t + "]") if i == tab else t for i, t in enumerate(TABS)), W - 1, curses.A_BOLD)
-        if lane == "RUNNER":
-            stdscr.addnstr(top + 1, 0, f" {'ticker':7s} {'cap $B':>7s} {'new':4s} {'close':>9s} {'ATR%':>6s} {'brk vol':>8s} {'bars':>5s} {'$M/day':>7s} {'shares':>7s}", W - 1, curses.A_UNDERLINE)
+        if lane in ("RUNNER", "TREE"):
+            stdscr.addnstr(top + 1, 0, f" {'ticker':7s} {'lane':8s} {'new':4s} {'close':>9s} {'ATR%':>6s} {'brk vol':>8s} {'bars':>5s} {'$M/day':>7s} {'shares':>7s}", W - 1, curses.A_UNDERLINE)
         else:
             stdscr.addnstr(top + 1, 0, f" {'ticker':7s} {'family':10s} {'new':4s} {'close':>9s} {'ATR%':>6s} {'target':>9s} {'stop':>9s} {'shares':>7s}", W - 1, curses.A_UNDERLINE)
         lw = 70; rows = H - top - 4
         for i, c in enumerate(cands[:rows]):
             shares = int(a.capital * SIZES[size_i] / c["atr"]) if c["atr"] else 0
-            if lane == "RUNNER":
-                ln = f" {c['ticker']:7s} {c.get('cap_B') or 0:7.2f} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:6.2f} {c.get('break_vol_ratio') or 0:8.2f} {c.get('bars_since_break', 0):5d} {c.get('dvol20_M') or 0:7.1f} {shares:7d}"
+            if lane in ("RUNNER", "TREE"):
+                lane_name = "runner" if c["family"] == "RUNNER" else "washout"
+                ln = f" {c['ticker']:7s} {lane_name:8s} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:6.2f} {c.get('break_vol_ratio') or 0:8.2f} {c.get('bars_since_break', 0):5d} {(c.get('dvol20_M') or c['context'].get('dvol20_M') or 0):7.1f} {shares:7d}"
             else:
                 ln = f" {c['ticker']:7s} {c['family']:10s} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:6.2f} {c['plan']['target'] or 0:9.2f} {float(c['plan']['stop']) if isinstance(c['plan']['stop'], (int, float)) else 0:9.2f} {shares:7d}"
             stdscr.addnstr(top + 2 + i, 0, ln, lw, (curses.A_REVERSE if i == sel else 0) | curses.color_pair(fam_col.get(c["family"], 0)))
@@ -154,7 +158,9 @@ def draw(stdscr, sup, today, a):
 def dump(sup, today, a):
     """--dump: print both lanes as text (for a report or a non-interactive terminal)"""
     g = today.get("guard"); print(f"TREE OF LIFE · {today['date']} · scanned {today['scanned']} · " + ("guard ON" if g and g["on"] else "guard OFF" if g else "guard not checked") + (f" (SPY {g['spy']:.0f} vs 200d {g['sma200']:.0f})" if g else ""))
-    run = [c for c in today["candidates"] if c["family"] == "RUNNER" and c.get("in_universe") and (c.get("cap_B") or 0) >= sup["RUNNER"]["universe"]["cap_min"] / 1e9]
+    run = [c for c in today["candidates"] if c["family"] == "RUNNER" and c.get("in_universe") and (c.get("cap_B") or 0) >= sup["RUNNER"]["universe"]["cap_min"] / 1e9 and not c.get("downtrend")]
+    wash_dn = [c for c in today["candidates"] if c["family"] == "STRUCTURE" and c.get("downtrend") and (c["context"].get("dvol20_M") or 0) >= 3.0]
+    print(f"\nTREE view = runner outside a long downtrend ({len(run)}) + washout inside one ({len(wash_dn)}): " + ", ".join(c["ticker"] for c in wash_dn[:20]))
     run.sort(key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0)))
     print(f"\nRUNNER lane — hole broke up, in the universe (${sup['RUNNER']['universe']['cap_min']/1e9:.1f}B–5B, ATR ≥ 5 %): {len(run)} names, {sum(c['new'] for c in run)} fresh (≤ 3 bars)")
     print(f"  {'ticker':7s} {'cap$B':>6s} {'new':4s} {'close':>9s} {'ATR%':>5s} {'brk vol':>8s} {'bars':>5s} {'$M/day':>7s} {'52w%':>5s} {'earn7d':>6s}  plan")
