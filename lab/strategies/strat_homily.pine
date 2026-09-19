@@ -55,12 +55,15 @@ if not na(ph) or not na(pl)
     hUp := maV[pivL] + holeK * atrV[pivL]
     hDn := maV[pivL] - holeK * atrV[pivL]
     hState := 0
+volMin = input.float(0.0, "Hole break volume ≥ x× 20-day (0 = off)", step=0.25)
+var bool hVolOK = true
 if hState == 0 and not na(hUp)
     if close > hUp and close[1] > hUp
         hState := 1
+        hVolOK := volMin <= 0 or math.max(volume, volume[1]) >= volMin * ta.sma(volume, 20)
     else if close < hDn and close[1] < hDn
         hState := -1
-holeBull = hState == 1
+holeBull = hState == 1 and hVolOK
 holeBear = hState == -1
 
 // ── MCDX whales (rolling cost distribution, profit chips ≥ 50) ──

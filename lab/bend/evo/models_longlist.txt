@@ -1,0 +1,343 @@
+# domain | model | how it would be measured from one symbol's daily OHLCV
+mechanics | Newton's second law | force = mass × acceleration: dollar volume × the change in 5-bar velocity, in ATR/bar²
+mechanics | Momentum conservation | net signed dollar volume over 10 bars vs the price change it produced (impact per momentum unit)
+mechanics | Inertia | bars the current direction has persisted weighted by the size of the moves
+mechanics | Friction | ratio of gross path length to net displacement over 20 bars (energy lost to noise)
+mechanics | Elastic collision | bounce off a level: size of the rebound after touching the 50-day mean, in ATR
+mechanics | Inelastic collision | volume absorbed at a level: volume on bars touching the 20-bar low divided by average volume
+mechanics | Torque | close position within the daily range times daily range, summed over 5 bars
+mechanics | Angular momentum | rotation in (price, velocity) phase space over 10 bars (signed area swept)
+mechanics | Center of mass | volume-weighted average price over the last swing vs the current close, in ATR
+mechanics | Moment of inertia | dispersion of volume across price levels in the last 20 bars (second moment of volume-at-price)
+mechanics | Terminal velocity | 5-bar velocity relative to the 60-bar maximum 5-bar velocity
+mechanics | Projectile apex | bars since velocity crossed from positive to negative in an up-leg
+mechanics | Pendulum period | average bars between successive swing highs over the last 5 swings
+mechanics | Resonance | ratio of swing amplitude to the amplitude of the swing before, when periods match
+mechanics | Hooke's law | restoring force: distance from the 20-day mean times the 60-bar reversion speed
+mechanics | Work done | sum of signed (close − open) × volume over 10 bars divided by total volume
+mechanics | Power | work per bar: 5-bar net move times average volume, in ATR
+mechanics | Escape velocity | 5-bar velocity relative to the velocity that historically preceded 20-day breakouts
+mechanics | Gravitational pull | strength of a level: volume traded within 0.5 ATR of the 50-day mean over 50 bars
+mechanics | Drag coefficient | deceleration of velocity as a function of velocity squared over 20 bars
+thermodynamics | Temperature | realized daily-range variance over 10 bars relative to 100 bars
+thermodynamics | Heat capacity | volume needed to move price one ATR over 20 bars
+thermodynamics | Entropy production | growth of return-sign entropy over the last 20 bars vs the prior 20
+thermodynamics | Free energy | trend energy minus noise energy: net 20-bar move squared minus variance of daily changes
+thermodynamics | Phase transition | sharp change in the volatility regime: ATR(5)/ATR(50) crossing 2 or 0.5 within 5 bars
+thermodynamics | Latent heat | volume absorbed without price movement during the last 5 bars (volume × (1 − efficiency))
+thermodynamics | Boltzmann distribution | share of daily moves larger than 1 ATR vs the exponential expectation
+thermodynamics | Carnot efficiency | net move divided by gross intraday range over 20 bars
+thermodynamics | Thermal equilibrium | bars since the 5-bar variance and 50-bar variance last matched
+thermodynamics | Heat diffusion | spread of volume-at-price around the point of control over 20 bars
+thermodynamics | Adiabatic compression | range contraction with rising volume over 10 bars
+thermodynamics | Pressure | volume divided by the daily range (volume per unit of price movement) vs its 50-bar mean
+thermodynamics | Boiling point | bars of compression before a range expansion of 2× (historic distribution vs the current count)
+thermodynamics | Cooling curve | decay of daily range after a 3-ATR day, fitted exponent over 10 bars
+statistical physics | Ising magnetisation | fraction of up-days in the last 20 minus 0.5, times 2
+statistical physics | Susceptibility | response of returns to volume shocks: slope of |return| on volume z-score over 60 bars
+statistical physics | Correlation length | number of bars over which return autocorrelation stays positive
+statistical physics | Percolation density | fraction of the last 20 bars with volume above the 50-bar median
+statistical physics | Spin-glass frustration | fraction of bars where close position and volume direction disagree over 20 bars
+statistical physics | Random walk exponent | log of net displacement over log of bars, over 30 bars
+statistical physics | Mean first-passage time | historic bars needed to travel 2 ATR from the current velocity regime
+statistical physics | Fluctuation-dissipation | ratio of the response to shocks to the resting variance over 60 bars
+statistical physics | Ergodicity breaking | difference between the time-average and the recent-window average return over 250 bars
+statistical physics | Detrended fluctuation exponent | DFA exponent of daily returns over 100 bars
+statistical physics | Self-organised criticality | count of moves above 1.5 ATR in 20 bars vs the power-law expectation
+statistical physics | Avalanche size | cumulative move of the current same-direction run in ATR
+statistical physics | Metastability | bars spent within ±1 ATR of a level before a 2-ATR escape
+statistical physics | Order parameter | coherence of daily direction, volume direction and close position over 10 bars
+fluids | Reynolds number | velocity × swing size ÷ viscosity (noise): 20-bar velocity × leg size ÷ daily-change std
+fluids | Turbulence cascade | ratio of variance at 1-, 5-, 20-day scales (deviation from the 5/3 law)
+fluids | Vortex shedding | alternation of up and down closes with regular period over 20 bars
+fluids | Laminar flow | path efficiency above 0.7 with low volume variance over 10 bars
+fluids | Pressure gradient | difference between the 5-bar and 20-bar volume-weighted mean prices, in ATR
+fluids | Bernoulli | fast flow means low pressure: high velocity with volume below average over 5 bars
+fluids | Viscosity | volume per ATR of movement over 20 bars relative to 100 bars
+fluids | Hydraulic jump | sudden range expansion after a fast, low-range move
+fluids | Tidal cycle | position within the 20-bar cycle of the dominant period found by autocorrelation
+fluids | Wave breaking | swing amplitude growing while period shortens over the last 3 swings
+fluids | Buoyancy | closes above the 20-day VWAP on below-average volume for 5 bars
+fluids | Capillary action | slow steady rise on low volume: 10-bar efficiency above 0.6 with volume below 0.8× average
+waves and optics | Interference | agreement of the 5-, 20- and 60-bar trend slopes (constructive) vs disagreement
+waves and optics | Doppler shift | shortening of swing periods as price accelerates
+waves and optics | Standing wave | price oscillating between two levels for 20 bars (range with 3+ touches each side)
+waves and optics | Refraction | change of trend slope on crossing the 50-day mean
+waves and optics | Diffraction | spread of price after passing a narrow squeeze
+waves and optics | Beat frequency | difference between the two dominant cycle periods found in 100 bars
+waves and optics | Wavelet energy at scale 5 | Haar wavelet energy of closes at scale 5 relative to total energy
+waves and optics | Wavelet energy at scale 20 | Haar wavelet energy at scale 20 relative to total energy
+waves and optics | Spectral centroid | volume-weighted centre of the return power spectrum over 64 bars
+waves and optics | Signal envelope | Hilbert-style envelope of the detrended close over 20 bars
+waves and optics | Phase lag price vs volume | lag maximising the cross-correlation of |returns| and volume over 60 bars
+electromagnetism | Capacitance | volume stored during compression, released on expansion (squeeze volume ÷ breakout volume)
+electromagnetism | Inductance | resistance to change of velocity: lag between volume surge and price response
+electromagnetism | Resistance | volume required per ATR of movement over 10 bars
+electromagnetism | Voltage | distance to the 20-day high in ATR times the volume ratio
+electromagnetism | Magnetic hysteresis | asymmetry of the path up vs the path down through the same levels over the last swing pair
+electromagnetism | Skin effect | intraday extremes (high, low) moving more than closes over 10 bars
+electromagnetism | Faraday induction | rate of change of the volume profile centre over 10 bars
+electromagnetism | Dipole | difference between the volume above and below the close within the 20-bar volume-at-price
+quantum | Tunnelling | closes beyond the 50-bar high on volume below average, followed by return
+quantum | Zero-point energy | minimum realized range over the last 60 bars relative to the current range
+quantum | Decoherence time | bars over which return autocorrelation decays to zero
+quantum | Superposition collapse | bars of a narrow range then a large single-bar move (measurement)
+quantum | Energy levels | quantised step sizes: clustering of 20-bar moves around multiples of the ATR
+quantum | Uncertainty | product of the 20-bar price standard deviation and velocity standard deviation
+quantum | Quantum walk spread | ballistic vs diffusive spread: net displacement vs square root of bars over 30 bars
+quantum | Entanglement | co-movement of volume direction and close position beyond chance over 20 bars
+chemistry | Reaction rate | speed of the move after a catalyst day (a 2-ATR bar): net move over the next 5 bars
+chemistry | Activation energy | volume spike needed before a breakout historically vs the current volume ratio
+chemistry | Equilibrium constant | ratio of up-volume to down-volume over 50 bars
+chemistry | Le Chatelier | response opposing a shock: rebound size after a 2-ATR down day
+chemistry | Catalyst | volume ratio above 3 with a range above 2 ATR
+chemistry | Half-life of a shock | bars until the daily range falls back to its pre-shock level
+chemistry | Saturation | share of the 20-bar range covered by the last 5 bars
+chemistry | Titration endpoint | the bar where cumulative up-volume overtakes cumulative down-volume in the last 20 bars
+chemistry | Diffusion coefficient | variance growth per bar over 10, 20 and 40 bars (linearity test)
+chemistry | Crystallisation | narrowing of daily ranges with closes near the same level for 10 bars
+ecology | Lotka–Volterra cycle | phase of the up-volume/down-volume cycle over 40 bars
+ecology | Carrying capacity | distance to the 250-bar high as a saturation level
+ecology | Allee effect | dollar volume below a critical threshold relative to its 250-bar median
+ecology | Predation pressure | down-volume share during up-days over 10 bars
+ecology | Succession | time since the last regime change (SuperTrend flip) as a maturity measure
+ecology | Keystone bar | share of the 20-bar volume in the single largest bar
+ecology | Niche width | number of distinct 0.5 % price bins visited in 20 bars
+ecology | Resilience | bars to recover half of a 2-ATR drop
+ecology | Extinction risk | consecutive days with volume below 0.5× average
+ecology | Island biogeography | range size vs the number of touches of its edges over 20 bars
+epidemiology | Basic reproduction number | up-days in the last 5 over up-days in the 5 before
+epidemiology | Incubation period | bars between a volume surge and the subsequent price move
+epidemiology | Herd immunity threshold | share of the 60-bar range above which up-moves stall historically
+epidemiology | Epidemic curve | cumulative up-volume over 20 bars fitted to a logistic curve: position on the curve
+epidemiology | Case fatality | share of breakouts in the last 100 bars that reversed within 5 bars
+epidemiology | Contact rate | volume relative to average as the mixing rate
+epidemiology | Superspreader bar | a single bar with volume above 4× average and range above 2 ATR
+physiology | Heart-rate variability | coefficient of variation of daily ranges over 20 bars
+physiology | Refractory period | bars since the last 2-ATR move during which no further 2-ATR move occurred
+physiology | Homeostasis | bars within ±1 ATR of the 20-day median in the last 20
+physiology | Fatigue | declining volume on successive up-days in a run
+physiology | Adaptation | shrinking response to repeated volume surges over 60 bars
+physiology | Fever | daily range above 2 ATR for 3 consecutive bars
+physiology | Pulse | dominant short cycle (3–8 bars) amplitude relative to ATR
+physiology | Blood pressure | ratio of the 20-bar high-low range to the median daily range
+neuroscience | Action potential threshold | volume z-score above 2 as the firing threshold, count in 20 bars
+neuroscience | Synaptic plasticity | strengthening of the price response to volume over 60 bars (slope change)
+neuroscience | Habituation | decreasing range response to same-size volume surges
+neuroscience | Spike train regularity | coefficient of variation of the intervals between 1.5-ATR days
+neuroscience | Neural adaptation | decline of 5-bar velocity while volume stays high
+neuroscience | Lateral inhibition | up-days followed by down-days: lag-1 sign anticorrelation over 20 bars
+neuroscience | Integrate-and-fire | cumulative signed volume since the last 2-ATR move relative to its historic firing level
+genetics and evolution | Mutation rate | frequency of direction changes over 20 bars
+genetics and evolution | Selection pressure | share of volume on days that closed in the top third of their range over 20 bars
+genetics and evolution | Fitness landscape | count of local 20-bar highs within the last 100 bars
+genetics and evolution | Genetic drift | random-walk component: net move minus trend component over 20 bars
+genetics and evolution | Punctuated equilibrium | long flat periods interrupted by jumps: ratio of the largest 5-bar move to the median 5-bar move over 100 bars
+genetics and evolution | Red Queen | relative strength of the stock vs its own 250-bar trend
+genetics and evolution | Convergent evolution | agreement of three independent trend measures (slope, efficiency, structure)
+geophysics | Omori aftershock decay | fitted decay exponent of daily range after a 3-ATR shock
+geophysics | Gutenberg–Richter | log count of days above 1, 2, 3 ATR over 250 bars (b-value)
+geophysics | Seismic gap | bars since the last 2-ATR move relative to the historic mean interval
+geophysics | Strain accumulation | squeeze bars times volatility compression
+geophysics | Foreshocks | increasing count of 1-ATR moves in the 10 bars before now
+geophysics | Plate boundary | distance to the nearest high-volume price level in ATR
+geophysics | Liquefaction | volume rising while daily ranges shrink over 10 bars
+geophysics | Erosion | slow drift of the 50-day mean vs the 250-day mean
+geophysics | Sediment layers | number of distinct volume-at-price peaks in 60 bars
+meteorology | Pressure system | 20-day VWAP above or below the 50-day VWAP and the gap in ATR
+meteorology | Front passage | day when the 5-bar slope changes sign with volume above average
+meteorology | Storm intensity | maximum daily range over 5 bars in ATR
+meteorology | Wind shear | difference between the 5-bar and 20-bar slopes in ATR/bar
+meteorology | Dew point | level where selling stops: the 20-bar low as a fraction of the 60-bar range
+meteorology | Jet stream | 60-bar slope strength when the 60-bar efficiency is above 0.5
+meteorology | Humidity | volume relative to the 50-bar median as moisture available for a move
+meteorology | Barometer falling | three consecutive declines of the 20-day VWAP
+hydrology | Hurst rescaled range | R/S exponent over 100 bars
+hydrology | Flood recurrence | historic interval between 3-ATR days vs the current gap
+hydrology | Watershed | the 50-bar high as a divide: side of it and distance in ATR
+hydrology | Baseflow | the slow component of the move: 60-bar slope in ATR/bar
+hydrology | Flash flood | 2-ATR move on a day with volume above 3× average
+hydrology | Evaporation | volume declining over 10 bars during a flat range
+oceanography | Tidal range | difference between the 20-bar high and low in ATR
+oceanography | Rip current | close near the low on volume above average within an uptrend
+oceanography | Swell | long-period cycle (40–60 bars) amplitude relative to ATR
+oceanography | Rogue wave | a daily range above 4 ATR within the last 20 bars
+oceanography | Thermocline | the level separating high-volume and low-volume price bands in the 60-bar profile
+astronomy | Orbital period | dominant cycle period from autocorrelation over 250 bars
+astronomy | Perihelion | closeness of the close to the cycle low
+astronomy | Redshift | lengthening of swing periods over the last 5 swings
+astronomy | Luminosity | dollar volume relative to the 250-bar median
+astronomy | Gravitational lensing | distortion of the path around a high-volume level: path length within 1 ATR of it
+astronomy | Supernova | a 4-ATR up day on 5× volume within the last 60 bars
+astronomy | Black hole | volume concentrating at one price level for 20 bars with shrinking range
+control theory | PID proportional | distance to the 50-day mean in ATR
+control theory | PID integral | cumulative distance to the 50-day mean over 20 bars
+control theory | PID derivative | change of the distance to the 50-day mean over 5 bars
+control theory | Overshoot | excursion beyond the 20-day mean after crossing it, in ATR
+control theory | Settling time | bars to stay within ±0.5 ATR of the 20-day mean after a 2-ATR deviation
+control theory | Damping ratio | ratio of successive overshoots around the 20-day mean
+control theory | Bang-bang control | alternation between range extremes: closes at the 20-bar high or low
+control theory | Kalman velocity | Kalman-filtered velocity of the close (constant-velocity model)
+control theory | Kalman innovation | z-score of today's close vs the Kalman prediction
+control theory | Gain scheduling | trend slope conditioned on the volatility regime
+control theory | Dead band | bars within a ±0.5 ATR band around the 20-day mean
+information theory | Shannon entropy of signs | entropy of the up/down sequence over 20 bars
+information theory | Mutual information price-volume | mutual information of return sign and volume direction over 60 bars
+information theory | Transfer entropy | information from volume to next-day return sign over 60 bars
+information theory | Lempel–Ziv complexity | compressibility of the 30-bar sign sequence
+information theory | Channel capacity | signal variance over noise variance for the 20-bar trend
+information theory | Kullback–Leibler divergence | divergence of the recent 20-bar return distribution from the 250-bar one
+information theory | Surprise | negative log probability of today's return under the 60-bar distribution
+information theory | Redundancy | lag-1 to lag-5 autocorrelation sum of returns over 40 bars
+information theory | Rate distortion | error of a two-level approximation of the 20-bar path
+signal processing | Kotelnikov sampling | dominant cycle period relative to the 20-bar horizon
+signal processing | Spectral flatness | flatness of the 64-bar return spectrum
+signal processing | Matched filter | correlation of the last 20 bars with the average pre-breakout shape from history
+signal processing | Zero-crossing rate | sign changes of the detrended close over 20 bars
+signal processing | Envelope detector | 20-bar high-low envelope width relative to ATR
+signal processing | Phase-locked loop | phase error between price and its dominant cycle
+signal processing | Cepstrum | periodicity of the log power spectrum (echoes of a shock)
+signal processing | Wiener filter slope | optimal linear prediction of the next close minus the current close, in ATR
+signal processing | Savitzky–Golay slope | smoothed derivative of the close over 11 bars, in ATR
+signal processing | Hilbert instantaneous frequency | instantaneous cycle frequency of the detrended close
+signal processing | Kurtosis of returns | excess kurtosis over 60 bars
+signal processing | Skewness of returns | skewness over 60 bars
+stochastic processes | Ornstein–Uhlenbeck speed | regression of daily change on lagged deviation from the 60-bar mean
+stochastic processes | Ornstein–Uhlenbeck half-life | log 2 over the reversion speed
+stochastic processes | Brownian bridge probability | probability of reaching the 20-bar high before the 20-bar low from the current point
+stochastic processes | First-passage distance | distance to the nearer of the 20-bar high and low in ATR
+stochastic processes | Hawkes intensity | exponentially decaying count of |return| > 1.5 ATR events
+stochastic processes | Lévy jump count | number of returns beyond 3 daily-change standard deviations in 60 bars
+stochastic processes | Variance ratio 5 | variance of 5-day returns over 5× the 1-day variance
+stochastic processes | Variance ratio 20 | variance of 20-day returns over 20× the 1-day variance
+stochastic processes | Markov up→up | probability of an up day after an up day over 60 bars
+stochastic processes | Markov down→down | probability of a down day after a down day over 60 bars
+stochastic processes | Hidden regime | bars since the volatility regime (ATR ratio) last crossed 1
+stochastic processes | Martingale test | mean of the next-day return conditional on the sign of today's over 60 bars
+stochastic processes | Runs test | z-score of the number of runs in the 30-bar sign sequence
+stochastic processes | Local time at a level | bars spent within 0.25 ATR of the 50-day mean in the last 50
+stochastic processes | Drawdown duration | bars since the 60-bar high
+stochastic processes | Drawup duration | bars since the 60-bar low
+extreme value | Gnedenko tail index | Hill estimator of the return tail over 250 bars
+extreme value | Expected 20-day maximum | expected maximum excursion in ATR from the tail index
+extreme value | Return level | the 250-bar 1-in-50 daily move vs today's move
+extreme value | Peaks over threshold | count of |return| over 2 ATR in 60 bars
+extreme value | Block maxima trend | trend of the monthly maximum range over 12 months
+statistics | Bayesian shrinkage slope | 20-bar slope shrunk toward the 250-bar slope by its noise
+statistics | Bootstrap stability | share of bootstrap resamples where the 20-bar slope keeps its sign
+statistics | Regression R² | R² of the 20-bar linear fit of the close
+statistics | Residual autocorrelation | lag-1 autocorrelation of residuals from the 20-bar fit
+statistics | Quantile position | percentile of the close within the 250-bar close distribution
+statistics | Median absolute deviation | robust volatility over 20 bars relative to ATR
+statistics | Winsorised momentum | 20-bar return with the two largest daily moves removed
+statistics | Cook's distance | influence of the largest bar on the 20-bar slope
+topology and geometry | Convex hull area | area of the (bar index, close) hull over 20 bars in ATR·bars
+topology and geometry | Curvature | second difference of the 10-bar smoothed close, in ATR
+topology and geometry | Torsion | change of curvature over 5 bars
+topology and geometry | Fractal dimension | Katz dimension of the 30-bar path
+topology and geometry | Self-similarity | correlation of the 5-bar and 20-bar path shapes
+topology and geometry | Golden ratio retrace | closeness of the current retrace to 0.382 or 0.618 of the last leg
+topology and geometry | Symmetry | mirror symmetry of the last two swings (size and duration)
+topology and geometry | Fibonacci time | bars since the swing low relative to 8, 13, 21, 34
+topology and geometry | Angle of attack | arctangent of the 10-bar slope in ATR per bar
+topology and geometry | Winding number | net rotations in the (velocity, acceleration) plane over 40 bars
+topology and geometry | Persistent homology | number of price bands with volume peaks persisting across 20, 40 and 60 bars
+soviet school | Kolmogorov–Wiener predictor | linear prediction of the next close from the last 10 returns, in ATR
+soviet school | Kolmogorov complexity | compressibility of the recent sign sequence
+soviet school | Kolmogorov–Smirnov | KS distance between the recent 20-bar and the 250-bar return distributions
+soviet school | Kantorovich transport | Wasserstein distance between the 20-bar and 60-bar volume-at-price profiles
+soviet school | Lyapunov exponent | divergence rate of nearby 5-bar path segments in the last 60 bars
+soviet school | Pontryagin hazard | reversal hazard as a function of bars in trend and distance from the mean
+soviet school | Tikhonov trend | ridge-regularised 20-bar slope
+soviet school | Chebyshev bound | share of moves beyond k standard deviations vs the 1/k² bound
+soviet school | Gnedenko extremes | tail index of the daily-range distribution
+soviet school | Markov chain | 2-state transition matrix of daily direction over 60 bars
+soviet school | Krylov subspace | projection of the last 20 closes on the first three powers of the shift (trend, curvature, oscillation)
+soviet school | Arnold tongues | locking of the swing period to a multiple of 5 bars
+soviet school | Landau order parameter | magnetisation-like coherence of direction, volume and range over 10 bars
+soviet school | Zeldovich collapse | volume collapsing into a narrow price band (share of 20-bar volume within 1 ATR)
+soviet school | Kotelnikov theorem | dominant cycle sampled adequately by the 20-bar window
+soviet school | Stratonovich filter | Kalman filtered level and velocity with innovation
+soviet school | Gelfand pairs | agreement of two symmetric measures (up-leg and down-leg structure)
+soviet school | Dubinin adsorption | volume absorbed at a level as a function of distance to it
+materials science | Yield point | level beyond which price moves fast: the 20-bar high on a volume expansion
+materials science | Fatigue crack | repeated tests of a level (touches of the 20-bar low in 20 bars)
+materials science | Stress-strain | volume applied vs price displacement over 10 bars
+materials science | Brittleness | large single-bar moves relative to the median range
+materials science | Creep | slow steady drift on low volume over 20 bars
+materials science | Annealing | shrinking daily ranges with rising volume over 20 bars
+materials science | Hardness | volume needed to move price 1 ATR relative to 250 bars
+structural engineering | Load-bearing level | volume at the 50-bar low relative to average
+structural engineering | Buckling | acceleration turning negative at high velocity
+structural engineering | Safety factor | distance to the stop level (4 ATR) vs the 20-bar MAE distribution
+structural engineering | Natural frequency | dominant cycle of the detrended close
+structural engineering | Resonance risk | swing amplitude growth over 3 swings with a stable period
+reliability engineering | Bathtub hazard | reversal hazard as a function of trend age from history
+reliability engineering | Mean time between failures | mean bars between 2-ATR down days over 250 bars
+reliability engineering | Weibull shape | shape of the distribution of up-run lengths
+reliability engineering | Survival probability | share of historic 10-bar runs that survived to 15 bars
+economics | Supply-demand imbalance | up-volume minus down-volume over 10 bars relative to total
+economics | Elasticity | percent price change per percent volume change over 20 bars
+economics | Diminishing returns | 5-bar return relative to the return of the prior 5 bars in a run
+economics | Bubble indicator | log price above its 250-bar trend with accelerating slope
+economics | Herding | share of days with volume above average and direction agreeing with the 5-bar trend
+economics | Liquidity spiral | falling dollar volume with rising ranges over 10 bars
+economics | Auction theory | close near the high on rising volume (winning bids)
+economics | Price discovery | share of the daily move that happens in the opening gap over 10 bars
+economics | Information ratio | 20-bar return over the standard deviation of daily returns
+economics | Kelly fraction | expected edge over variance from the 60-bar return distribution
+economics | Amihud illiquidity | |return| per dollar volume over 20 bars
+economics | Roll spread | negative lag-1 autocovariance of daily changes as an effective spread
+economics | Kyle's lambda | slope of price change on signed volume over 60 bars
+economics | Overnight vs intraday | share of the 20-bar move made in gaps vs within sessions
+economics | Turn of the month | day of month within the last or first three trading days
+psychology | Anchoring | distance to the 250-bar high and low as anchors, in ATR
+psychology | Disposition effect | volume on up-days after a 20-bar drawdown vs before
+psychology | Recency bias | 5-bar return vs 60-bar return divergence
+psychology | Loss aversion asymmetry | volume on down-days over volume on up-days in the last 20 bars
+psychology | Round-number magnet | distance of the close to the nearest round price level in ATR
+psychology | Capitulation | 3-ATR down day on 4× volume closing near the low
+psychology | Euphoria | 3-ATR up day on 4× volume closing near the high after a 20-bar rally
+psychology | Regret | gap up on high volume followed by a close below the open
+psychology | Attention | volume relative to its 250-bar median
+social dynamics | Bandwagon | consecutive up-days with rising volume
+social dynamics | Contagion | up-volume share rising over 5 bars
+social dynamics | Opinion polarisation | share of bars closing in the top or bottom quarter of their range over 20 bars
+social dynamics | Critical mass | volume above 2× average for 3 consecutive bars
+military and operations research | Lanchester attrition | up-volume squared minus down-volume squared over 10 bars
+military and operations research | Supply line length | bars since the last 20-bar high as the extension of the advance
+military and operations research | OODA loop | bars between a volume surge and the price reaction
+military and operations research | Force concentration | share of the 20-bar volume in the top 3 bars
+military and operations research | Retreat | close below the 10-bar low on volume above average
+military and operations research | Siege | 20 bars within a 3-ATR range with volume declining
+games and sports | Momentum in games | consecutive wins: up-day streak weighted by size
+games and sports | Fatigue in sport | declining ranges over a run of up-days
+games and sports | Home advantage | share of up-days that opened above the prior close
+games and sports | Elo rating | rating of the stock's own recent returns vs its long-term returns
+games and sports | Poker pot odds | reward-to-risk of the bracket given the distance to the 20-bar high and low
+games and sports | Chess tempo | bars the trend has held without a 1-ATR pullback
+music and language | Rhythm regularity | coefficient of variation of intervals between swing highs
+music and language | Tempo | swings per 20 bars
+music and language | Harmonic ratio | ratio of the last two swing sizes near 2:1 or 3:2
+music and language | Zipf law | rank-size slope of the 60-bar daily moves
+music and language | Crescendo | rising ranges and volume over 5 bars
+music and language | Rest | bars with range below 0.5 ATR in the last 10
+computing | Compression ratio | gzip-like compressibility of the 60-bar sign sequence
+computing | Cache hit | share of the last 20 closes within 0.5 ATR of a previous close
+computing | Exponential backoff | interval between volume surges growing over 60 bars
+computing | Hash collision | closes repeating the same 0.5 % bin within 20 bars
+computing | Load average | volume relative to average over 1, 5 and 15 bars
+computing | Garbage collection | bars of volume decline after a surge
+medicine | Dose-response | price response per unit of volume over 20 bars
+medicine | Vital signs | range, volume and efficiency each within their normal 250-bar band
+medicine | Fever curve | daily range rising for 3 bars then falling
+medicine | Triage | ranking of the day's move by range and volume vs 60 bars
+medicine | Remission | bars since the last 2-ATR down day with no new low
+agriculture | Growing season | bars since the 250-bar low as the age of the crop
+agriculture | Harvest | volume spike after a 20-bar rally (distribution)
+agriculture | Drought | 20 bars with volume below 0.7× average
+agriculture | Crop rotation | alternation of up and down 5-bar periods
+architecture | Foundation | number of touches of the 60-bar low with rising lows
+architecture | Ceiling | number of touches of the 60-bar high with falling highs
+architecture | Cantilever | price extended beyond the 20-day VWAP by more than 3 ATR
+architecture | Arch | swing high with symmetric rise and fall in bars and size

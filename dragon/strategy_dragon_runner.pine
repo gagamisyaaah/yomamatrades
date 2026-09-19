@@ -1,0 +1,54 @@
+//@version=5
+strategy("DRAGON RUNNER (strategy)", overlay=true, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, initial_capital=100000, pyramiding=0)
+// Strategy twin of DRAGON RUNNER: enter at the next open after the hole breaks up, exit when it breaks down
+// (or when the TE line flattens, if enabled). $10k fixed per trade: read per-trade averages, not net % on one chart.
+holeK   = input.float(1.4, "Hole k·ATR", step=0.1)
+pivL    = input.int(4, "Hole pivot strength", minval=1)
+volMin  = input.float(0.0, "Require volume on the break ≥ x× 20-day (0 = off)", step=0.25)
+useFlat = input.bool(false, "Exit also when the TE line flattens")
+flatK   = input.float(0.3, "Flatten: slope below this × peak", step=0.05)
+flatMin = input.float(0.02, "Flatten: slope floor (ATR/bar)", step=0.01)
+atrMin  = input.float(0.0, "Only trade when ATR % ≥ (0 = off)", step=0.5)
+guard   = input.bool(false, "Market guard: no entries while SPX < 200-day")
+
+atrV = ta.atr(14)
+maV  = ta.sma(close, 10)
+ph = ta.pivothigh(high, pivL, pivL)
+pl = ta.pivotlow(low, pivL, pivL)
+var float hUp = na
+var float hDn = na
+var int hState = 0
+var bool volOK = true
+if not na(ph) or not na(pl)
+    hUp := maV[pivL] + holeK * atrV[pivL]
+    hDn := maV[pivL] - holeK * atrV[pivL]
+    hState := 0
+brokeUp = false
+brokeDn = false
+if hState == 0 and not na(hUp)
+    if close > hUp and close[1] > hUp
+        hState := 1
+        brokeUp := true
+        volOK := volMin <= 0 or math.max(volume, volume[1]) >= volMin * ta.sma(volume, 20)
+    else if close < hDn and close[1] < hDn
+        hState := -1
+        brokeDn := true
+trip = (ta.ema(ohlc4, 21) + ta.ema(ohlc4, 34) + ta.ema(ohlc4, 68)) / 3
+v7 = ta.linreg(trip, 6, 0)
+teSlope = (v7 - v7[1]) / atrV
+var float peakSlope = 0.0
+if brokeUp
+    peakSlope := 0.0
+if hState == 1
+    peakSlope := math.max(peakSlope, teSlope)
+flatten = hState == 1 and peakSlope > 0 and (teSlope < flatK * peakSlope or teSlope < flatMin) and not brokeUp
+spxOK = not guard or request.security("SP:SPX", "D", close > ta.sma(close, 200))
+atrOK = atrMin <= 0 or atrV / close * 100 >= atrMin
+if brokeUp and volOK and spxOK and atrOK and strategy.position_size == 0
+    strategy.entry("L", strategy.long)
+if strategy.position_size > 0 and (brokeDn or (useFlat and flatten) or (guard and not spxOK))
+    strategy.close("L")
+plot(hUp, color=color.new(color.orange, 30), style=plot.style_linebr)
+plot(hDn, color=color.new(color.orange, 30), style=plot.style_linebr)
+plotshape(brokeUp, style=shape.triangleup, location=location.belowbar, color=color.lime, size=size.small)
+plotshape(brokeDn, style=shape.triangledown, location=location.abovebar, color=color.red, size=size.small)

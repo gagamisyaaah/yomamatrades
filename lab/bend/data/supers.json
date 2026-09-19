@@ -1,0 +1,47 @@
+{
+ "RUNNER": {
+  "lane": "RUNNER",
+  "name": "DRAGON RUNNER — hole break-up, hold to break-down",
+  "rule": "hole_up=1 & fresh=1",
+  "engine": true,
+  "universe": {"cap_min": 300000000, "cap_max": 5000000000, "atr_pct_min": 5.0, "note": "the edge lives on volatile $300M–5B names; calm large caps have none"},
+  "rank_by": "break_vol_ratio",
+  "exit": "hole breaks down (two closes below the lower level); TE-flatten exit under test — at k=0.3 it cut runners after ~12 bars and captured nothing",
+  "meaning": {"hole_up": "Dragon volatility hole broke up: two closes above MA10 + 1.4·ATR set at the last confirmed pivot", "fresh": "the break happened within the last 3 bars"},
+  "evidence": {
+   "matrix, $300M–5B & ATR≥5%, holdout 2024+ (hole-down exit vs an in-force bar)": "+0.7 % per trade; with volume ≥ 1.5× on the break +3.9 % (n 421); volume×range top decile +5.4 % (n 366)",
+   "matrix, >$5B & ATR 5–8 %, holdout": "+13.6 % avg vs +9.6 % in-force, 44 % winners (n 1,727)",
+   "live TradingView, ten $300M–5B names 2016-26, $10k/trade": "plain hole entry: 9/10 profitable, median +199 %, PF 1.95, ~28 trades, 42 % winners, median DD 44 % (buy-and-hold median +22 %); volume ≥1.5× filter: 8/10, median +137 %, fewer trades",
+   "shape": "42–46 % winners, big average, single-name drawdown ~40 %: a many-name portfolio, never one chart",
+   "does not work": "calm large caps (ATR < 3 %), bracket exits, liquid names ≥ $10M/day (−3.4 %)"
+  },
+  "pine": "dragon/DRAGON_RUNNER.pine (+ strategy_dragon_runner.pine)"
+ },
+ "STRUCTURE": {
+  "lane": "BASE-HIT",
+  "name": "SUPER STRUCTURE — washout at the low",
+  "rule": "asym20≤p10(-0.874) & clv≤p10(0.08271) & d_pl≤p25(0.7581) & lo50≤p25(105.7)",
+  "exit": "bracket +2 / −4 ATR, 20 bars (the 10-bar close is competitive)",
+  "meaning": {"asym20": "20-bar path dominated by drawdown (max drawup ÷ max drawdown in the bottom decile)", "clv": "close in the bottom 8 % of the day's range", "d_pl": "close within 0.76 ATR of the last swing low or below it", "lo50": "close within 5.7 % of the 50-bar low"},
+  "evidence": {"holdout 2024+ (2,174 names)": "+0.20 ATR over random, z 3.6, 64 % winners, n 1,433; +1.49 % per trade vs +0.89 % random", "training eras": "positive in all four, bear +0.46, bull +0.36", "fires": "0.9 % of bars ≈ 21 signals/day across 2,174 names"},
+  "pine": "evolved/super_structure.pine"
+ },
+ "FORCE": {
+  "lane": "BASE-HIT",
+  "name": "SUPER FORCE — inefficient decline below the gold band",
+  "rule": "eff10≤p25(0.134) & gold=0 & lr20≤p25(-0.09698) & macd_hist≤p25(-0.1326)",
+  "exit": "bracket +2 / −4 ATR, 20 bars",
+  "meaning": {"eff10": "10-bar path efficiency in the bottom quartile (choppy)", "gold": "close below the Diamond gold band (EMA 21/34/55)", "lr20": "20-bar regression slope in the bottom quartile (falling)", "macd_hist": "MACD histogram in the bottom quartile"},
+  "evidence": {"holdout 2024+": "+0.28 ATR over random, z 4.8, 66 % winners, n 1,249; +1.38 % per trade vs +0.71 % random", "caution": "other FORCE lineages with roc120 instead of gold failed the holdout (−0.2 ATR)"},
+  "pine": "evolved/super_force.pine"
+ },
+ "ENERGY": {
+  "lane": "BASE-HIT",
+  "name": "SUPER ENERGY — capitulation gap on huge volume",
+  "rule": "gap≥p75(0.1867) & metabolic≥p90(1.872) & range_atr≥p75(1.084) & st_dist≤p25(-2.226)",
+  "exit": "bracket +2 / −4 ATR, 20 bars",
+  "meaning": {"gap": "opened at least 0.19 ATR above the prior close", "metabolic": "volume ratio × range in the top decile", "range_atr": "today's range above 1.08 ATR", "st_dist": "close more than 2.2 ATR below the SuperTrend(10,3) line"},
+  "evidence": {"holdout 2024+": "+0.18 ATR over random, z 2.0, 65 % winners, n 552; +1.86 % per trade vs +0.95 % random", "alternative cell (round 4)": "volatility expanding from quiet volume outside a squeeze: +0.14 ATR, z 2.3, +0.40 on bear bars"},
+  "pine": "evolved/super_energy.pine"
+ }
+}

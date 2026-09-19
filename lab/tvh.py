@@ -414,10 +414,16 @@ def set_symbol_ui(symbol: str, interval: str | None = None, retries: int = 2) ->
                 raise RuntimeError("symbol button not found")
             wait_for_element('[data-name="symbol-search-items-dialog"] input', timeout=5)
             wait(0.3)
+            js("""(() => { const i = document.querySelector('[data-name="symbol-search-items-dialog"] input'); if (i) { i.focus(); i.select(); } })()""")
+            press_key("Backspace")                       # the box keeps the previous text on a failed lookup: clear it first
+            wait(0.2)
             cdp("Input.insertText", text=symbol)
-            wait(1.0)
+            wait(1.2)
             press_key("Enter")
             wait(1.5)
+            if js("""!!document.querySelector('[data-name="symbol-search-items-dialog"]')"""):
+                press_key("Escape")                      # the dialog did not close: never let the next symbol land in it
+                wait(0.5)
         if interval and not symbol_ok(symbol, interval):
             tf = {"D": "1D", "W": "1W", "M": "1M"}.get(interval, interval)
             for ch in tf:

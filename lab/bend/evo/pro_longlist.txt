@@ -1,0 +1,297 @@
+# era | author or school | measurement | how it is computed from one symbol's OHLCV
+1962 | Coppock | Coppock curve | 10-period WMA of the sum of the 14- and 11-period rates of change
+1970s | Granville | On-balance volume slope | change of cumulative signed volume over 20 bars relative to volume
+1970s | Granville | OBV divergence | 20-bar slope of OBV minus the 20-bar slope of price, both normalised
+1976 | Arms | Ease of movement | midpoint change divided by (volume ÷ range), smoothed 14
+1978 | Wilder | RSI | ratio of average up-moves to down-moves over 14 bars
+1978 | Wilder | ATR | average true range over 14 bars
+1978 | Wilder | ADX | smoothed absolute difference of +DI and −DI over 14 bars
+1978 | Wilder | DI spread | +DI minus −DI over 14 bars
+1978 | Wilder | Parabolic SAR distance | distance of the close from the SAR stop in ATR and bars since the flip
+1978 | Wilder | Volatility stop | close vs the highest close minus 3 ATR (trailing)
+1978 | Wilder | Swing index | Wilder's accumulative swing index over 20 bars
+1979 | Appel | MACD line | 12-EMA minus 26-EMA in ATR
+1979 | Appel | MACD histogram slope | 3-bar change of the histogram in ATR
+1980s | Lane | Stochastic %K | position of the close in the 14-bar range
+1980s | Lane | Stochastic %D slope | 3-bar change of the smoothed stochastic
+1980s | Lane | Stochastic divergence | new price low with a higher stochastic low over 20 bars
+1980s | Williams | Williams %R | inverse stochastic over 14 bars
+1980s | Williams | Ultimate oscillator | weighted buying pressure over 7, 14 and 28 bars
+1980s | Williams | Market facilitation index | range divided by volume relative to yesterday
+1980s | Williams | Awesome oscillator | 5-SMA minus 34-SMA of the midprice in ATR
+1980s | Williams | Fractal breakout | close beyond the last confirmed 5-bar fractal high
+1980s | Williams | Alligator spread | distance between the 5-, 8- and 13-bar shifted SMAs in ATR
+1980s | Chaikin | Accumulation/distribution slope | 20-bar change of cumulative (CLV × volume) relative to volume
+1980s | Chaikin | Chaikin oscillator | 3-EMA minus 10-EMA of the A/D line relative to volume
+1980s | Chaikin | Chaikin money flow | sum of CLV × volume over 20 bars divided by volume
+1980s | Chaikin | Chaikin volatility | 10-bar change of the 10-EMA of the range
+1980s | Lambert | Commodity channel index | typical price deviation from its 20-SMA over mean absolute deviation
+1980s | Quong and Soudack | Money flow index | volume-weighted RSI of the typical price over 14 bars
+1980s | Blau | True strength index | double-smoothed momentum over double-smoothed absolute momentum
+1980s | Blau | Ergodic oscillator | TSI minus its signal line
+1980s | Pring | Know sure thing | weighted sum of four smoothed rates of change
+1980s | Pring | Special K | long-horizon combination of smoothed rates of change
+1980s | Dorsey | Mass index | 25-bar sum of the ratio of the 9-EMA of range to its double EMA
+1980s | Hurst | Cycle envelope | position within the centred moving-average envelope of the dominant cycle
+1980s | Elder | Force index | change × volume, 13-EMA, relative to volume × ATR
+1980s | Elder | Bull power | high minus the 13-EMA in ATR
+1980s | Elder | Bear power | low minus the 13-EMA in ATR
+1980s | Elder | Elder impulse | sign of the 13-EMA slope and the MACD histogram slope agreeing
+1980s | Elder | SafeZone stop | close vs the recent low minus 2× the average downside penetration
+1980s | Elder | Triple screen alignment | weekly trend direction agreeing with the daily oscillator pullback
+1988 | Tillson | T3 slope | slope of the T3 smoothed close in ATR
+1980s | Bollinger | Bollinger %B | position of the close inside the 20,2 bands
+1980s | Bollinger | Bollinger bandwidth | band width relative to the middle band
+1980s | Bollinger | Bandwidth squeeze | bandwidth at a 125-bar low
+1980s | Bollinger | Walking the band | consecutive closes above the upper band
+1980s | Bollinger | Band-volume confirmation | %B rising with the 20-bar volume slope positive
+1990s | Kaufman | Efficiency ratio | net move over the sum of absolute moves over 10 bars
+1990s | Kaufman | KAMA slope | slope of the adaptive moving average in ATR
+1990s | Kaufman | KAMA distance | close minus KAMA in ATR
+1990s | Chande | Chande momentum oscillator | net up minus down moves over their sum, 14 bars
+1990s | Chande | VIDYA distance | close minus the variable-index average in ATR
+1990s | Chande | Aroon up | bars since the 25-bar high as a percent
+1990s | Chande | Aroon oscillator | Aroon up minus Aroon down
+1990s | Chande | Stochastic RSI | stochastic of the RSI over 14 bars
+1990s | Chande | Qstick | average of close minus open over 8 bars in ATR
+1990s | Chande | Intraday momentum index | RSI built from close minus open
+1990s | Chande | Range action verification | 7-SMA minus 65-SMA over the 65-SMA
+1990s | Katsanos | Volume flow indicator | capped signed volume beyond a noise cutoff summed over 130 bars
+1990s | Katsanos | Intermarket relative strength vs the market | 40-bar return of the symbol minus the market, in ATR
+1990s | DeMark | TD setup count | consecutive closes above the close 4 bars earlier (up to 9)
+1990s | DeMark | TD countdown | closes above the high 2 bars earlier counted to 13
+1990s | DeMark | TD combo | setup and countdown completing together
+1990s | DeMark | TD sequential exhaustion | a completed 9-count with a close beyond the prior setup extreme
+1990s | DeMark | TD range expansion index | sum of high and low differences over 5 bars conditioned on overlap
+1990s | DeMark | TD demand line break | close above the line through the last two lower swing highs
+1990s | Raschke | Holy grail pullback | ADX above 30 with a pullback to the 20-EMA
+1990s | Raschke | Turtle soup | false breakout of the 20-bar low reversing within 2 bars
+1990s | Raschke | Anti setup | 7-bar stochastic pullback inside a longer-term trend
+1990s | Raschke | Momentum pinball | 3-bar RSI of the 1-bar rate of change at an extreme
+1990s | Connors | RSI(2) extreme | 2-bar RSI below 5 or above 95 above the 200-SMA
+1990s | Connors | Cumulative RSI | sum of the last two RSI(2) values
+1990s | Connors | Connors RSI | average of RSI(3), streak RSI and percent rank of the return
+1990s | Connors | Double 7s | close at a 7-bar low above the 200-SMA
+1990s | Connors | %B pullback | Bollinger %B below 0.2 in an uptrend
+1990s | Turtles | Donchian breakout | close beyond the 20-bar or 55-bar high
+1990s | Turtles | N-based sizing | position sized so one ATR equals a fixed fraction of equity
+1990s | Keltner | Keltner position | position of the close inside the 20-EMA ± 1.5 ATR channel
+1990s | Carter | TTM squeeze | Bollinger bands inside Keltner channels
+1990s | Carter | Squeeze momentum | regression momentum during and after a squeeze
+1990s | Raff | Regression channel position | position inside the 100-bar regression channel
+1990s | Kirkpatrick | Standard error bands | close vs the regression line ± 2 standard errors
+1990s | Hosoda | Ichimoku cloud position | close relative to the span A/B cloud
+1990s | Hosoda | Tenkan-Kijun cross | 9-bar midpoint crossing the 26-bar midpoint
+1990s | Hosoda | Chikou confirmation | the close 26 bars ago vs the current close
+1990s | Hull | Hull MA slope | slope of the Hull moving average in ATR
+1990s | Ehlers | Dominant cycle period | MESA-style dominant cycle length from the detrended close
+1990s | Ehlers | Fisher transform | Fisher transform of the normalised 10-bar price position
+1990s | Ehlers | Laguerre RSI | RSI on a Laguerre-filtered series
+1990s | Ehlers | Center of gravity oscillator | weighted centre of the last 10 closes
+1990s | Ehlers | Roofing filter | high-pass then super-smoother of the close
+1990s | Ehlers | Super smoother slope | slope of the two-pole smoothed close in ATR
+1990s | Ehlers | Cyber cycle | cycle component after removing the trend
+1990s | Ehlers | Instantaneous trendline | close vs the instantaneous trendline in ATR
+1990s | Ehlers | Sinewave indicator | phase of the dominant cycle
+1990s | Ehlers | Hilbert phase | instantaneous phase from the Hilbert transform of the detrended close
+1990s | Ehlers | Adaptive RSI | RSI with length set by the dominant cycle
+1990s | Ehlers | Decycler | close minus the high-pass component, slope
+1990s | Ehlers | Reflex and Trendflex | zero-lag oscillators built from the super smoother
+1990s | Ehlers | Autocorrelation periodogram | spectral estimate of the cycle period from autocorrelations
+1990s | Dreiss | Choppiness index | log of the sum of ranges over the total range, 14 bars
+1990s | Klinger | Klinger volume oscillator | 34-EMA minus 55-EMA of volume force
+1990s | Etzkorn | Vortex indicator | positive vs negative vortex movement over 14 bars
+1990s | Schaff | Schaff trend cycle | stochastic of the MACD cycled twice
+1990s | Hutson | TRIX | 1-bar rate of change of the triple-smoothed close
+1990s | Dorsey | Relative volatility index | RSI built on standard deviation
+1990s | Sylvain Vervoort | Smoothed RSI | RSI on a zero-lag smoothed close
+1990s | Vervoort | Haiken-Ashi trend | consecutive Heikin-Ashi bodies of one colour
+1990s | Levine | Balance of power | (close − open) over range, smoothed 14
+1990s | Sharpe/Trend | Price relative to the 200-day line | distance to the 200-SMA in ATR
+1990s | Weinstein | Stage analysis | slope of the 30-week average and the close relative to it
+1990s | O'Neil | Relative strength line new high | the symbol's ratio to the market at a 52-week high
+1990s | O'Neil | Cup with handle depth | depth of the base as a fraction of the prior advance
+1990s | O'Neil | Pivot point buy | close above the handle high on volume 50 % above average
+1990s | O'Neil | Volume dry-up | volume at a 50-bar low near the base low
+1990s | Minervini | VCP contraction count | successive contractions of the pullback depth within a base
+1990s | Minervini | Trend template | close above the 50, 150, 200 SMAs which are in order, and the 200 rising
+1990s | Darvas | Darvas box | close above the top of a box formed by a 3-bar high held for 3 bars
+1990s | Wyckoff | Spring | a break below a trading range low that closes back inside
+1990s | Wyckoff | Upthrust | a break above a range high that closes back inside
+1990s | Wyckoff | Effort vs result | volume relative to the price change it produced
+1990s | Wyckoff | Sign of strength | wide-range up bar on high volume closing near the high
+1990s | Wyckoff | Selling climax | wide-range down bar on the highest volume in 50 bars
+1990s | Wyckoff | Last point of support | higher low on lower volume after a spring
+1990s | Volume spread analysis | No-demand bar | narrow up bar on low volume in an uptrend
+1990s | Volume spread analysis | Stopping volume | wide down bar on very high volume closing off the lows
+1990s | Volume spread analysis | Test bar | narrow down bar on low volume into prior supply
+2000s | Shannon | Anchored VWAP from the last swing low | distance of the close from the VWAP anchored at the swing low
+2000s | Shannon | Anchored VWAP from the last high-volume bar | distance from the VWAP anchored at the highest-volume bar in 60
+2000s | Institutions | VWAP standard-deviation bands | position of the close inside the 20-bar VWAP ± 1 σ bands
+2000s | Institutions | Volume profile point of control | distance from the 60-bar volume-at-price mode in ATR
+2000s | Institutions | Value area position | position of the close inside the 70 % value area of the 60-bar profile
+2000s | Institutions | High-volume node distance | distance to the nearest volume node above the 90th percentile
+2000s | Institutions | Low-volume node crossing | close moving through a low-volume region of the profile
+2000s | Market profile | Initial balance extension | today's range vs the range of the first bars (proxy: open-to-close vs high-low)
+2000s | Market profile | Poor high | a range high with no excess (close near the high)
+2000s | Auction theory | Single prints | price zones traded on one bar only within 20 bars
+2000s | Order flow | Cumulative delta proxy | sum of volume × (close − open) ÷ range over 10 bars
+2000s | Order flow | Delta divergence | cumulative delta rising while price makes a lower low
+2000s | Order flow | Absorption | large volume with a small range at a level
+2000s | Order flow | Exhaustion | large range on falling volume at a swing extreme
+2000s | Weis | Weis wave volume | cumulative volume of the current swing vs the prior swing
+2000s | LazyBear | Squeeze momentum | Bollinger-in-Keltner squeeze with a regression momentum
+2000s | LazyBear | Wave trend oscillator | EMA-normalised deviation of the typical price with a signal line
+2000s | LazyBear | Volume flow oscillator | VFI minus its EMA
+2000s | Big Beluga / community | SuperTrend distance | distance from the ATR trailing line in ATR
+2000s | Community | Chandelier exit | highest high minus 3 ATR vs the close
+2000s | Community | Half-trend | trend direction from the midpoint of the ATR channel
+2000s | Community | Range filter | smoothed range band position
+2000s | Community | Nadaraya–Watson envelope | kernel-regression envelope position (non-repainting version)
+2000s | Community | Volume-weighted MACD | MACD computed on volume-weighted prices
+2000s | Community | Relative volume | volume at this time relative to the same time on prior days
+2000s | Community | Volume zone oscillator | signed volume EMA over volume EMA
+2000s | Community | Elder-Ray divergence | bull power falling while price rises
+2000s | Community | Detrended price oscillator | close minus the displaced 20-SMA in ATR
+2000s | Community | Percentage price oscillator | MACD as a percentage of the slow EMA
+2000s | Community | Zero-lag EMA slope | slope of the zero-lag EMA in ATR
+2000s | Community | Jurik-style smoothed slope | slope of an adaptive low-lag smoother
+2000s | Community | Heikin-Ashi body ratio | body over range of the Heikin-Ashi bar, 5-bar average
+2000s | Community | Renko brick count | number of consecutive same-colour 1-ATR bricks
+2000s | Community | Kagi reversal | reversal of a 1-ATR kagi line
+2000s | Community | Point-and-figure column | length of the current 3-box reversal column in boxes
+2000s | Community | Pivot point (floor) position | close relative to the daily floor pivot and R1/S1 computed from yesterday
+2000s | Community | Camarilla level position | close relative to the camarilla H3/L3 levels
+2000s | Community | Fibonacci retrace of the last leg | retrace ratio of the current pullback (0.382, 0.5, 0.618)
+2000s | Community | Gann swing direction | 2-bar swing chart direction and bars since the last swing
+2000s | Community | Elliott wave count proxy | number of alternating swings of increasing size in the current advance
+2000s | Community | Harmonic pattern ratio | ratio of the last three swing sizes (AB=CD)
+2000s | Community | Head and shoulders proxy | three swing highs with the middle highest and a neckline break
+2000s | Community | Double bottom proxy | two swing lows within 1 ATR of each other 10 to 60 bars apart
+2000s | Community | Flag tightness | range of the last 10 bars relative to the prior 10-bar move
+2000s | Community | Gap-and-go | gap of 2 ATR on 3× volume with the close above the open
+2000s | Community | Inside bar count | consecutive bars inside the prior bar's range
+2000s | Community | Outside bar | bar engulfing the prior bar's range
+2000s | Community | NR7 | narrowest range of the last 7 bars
+2000s | Community | Wide-range bar | range above 2× the 20-bar average range
+2000s | Community | Doji frequency | share of the last 20 bars with a body under 10 % of the range
+2000s | Community | Hammer / shooting star | long lower or upper wick relative to the body at a swing extreme
+2000s | Community | Engulfing | body engulfing the prior body at a swing extreme
+2000s | Community | Three-bar reversal | lower low then a close above the prior two highs
+2000s | Community | Opening range breakout proxy | close beyond the open ± 0.5 ATR
+2000s | Community | Overnight gap fill rate | share of the last 10 gaps filled the same day
+2000s | Community | Close location value trend | 10-bar average of the close position in the range
+2000s | Community | High-low index | share of the last 20 bars making a 20-bar high minus those making a 20-bar low
+2000s | Community | Ulcer index | root-mean-square drawdown from the 14-bar high
+2000s | Community | Pain index | average drawdown over 60 bars
+2000s | Community | Sortino-like | 20-bar return over downside deviation
+2000s | Community | Rolling Sharpe | 60-bar mean return over its standard deviation
+2000s | Community | Beta to the market | 60-bar regression slope of the symbol's returns on the market's
+2000s | Community | Correlation to the market | 60-bar correlation with the market
+2000s | Community | Relative strength ratio slope | slope of the symbol/market ratio over 20 bars
+2000s | Community | Idiosyncratic volatility | standard deviation of residuals from the market regression over 60 bars
+2000s | Community | Volume-weighted RSI | RSI with moves weighted by volume
+2000s | Community | Volume-price confirmation | 10-bar correlation of volume and |return|
+2000s | Community | Volume climax | volume at a 50-bar high with a range at a 50-bar high
+2000s | Community | Churn | high volume with a small range relative to 20 bars
+2000s | Community | Volume drift | 20-bar slope of volume relative to its mean
+2000s | Community | Dollar volume rank | percentile of 20-day dollar volume over 250 bars
+2000s | Community | Turnover spike | volume over the 50-bar median above 3
+1980s | Academic | Jegadeesh–Titman momentum | 12-month return skipping the last month
+1980s | Academic | Lehmann short-term reversal | last-week return reversed
+1990s | Academic | Long-term reversal (De Bondt–Thaler) | 3-year return reversed (proxy: 250-bar return)
+2000s | Academic | George–Hwang 52-week high | close as a fraction of the 52-week high
+2000s | Academic | Moskowitz time-series momentum | sign of the 12-month excess return
+2000s | Academic | Barroso vol-scaled momentum | momentum divided by realised volatility
+2000s | Academic | Frog-in-the-pan (Da, Gurun, Warachka) | share of days with the same sign as the 12-month return
+2000s | Academic | Momentum consistency (Grinblatt–Moskowitz) | number of positive months in the last 12
+2000s | Academic | MAX effect (Bali, Cakici, Whitelaw) | largest daily return in the last month
+2000s | Academic | MIN effect | most negative daily return in the last month
+2000s | Academic | Idiosyncratic volatility puzzle (Ang et al.) | idiosyncratic vol over the last month
+2000s | Academic | High-volume return premium (Gervais, Kaniel, Mingelgrin) | volume at a 50-day high
+2000s | Academic | Volume-conditioned momentum (Lee–Swaminathan) | momentum among high-turnover names
+2000s | Academic | Turnover (Datar, Naik, Radcliffe) | volume relative to its 250-bar average
+2000s | Academic | Amihud illiquidity | |return| per dollar volume over 20 bars
+2000s | Academic | Roll spread | negative first-order autocovariance of changes
+2000s | Academic | Corwin–Schultz high-low spread | spread estimate from two-day high-low ranges
+2000s | Academic | Kyle's lambda | price impact slope on signed volume
+2000s | Academic | Hasbrouck information share proxy | share of variance explained by the permanent component
+2000s | Academic | VPIN (Easley, López de Prado, O'Hara) | volume-bucketed order imbalance
+2000s | Academic | Lo–MacKinlay variance ratio | variance ratio at horizon 5 and 20
+2000s | Academic | Lo, Mamaysky, Wang patterns | kernel-smoothed head-and-shoulders and double-top detection
+1990s | Academic | Brock–Lakonishok–LeBaron | 1-50 and 1-150 moving-average crossover rules
+2000s | Academic | Han–Yang–Zhou moving-average anomaly | price above the 10-day MA conditioned on volatility
+2000s | Academic | Neely–Rapach–Tu–Zhou | combination of MA and momentum rules as a predictor
+2000s | Academic | Heston–Sadka seasonality | return in the same calendar month last year
+2000s | Academic | Realised volatility (Andersen) | sum of squared daily returns over 20 bars
+2000s | Academic | Bipower variation (Barndorff-Nielsen) | sum of products of adjacent absolute returns (jump-robust)
+2000s | Academic | Jump measure | realised variance minus bipower variation
+2000s | Academic | HAR volatility (Corsi) | 1-, 5- and 22-day realised volatility components
+2000s | Academic | Parkinson volatility | high-low based volatility estimator
+2000s | Academic | Garman–Klass volatility | OHLC-based volatility estimator
+2000s | Academic | Rogers–Satchell volatility | drift-independent OHLC estimator
+2000s | Academic | Yang–Zhang volatility | estimator combining overnight and intraday variance
+2000s | Academic | Overnight vs intraday return | share of the 20-bar return earned overnight
+2000s | Academic | Skewness preference (Boyer, Mitton, Vorkink) | expected idiosyncratic skewness proxy from 60-bar skewness
+2000s | Academic | Kurtosis | 60-bar excess kurtosis of returns
+2000s | Academic | Downside beta (Ang, Chen, Xing) | beta measured on market down days
+2000s | Academic | Coskewness | covariance of returns with squared market returns
+2000s | Academic | Tail risk (Kelly–Jiang) | Hill estimator of the lower tail
+2000s | Academic | Extreme downside hedge | return on the market's worst 5 % of days
+2000s | Academic | Momentum crash indicator (Daniel–Moskowitz) | bear market state with high volatility
+2000s | Academic | Gutierrez–Kelley reversal | one-week reversal that persists
+2000s | Academic | Da, Liu, Schaumburg overreaction | short-term reversal of the residual return
+2000s | Academic | Lagged industry momentum proxy | 20-bar return lagged by 20 bars
+2010s | Academic | Attention (Barber–Odean) | abnormal volume and extreme return as attention proxies
+2010s | Academic | Short-term reversal conditioned on volume (Campbell, Grossman, Wang) | reversal after high-volume days
+2010s | Academic | Volume-return relation (Llorente et al.) | autocorrelation conditioned on volume
+2010s | Academic | Price-path dependence (Chen, Da, Priestley) | fraction of the move that came in gaps vs intraday
+2010s | Academic | Extreme volume day reaction | return after a 5× volume day
+2010s | López de Prado | CUSUM filter | symmetric cumulative sum of returns crossing a threshold
+2010s | López de Prado | Fractional differencing | fractionally differenced close with the minimum d that is stationary
+2010s | López de Prado | Triple barrier label shape | which barrier the past 20-bar path hit first (as a feature of history)
+2010s | López de Prado | Structural break (SADF) | sup ADF statistic over the last 100 bars
+2010s | López de Prado | Entropy of encoded returns | Lempel–Ziv entropy of the binarised return sequence
+2010s | López de Prado | Trend-scanning label | t-value of the best linear trend over horizons 5 to 20
+2010s | López de Prado | Volume clock | bars needed to trade the 20-day average volume
+2010s | López de Prado | Bet sizing from probability | calibrated size from the signal's historic hit rate
+2010s | Academic | Realised skewness (Amaya et al.) | skewness of daily returns over the month
+2010s | Academic | Realised kurtosis | kurtosis of daily returns over the month
+2010s | Academic | Volatility of volatility | 20-bar standard deviation of the 5-bar realised volatility
+2010s | Academic | Volatility risk premium proxy | realised vs long-run volatility gap
+2010s | Academic | Time-series momentum with volatility targeting | 12-month sign scaled by 1/vol
+2010s | Academic | Trend strength t-statistic | t-stat of the 60-bar regression slope
+2010s | Academic | Moving-average distance (Avramov, Kaplanski, Subrahmanyam) | 21-day MA over the 200-day MA
+2010s | Academic | Slope of the price path (Boguth, Grégoire, Martineau) | share of the 12-month return from the largest single day
+2010s | Academic | Overnight momentum (Lou, Polk, Skouras) | cumulative overnight returns over 20 bars
+2010s | Academic | Intraday momentum (Gao et al.) | first-half-day return predicting the last half (proxy: open-to-mid vs mid-to-close using high/low)
+2010s | Academic | Liquidity shock (Bali et al.) | Amihud illiquidity relative to its 12-month average
+2010s | Academic | Volume shock persistence | consecutive days of volume above 2× average
+2010s | Academic | Lottery demand | share of days with returns above 5 % in the last 60
+2010s | Academic | Salience theory | return relative to the cross-section on the day (proxy: return relative to the market)
+2010s | Academic | Anchoring on the 52-week low | close as a multiple of the 52-week low
+2010s | Academic | Gambler's fallacy streaks | streak length of same-sign days and next-day reversal frequency
+2010s | Machine learning | Random forest feature importance | not a measurement; skip
+2010s | Machine learning | Autoencoder residual | reconstruction error of the last 20 bars from a low-rank basis (PCA on the symbol's own history)
+2010s | Machine learning | Shapelet distance | distance of the last 20 bars to the average shape before past breakouts
+2010s | Machine learning | Dynamic time warping | DTW distance of the last 20 bars to the last 20 bars before the best historic 20-bar move
+2010s | Machine learning | Hidden Markov regime | probability of the high-volatility state from a 2-state model on returns
+2010s | Machine learning | Change-point score | Bayesian online change-point probability on the mean return
+2010s | Machine learning | Isolation forest anomaly | anomaly score of today's (return, volume, range) triple vs 250 bars
+2010s | Machine learning | Kernel density of the close | density of the close in the 250-bar close distribution
+2010s | Machine learning | Mahalanobis distance | distance of today's (return, range, volume) from the 60-bar mean in covariance units
+2020s | Quant desks | Trend-following breakout with volatility filter | 50-bar breakout only when ATR(20)/ATR(100) is below 1
+2020s | Quant desks | Mean-reversion in the range | position in the 20-bar range when the 20-bar efficiency is low
+2020s | Quant desks | Momentum with a quality filter | 12-1 momentum on names with low 60-bar volatility
+2020s | Quant desks | Volume-confirmed breakout | 20-bar high with volume above 1.5× average
+2020s | Quant desks | Pullback in strength | RSI(3) below 30 while the 12-1 momentum is in the top quartile
+2020s | Quant desks | Gap continuation | gap of 1 ATR closing in the direction of the gap
+2020s | Quant desks | Gap fade | gap of 1 ATR closing against the gap
+2020s | Quant desks | Overnight drift capture | close-to-open return over 20 bars
+2020s | Quant desks | Range compression breakout | NR7 followed by a range expansion in the trend direction
+2020s | Quant desks | Vol-adjusted momentum rank | 20-bar return over ATR percentile within the symbol's own history
+2020s | Quant desks | Drawdown recovery speed | bars to recover from the last 10 % drawdown
+2020s | Quant desks | Liquidity-adjusted momentum | momentum scaled by dollar volume rank
+2020s | Quant desks | Signal decay | correlation of today's momentum with the momentum 5 bars ago
+2020s | Quant desks | Regime-conditioned reversal | short-term reversal only in low-volatility regimes
+2020s | Quant desks | Turn-of-the-month with momentum | momentum names entering the last 3 days of the month

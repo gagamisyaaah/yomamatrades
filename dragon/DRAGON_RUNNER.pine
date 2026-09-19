@@ -1,0 +1,87 @@
+//@version=5
+indicator("DRAGON RUNNER — hole break-up, hold to break-down", "DRAGON RUNNER", overlay=true, max_labels_count=200)
+// The RUNNER lane. Entry: the volatility hole breaks UP (two closes above the pivot-set upper level). Exit: the hole breaks
+// DOWN (two closes below the lower level), or — optional — the TE line flattens while still rising. Read the readouts
+// before taking anything: this pays on names with ATR ≥ 5 % and market cap $300M–5B; it has no edge on calm large caps.
+// Evidence: 3,606-ticker matrix (2016-23 eras, 2024+ holdout) + live Strategy Tester on ten $300M–5B names (9/10 profitable).
+
+holeK   = input.float(1.4, "Hole k·ATR", step=0.1)
+pivL    = input.int(4, "Hole pivot strength", minval=1)
+volMin  = input.float(1.5, "Volume on the break ≥ x× 20-day (readout / ranking)", step=0.25)
+flatK   = input.float(0.3, "Flatten: TE slope below this × its peak since the break", step=0.05)
+flatMin = input.float(0.02, "Flatten: TE slope floor (ATR per bar)", step=0.01)
+atrMin  = input.float(5.0, "Universe: ATR % of price ≥", step=0.5)
+showTE  = input.bool(true, "Plot the TE line")
+
+// ── volatility hole (pivot-confirmed levels, two closes to break) ──
+atrV = ta.atr(14)
+maV  = ta.sma(close, 10)
+ph = ta.pivothigh(high, pivL, pivL)
+pl = ta.pivotlow(low, pivL, pivL)
+var float hUp = na
+var float hDn = na
+var int   hState = 0            // 0 in force · 1 broke up · -1 broke down
+var int   breakBar = na
+var float breakVol = na
+if not na(ph) or not na(pl)
+    hUp := maV[pivL] + holeK * atrV[pivL]
+    hDn := maV[pivL] - holeK * atrV[pivL]
+    hState := 0
+brokeUp = false
+brokeDn = false
+if hState == 0 and not na(hUp)
+    if close > hUp and close[1] > hUp
+        hState := 1
+        brokeUp := true
+        breakBar := bar_index
+        breakVol := math.max(volume, volume[1]) / ta.sma(volume, 20)
+    else if close < hDn and close[1] < hDn
+        hState := -1
+        brokeDn := true
+
+// ── TE line (triple EMA of ohlc4, 6-bar regression) and its slope in ATR per bar ──
+trip = (ta.ema(ohlc4, 21) + ta.ema(ohlc4, 34) + ta.ema(ohlc4, 68)) / 3
+v7 = ta.linreg(trip, 6, 0)
+teSlope = (v7 - v7[1]) / atrV
+var float peakSlope = 0.0
+if brokeUp
+    peakSlope := 0.0
+if hState == 1
+    peakSlope := math.max(peakSlope, teSlope)
+flatten = hState == 1 and peakSlope > 0 and (teSlope < flatK * peakSlope or teSlope < flatMin) and not brokeUp
+
+// ── readouts ──
+atrPct = atrV / close * 100
+dvolM  = ta.sma(close * volume, 20) / 1e6
+inUniverse = atrPct >= atrMin
+barsSince = na(breakBar) ? na : bar_index - breakBar
+
+// ── drawing ──
+plot(hUp, "Hole upper", color=color.new(color.orange, 30), style=plot.style_linebr)
+plot(hDn, "Hole lower", color=color.new(color.orange, 30), style=plot.style_linebr)
+plot(showTE ? v7 : na, "TE line", color=hState == 1 ? color.new(color.lime, 0) : color.new(color.gray, 40), linewidth=2)
+bgcolor(hState == 1 ? color.new(color.lime, 94) : hState == -1 ? color.new(color.red, 94) : na)
+plotshape(brokeUp, "ENTER · hole broke up", style=shape.triangleup, location=location.belowbar, color=inUniverse ? color.new(color.lime, 0) : color.new(color.gray, 20), size=size.small)
+plotshape(brokeDn, "EXIT · hole broke down", style=shape.triangledown, location=location.abovebar, color=color.new(color.red, 0), size=size.small)
+plotshape(flatten and not flatten[1], "flatten · TE slope fading", style=shape.xcross, location=location.abovebar, color=color.new(color.yellow, 0), size=size.tiny)
+if brokeUp
+    label.new(bar_index, low, "break · vol " + str.tostring(breakVol, "#.##") + "× · ATR " + str.tostring(atrPct, "#.#") + "%", style=label.style_label_up, color=breakVol >= volMin and inUniverse ? color.new(color.lime, 20) : color.new(color.gray, 40), textcolor=color.black, size=size.small)
+
+var table t = table.new(position.top_right, 2, 6, border_width=1)
+if barstate.islast
+    table.cell(t, 0, 0, "RUNNER", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 1, 0, hState == 1 ? "hole UP · hold" : hState == -1 ? "hole DOWN · out" : "in force · wait", text_color=color.white, bgcolor=hState == 1 ? color.new(color.green, 20) : hState == -1 ? color.new(color.red, 20) : color.new(color.gray, 20))
+    table.cell(t, 0, 1, "bars since break", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 1, 1, na(barsSince) ? "—" : str.tostring(barsSince), text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 0, 2, "volume on the break", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 1, 2, na(breakVol) ? "—" : str.tostring(breakVol, "#.##") + "× 20d", text_color=color.white, bgcolor=na(breakVol) ? color.new(color.black, 20) : breakVol >= volMin ? color.new(color.green, 20) : color.new(color.gray, 20))
+    table.cell(t, 0, 3, "ATR % of price", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 1, 3, str.tostring(atrPct, "#.#") + "%", text_color=color.white, bgcolor=inUniverse ? color.new(color.green, 20) : color.new(color.red, 20))
+    table.cell(t, 0, 4, "dollar volume / day", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 1, 4, "$" + str.tostring(dvolM, "#.#") + "M", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 0, 5, "TE slope / peak", text_color=color.white, bgcolor=color.new(color.black, 20))
+    table.cell(t, 1, 5, str.tostring(teSlope, "#.###") + " / " + str.tostring(peakSlope, "#.###"), text_color=color.white, bgcolor=flatten ? color.new(color.yellow, 40) : color.new(color.black, 20))
+
+alertcondition(brokeUp, "RUNNER enter", "{{ticker}}: hole broke UP — runner entry at the next open")
+alertcondition(brokeDn, "RUNNER exit", "{{ticker}}: hole broke DOWN — exit")
+alertcondition(flatten and not flatten[1], "RUNNER flatten", "{{ticker}}: TE line flattening while up — consider the exit")

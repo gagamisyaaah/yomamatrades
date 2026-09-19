@@ -1,0 +1,206 @@
+//@version=5
+strategy("SUPER STRUCTURE — washout at the low (strategy)", overlay=true, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, initial_capital=100000, pyramiding=0)
+// Evolved on 496,799 labelled random-entry bars across 2,174 US stocks (2016-23 sequential eras, 2024+ holdout).
+// Rule: asym20≤p10(-0.874) & clv≤p10(0.08271) & d_pl≤p25(0.7581) & lo50≤p25(105.7)
+atan2(y, x) => x > 0 ? math.atan(y / x) : x < 0 and y >= 0 ? math.atan(y / x) + math.pi : x < 0 and y < 0 ? math.atan(y / x) - math.pi : y > 0 ? math.pi / 2 : -math.pi / 2
+atr = ta.atr(14)
+ph = ta.pivothigh(high, 4, 4)
+pl = ta.pivotlow(low, 4, 4)
+var float ph_px = na
+var float pl_px = na
+var int ph_bar = na
+var int pl_bar = na
+var float ph_prev = na
+var float pl_prev = na
+var float hh = na
+var float hl = na
+if not na(ph)
+    hh := ph > ph_px ? 1 : 0
+    ph_prev := ph_px
+    ph_px := ph
+    ph_bar := bar_index - 4
+if not na(pl)
+    hl := pl > pl_px ? 1 : 0
+    pl_prev := pl_px
+    pl_px := pl
+    pl_bar := bar_index - 4
+// structure: higher highs / higher lows over the last three swings on each side
+var float[] hhs = array.new_float()
+var float[] hls = array.new_float()
+if not na(ph) and not na(ph_prev)
+    array.push(hhs, ph > ph_prev ? 1 : -1)
+    if array.size(hhs) > 3
+        array.shift(hhs)
+if not na(pl) and not na(pl_prev)
+    array.push(hls, pl > pl_prev ? 1 : -1)
+    if array.size(hls) > 3
+        array.shift(hls)
+swing_structure = (array.size(hhs) > 0 ? array.sum(hhs) : 0) + (array.size(hls) > 0 ? array.sum(hls) : 0)
+rng20 = (ta.highest(high, 20) - ta.lowest(low, 20)) / (ta.highest(high, 50) - ta.lowest(low, 50))
+var int squeeze_bars = 0
+squeeze_bars := rng20 < 0.5 ? squeeze_bars + 1 : 0
+vel20 = (close - close[20]) / 20 / atr
+vel5 = (close - close[5]) / 5 / atr
+vwap20 = math.sum(hlc3 * volume, 20) / math.sum(volume, 20)
+upv10 = math.sum(close > close[1] ? volume : 0, 10)
+dnv10 = math.sum(close < close[1] ? volume : 0, 10)
+shock = ta.change(close) / atr <= -2
+shock_bar = ta.valuewhen(shock, bar_index, 0)
+shock_px = ta.valuewhen(shock, close, 0)
+drawup20 = ta.highest(close, 20) / ta.lowest(close, 20) - 1
+drawdown20 = 1 - ta.lowest(close, 20) / ta.highest(close, 20)
+dev60 = close[1] - ta.sma(close, 60)[1]
+ou_speed60 = ta.correlation(ta.change(close), dev60, 60) * ta.stdev(ta.change(close), 60) / ta.stdev(dev60, 60)
+// last two swing sizes (for the damping ratio)
+var float leg_now = na
+var float leg_prev = na
+var float last_piv = na
+if not na(ph) or not na(pl)
+    piv_px = not na(ph) ? ph : pl
+    if not na(last_piv)
+        leg_prev := leg_now
+        leg_now := math.abs(piv_px - last_piv)
+    last_piv := piv_px
+// volume flow (VFI 20)
+inter = math.log(hlc3) - math.log(hlc3[1])
+vinter = ta.stdev(inter, 30)
+cutoff = 0.2 * vinter * close
+vave = ta.sma(volume, 50)[1]
+vc = math.min(volume, vave * 2.5)
+mf = hlc3 - hlc3[1]
+vcp = mf > cutoff ? vc : mf < -cutoff ? -vc : 0
+vfi20 = ta.sma(math.sum(vcp, 20) / vave, 3)
+// Weis wave volume ratio
+var float wave_vol = 0
+var float prev_wave = 0
+var int wave_dir = 0
+d_ = close > close[1] ? 1 : close < close[1] ? -1 : wave_dir
+if d_ != wave_dir
+    prev_wave := wave_vol
+    wave_vol := 0
+    wave_dir := d_
+wave_vol += volume
+weis_ratio = math.log((wave_vol + 1) / (prev_wave + 1))
+// squeeze (BB inside Keltner) and SuperTrend(10, 3)
+sqz_on = (ta.sma(close, 20) - 2 * ta.stdev(close, 20) > ta.sma(close, 20) - 1.5 * ta.atr(20)) and (ta.sma(close, 20) + 2 * ta.stdev(close, 20) < ta.sma(close, 20) + 1.5 * ta.atr(20))
+[st_line, st_dirn] = ta.supertrend(3, 10)
+// anchored VWAPs from the last swing low / high
+var float apv_l = 0
+var float av_l = 0
+var float apv_h = 0
+var float av_h = 0
+if not na(pl)
+    apv_l := 0
+    av_l := 0
+if not na(ph)
+    apv_h := 0
+    av_h := 0
+apv_l += hlc3 * volume
+av_l += volume
+apv_h += hlc3 * volume
+av_h += volume
+avwap_pl = apv_l / av_l
+avwap_ph = apv_h / av_h
+// round-3 helpers
+capit = ta.change(close) / atr <= -3 and volume >= 4 * ta.sma(volume, 20) and (close - low) / (high - low) <= 0.25
+euph = ta.change(close) / atr >= 3 and volume >= 4 * ta.sma(volume, 20) and (close - low) / (high - low) >= 0.75
+r1 = ta.roc(close, 1)
+a1 = math.abs(r1)
+big1 = ta.highest(a1, 20)
+big2 = ta.highest(a1 == big1 ? 0 : a1, 20)
+win_mom20 = math.sum(r1, 20) - (ta.valuewhen(a1 == big1, r1, 0) + ta.valuewhen(a1 == big2, r1, 0))
+var int shock_b = na
+var float low_since = na
+var bool broke = false
+if ta.change(close) / atr <= -2
+    shock_b := bar_index
+    low_since := low
+    broke := false
+else
+    if not na(low_since)
+        broke := broke or low < low_since
+        low_since := math.min(low_since, low)
+remission = na(shock_b) or broke ? 0 : bar_index - shock_b
+side20 = math.sign(close - ta.sma(close, 20))
+var float overshoot20 = 0
+overshoot20 := side20 != side20[1] ? math.abs(close - ta.sma(close, 20)) / atr : math.max(overshoot20, math.abs(close - ta.sma(close, 20)) / atr)
+m60 = ta.sma(r1, 60)
+s60 = ta.stdev(r1, 60)
+kurt60 = ta.sma(math.pow((r1 - m60) / s60, 4), 60) - 3
+skew60 = ta.sma(math.pow((r1 - m60) / s60, 3), 60)
+var int bandwagon = 0
+bandwagon := close > close[1] and volume > volume[1] ? bandwagon + 1 : 0
+var float inertia = 0
+inertia := math.sign(ta.change(close)) == math.sign(ta.change(close)[1]) ? inertia + ta.change(close) / atr : ta.change(close) / atr
+rng_slope20 = (ta.linreg(high - low, 20, 0) - ta.linreg(high - low, 20, 1)) / atr
+vol_slope20 = ta.linreg(volume / ta.sma(volume, 20), 20, 0) - ta.linreg(volume / ta.sma(volume, 20), 20, 1)
+anneal20 = -rng_slope20 * vol_slope20 * math.sign(vol_slope20) * math.sign(-rng_slope20)
+au = close > close[1] ? 1.0 : 0.0
+bu = volume > volume[1] ? 1.0 : 0.0
+p11 = ta.sma(au * bu, 60) + 1e-9
+p10 = ta.sma(au * (1 - bu), 60) + 1e-9
+p01 = ta.sma((1 - au) * bu, 60) + 1e-9
+p00 = ta.sma((1 - au) * (1 - bu), 60) + 1e-9
+pa1 = p11 + p10
+pb1 = p11 + p01
+mi60 = (p11 * math.log(p11 / (pa1 * pb1)) + p10 * math.log(p10 / (pa1 * (1 - pb1))) + p01 * math.log(p01 / ((1 - pa1) * pb1)) + p00 * math.log(p00 / ((1 - pa1) * (1 - pb1)))) / math.log(2)
+// Diamond vetoes: hype, money flow, gold band, mountain, bubble (same formulas as DIAMOND_TOTAL)
+signed_v = close > close[1] ? volume : close < close[1] ? -volume : 0
+hype = ta.ema(100 * ta.ema(signed_v, 10) / ta.ema(volume, 10) / 2, 3)
+mfi_raw = ta.mfi(hlc3, 14)
+flow = ta.ema(mfi_raw - 50, 3)
+gold_top = math.max(ta.ema(close, 21), ta.ema(close, 34), ta.ema(close, 55))
+band_up = ta.ema(close, 21) > ta.ema(close, 55) and ta.ema(close, 21) > ta.ema(close, 21)[1]
+mountain = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > gold_top ? 1 : 0) + (band_up ? 1 : 0)
+bubble = math.max(0, (close - ta.ema(close, 200)) / atr) + (hype > 25 ? 1 : 0) + (flow > 25 ? 1 : 0)
+// Dragon: TE line and the SS candle
+te_trip = (ta.ema(ohlc4, 21) + ta.ema(ohlc4, 34) + ta.ema(ohlc4, 68)) / 3
+te_v7 = ta.linreg(te_trip, 6, 0)
+kdj_rsv = (close - ta.lowest(low, 9)) / (ta.highest(high, 9) - ta.lowest(low, 9)) * 100
+var float kdj_k = 50.0
+var float kdj_d = 50.0
+kdj_k := (nz(kdj_rsv, 50) + 2 * kdj_k) / 3
+kdj_d := (kdj_k + 2 * kdj_d) / 3
+kdj_j = 3 * kdj_k - 2 * kdj_d
+var float red_hi = na
+var float red_lo = na
+if kdj_j > 50 and kdj_j[1] <= 50
+    red_hi := high
+    red_lo := low
+ss_confirm = kdj_j > 50 and not na(red_hi) and close > red_hi and not (close < red_lo)
+var int dstreak = 0
+var int ustreak = 0
+dstreak := close < close[1] ? dstreak + 1 : 0
+ustreak := close > close[1] ? ustreak + 1 : 0
+[diplus, diminus, adx14] = ta.dmi(14, 14)
+[macdLine, signalLine, _h] = ta.macd(close, 12, 26, 9)
+thr0 = input.float(-0.874, "asym20 ≤")
+thr1 = input.float(0.08271, "clv ≤")
+thr2 = input.float(0.7581, "d_pl ≤")
+thr3 = input.float(105.7, "lo50 ≤")
+c0 = (math.log((drawup20 + 0.01) / (drawdown20 + 0.01))) <= thr0
+c1 = ((close - low) / (high - low)) <= thr1
+c2 = ((close - pl_px) / atr) <= thr2
+c3 = (close / ta.lowest(low, 50) * 100) <= thr3
+on = c0 and c1 and c2 and c3
+signal = on and not on[1]
+target_mult = input.float(2.0, "target (ATR)")
+stop_mult = input.float(4.0, "stop (ATR)")
+bars_max = input.int(20, "time stop (bars)")
+plotshape(signal, style=shape.triangleup, location=location.belowbar, color=color.new(color.lime, 0), size=size.small, title="entry")
+bgcolor(on ? color.new(color.lime, 92) : na)
+alertcondition(signal, "evolved entry", "{{ticker}} evolved entry")
+var float ent = na
+var int ent_bar = na
+if signal and strategy.position_size == 0
+    strategy.entry("L", strategy.long)
+if strategy.position_size > 0 and na(ent)
+    ent := strategy.position_avg_price
+    ent_bar := bar_index
+if strategy.position_size > 0
+    strategy.exit("X", "L", limit=ent + target_mult * atr[bar_index - ent_bar], stop=ent - stop_mult * atr[bar_index - ent_bar])
+    if bar_index - ent_bar >= bars_max
+        strategy.close("L")
+if strategy.position_size == 0
+    ent := na
+    ent_bar := na

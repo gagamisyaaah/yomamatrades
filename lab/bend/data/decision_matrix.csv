@@ -1,0 +1,1811 @@
+entry,exit,period,cap,atr,regime,n,trades_per_year,excess,z,win,unit,per_trade_pct
+STRUCTURE,bracket +2/−4 20b,in-sample,all,all,all,4074,5613,0.407,12.2,0.69,ATR,1.36
+STRUCTURE,bracket +2/−4 20b,in-sample,all,all,bull,2310,3183,0.361,8.8,0.702,ATR,1.05
+STRUCTURE,bracket +2/−4 20b,in-sample,all,all,bear,1764,2430,0.468,8.4,0.676,ATR,1.76
+STRUCTURE,bracket +2/−4 20b,in-sample,all,<3,all,1717,2366,0.452,8.4,0.705,ATR,1.14
+STRUCTURE,bracket +2/−4 20b,in-sample,all,<3,bull,1060,1460,0.463,7.4,0.732,ATR,1.13
+STRUCTURE,bracket +2/−4 20b,in-sample,all,<3,bear,657,905,0.435,4.5,0.661,ATR,1.15
+STRUCTURE,bracket +2/−4 20b,in-sample,all,3-5,all,1504,2072,0.501,9.4,0.717,ATR,1.84
+STRUCTURE,bracket +2/−4 20b,in-sample,all,3-5,bull,816,1124,0.346,5.1,0.711,ATR,1.33
+STRUCTURE,bracket +2/−4 20b,in-sample,all,3-5,bear,688,948,0.685,8.1,0.725,ATR,2.44
+STRUCTURE,bracket +2/−4 20b,in-sample,all,5-8,all,572,788,0.187,2.1,0.628,ATR,1.03
+STRUCTURE,bracket +2/−4 20b,in-sample,all,5-8,bull,300,413,0.266,2.6,0.65,ATR,1.59
+STRUCTURE,bracket +2/−4 20b,in-sample,all,5-8,bear,272,375,0.099,0.7,0.603,ATR,0.42
+STRUCTURE,bracket +2/−4 20b,in-sample,500M-2B,all,all,481,663,0.153,1.5,0.638,ATR,0.45
+STRUCTURE,bracket +2/−4 20b,in-sample,500M-2B,all,bull,272,375,0.202,1.7,0.665,ATR,0.98
+STRUCTURE,bracket +2/−4 20b,in-sample,500M-2B,all,bear,209,288,0.088,0.5,0.603,ATR,-0.25
+STRUCTURE,bracket +2/−4 20b,in-sample,500M-2B,3-5,all,196,270,0.247,1.6,0.684,ATR,0.83
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,all,all,1153,1589,0.254,4.0,0.651,ATR,0.9
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,all,bull,667,919,0.196,2.5,0.652,ATR,0.41
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,all,bear,486,670,0.334,3.1,0.65,ATR,1.58
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,<3,all,334,460,0.187,1.4,0.656,ATR,0.47
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,<3,bull,197,271,0.238,1.5,0.68,ATR,0.57
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,3-5,all,488,672,0.37,3.9,0.682,ATR,1.42
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,3-5,bull,290,400,0.212,1.8,0.669,ATR,0.86
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,3-5,bear,198,273,0.602,3.8,0.702,ATR,2.23
+STRUCTURE,bracket +2/−4 20b,in-sample,2B-5B,5-8,all,223,307,0.313,2.3,0.641,ATR,1.81
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,all,all,2432,3351,0.53,12.5,0.72,ATR,1.76
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,all,bull,1370,1888,0.474,9.2,0.734,ATR,1.39
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,all,bear,1062,1463,0.602,8.5,0.702,ATR,2.23
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,<3,all,1257,1732,0.555,9.3,0.726,ATR,1.38
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,<3,bull,805,1109,0.555,8.1,0.753,ATR,1.35
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,<3,bear,452,623,0.556,4.9,0.677,ATR,1.44
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,3-5,all,819,1128,0.64,9.1,0.747,ATR,2.33
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,3-5,bull,405,558,0.465,5.0,0.746,ATR,1.75
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,3-5,bear,414,570,0.811,7.8,0.749,ATR,2.9
+STRUCTURE,bracket +2/−4 20b,in-sample,>5B,5-8,all,245,338,0.105,0.7,0.629,ATR,0.47
+STRUCTURE,bracket +2/−4 20b,holdout,all,all,all,1430,5307,0.197,3.5,0.639,ATR,0.62
+STRUCTURE,bracket +2/−4 20b,holdout,all,all,bull,1265,4695,0.251,4.4,0.644,ATR,0.81
+STRUCTURE,bracket +2/−4 20b,holdout,all,all,bear,165,612,-0.217,-1.1,0.6,ATR,-0.84
+STRUCTURE,bracket +2/−4 20b,holdout,all,<3,all,540,2004,0.408,4.5,0.683,ATR,0.9
+STRUCTURE,bracket +2/−4 20b,holdout,all,<3,bull,498,1848,0.452,4.9,0.685,ATR,1.07
+STRUCTURE,bracket +2/−4 20b,holdout,all,3-5,all,528,1960,0.053,0.5,0.616,ATR,0.21
+STRUCTURE,bracket +2/−4 20b,holdout,all,3-5,bull,442,1640,0.137,1.4,0.627,ATR,0.47
+STRUCTURE,bracket +2/−4 20b,holdout,all,5-8,all,264,980,-0.001,-0.0,0.591,ATR,-0.21
+STRUCTURE,bracket +2/−4 20b,holdout,all,5-8,bull,239,887,0.003,0.0,0.59,ATR,-0.18
+STRUCTURE,bracket +2/−4 20b,holdout,500M-2B,all,all,194,720,-0.236,-1.4,0.572,ATR,-1.03
+STRUCTURE,bracket +2/−4 20b,holdout,500M-2B,all,bull,172,638,-0.219,-1.3,0.564,ATR,-1.03
+STRUCTURE,bracket +2/−4 20b,holdout,2B-5B,all,all,424,1574,0.023,0.2,0.604,ATR,0.05
+STRUCTURE,bracket +2/−4 20b,holdout,2B-5B,all,bull,368,1366,0.133,1.3,0.617,ATR,0.44
+STRUCTURE,bracket +2/−4 20b,holdout,2B-5B,3-5,all,174,646,-0.066,-0.4,0.603,ATR,-0.1
+STRUCTURE,bracket +2/−4 20b,holdout,>5B,all,all,808,2999,0.391,5.5,0.675,ATR,1.3
+STRUCTURE,bracket +2/−4 20b,holdout,>5B,all,bull,721,2676,0.422,5.7,0.678,ATR,1.42
+STRUCTURE,bracket +2/−4 20b,holdout,>5B,<3,all,392,1455,0.507,4.9,0.702,ATR,1.16
+STRUCTURE,bracket +2/−4 20b,holdout,>5B,<3,bull,367,1362,0.508,4.8,0.698,ATR,1.19
+STRUCTURE,bracket +2/−4 20b,holdout,>5B,3-5,all,287,1065,0.249,2.0,0.638,ATR,0.86
+STRUCTURE,bracket +2/−4 20b,holdout,>5B,3-5,bull,240,891,0.292,2.3,0.642,ATR,0.99
+STRUCTURE,bracket +3/−4 20b,in-sample,all,all,all,4074,5613,0.483,12.3,0.632,ATR,1.61
+STRUCTURE,bracket +3/−4 20b,in-sample,all,all,bull,2310,3183,0.442,9.2,0.659,ATR,1.3
+STRUCTURE,bracket +3/−4 20b,in-sample,all,all,bear,1764,2430,0.537,8.2,0.597,ATR,2.02
+STRUCTURE,bracket +3/−4 20b,in-sample,all,<3,all,1717,2366,0.579,9.2,0.647,ATR,1.49
+STRUCTURE,bracket +3/−4 20b,in-sample,all,<3,bull,1060,1460,0.579,7.8,0.679,ATR,1.45
+STRUCTURE,bracket +3/−4 20b,in-sample,all,<3,bear,657,905,0.581,5.2,0.595,ATR,1.57
+STRUCTURE,bracket +3/−4 20b,in-sample,all,3-5,all,1504,2072,0.561,8.8,0.652,ATR,2.06
+STRUCTURE,bracket +3/−4 20b,in-sample,all,3-5,bull,816,1124,0.433,5.4,0.673,ATR,1.64
+STRUCTURE,bracket +3/−4 20b,in-sample,all,3-5,bear,688,948,0.713,7.1,0.628,ATR,2.56
+STRUCTURE,bracket +3/−4 20b,in-sample,all,5-8,all,572,788,0.183,1.8,0.577,ATR,1.02
+STRUCTURE,bracket +3/−4 20b,in-sample,all,5-8,bull,300,413,0.244,2.1,0.617,ATR,1.44
+STRUCTURE,bracket +3/−4 20b,in-sample,all,5-8,bear,272,375,0.117,0.7,0.533,ATR,0.56
+STRUCTURE,bracket +3/−4 20b,in-sample,500M-2B,all,all,481,663,0.152,1.3,0.58,ATR,0.61
+STRUCTURE,bracket +3/−4 20b,in-sample,500M-2B,all,bull,272,375,0.217,1.6,0.621,ATR,1.11
+STRUCTURE,bracket +3/−4 20b,in-sample,500M-2B,all,bear,209,288,0.068,0.3,0.526,ATR,-0.04
+STRUCTURE,bracket +3/−4 20b,in-sample,500M-2B,3-5,all,196,270,0.363,2.0,0.643,ATR,1.26
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,all,all,1153,1589,0.307,4.1,0.597,ATR,1.06
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,all,bull,667,919,0.231,2.5,0.612,ATR,0.49
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,all,bear,486,670,0.413,3.3,0.576,ATR,1.84
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,<3,all,334,460,0.322,2.1,0.614,ATR,0.92
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,<3,bull,197,271,0.354,1.9,0.65,ATR,0.94
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,3-5,all,488,672,0.436,3.8,0.617,ATR,1.66
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,3-5,bull,290,400,0.212,1.5,0.61,ATR,0.82
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,3-5,bear,198,273,0.764,4.1,0.626,ATR,2.88
+STRUCTURE,bracket +3/−4 20b,in-sample,2B-5B,5-8,all,223,307,0.235,1.5,0.574,ATR,1.33
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,all,all,2432,3351,0.633,12.6,0.66,ATR,2.08
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,all,bull,1370,1888,0.592,9.6,0.691,ATR,1.74
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,all,bear,1062,1463,0.686,8.2,0.621,ATR,2.51
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,<3,all,1257,1732,0.711,10.0,0.668,ATR,1.78
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,<3,bull,805,1109,0.679,8.2,0.696,ATR,1.68
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,<3,bear,452,623,0.768,5.8,0.619,ATR,1.96
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,3-5,all,819,1128,0.685,8.1,0.676,ATR,2.49
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,3-5,bull,405,558,0.626,5.7,0.721,ATR,2.32
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,3-5,bear,414,570,0.742,5.8,0.633,ATR,2.65
+STRUCTURE,bracket +3/−4 20b,in-sample,>5B,5-8,all,245,338,0.197,1.2,0.596,ATR,1.01
+STRUCTURE,bracket +3/−4 20b,holdout,all,all,all,1430,5307,0.08,1.2,0.559,ATR,0.11
+STRUCTURE,bracket +3/−4 20b,holdout,all,all,bull,1265,4695,0.261,3.9,0.584,ATR,0.75
+STRUCTURE,bracket +3/−4 20b,holdout,all,all,bear,165,612,-1.313,-6.0,0.364,ATR,-4.81
+STRUCTURE,bracket +3/−4 20b,holdout,all,<3,all,540,2004,0.397,3.6,0.607,ATR,0.85
+STRUCTURE,bracket +3/−4 20b,holdout,all,<3,bull,498,1848,0.508,4.6,0.618,ATR,1.2
+STRUCTURE,bracket +3/−4 20b,holdout,all,3-5,all,528,1960,-0.17,-1.5,0.517,ATR,-0.54
+STRUCTURE,bracket +3/−4 20b,holdout,all,3-5,bull,442,1640,0.173,1.5,0.57,ATR,0.64
+STRUCTURE,bracket +3/−4 20b,holdout,all,5-8,all,264,980,-0.102,-0.8,0.53,ATR,-0.79
+STRUCTURE,bracket +3/−4 20b,holdout,all,5-8,bull,239,887,-0.084,-0.6,0.531,ATR,-0.7
+STRUCTURE,bracket +3/−4 20b,holdout,500M-2B,all,all,194,720,-0.453,-2.5,0.49,ATR,-1.86
+STRUCTURE,bracket +3/−4 20b,holdout,500M-2B,all,bull,172,638,-0.32,-1.7,0.5,ATR,-1.49
+STRUCTURE,bracket +3/−4 20b,holdout,2B-5B,all,all,424,1574,-0.148,-1.2,0.526,ATR,-0.62
+STRUCTURE,bracket +3/−4 20b,holdout,2B-5B,all,bull,368,1366,0.078,0.6,0.557,ATR,0.18
+STRUCTURE,bracket +3/−4 20b,holdout,2B-5B,3-5,all,174,646,-0.334,-1.7,0.511,ATR,-0.93
+STRUCTURE,bracket +3/−4 20b,holdout,>5B,all,all,808,2999,0.323,3.8,0.593,ATR,0.92
+STRUCTURE,bracket +3/−4 20b,holdout,>5B,all,bull,721,2676,0.49,5.7,0.619,ATR,1.53
+STRUCTURE,bracket +3/−4 20b,holdout,>5B,<3,all,392,1455,0.543,4.3,0.628,ATR,1.26
+STRUCTURE,bracket +3/−4 20b,holdout,>5B,<3,bull,367,1362,0.613,4.9,0.635,ATR,1.48
+STRUCTURE,bracket +3/−4 20b,holdout,>5B,3-5,all,287,1065,0.058,0.4,0.537,ATR,0.18
+STRUCTURE,bracket +3/−4 20b,holdout,>5B,3-5,bull,240,891,0.372,2.5,0.588,ATR,1.26
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,all,all,4074,5613,0.132,8.8,0.865,ATR,0.55
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,all,bull,2310,3183,0.085,4.4,0.851,ATR,0.28
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,all,bear,1764,2430,0.194,8.3,0.883,ATR,0.9
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,<3,all,1717,2366,0.108,4.3,0.865,ATR,0.28
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,<3,bull,1060,1460,0.107,3.7,0.873,ATR,0.27
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,<3,bear,657,905,0.109,2.4,0.852,ATR,0.28
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,3-5,all,1504,2072,0.159,6.8,0.886,ATR,0.6
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,3-5,bull,816,1124,0.068,2.0,0.857,ATR,0.25
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,3-5,bear,688,948,0.266,8.5,0.92,ATR,1.01
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,5-8,all,572,788,0.113,2.9,0.825,ATR,0.71
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,5-8,bull,300,413,0.041,0.8,0.783,ATR,0.27
+STRUCTURE,scalp +0.5/−3 10b,in-sample,all,5-8,bear,272,375,0.193,3.4,0.871,ATR,1.19
+STRUCTURE,scalp +0.5/−3 10b,in-sample,500M-2B,all,all,481,663,0.097,2.2,0.842,ATR,0.38
+STRUCTURE,scalp +0.5/−3 10b,in-sample,500M-2B,all,bull,272,375,0.061,1.1,0.831,ATR,0.23
+STRUCTURE,scalp +0.5/−3 10b,in-sample,500M-2B,all,bear,209,288,0.144,2.0,0.856,ATR,0.57
+STRUCTURE,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,all,196,270,0.077,1.1,0.862,ATR,0.26
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,all,all,1153,1589,0.07,2.3,0.845,ATR,0.45
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,all,bull,667,919,0.062,1.7,0.837,ATR,0.27
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,all,bear,486,670,0.083,1.7,0.856,ATR,0.7
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,<3,all,334,460,-0.032,-0.5,0.817,ATR,-0.06
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bull,197,271,0.059,0.8,0.853,ATR,0.19
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,all,488,672,0.092,2.1,0.867,ATR,0.37
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bull,290,400,0.043,0.8,0.841,ATR,0.18
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bear,198,273,0.163,2.3,0.904,ATR,0.65
+STRUCTURE,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,all,223,307,0.138,2.3,0.843,ATR,0.95
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,all,all,2432,3351,0.168,9.1,0.879,ATR,0.63
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,all,bull,1370,1888,0.102,4.1,0.863,ATR,0.3
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,all,bear,1062,1463,0.253,9.1,0.9,ATR,1.05
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,<3,all,1257,1732,0.148,5.5,0.879,ATR,0.38
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,<3,bull,805,1109,0.127,4.0,0.881,ATR,0.32
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,<3,bear,452,623,0.186,3.7,0.876,ATR,0.5
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,3-5,all,819,1128,0.217,7.6,0.902,ATR,0.81
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,3-5,bull,405,558,0.083,1.8,0.864,ATR,0.3
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,3-5,bear,414,570,0.349,10.6,0.94,ATR,1.32
+STRUCTURE,scalp +0.5/−3 10b,in-sample,>5B,5-8,all,245,338,0.071,1.1,0.808,ATR,0.38
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,all,all,1430,5307,0.098,4.0,0.838,ATR,0.45
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,all,bull,1265,4695,0.06,2.2,0.823,ATR,0.32
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,all,bear,165,612,0.385,10.8,0.958,ATR,1.5
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,<3,all,540,2004,0.095,2.3,0.848,ATR,0.21
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,<3,bull,498,1848,0.067,1.5,0.837,ATR,0.15
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,3-5,all,528,1960,0.09,2.2,0.831,ATR,0.37
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,3-5,bull,442,1640,0.025,0.5,0.805,ATR,0.13
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,5-8,all,264,980,0.084,1.6,0.822,ATR,0.44
+STRUCTURE,scalp +0.5/−3 10b,holdout,all,5-8,bull,239,887,0.068,1.2,0.812,ATR,0.35
+STRUCTURE,scalp +0.5/−3 10b,holdout,500M-2B,all,all,194,720,0.086,1.3,0.84,ATR,0.52
+STRUCTURE,scalp +0.5/−3 10b,holdout,500M-2B,all,bull,172,638,0.048,0.6,0.826,ATR,0.43
+STRUCTURE,scalp +0.5/−3 10b,holdout,2B-5B,all,all,424,1574,0.05,1.1,0.804,ATR,0.31
+STRUCTURE,scalp +0.5/−3 10b,holdout,2B-5B,all,bull,368,1366,0.001,0.0,0.78,ATR,0.12
+STRUCTURE,scalp +0.5/−3 10b,holdout,2B-5B,3-5,all,174,646,0.092,1.4,0.81,ATR,0.44
+STRUCTURE,scalp +0.5/−3 10b,holdout,>5B,all,all,808,2999,0.124,3.9,0.855,ATR,0.48
+STRUCTURE,scalp +0.5/−3 10b,holdout,>5B,all,bull,721,2676,0.091,2.6,0.843,ATR,0.36
+STRUCTURE,scalp +0.5/−3 10b,holdout,>5B,<3,all,392,1455,0.116,2.5,0.86,ATR,0.25
+STRUCTURE,scalp +0.5/−3 10b,holdout,>5B,<3,bull,367,1362,0.096,1.9,0.853,ATR,0.2
+STRUCTURE,scalp +0.5/−3 10b,holdout,>5B,3-5,all,287,1065,0.115,2.1,0.847,ATR,0.44
+STRUCTURE,scalp +0.5/−3 10b,holdout,>5B,3-5,bull,240,891,0.05,0.8,0.825,ATR,0.2
+STRUCTURE,close 10 bars,in-sample,all,all,all,4074,5613,1.039,6.2,0.622,%,1.04
+STRUCTURE,close 10 bars,in-sample,all,all,bull,2310,3183,0.902,5.0,0.635,%,0.9
+STRUCTURE,close 10 bars,in-sample,all,all,bear,1764,2430,1.219,4.0,0.605,%,1.22
+STRUCTURE,close 10 bars,in-sample,all,<3,all,1717,2366,1.291,9.1,0.621,%,1.29
+STRUCTURE,close 10 bars,in-sample,all,<3,bull,1060,1460,1.106,7.1,0.653,%,1.11
+STRUCTURE,close 10 bars,in-sample,all,<3,bear,657,905,1.589,5.9,0.569,%,1.59
+STRUCTURE,close 10 bars,in-sample,all,3-5,all,1504,2072,2.296,8.9,0.667,%,2.3
+STRUCTURE,close 10 bars,in-sample,all,3-5,bull,816,1124,1.71,5.7,0.654,%,1.71
+STRUCTURE,close 10 bars,in-sample,all,3-5,bear,688,948,2.991,6.8,0.682,%,2.99
+STRUCTURE,close 10 bars,in-sample,all,5-8,all,572,788,-0.634,-1.1,0.558,%,-0.63
+STRUCTURE,close 10 bars,in-sample,all,5-8,bull,300,413,0.576,0.9,0.587,%,0.58
+STRUCTURE,close 10 bars,in-sample,all,5-8,bear,272,375,-1.969,-1.9,0.526,%,-1.97
+STRUCTURE,close 10 bars,in-sample,500M-2B,all,all,481,663,-0.537,-0.9,0.559,%,-0.54
+STRUCTURE,close 10 bars,in-sample,500M-2B,all,bull,272,375,0.391,0.6,0.592,%,0.39
+STRUCTURE,close 10 bars,in-sample,500M-2B,all,bear,209,288,-1.745,-1.7,0.517,%,-1.74
+STRUCTURE,close 10 bars,in-sample,500M-2B,3-5,all,196,270,1.328,2.0,0.638,%,1.33
+STRUCTURE,close 10 bars,in-sample,2B-5B,all,all,1153,1589,0.617,1.8,0.585,%,0.62
+STRUCTURE,close 10 bars,in-sample,2B-5B,all,bull,667,919,0.563,1.4,0.598,%,0.56
+STRUCTURE,close 10 bars,in-sample,2B-5B,all,bear,486,670,0.69,1.2,0.566,%,0.69
+STRUCTURE,close 10 bars,in-sample,2B-5B,<3,all,334,460,0.428,1.2,0.545,%,0.43
+STRUCTURE,close 10 bars,in-sample,2B-5B,<3,bull,197,271,0.702,1.7,0.599,%,0.7
+STRUCTURE,close 10 bars,in-sample,2B-5B,3-5,all,488,672,1.949,4.1,0.635,%,1.95
+STRUCTURE,close 10 bars,in-sample,2B-5B,3-5,bull,290,400,1.15,2.1,0.61,%,1.15
+STRUCTURE,close 10 bars,in-sample,2B-5B,3-5,bear,198,273,3.119,3.7,0.672,%,3.12
+STRUCTURE,close 10 bars,in-sample,2B-5B,5-8,all,223,307,-0.421,-0.5,0.552,%,-0.42
+STRUCTURE,close 10 bars,in-sample,>5B,all,all,2432,3351,1.556,7.8,0.653,%,1.56
+STRUCTURE,close 10 bars,in-sample,>5B,all,bull,1370,1888,1.178,6.1,0.663,%,1.18
+STRUCTURE,close 10 bars,in-sample,>5B,all,bear,1062,1463,2.042,5.3,0.64,%,2.04
+STRUCTURE,close 10 bars,in-sample,>5B,<3,all,1257,1732,1.625,10.1,0.652,%,1.63
+STRUCTURE,close 10 bars,in-sample,>5B,<3,bull,805,1109,1.278,7.6,0.675,%,1.28
+STRUCTURE,close 10 bars,in-sample,>5B,<3,bear,452,623,2.243,6.8,0.613,%,2.24
+STRUCTURE,close 10 bars,in-sample,>5B,3-5,all,819,1128,2.741,8.0,0.694,%,2.74
+STRUCTURE,close 10 bars,in-sample,>5B,3-5,bull,405,558,2.221,5.7,0.684,%,2.22
+STRUCTURE,close 10 bars,in-sample,>5B,3-5,bear,414,570,3.249,5.8,0.703,%,3.25
+STRUCTURE,close 10 bars,in-sample,>5B,5-8,all,245,338,-0.526,-0.6,0.58,%,-0.53
+STRUCTURE,close 10 bars,holdout,all,all,all,1430,5307,1.229,4.8,0.617,%,1.23
+STRUCTURE,close 10 bars,holdout,all,all,bull,1265,4695,1.127,4.0,0.593,%,1.13
+STRUCTURE,close 10 bars,holdout,all,all,bear,165,612,2.011,4.1,0.8,%,2.01
+STRUCTURE,close 10 bars,holdout,all,<3,all,540,2004,1.358,6.0,0.609,%,1.36
+STRUCTURE,close 10 bars,holdout,all,<3,bull,498,1848,1.326,5.4,0.596,%,1.33
+STRUCTURE,close 10 bars,holdout,all,3-5,all,528,1960,0.953,2.8,0.623,%,0.95
+STRUCTURE,close 10 bars,holdout,all,3-5,bull,442,1640,0.693,1.8,0.581,%,0.69
+STRUCTURE,close 10 bars,holdout,all,5-8,all,264,980,1.021,1.3,0.61,%,1.02
+STRUCTURE,close 10 bars,holdout,all,5-8,bull,239,887,0.764,0.9,0.59,%,0.76
+STRUCTURE,close 10 bars,holdout,500M-2B,all,all,194,720,-0.336,-0.4,0.562,%,-0.34
+STRUCTURE,close 10 bars,holdout,500M-2B,all,bull,172,638,-0.611,-0.7,0.541,%,-0.61
+STRUCTURE,close 10 bars,holdout,2B-5B,all,all,424,1574,0.45,0.9,0.561,%,0.45
+STRUCTURE,close 10 bars,holdout,2B-5B,all,bull,368,1366,0.358,0.6,0.533,%,0.36
+STRUCTURE,close 10 bars,holdout,2B-5B,3-5,all,174,646,1.088,2.0,0.592,%,1.09
+STRUCTURE,close 10 bars,holdout,>5B,all,all,808,2999,2.003,6.7,0.66,%,2.0
+STRUCTURE,close 10 bars,holdout,>5B,all,bull,721,2676,1.921,5.9,0.637,%,1.92
+STRUCTURE,close 10 bars,holdout,>5B,<3,all,392,1455,1.601,5.9,0.648,%,1.6
+STRUCTURE,close 10 bars,holdout,>5B,<3,bull,367,1362,1.563,5.4,0.635,%,1.56
+STRUCTURE,close 10 bars,holdout,>5B,3-5,all,287,1065,1.332,2.9,0.652,%,1.33
+STRUCTURE,close 10 bars,holdout,>5B,3-5,bull,240,891,1.009,1.9,0.608,%,1.01
+STRUCTURE,hole down,in-sample,all,all,all,4074,5613,-1.077,-5.3,0.522,%,-1.08
+STRUCTURE,hole down,in-sample,all,all,bull,2310,3183,-2.06,-6.4,0.48,%,-2.06
+STRUCTURE,hole down,in-sample,all,all,bear,1764,2430,0.211,1.0,0.577,%,0.21
+STRUCTURE,hole down,in-sample,all,<3,all,1717,2366,-0.117,-1.5,0.464,%,-0.12
+STRUCTURE,hole down,in-sample,all,<3,bull,1060,1460,-0.618,-5.6,0.465,%,-0.62
+STRUCTURE,hole down,in-sample,all,<3,bear,657,905,0.693,7.4,0.463,%,0.69
+STRUCTURE,hole down,in-sample,all,3-5,all,1504,2072,-1.058,-7.6,0.578,%,-1.06
+STRUCTURE,hole down,in-sample,all,3-5,bull,816,1124,-2.806,-13.5,0.505,%,-2.81
+STRUCTURE,hole down,in-sample,all,3-5,bear,688,948,1.015,7.0,0.666,%,1.02
+STRUCTURE,hole down,in-sample,all,5-8,all,572,788,-1.922,-4.4,0.551,%,-1.92
+STRUCTURE,hole down,in-sample,all,5-8,bull,300,413,-4.219,-6.2,0.483,%,-4.22
+STRUCTURE,hole down,in-sample,all,5-8,bear,272,375,0.612,1.2,0.625,%,0.61
+STRUCTURE,hole down,in-sample,500M-2B,all,all,481,663,-3.102,-5.8,0.482,%,-3.1
+STRUCTURE,hole down,in-sample,500M-2B,all,bull,272,375,-4.266,-6.7,0.445,%,-4.27
+STRUCTURE,hole down,in-sample,500M-2B,all,bear,209,288,-1.588,-1.8,0.531,%,-1.59
+STRUCTURE,hole down,in-sample,500M-2B,3-5,all,196,270,-1.531,-3.9,0.485,%,-1.53
+STRUCTURE,hole down,in-sample,2B-5B,all,all,1153,1589,-1.368,-4.6,0.505,%,-1.37
+STRUCTURE,hole down,in-sample,2B-5B,all,bull,667,919,-2.426,-5.7,0.484,%,-2.43
+STRUCTURE,hole down,in-sample,2B-5B,all,bear,486,670,0.084,0.2,0.533,%,0.08
+STRUCTURE,hole down,in-sample,2B-5B,<3,all,334,460,-0.36,-1.7,0.404,%,-0.36
+STRUCTURE,hole down,in-sample,2B-5B,<3,bull,197,271,-0.668,-2.1,0.442,%,-0.67
+STRUCTURE,hole down,in-sample,2B-5B,3-5,all,488,672,-1.224,-4.7,0.555,%,-1.22
+STRUCTURE,hole down,in-sample,2B-5B,3-5,bull,290,400,-2.748,-7.5,0.5,%,-2.75
+STRUCTURE,hole down,in-sample,2B-5B,3-5,bear,198,273,1.007,3.4,0.636,%,1.01
+STRUCTURE,hole down,in-sample,2B-5B,5-8,all,223,307,-1.722,-2.0,0.534,%,-1.72
+STRUCTURE,hole down,in-sample,>5B,all,all,2432,3351,-0.544,-1.9,0.537,%,-0.54
+STRUCTURE,hole down,in-sample,>5B,all,bull,1370,1888,-1.438,-3.0,0.485,%,-1.44
+STRUCTURE,hole down,in-sample,>5B,all,bear,1062,1463,0.609,2.6,0.604,%,0.61
+STRUCTURE,hole down,in-sample,>5B,<3,all,1257,1732,-0.092,-1.1,0.476,%,-0.09
+STRUCTURE,hole down,in-sample,>5B,<3,bull,805,1109,-0.63,-5.6,0.47,%,-0.63
+STRUCTURE,hole down,in-sample,>5B,<3,bear,452,623,0.866,8.7,0.487,%,0.87
+STRUCTURE,hole down,in-sample,>5B,3-5,all,819,1128,-0.85,-4.8,0.614,%,-0.85
+STRUCTURE,hole down,in-sample,>5B,3-5,bull,405,558,-2.893,-10.3,0.521,%,-2.89
+STRUCTURE,hole down,in-sample,>5B,3-5,bear,414,570,1.149,6.7,0.705,%,1.15
+STRUCTURE,hole down,in-sample,>5B,5-8,all,245,338,-1.399,-2.4,0.592,%,-1.4
+STRUCTURE,hole down,holdout,all,all,all,1430,5307,-2.699,-12.2,0.488,%,-2.7
+STRUCTURE,hole down,holdout,all,all,bull,1265,4695,-2.475,-10.9,0.462,%,-2.47
+STRUCTURE,hole down,holdout,all,all,bear,165,612,-4.421,-5.6,0.685,%,-4.42
+STRUCTURE,hole down,holdout,all,<3,all,540,2004,-0.303,-1.9,0.459,%,-0.3
+STRUCTURE,hole down,holdout,all,<3,bull,498,1848,-0.372,-2.2,0.44,%,-0.37
+STRUCTURE,hole down,holdout,all,3-5,all,528,1960,-1.369,-6.5,0.502,%,-1.37
+STRUCTURE,hole down,holdout,all,3-5,bull,442,1640,-1.247,-5.0,0.45,%,-1.25
+STRUCTURE,hole down,holdout,all,5-8,all,264,980,-6.068,-13.9,0.515,%,-6.07
+STRUCTURE,hole down,holdout,all,5-8,bull,239,887,-5.757,-13.9,0.523,%,-5.76
+STRUCTURE,hole down,holdout,500M-2B,all,all,194,720,-4.064,-6.7,0.485,%,-4.06
+STRUCTURE,hole down,holdout,500M-2B,all,bull,172,638,-4.21,-7.0,0.453,%,-4.21
+STRUCTURE,hole down,holdout,2B-5B,all,all,424,1574,-3.781,-7.4,0.465,%,-3.78
+STRUCTURE,hole down,holdout,2B-5B,all,bull,368,1366,-3.559,-6.4,0.429,%,-3.56
+STRUCTURE,hole down,holdout,2B-5B,3-5,all,174,646,-1.869,-7.6,0.471,%,-1.87
+STRUCTURE,hole down,holdout,>5B,all,all,808,2999,-1.698,-7.4,0.501,%,-1.7
+STRUCTURE,hole down,holdout,>5B,all,bull,721,2676,-1.388,-6.2,0.481,%,-1.39
+STRUCTURE,hole down,holdout,>5B,<3,all,392,1455,-0.177,-0.9,0.454,%,-0.18
+STRUCTURE,hole down,holdout,>5B,<3,bull,367,1362,-0.228,-1.1,0.441,%,-0.23
+STRUCTURE,hole down,holdout,>5B,3-5,all,287,1065,-1.002,-3.0,0.533,%,-1.0
+STRUCTURE,hole down,holdout,>5B,3-5,bull,240,891,-0.815,-2.1,0.492,%,-0.81
+FORCE,bracket +2/−4 20b,in-sample,all,all,all,2482,3420,0.342,8.3,0.691,ATR,1.19
+FORCE,bracket +2/−4 20b,in-sample,all,all,bull,2156,2971,0.302,6.9,0.693,ATR,1.08
+FORCE,bracket +2/−4 20b,in-sample,all,all,bear,326,449,0.602,5.0,0.678,ATR,1.93
+FORCE,bracket +2/−4 20b,in-sample,all,<3,all,1291,1779,0.325,5.4,0.688,ATR,0.77
+FORCE,bracket +2/−4 20b,in-sample,all,<3,bull,1186,1634,0.269,4.3,0.685,ATR,0.62
+FORCE,bracket +2/−4 20b,in-sample,all,3-5,all,764,1053,0.335,4.5,0.698,ATR,1.32
+FORCE,bracket +2/−4 20b,in-sample,all,3-5,bull,643,886,0.308,3.9,0.7,ATR,1.21
+FORCE,bracket +2/−4 20b,in-sample,all,5-8,all,329,453,0.568,6.2,0.739,ATR,3.42
+FORCE,bracket +2/−4 20b,in-sample,all,5-8,bull,251,346,0.546,5.6,0.749,ATR,3.26
+FORCE,bracket +2/−4 20b,in-sample,500M-2B,all,all,236,325,0.346,2.7,0.695,ATR,0.94
+FORCE,bracket +2/−4 20b,in-sample,500M-2B,all,bull,204,281,0.303,2.3,0.696,ATR,0.85
+FORCE,bracket +2/−4 20b,in-sample,2B-5B,all,all,620,854,0.15,1.8,0.656,ATR,0.66
+FORCE,bracket +2/−4 20b,in-sample,2B-5B,all,bull,543,748,0.121,1.3,0.657,ATR,0.65
+FORCE,bracket +2/−4 20b,in-sample,2B-5B,<3,all,246,339,0.109,0.8,0.638,ATR,0.28
+FORCE,bracket +2/−4 20b,in-sample,2B-5B,<3,bull,236,325,0.068,0.5,0.636,ATR,0.17
+FORCE,bracket +2/−4 20b,in-sample,2B-5B,3-5,all,234,322,0.099,0.7,0.667,ATR,0.34
+FORCE,bracket +2/−4 20b,in-sample,2B-5B,3-5,bull,194,267,0.036,0.2,0.66,ATR,0.14
+FORCE,bracket +2/−4 20b,in-sample,>5B,all,all,1617,2228,0.413,8.1,0.704,ATR,1.45
+FORCE,bracket +2/−4 20b,in-sample,>5B,all,bull,1401,1930,0.367,6.8,0.706,ATR,1.27
+FORCE,bracket +2/−4 20b,in-sample,>5B,all,bear,216,298,0.706,4.8,0.69,ATR,2.58
+FORCE,bracket +2/−4 20b,in-sample,>5B,<3,all,944,1301,0.365,5.2,0.697,ATR,0.88
+FORCE,bracket +2/−4 20b,in-sample,>5B,<3,bull,856,1179,0.305,4.2,0.695,ATR,0.72
+FORCE,bracket +2/−4 20b,in-sample,>5B,3-5,all,453,624,0.452,4.9,0.709,ATR,1.8
+FORCE,bracket +2/−4 20b,in-sample,>5B,3-5,bull,384,529,0.442,4.6,0.716,ATR,1.74
+FORCE,bracket +2/−4 20b,in-sample,>5B,5-8,all,180,248,0.653,5.2,0.772,ATR,3.9
+FORCE,bracket +2/−4 20b,holdout,all,all,all,1248,4632,0.283,4.8,0.656,ATR,0.69
+FORCE,bracket +2/−4 20b,holdout,all,all,bull,1166,4327,0.363,6.1,0.669,ATR,0.85
+FORCE,bracket +2/−4 20b,holdout,all,<3,all,658,2442,0.298,3.5,0.673,ATR,0.74
+FORCE,bracket +2/−4 20b,holdout,all,<3,bull,628,2331,0.433,5.2,0.696,ATR,1.02
+FORCE,bracket +2/−4 20b,holdout,all,3-5,all,366,1358,0.513,5.0,0.697,ATR,1.81
+FORCE,bracket +2/−4 20b,holdout,all,3-5,bull,330,1225,0.582,5.6,0.709,ATR,2.09
+FORCE,bracket +2/−4 20b,holdout,2B-5B,all,all,327,1214,0.332,3.0,0.661,ATR,0.95
+FORCE,bracket +2/−4 20b,holdout,2B-5B,all,bull,307,1139,0.368,3.3,0.664,ATR,0.96
+FORCE,bracket +2/−4 20b,holdout,>5B,all,all,792,2939,0.256,3.4,0.657,ATR,0.55
+FORCE,bracket +2/−4 20b,holdout,>5B,all,bull,738,2739,0.356,4.7,0.673,ATR,0.79
+FORCE,bracket +2/−4 20b,holdout,>5B,<3,all,470,1744,0.303,3.0,0.681,ATR,0.68
+FORCE,bracket +2/−4 20b,holdout,>5B,<3,bull,450,1670,0.44,4.4,0.704,ATR,0.97
+FORCE,bracket +2/−4 20b,holdout,>5B,3-5,all,213,791,0.37,2.7,0.667,ATR,1.29
+FORCE,bracket +2/−4 20b,holdout,>5B,3-5,bull,189,701,0.479,3.5,0.688,ATR,1.74
+FORCE,bracket +3/−4 20b,in-sample,all,all,all,2482,3420,0.415,8.6,0.644,ATR,1.38
+FORCE,bracket +3/−4 20b,in-sample,all,all,bull,2156,2971,0.386,7.5,0.65,ATR,1.28
+FORCE,bracket +3/−4 20b,in-sample,all,all,bear,326,449,0.607,4.2,0.601,ATR,1.99
+FORCE,bracket +3/−4 20b,in-sample,all,<3,all,1291,1779,0.446,6.3,0.639,ATR,1.02
+FORCE,bracket +3/−4 20b,in-sample,all,<3,bull,1186,1634,0.4,5.5,0.639,ATR,0.89
+FORCE,bracket +3/−4 20b,in-sample,all,3-5,all,764,1053,0.344,4.0,0.644,ATR,1.34
+FORCE,bracket +3/−4 20b,in-sample,all,3-5,bull,643,886,0.333,3.6,0.655,ATR,1.29
+FORCE,bracket +3/−4 20b,in-sample,all,5-8,all,329,453,0.616,5.5,0.702,ATR,3.72
+FORCE,bracket +3/−4 20b,in-sample,all,5-8,bull,251,346,0.55,4.6,0.717,ATR,3.25
+FORCE,bracket +3/−4 20b,in-sample,500M-2B,all,all,236,325,0.355,2.4,0.64,ATR,0.93
+FORCE,bracket +3/−4 20b,in-sample,500M-2B,all,bull,204,281,0.309,1.9,0.642,ATR,0.9
+FORCE,bracket +3/−4 20b,in-sample,2B-5B,all,all,620,854,0.26,2.6,0.616,ATR,1.07
+FORCE,bracket +3/−4 20b,in-sample,2B-5B,all,bull,543,748,0.24,2.3,0.621,ATR,1.08
+FORCE,bracket +3/−4 20b,in-sample,2B-5B,<3,all,246,339,0.249,1.5,0.598,ATR,0.6
+FORCE,bracket +3/−4 20b,in-sample,2B-5B,<3,bull,236,325,0.201,1.2,0.593,ATR,0.47
+FORCE,bracket +3/−4 20b,in-sample,2B-5B,3-5,all,234,322,0.169,1.0,0.607,ATR,0.6
+FORCE,bracket +3/−4 20b,in-sample,2B-5B,3-5,bull,194,267,0.132,0.7,0.608,ATR,0.49
+FORCE,bracket +3/−4 20b,in-sample,>5B,all,all,1617,2228,0.48,8.1,0.655,ATR,1.58
+FORCE,bracket +3/−4 20b,in-sample,>5B,all,bull,1401,1930,0.447,7.1,0.662,ATR,1.41
+FORCE,bracket +3/−4 20b,in-sample,>5B,all,bear,216,298,0.693,3.9,0.606,ATR,2.66
+FORCE,bracket +3/−4 20b,in-sample,>5B,<3,all,944,1301,0.482,5.9,0.646,ATR,1.12
+FORCE,bracket +3/−4 20b,in-sample,>5B,<3,bull,856,1179,0.439,5.2,0.648,ATR,0.99
+FORCE,bracket +3/−4 20b,in-sample,>5B,3-5,all,453,624,0.433,4.0,0.66,ATR,1.7
+FORCE,bracket +3/−4 20b,in-sample,>5B,3-5,bull,384,529,0.45,4.0,0.68,ATR,1.75
+FORCE,bracket +3/−4 20b,in-sample,>5B,5-8,all,180,248,0.695,4.5,0.728,ATR,4.13
+FORCE,bracket +3/−4 20b,holdout,all,all,all,1248,4632,0.297,4.3,0.595,ATR,0.57
+FORCE,bracket +3/−4 20b,holdout,all,all,bull,1166,4327,0.396,5.7,0.608,ATR,0.8
+FORCE,bracket +3/−4 20b,holdout,all,<3,all,658,2442,0.394,4.0,0.62,ATR,0.96
+FORCE,bracket +3/−4 20b,holdout,all,<3,bull,628,2331,0.541,5.5,0.642,ATR,1.26
+FORCE,bracket +3/−4 20b,holdout,all,3-5,all,366,1358,0.46,3.7,0.615,ATR,1.6
+FORCE,bracket +3/−4 20b,holdout,all,3-5,bull,330,1225,0.538,4.2,0.624,ATR,1.89
+FORCE,bracket +3/−4 20b,holdout,2B-5B,all,all,327,1214,0.329,2.5,0.599,ATR,0.78
+FORCE,bracket +3/−4 20b,holdout,2B-5B,all,bull,307,1139,0.365,2.7,0.599,ATR,0.78
+FORCE,bracket +3/−4 20b,holdout,>5B,all,all,792,2939,0.309,3.5,0.604,ATR,0.58
+FORCE,bracket +3/−4 20b,holdout,>5B,all,bull,738,2739,0.438,4.9,0.622,ATR,0.92
+FORCE,bracket +3/−4 20b,holdout,>5B,<3,all,470,1744,0.387,3.3,0.626,ATR,0.86
+FORCE,bracket +3/−4 20b,holdout,>5B,<3,bull,450,1670,0.543,4.6,0.649,ATR,1.2
+FORCE,bracket +3/−4 20b,holdout,>5B,3-5,all,213,791,0.514,3.1,0.624,ATR,1.83
+FORCE,bracket +3/−4 20b,holdout,>5B,3-5,bull,189,701,0.652,3.9,0.646,ATR,2.35
+FORCE,scalp +0.5/−3 10b,in-sample,all,all,all,2482,3420,0.108,5.8,0.858,ATR,0.44
+FORCE,scalp +0.5/−3 10b,in-sample,all,all,bull,2156,2971,0.08,3.9,0.857,ATR,0.35
+FORCE,scalp +0.5/−3 10b,in-sample,all,all,bear,326,449,0.294,6.6,0.865,ATR,1.0
+FORCE,scalp +0.5/−3 10b,in-sample,all,<3,all,1291,1779,0.078,2.8,0.854,ATR,0.18
+FORCE,scalp +0.5/−3 10b,in-sample,all,<3,bull,1186,1634,0.048,1.6,0.851,ATR,0.12
+FORCE,scalp +0.5/−3 10b,in-sample,all,3-5,all,764,1053,0.116,3.6,0.857,ATR,0.49
+FORCE,scalp +0.5/−3 10b,in-sample,all,3-5,bull,643,886,0.09,2.5,0.857,ATR,0.39
+FORCE,scalp +0.5/−3 10b,in-sample,all,5-8,all,329,453,0.241,6.2,0.891,ATR,1.48
+FORCE,scalp +0.5/−3 10b,in-sample,all,5-8,bull,251,346,0.219,4.8,0.892,ATR,1.38
+FORCE,scalp +0.5/−3 10b,in-sample,500M-2B,all,all,236,325,0.05,0.8,0.822,ATR,0.06
+FORCE,scalp +0.5/−3 10b,in-sample,500M-2B,all,bull,204,281,0.023,0.3,0.824,ATR,-0.15
+FORCE,scalp +0.5/−3 10b,in-sample,2B-5B,all,all,620,854,0.114,3.1,0.866,ATR,0.54
+FORCE,scalp +0.5/−3 10b,in-sample,2B-5B,all,bull,543,748,0.104,2.6,0.871,ATR,0.58
+FORCE,scalp +0.5/−3 10b,in-sample,2B-5B,<3,all,246,339,0.054,0.8,0.862,ATR,0.23
+FORCE,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bull,236,325,0.043,0.6,0.86,ATR,0.2
+FORCE,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,all,234,322,0.106,1.8,0.859,ATR,0.41
+FORCE,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bull,194,267,0.088,1.3,0.861,ATR,0.35
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,all,all,1617,2228,0.116,5.0,0.86,ATR,0.45
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,all,bull,1401,1930,0.081,3.2,0.857,ATR,0.34
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,all,bear,216,298,0.344,6.7,0.884,ATR,1.2
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,<3,all,944,1301,0.084,2.6,0.854,ATR,0.17
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,<3,bull,856,1179,0.048,1.4,0.85,ATR,0.09
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,3-5,all,453,624,0.144,3.6,0.868,ATR,0.63
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,3-5,bull,384,529,0.113,2.6,0.862,ATR,0.51
+FORCE,scalp +0.5/−3 10b,in-sample,>5B,5-8,all,180,248,0.219,3.9,0.883,ATR,1.35
+FORCE,scalp +0.5/−3 10b,holdout,all,all,all,1248,4632,-0.002,-0.1,0.804,ATR,0.04
+FORCE,scalp +0.5/−3 10b,holdout,all,all,bull,1166,4327,0.017,0.6,0.81,ATR,0.07
+FORCE,scalp +0.5/−3 10b,holdout,all,<3,all,658,2442,-0.079,-1.8,0.792,ATR,-0.16
+FORCE,scalp +0.5/−3 10b,holdout,all,<3,bull,628,2331,-0.03,-0.7,0.806,ATR,-0.05
+FORCE,scalp +0.5/−3 10b,holdout,all,3-5,all,366,1358,0.138,2.9,0.858,ATR,0.5
+FORCE,scalp +0.5/−3 10b,holdout,all,3-5,bull,330,1225,0.13,2.6,0.855,ATR,0.47
+FORCE,scalp +0.5/−3 10b,holdout,2B-5B,all,all,327,1214,0.077,1.5,0.826,ATR,0.29
+FORCE,scalp +0.5/−3 10b,holdout,2B-5B,all,bull,307,1139,0.089,1.7,0.834,ATR,0.31
+FORCE,scalp +0.5/−3 10b,holdout,>5B,all,all,792,2939,-0.047,-1.2,0.794,ATR,-0.07
+FORCE,scalp +0.5/−3 10b,holdout,>5B,all,bull,738,2739,-0.025,-0.7,0.798,ATR,-0.06
+FORCE,scalp +0.5/−3 10b,holdout,>5B,<3,all,470,1744,-0.127,-2.4,0.777,ATR,-0.26
+FORCE,scalp +0.5/−3 10b,holdout,>5B,<3,bull,450,1670,-0.077,-1.5,0.791,ATR,-0.15
+FORCE,scalp +0.5/−3 10b,holdout,>5B,3-5,all,213,791,0.115,1.8,0.845,ATR,0.38
+FORCE,scalp +0.5/−3 10b,holdout,>5B,3-5,bull,189,701,0.115,1.7,0.841,ATR,0.38
+FORCE,close 10 bars,in-sample,all,all,all,2482,3420,0.659,3.9,0.601,%,0.66
+FORCE,close 10 bars,in-sample,all,all,bull,2156,2971,0.431,2.5,0.603,%,0.43
+FORCE,close 10 bars,in-sample,all,all,bear,326,449,2.164,3.6,0.589,%,2.16
+FORCE,close 10 bars,in-sample,all,<3,all,1291,1779,0.817,5.5,0.6,%,0.82
+FORCE,close 10 bars,in-sample,all,<3,bull,1186,1634,0.681,4.4,0.599,%,0.68
+FORCE,close 10 bars,in-sample,all,3-5,all,764,1053,1.341,4.5,0.605,%,1.34
+FORCE,close 10 bars,in-sample,all,3-5,bull,643,886,1.093,3.4,0.61,%,1.09
+FORCE,close 10 bars,in-sample,all,5-8,all,329,453,2.077,3.2,0.629,%,2.08
+FORCE,close 10 bars,in-sample,all,5-8,bull,251,346,1.343,2.0,0.633,%,1.34
+FORCE,close 10 bars,in-sample,500M-2B,all,all,236,325,0.255,0.4,0.593,%,0.25
+FORCE,close 10 bars,in-sample,500M-2B,all,bull,204,281,0.279,0.4,0.603,%,0.28
+FORCE,close 10 bars,in-sample,2B-5B,all,all,620,854,0.053,0.1,0.573,%,0.05
+FORCE,close 10 bars,in-sample,2B-5B,all,bull,543,748,-0.096,-0.2,0.567,%,-0.1
+FORCE,close 10 bars,in-sample,2B-5B,<3,all,246,339,0.555,1.4,0.573,%,0.55
+FORCE,close 10 bars,in-sample,2B-5B,<3,bull,236,325,0.361,0.9,0.564,%,0.36
+FORCE,close 10 bars,in-sample,2B-5B,3-5,all,234,322,1.294,2.2,0.598,%,1.29
+FORCE,close 10 bars,in-sample,2B-5B,3-5,bull,194,267,0.893,1.4,0.593,%,0.89
+FORCE,close 10 bars,in-sample,>5B,all,all,1617,2228,0.975,5.2,0.612,%,0.98
+FORCE,close 10 bars,in-sample,>5B,all,bull,1401,1930,0.651,3.6,0.615,%,0.65
+FORCE,close 10 bars,in-sample,>5B,all,bear,216,298,3.08,4.2,0.593,%,3.08
+FORCE,close 10 bars,in-sample,>5B,<3,all,944,1301,0.886,5.4,0.607,%,0.89
+FORCE,close 10 bars,in-sample,>5B,<3,bull,856,1179,0.763,4.4,0.609,%,0.76
+FORCE,close 10 bars,in-sample,>5B,3-5,all,453,624,1.345,3.7,0.611,%,1.35
+FORCE,close 10 bars,in-sample,>5B,3-5,bull,384,529,1.072,2.8,0.615,%,1.07
+FORCE,close 10 bars,in-sample,>5B,5-8,all,180,248,2.734,2.9,0.644,%,2.73
+FORCE,close 10 bars,holdout,all,all,all,1248,4632,-0.003,-0.0,0.542,%,-0.0
+FORCE,close 10 bars,holdout,all,all,bull,1166,4327,0.194,0.8,0.551,%,0.19
+FORCE,close 10 bars,holdout,all,<3,all,658,2442,0.023,0.1,0.511,%,0.02
+FORCE,close 10 bars,holdout,all,<3,bull,628,2331,0.321,1.6,0.53,%,0.32
+FORCE,close 10 bars,holdout,all,3-5,all,366,1358,1.395,3.5,0.639,%,1.39
+FORCE,close 10 bars,holdout,all,3-5,bull,330,1225,1.5,3.5,0.636,%,1.5
+FORCE,close 10 bars,holdout,2B-5B,all,all,327,1214,0.154,0.3,0.544,%,0.15
+FORCE,close 10 bars,holdout,2B-5B,all,bull,307,1139,0.348,0.7,0.55,%,0.35
+FORCE,close 10 bars,holdout,>5B,all,all,792,2939,-0.046,-0.2,0.542,%,-0.05
+FORCE,close 10 bars,holdout,>5B,all,bull,738,2739,0.164,0.6,0.55,%,0.16
+FORCE,close 10 bars,holdout,>5B,<3,all,470,1744,0.153,0.6,0.519,%,0.15
+FORCE,close 10 bars,holdout,>5B,<3,bull,450,1670,0.442,1.8,0.54,%,0.44
+FORCE,close 10 bars,holdout,>5B,3-5,all,213,791,0.628,1.4,0.596,%,0.63
+FORCE,close 10 bars,holdout,>5B,3-5,bull,189,701,0.767,1.6,0.593,%,0.77
+FORCE,hole down,in-sample,all,all,all,2482,3420,-1.028,-3.0,0.43,%,-1.03
+FORCE,hole down,in-sample,all,all,bull,2156,2971,-1.175,-3.1,0.437,%,-1.17
+FORCE,hole down,in-sample,all,all,bear,326,449,-0.059,-0.1,0.383,%,-0.06
+FORCE,hole down,in-sample,all,<3,all,1291,1779,0.034,0.2,0.437,%,0.03
+FORCE,hole down,in-sample,all,<3,bull,1186,1634,-0.13,-0.7,0.433,%,-0.13
+FORCE,hole down,in-sample,all,3-5,all,764,1053,-0.306,-0.5,0.424,%,-0.31
+FORCE,hole down,in-sample,all,3-5,bull,643,886,-0.248,-0.4,0.442,%,-0.25
+FORCE,hole down,in-sample,all,5-8,all,329,453,0.132,0.1,0.432,%,0.13
+FORCE,hole down,in-sample,all,5-8,bull,251,346,-0.663,-0.3,0.442,%,-0.66
+FORCE,hole down,in-sample,500M-2B,all,all,236,325,-1.591,-0.8,0.432,%,-1.59
+FORCE,hole down,in-sample,500M-2B,all,bull,204,281,-1.424,-0.6,0.446,%,-1.42
+FORCE,hole down,in-sample,2B-5B,all,all,620,854,-1.643,-2.2,0.419,%,-1.64
+FORCE,hole down,in-sample,2B-5B,all,bull,543,748,-1.751,-2.1,0.425,%,-1.75
+FORCE,hole down,in-sample,2B-5B,<3,all,246,339,-0.607,-1.3,0.394,%,-0.61
+FORCE,hole down,in-sample,2B-5B,<3,bull,236,325,-0.653,-1.4,0.39,%,-0.65
+FORCE,hole down,in-sample,2B-5B,3-5,all,234,322,0.177,0.1,0.415,%,0.18
+FORCE,hole down,in-sample,2B-5B,3-5,bull,194,267,0.112,0.1,0.423,%,0.11
+FORCE,hole down,in-sample,>5B,all,all,1617,2228,-0.656,-2.0,0.434,%,-0.66
+FORCE,hole down,in-sample,>5B,all,bull,1401,1930,-0.905,-2.5,0.44,%,-0.91
+FORCE,hole down,in-sample,>5B,all,bear,216,298,0.96,1.3,0.394,%,0.96
+FORCE,hole down,in-sample,>5B,<3,all,944,1301,0.246,1.1,0.449,%,0.25
+FORCE,hole down,in-sample,>5B,<3,bull,856,1179,0.044,0.2,0.445,%,0.04
+FORCE,hole down,in-sample,>5B,3-5,all,453,624,-0.469,-0.7,0.422,%,-0.47
+FORCE,hole down,in-sample,>5B,3-5,bull,384,529,-0.307,-0.4,0.445,%,-0.31
+FORCE,hole down,in-sample,>5B,5-8,all,180,248,-0.239,-0.1,0.406,%,-0.24
+FORCE,hole down,holdout,all,all,all,1248,4632,-1.086,-2.1,0.396,%,-1.09
+FORCE,hole down,holdout,all,all,bull,1166,4327,-0.828,-1.5,0.402,%,-0.83
+FORCE,hole down,holdout,all,<3,all,658,2442,0.538,1.7,0.384,%,0.54
+FORCE,hole down,holdout,all,<3,bull,628,2331,0.738,2.3,0.396,%,0.74
+FORCE,hole down,holdout,all,3-5,all,366,1358,-0.969,-1.8,0.396,%,-0.97
+FORCE,hole down,holdout,all,3-5,bull,330,1225,-0.804,-1.4,0.397,%,-0.8
+FORCE,hole down,holdout,2B-5B,all,all,327,1214,-2.186,-2.3,0.364,%,-2.19
+FORCE,hole down,holdout,2B-5B,all,bull,307,1139,-2.097,-2.2,0.368,%,-2.1
+FORCE,hole down,holdout,>5B,all,all,792,2939,-0.133,-0.2,0.407,%,-0.13
+FORCE,hole down,holdout,>5B,all,bull,738,2739,0.236,0.3,0.416,%,0.24
+FORCE,hole down,holdout,>5B,<3,all,470,1744,0.872,2.2,0.4,%,0.87
+FORCE,hole down,holdout,>5B,<3,bull,450,1670,1.073,2.7,0.411,%,1.07
+FORCE,hole down,holdout,>5B,3-5,all,213,791,-1.631,-2.3,0.385,%,-1.63
+FORCE,hole down,holdout,>5B,3-5,bull,189,701,-1.345,-1.8,0.392,%,-1.35
+ENERGY,bracket +2/−4 20b,in-sample,all,all,all,1265,1743,0.361,6.0,0.672,ATR,1.32
+ENERGY,bracket +2/−4 20b,in-sample,all,all,bull,891,1228,0.292,4.3,0.671,ATR,1.11
+ENERGY,bracket +2/−4 20b,in-sample,all,all,bear,374,515,0.524,4.4,0.674,ATR,1.82
+ENERGY,bracket +2/−4 20b,in-sample,all,<3,all,595,820,0.401,4.2,0.684,ATR,1.04
+ENERGY,bracket +2/−4 20b,in-sample,all,<3,bull,427,588,0.257,2.4,0.672,ATR,0.65
+ENERGY,bracket +2/−4 20b,in-sample,all,<3,bear,168,231,0.765,4.1,0.714,ATR,2.02
+ENERGY,bracket +2/−4 20b,in-sample,all,3-5,all,406,559,0.405,4.2,0.67,ATR,1.47
+ENERGY,bracket +2/−4 20b,in-sample,all,3-5,bull,300,413,0.362,3.3,0.673,ATR,1.31
+ENERGY,bracket +2/−4 20b,in-sample,all,5-8,all,179,247,0.096,0.6,0.665,ATR,0.59
+ENERGY,bracket +2/−4 20b,in-sample,2B-5B,all,all,328,452,0.467,4.3,0.683,ATR,1.78
+ENERGY,bracket +2/−4 20b,in-sample,2B-5B,all,bull,235,324,0.494,4.2,0.698,ATR,1.98
+ENERGY,bracket +2/−4 20b,in-sample,>5B,all,all,796,1097,0.352,4.5,0.675,ATR,1.17
+ENERGY,bracket +2/−4 20b,in-sample,>5B,all,bull,555,765,0.234,2.6,0.661,ATR,0.78
+ENERGY,bracket +2/−4 20b,in-sample,>5B,all,bear,241,332,0.623,4.1,0.705,ATR,2.06
+ENERGY,bracket +2/−4 20b,in-sample,>5B,<3,all,448,617,0.411,3.7,0.692,ATR,1.0
+ENERGY,bracket +2/−4 20b,in-sample,>5B,<3,bull,320,441,0.197,1.5,0.666,ATR,0.49
+ENERGY,bracket +2/−4 20b,in-sample,>5B,3-5,all,232,320,0.372,2.8,0.668,ATR,1.32
+ENERGY,bracket +2/−4 20b,in-sample,>5B,3-5,bull,164,226,0.362,2.5,0.671,ATR,1.3
+ENERGY,bracket +2/−4 20b,holdout,all,all,all,552,2049,0.181,2.0,0.652,ATR,0.88
+ENERGY,bracket +2/−4 20b,holdout,all,all,bull,510,1893,0.147,1.6,0.641,ATR,0.52
+ENERGY,bracket +2/−4 20b,holdout,all,<3,all,204,757,0.26,1.7,0.662,ATR,0.65
+ENERGY,bracket +2/−4 20b,holdout,all,<3,bull,196,727,0.294,1.9,0.668,ATR,0.67
+ENERGY,bracket +2/−4 20b,holdout,all,3-5,all,209,776,0.073,0.5,0.612,ATR,0.2
+ENERGY,bracket +2/−4 20b,holdout,all,3-5,bull,196,727,0.042,0.3,0.602,ATR,0.07
+ENERGY,bracket +2/−4 20b,holdout,>5B,all,all,315,1169,0.197,1.7,0.651,ATR,1.02
+ENERGY,bracket +2/−4 20b,holdout,>5B,all,bull,298,1106,0.176,1.4,0.644,ATR,0.83
+ENERGY,bracket +3/−4 20b,in-sample,all,all,all,1265,1743,0.356,5.1,0.604,ATR,1.33
+ENERGY,bracket +3/−4 20b,in-sample,all,all,bull,891,1228,0.333,4.2,0.621,ATR,1.2
+ENERGY,bracket +3/−4 20b,in-sample,all,all,bear,374,515,0.41,3.0,0.564,ATR,1.63
+ENERGY,bracket +3/−4 20b,in-sample,all,<3,all,595,820,0.381,3.5,0.602,ATR,0.97
+ENERGY,bracket +3/−4 20b,in-sample,all,<3,bull,427,588,0.314,2.6,0.616,ATR,0.74
+ENERGY,bracket +3/−4 20b,in-sample,all,<3,bear,168,231,0.55,2.5,0.565,ATR,1.56
+ENERGY,bracket +3/−4 20b,in-sample,all,3-5,all,406,559,0.384,3.3,0.606,ATR,1.39
+ENERGY,bracket +3/−4 20b,in-sample,all,3-5,bull,300,413,0.372,2.8,0.623,ATR,1.34
+ENERGY,bracket +3/−4 20b,in-sample,all,5-8,all,179,247,0.099,0.6,0.615,ATR,0.49
+ENERGY,bracket +3/−4 20b,in-sample,2B-5B,all,all,328,452,0.477,3.7,0.622,ATR,1.93
+ENERGY,bracket +3/−4 20b,in-sample,2B-5B,all,bull,235,324,0.479,3.4,0.638,ATR,1.98
+ENERGY,bracket +3/−4 20b,in-sample,>5B,all,all,796,1097,0.334,3.7,0.601,ATR,1.13
+ENERGY,bracket +3/−4 20b,in-sample,>5B,all,bull,555,765,0.276,2.7,0.611,ATR,0.83
+ENERGY,bracket +3/−4 20b,in-sample,>5B,all,bear,241,332,0.467,2.6,0.577,ATR,1.82
+ENERGY,bracket +3/−4 20b,in-sample,>5B,<3,all,448,617,0.361,2.9,0.603,ATR,0.87
+ENERGY,bracket +3/−4 20b,in-sample,>5B,<3,bull,320,441,0.252,1.7,0.613,ATR,0.58
+ENERGY,bracket +3/−4 20b,in-sample,>5B,3-5,all,232,320,0.356,2.3,0.608,ATR,1.23
+ENERGY,bracket +3/−4 20b,in-sample,>5B,3-5,bull,164,226,0.361,2.0,0.622,ATR,1.28
+ENERGY,bracket +3/−4 20b,holdout,all,all,all,552,2049,0.14,1.4,0.594,ATR,0.68
+ENERGY,bracket +3/−4 20b,holdout,all,all,bull,510,1893,0.092,0.9,0.58,ATR,0.22
+ENERGY,bracket +3/−4 20b,holdout,all,<3,all,204,757,0.122,0.7,0.578,ATR,0.4
+ENERGY,bracket +3/−4 20b,holdout,all,<3,bull,196,727,0.156,0.9,0.582,ATR,0.41
+ENERGY,bracket +3/−4 20b,holdout,all,3-5,all,209,776,0.158,0.9,0.579,ATR,0.53
+ENERGY,bracket +3/−4 20b,holdout,all,3-5,bull,196,727,0.126,0.7,0.571,ATR,0.37
+ENERGY,bracket +3/−4 20b,holdout,>5B,all,all,315,1169,0.14,1.0,0.594,ATR,0.94
+ENERGY,bracket +3/−4 20b,holdout,>5B,all,bull,298,1106,0.115,0.8,0.587,ATR,0.72
+ENERGY,scalp +0.5/−3 10b,in-sample,all,all,all,1265,1743,0.111,4.0,0.855,ATR,0.38
+ENERGY,scalp +0.5/−3 10b,in-sample,all,all,bull,891,1228,0.049,1.4,0.841,ATR,0.25
+ENERGY,scalp +0.5/−3 10b,in-sample,all,all,bear,374,515,0.261,5.4,0.888,ATR,0.7
+ENERGY,scalp +0.5/−3 10b,in-sample,all,<3,all,595,820,0.105,2.4,0.861,ATR,0.29
+ENERGY,scalp +0.5/−3 10b,in-sample,all,<3,bull,427,588,-0.025,-0.4,0.827,ATR,0.03
+ENERGY,scalp +0.5/−3 10b,in-sample,all,<3,bear,168,231,0.436,7.0,0.946,ATR,0.96
+ENERGY,scalp +0.5/−3 10b,in-sample,all,3-5,all,406,559,0.158,3.6,0.879,ATR,0.55
+ENERGY,scalp +0.5/−3 10b,in-sample,all,3-5,bull,300,413,0.123,2.5,0.87,ATR,0.44
+ENERGY,scalp +0.5/−3 10b,in-sample,all,5-8,all,179,247,0.022,0.3,0.799,ATR,0.06
+ENERGY,scalp +0.5/−3 10b,in-sample,2B-5B,all,all,328,452,0.202,4.4,0.878,ATR,0.73
+ENERGY,scalp +0.5/−3 10b,in-sample,2B-5B,all,bull,235,324,0.156,2.9,0.864,ATR,0.56
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,all,all,796,1097,0.097,2.6,0.854,ATR,0.38
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,all,bull,555,765,0.015,0.3,0.834,ATR,0.19
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,all,bear,241,332,0.287,4.8,0.9,ATR,0.84
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,<3,all,448,617,0.07,1.3,0.848,ATR,0.21
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,<3,bull,320,441,-0.071,-1.1,0.809,ATR,-0.06
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,3-5,all,232,320,0.178,3.2,0.884,ATR,0.58
+ENERGY,scalp +0.5/−3 10b,in-sample,>5B,3-5,bull,164,226,0.138,2.1,0.872,ATR,0.45
+ENERGY,scalp +0.5/−3 10b,holdout,all,all,all,552,2049,-0.021,-0.4,0.81,ATR,0.03
+ENERGY,scalp +0.5/−3 10b,holdout,all,all,bull,510,1893,-0.038,-0.8,0.802,ATR,-0.09
+ENERGY,scalp +0.5/−3 10b,holdout,all,<3,all,204,757,-0.101,-1.2,0.794,ATR,-0.2
+ENERGY,scalp +0.5/−3 10b,holdout,all,<3,bull,196,727,-0.105,-1.2,0.791,ATR,-0.22
+ENERGY,scalp +0.5/−3 10b,holdout,all,3-5,all,209,776,-0.009,-0.1,0.813,ATR,-0.0
+ENERGY,scalp +0.5/−3 10b,holdout,all,3-5,bull,196,727,-0.024,-0.3,0.806,ATR,-0.08
+ENERGY,scalp +0.5/−3 10b,holdout,>5B,all,all,315,1169,-0.047,-0.7,0.8,ATR,-0.0
+ENERGY,scalp +0.5/−3 10b,holdout,>5B,all,bull,298,1106,-0.053,-0.8,0.795,ATR,-0.06
+ENERGY,close 10 bars,in-sample,all,all,all,1265,1743,0.858,3.1,0.589,%,0.86
+ENERGY,close 10 bars,in-sample,all,all,bull,891,1228,0.857,2.7,0.59,%,0.86
+ENERGY,close 10 bars,in-sample,all,all,bear,374,515,0.86,1.6,0.586,%,0.86
+ENERGY,close 10 bars,in-sample,all,<3,all,595,820,0.908,4.5,0.598,%,0.91
+ENERGY,close 10 bars,in-sample,all,<3,bull,427,588,0.565,2.5,0.595,%,0.57
+ENERGY,close 10 bars,in-sample,all,<3,bear,168,231,1.781,4.4,0.607,%,1.78
+ENERGY,close 10 bars,in-sample,all,3-5,all,406,559,1.13,2.6,0.601,%,1.13
+ENERGY,close 10 bars,in-sample,all,3-5,bull,300,413,1.046,2.1,0.597,%,1.05
+ENERGY,close 10 bars,in-sample,all,5-8,all,179,247,0.35,0.4,0.536,%,0.35
+ENERGY,close 10 bars,in-sample,2B-5B,all,all,328,452,0.82,1.3,0.588,%,0.82
+ENERGY,close 10 bars,in-sample,2B-5B,all,bull,235,324,1.026,1.5,0.596,%,1.03
+ENERGY,close 10 bars,in-sample,>5B,all,all,796,1097,0.852,2.9,0.593,%,0.85
+ENERGY,close 10 bars,in-sample,>5B,all,bull,555,765,0.608,1.8,0.584,%,0.61
+ENERGY,close 10 bars,in-sample,>5B,all,bear,241,332,1.415,2.3,0.614,%,1.42
+ENERGY,close 10 bars,in-sample,>5B,<3,all,448,617,0.805,3.4,0.596,%,0.81
+ENERGY,close 10 bars,in-sample,>5B,<3,bull,320,441,0.346,1.3,0.578,%,0.35
+ENERGY,close 10 bars,in-sample,>5B,3-5,all,232,320,1.184,2.2,0.608,%,1.18
+ENERGY,close 10 bars,in-sample,>5B,3-5,bull,164,226,1.157,1.9,0.604,%,1.16
+ENERGY,close 10 bars,holdout,all,all,all,552,2049,0.807,1.7,0.585,%,0.81
+ENERGY,close 10 bars,holdout,all,all,bull,510,1893,0.469,0.9,0.573,%,0.47
+ENERGY,close 10 bars,holdout,all,<3,all,204,757,0.688,1.9,0.583,%,0.69
+ENERGY,close 10 bars,holdout,all,<3,bull,196,727,0.72,1.9,0.592,%,0.72
+ENERGY,close 10 bars,holdout,all,3-5,all,209,776,0.845,1.5,0.565,%,0.85
+ENERGY,close 10 bars,holdout,all,3-5,bull,196,727,0.634,1.1,0.556,%,0.63
+ENERGY,close 10 bars,holdout,>5B,all,all,315,1169,0.623,1.3,0.575,%,0.62
+ENERGY,close 10 bars,holdout,>5B,all,bull,298,1106,0.523,1.1,0.567,%,0.52
+ENERGY,hole down,in-sample,all,all,all,1265,1743,-0.567,-1.3,0.429,%,-0.57
+ENERGY,hole down,in-sample,all,all,bull,891,1228,-0.951,-1.7,0.424,%,-0.95
+ENERGY,hole down,in-sample,all,all,bear,374,515,0.348,0.7,0.441,%,0.35
+ENERGY,hole down,in-sample,all,<3,all,595,820,-0.047,-0.2,0.38,%,-0.05
+ENERGY,hole down,in-sample,all,<3,bull,427,588,-0.385,-1.4,0.377,%,-0.38
+ENERGY,hole down,in-sample,all,<3,bear,168,231,0.812,3.2,0.387,%,0.81
+ENERGY,hole down,in-sample,all,3-5,all,406,559,-0.563,-1.1,0.495,%,-0.56
+ENERGY,hole down,in-sample,all,3-5,bull,300,413,-1.18,-1.8,0.47,%,-1.18
+ENERGY,hole down,in-sample,all,5-8,all,179,247,-1.474,-1.1,0.447,%,-1.47
+ENERGY,hole down,in-sample,2B-5B,all,all,328,452,0.433,0.3,0.457,%,0.43
+ENERGY,hole down,in-sample,2B-5B,all,bull,235,324,-0.069,-0.0,0.451,%,-0.07
+ENERGY,hole down,in-sample,>5B,all,all,796,1097,-0.849,-2.4,0.417,%,-0.85
+ENERGY,hole down,in-sample,>5B,all,bull,555,765,-1.214,-2.7,0.404,%,-1.21
+ENERGY,hole down,in-sample,>5B,all,bear,241,332,-0.008,-0.0,0.448,%,-0.01
+ENERGY,hole down,in-sample,>5B,<3,all,448,617,-0.103,-0.5,0.377,%,-0.1
+ENERGY,hole down,in-sample,>5B,<3,bull,320,441,-0.496,-1.8,0.359,%,-0.5
+ENERGY,hole down,in-sample,>5B,3-5,all,232,320,-0.871,-1.5,0.496,%,-0.87
+ENERGY,hole down,in-sample,>5B,3-5,bull,164,226,-1.592,-2.1,0.463,%,-1.59
+ENERGY,hole down,holdout,all,all,all,552,2049,-3.053,-6.9,0.473,%,-3.05
+ENERGY,hole down,holdout,all,all,bull,510,1893,-2.924,-6.4,0.455,%,-2.92
+ENERGY,hole down,holdout,all,<3,all,204,757,-0.246,-0.7,0.436,%,-0.25
+ENERGY,hole down,holdout,all,<3,bull,196,727,-0.262,-0.8,0.444,%,-0.26
+ENERGY,hole down,holdout,all,3-5,all,209,776,-1.292,-3.1,0.464,%,-1.29
+ENERGY,hole down,holdout,all,3-5,bull,196,727,-1.314,-3.1,0.449,%,-1.31
+ENERGY,hole down,holdout,>5B,all,all,315,1169,-2.594,-4.8,0.463,%,-2.59
+ENERGY,hole down,holdout,>5B,all,bull,298,1106,-2.485,-4.5,0.446,%,-2.49
+any family,bracket +2/−4 20b,in-sample,all,all,all,7668,10565,0.378,15.7,0.688,ATR,1.31
+any family,bracket +2/−4 20b,in-sample,all,all,bull,5286,7283,0.326,11.8,0.693,ATR,1.08
+any family,bracket +2/−4 20b,in-sample,all,all,bear,2382,3282,0.494,10.4,0.676,ATR,1.8
+any family,bracket +2/−4 20b,in-sample,all,<3,all,3526,4858,0.386,10.3,0.693,ATR,0.96
+any family,bracket +2/−4 20b,in-sample,all,<3,bull,2635,3631,0.338,8.1,0.7,ATR,0.81
+any family,bracket +2/−4 20b,in-sample,all,<3,bear,891,1228,0.528,6.4,0.671,ATR,1.39
+any family,bracket +2/−4 20b,in-sample,all,3-5,all,2622,3613,0.451,11.3,0.708,ATR,1.68
+any family,bracket +2/−4 20b,in-sample,all,3-5,bull,1734,2389,0.343,7.3,0.703,ATR,1.31
+any family,bracket +2/−4 20b,in-sample,all,3-5,bear,888,1223,0.661,9.0,0.717,ATR,2.39
+any family,bracket +2/−4 20b,in-sample,all,5-8,all,1065,1467,0.294,4.9,0.669,ATR,1.72
+any family,bracket +2/−4 20b,in-sample,all,5-8,bull,663,913,0.37,5.6,0.694,ATR,2.22
+any family,bracket +2/−4 20b,in-sample,all,5-8,bear,402,554,0.168,1.4,0.627,ATR,0.9
+any family,bracket +2/−4 20b,in-sample,500M-2B,all,all,838,1155,0.208,2.8,0.655,ATR,0.71
+any family,bracket +2/−4 20b,in-sample,500M-2B,all,bull,567,781,0.225,2.7,0.677,ATR,0.96
+any family,bracket +2/−4 20b,in-sample,500M-2B,all,bear,271,373,0.171,1.2,0.609,ATR,0.19
+any family,bracket +2/−4 20b,in-sample,500M-2B,<3,all,241,332,0.153,1.0,0.643,ATR,0.38
+any family,bracket +2/−4 20b,in-sample,500M-2B,<3,bull,166,229,0.149,0.9,0.663,ATR,0.32
+any family,bracket +2/−4 20b,in-sample,500M-2B,3-5,all,324,446,0.286,2.4,0.694,ATR,1.04
+any family,bracket +2/−4 20b,in-sample,500M-2B,3-5,bull,230,317,0.257,2.0,0.7,ATR,1.01
+any family,bracket +2/−4 20b,in-sample,500M-2B,5-8,all,176,242,0.233,1.6,0.642,ATR,1.52
+any family,bracket +2/−4 20b,in-sample,2B-5B,all,all,2066,2847,0.26,5.6,0.659,ATR,0.98
+any family,bracket +2/−4 20b,in-sample,2B-5B,all,bull,1428,1968,0.22,4.1,0.663,ATR,0.77
+any family,bracket +2/−4 20b,in-sample,2B-5B,all,bear,638,879,0.352,3.8,0.65,ATR,1.46
+any family,bracket +2/−4 20b,in-sample,2B-5B,<3,all,680,937,0.21,2.4,0.654,ATR,0.56
+any family,bracket +2/−4 20b,in-sample,2B-5B,<3,bull,509,701,0.211,2.1,0.666,ATR,0.53
+any family,bracket +2/−4 20b,in-sample,2B-5B,<3,bear,171,236,0.206,1.0,0.62,ATR,0.65
+any family,bracket +2/−4 20b,in-sample,2B-5B,3-5,all,825,1137,0.332,4.5,0.68,ATR,1.25
+any family,bracket +2/−4 20b,in-sample,2B-5B,3-5,bull,564,777,0.206,2.4,0.67,ATR,0.8
+any family,bracket +2/−4 20b,in-sample,2B-5B,3-5,bear,261,360,0.606,4.5,0.701,ATR,2.23
+any family,bracket +2/−4 20b,in-sample,2B-5B,5-8,all,386,532,0.326,3.4,0.668,ATR,1.92
+any family,bracket +2/−4 20b,in-sample,2B-5B,5-8,bull,248,342,0.47,4.6,0.71,ATR,2.78
+any family,bracket +2/−4 20b,in-sample,>5B,all,all,4742,6534,0.458,15.1,0.706,ATR,1.56
+any family,bracket +2/−4 20b,in-sample,>5B,all,bull,3278,4516,0.388,11.1,0.709,ATR,1.24
+any family,bracket +2/−4 20b,in-sample,>5B,all,bear,1464,2017,0.616,10.3,0.7,ATR,2.27
+any family,bracket +2/−4 20b,in-sample,>5B,<3,all,2588,3566,0.447,10.4,0.706,ATR,1.1
+any family,bracket +2/−4 20b,in-sample,>5B,<3,bull,1950,2687,0.381,8.0,0.711,ATR,0.92
+any family,bracket +2/−4 20b,in-sample,>5B,<3,bear,638,879,0.65,6.8,0.691,ATR,1.66
+any family,bracket +2/−4 20b,in-sample,>5B,3-5,all,1472,2028,0.554,10.7,0.727,ATR,2.05
+any family,bracket +2/−4 20b,in-sample,>5B,3-5,bull,940,1295,0.447,7.3,0.723,ATR,1.69
+any family,bracket +2/−4 20b,in-sample,>5B,3-5,bear,532,733,0.744,8.0,0.733,ATR,2.7
+any family,bracket +2/−4 20b,in-sample,>5B,5-8,all,500,689,0.297,3.3,0.682,ATR,1.68
+any family,bracket +2/−4 20b,in-sample,>5B,5-8,bull,296,408,0.337,3.3,0.696,ATR,2.01
+any family,bracket +2/−4 20b,in-sample,>5B,5-8,bear,204,281,0.238,1.4,0.662,ATR,1.21
+any family,bracket +2/−4 20b,holdout,all,all,all,3172,11772,0.225,6.0,0.647,ATR,0.68
+any family,bracket +2/−4 20b,holdout,all,all,bull,2889,10722,0.274,7.2,0.652,ATR,0.77
+any family,bracket +2/−4 20b,holdout,all,all,bear,283,1050,-0.279,-1.8,0.59,ATR,-0.21
+any family,bracket +2/−4 20b,holdout,all,<3,all,1384,5136,0.328,5.6,0.673,ATR,0.77
+any family,bracket +2/−4 20b,holdout,all,<3,bull,1304,4840,0.414,7.1,0.686,ATR,0.97
+any family,bracket +2/−4 20b,holdout,all,3-5,all,1081,4012,0.21,3.2,0.643,ATR,0.74
+any family,bracket +2/−4 20b,holdout,all,3-5,bull,950,3526,0.266,4.0,0.651,ATR,0.93
+any family,bracket +2/−4 20b,holdout,all,5-8,all,485,1800,-0.017,-0.2,0.6,ATR,-0.2
+any family,bracket +2/−4 20b,holdout,all,5-8,bull,437,1622,-0.07,-0.8,0.586,ATR,-0.53
+any family,bracket +2/−4 20b,holdout,500M-2B,all,all,402,1492,0.063,0.6,0.617,ATR,0.14
+any family,bracket +2/−4 20b,holdout,500M-2B,all,bull,365,1355,0.086,0.8,0.614,ATR,0.1
+any family,bracket +2/−4 20b,holdout,2B-5B,all,all,880,3266,0.13,1.8,0.627,ATR,0.43
+any family,bracket +2/−4 20b,holdout,2B-5B,all,bull,790,2932,0.192,2.6,0.633,ATR,0.53
+any family,bracket +2/−4 20b,holdout,2B-5B,<3,all,286,1061,0.239,1.8,0.654,ATR,0.64
+any family,bracket +2/−4 20b,holdout,2B-5B,<3,bull,264,980,0.371,2.9,0.67,ATR,0.98
+any family,bracket +2/−4 20b,holdout,2B-5B,3-5,all,333,1236,0.141,1.1,0.637,ATR,0.55
+any family,bracket +2/−4 20b,holdout,2B-5B,3-5,bull,290,1076,0.245,2.0,0.652,ATR,0.91
+any family,bracket +2/−4 20b,holdout,2B-5B,5-8,all,181,672,-0.172,-1.2,0.547,ATR,-1.26
+any family,bracket +2/−4 20b,holdout,2B-5B,5-8,bull,168,624,-0.247,-1.7,0.53,ATR,-1.7
+any family,bracket +2/−4 20b,holdout,>5B,all,all,1882,6985,0.304,6.3,0.663,ATR,0.94
+any family,bracket +2/−4 20b,holdout,>5B,all,bull,1726,6406,0.352,7.2,0.67,ATR,1.05
+any family,bracket +2/−4 20b,holdout,>5B,all,bear,156,579,-0.23,-1.1,0.583,ATR,-0.27
+any family,bracket +2/−4 20b,holdout,>5B,<3,all,987,3663,0.361,5.2,0.683,ATR,0.85
+any family,bracket +2/−4 20b,holdout,>5B,<3,bull,938,3481,0.427,6.2,0.693,ATR,1.0
+any family,bracket +2/−4 20b,holdout,>5B,3-5,all,609,2260,0.288,3.5,0.649,ATR,0.98
+any family,bracket +2/−4 20b,holdout,>5B,3-5,bull,534,1982,0.334,3.9,0.655,ATR,1.15
+any family,bracket +2/−4 20b,holdout,>5B,5-8,all,203,753,0.164,1.2,0.645,ATR,0.96
+any family,bracket +2/−4 20b,holdout,>5B,5-8,bull,180,668,0.136,1.0,0.639,ATR,0.74
+any family,bracket +3/−4 20b,in-sample,all,all,all,7668,10565,0.441,15.7,0.632,ATR,1.5
+any family,bracket +3/−4 20b,in-sample,all,all,bull,5286,7283,0.4,12.4,0.649,ATR,1.28
+any family,bracket +3/−4 20b,in-sample,all,all,bear,2382,3282,0.531,9.6,0.594,ATR,1.98
+any family,bracket +3/−4 20b,in-sample,all,<3,all,3526,4858,0.488,11.2,0.635,ATR,1.21
+any family,bracket +3/−4 20b,in-sample,all,<3,bull,2635,3631,0.449,9.3,0.65,ATR,1.07
+any family,bracket +3/−4 20b,in-sample,all,<3,bear,891,1228,0.605,6.3,0.593,ATR,1.63
+any family,bracket +3/−4 20b,in-sample,all,3-5,all,2622,3613,0.484,10.2,0.646,ATR,1.79
+any family,bracket +3/−4 20b,in-sample,all,3-5,bull,1734,2389,0.394,7.1,0.66,ATR,1.49
+any family,bracket +3/−4 20b,in-sample,all,3-5,bear,888,1223,0.661,7.5,0.619,ATR,2.39
+any family,bracket +3/−4 20b,in-sample,all,5-8,all,1065,1467,0.306,4.4,0.623,ATR,1.78
+any family,bracket +3/−4 20b,in-sample,all,5-8,bull,663,913,0.365,4.7,0.659,ATR,2.15
+any family,bracket +3/−4 20b,in-sample,all,5-8,bear,402,554,0.21,1.6,0.562,ATR,1.18
+any family,bracket +3/−4 20b,in-sample,500M-2B,all,all,838,1155,0.224,2.7,0.601,ATR,0.84
+any family,bracket +3/−4 20b,in-sample,500M-2B,all,bull,567,781,0.263,2.7,0.633,ATR,1.15
+any family,bracket +3/−4 20b,in-sample,500M-2B,all,bear,271,373,0.144,0.9,0.535,ATR,0.2
+any family,bracket +3/−4 20b,in-sample,500M-2B,<3,all,241,332,0.138,0.8,0.573,ATR,0.37
+any family,bracket +3/−4 20b,in-sample,500M-2B,<3,bull,166,229,0.233,1.2,0.608,ATR,0.46
+any family,bracket +3/−4 20b,in-sample,500M-2B,3-5,all,324,446,0.374,2.8,0.651,ATR,1.38
+any family,bracket +3/−4 20b,in-sample,500M-2B,3-5,bull,230,317,0.289,1.9,0.657,ATR,1.17
+any family,bracket +3/−4 20b,in-sample,500M-2B,5-8,all,176,242,0.124,0.7,0.574,ATR,0.92
+any family,bracket +3/−4 20b,in-sample,2B-5B,all,all,2066,2847,0.326,6.0,0.608,ATR,1.22
+any family,bracket +3/−4 20b,in-sample,2B-5B,all,bull,1428,1968,0.281,4.5,0.621,ATR,0.98
+any family,bracket +3/−4 20b,in-sample,2B-5B,all,bear,638,879,0.426,4.0,0.58,ATR,1.75
+any family,bracket +3/−4 20b,in-sample,2B-5B,<3,all,680,937,0.333,3.2,0.609,ATR,0.9
+any family,bracket +3/−4 20b,in-sample,2B-5B,<3,bull,509,701,0.317,2.8,0.623,ATR,0.8
+any family,bracket +3/−4 20b,in-sample,2B-5B,<3,bear,171,236,0.382,1.7,0.567,ATR,1.21
+any family,bracket +3/−4 20b,in-sample,2B-5B,3-5,all,825,1137,0.384,4.4,0.615,ATR,1.45
+any family,bracket +3/−4 20b,in-sample,2B-5B,3-5,bull,564,777,0.237,2.3,0.613,ATR,0.91
+any family,bracket +3/−4 20b,in-sample,2B-5B,3-5,bear,261,360,0.7,4.3,0.617,ATR,2.63
+any family,bracket +3/−4 20b,in-sample,2B-5B,5-8,all,386,532,0.316,2.8,0.622,ATR,1.83
+any family,bracket +3/−4 20b,in-sample,2B-5B,5-8,bull,248,342,0.502,4.2,0.685,ATR,2.93
+any family,bracket +3/−4 20b,in-sample,>5B,all,all,4742,6534,0.528,14.8,0.648,ATR,1.75
+any family,bracket +3/−4 20b,in-sample,>5B,all,bull,3278,4516,0.472,11.6,0.664,ATR,1.44
+any family,bracket +3/−4 20b,in-sample,>5B,all,bear,1464,2017,0.654,9.2,0.613,ATR,2.44
+any family,bracket +3/−4 20b,in-sample,>5B,<3,all,2588,3566,0.556,11.1,0.647,ATR,1.36
+any family,bracket +3/−4 20b,in-sample,>5B,<3,bull,1950,2687,0.493,8.9,0.659,ATR,1.18
+any family,bracket +3/−4 20b,in-sample,>5B,<3,bear,638,879,0.749,6.7,0.611,ATR,1.93
+any family,bracket +3/−4 20b,in-sample,>5B,3-5,all,1472,2028,0.566,9.2,0.664,ATR,2.08
+any family,bracket +3/−4 20b,in-sample,>5B,3-5,bull,940,1295,0.513,7.1,0.689,ATR,1.91
+any family,bracket +3/−4 20b,in-sample,>5B,3-5,bear,532,733,0.658,5.8,0.618,ATR,2.37
+any family,bracket +3/−4 20b,in-sample,>5B,5-8,all,500,689,0.371,3.5,0.644,ATR,2.1
+any family,bracket +3/−4 20b,in-sample,>5B,5-8,bull,296,408,0.318,2.7,0.655,ATR,1.8
+any family,bracket +3/−4 20b,in-sample,>5B,5-8,bear,204,281,0.448,2.3,0.627,ATR,2.53
+any family,bracket +3/−4 20b,holdout,all,all,all,3172,11772,0.168,3.9,0.578,ATR,0.36
+any family,bracket +3/−4 20b,holdout,all,all,bull,2889,10722,0.28,6.3,0.592,ATR,0.65
+any family,bracket +3/−4 20b,holdout,all,all,bear,283,1050,-0.979,-5.8,0.431,ATR,-2.71
+any family,bracket +3/−4 20b,holdout,all,<3,all,1384,5136,0.35,5.1,0.608,ATR,0.82
+any family,bracket +3/−4 20b,holdout,all,<3,bull,1304,4840,0.467,6.8,0.623,ATR,1.1
+any family,bracket +3/−4 20b,holdout,all,3-5,all,1081,4012,0.094,1.2,0.561,ATR,0.34
+any family,bracket +3/−4 20b,holdout,all,3-5,bull,950,3526,0.279,3.6,0.588,ATR,0.97
+any family,bracket +3/−4 20b,holdout,all,5-8,all,485,1800,-0.12,-1.2,0.544,ATR,-0.81
+any family,bracket +3/−4 20b,holdout,all,5-8,bull,437,1622,-0.148,-1.4,0.533,ATR,-1.0
+any family,bracket +3/−4 20b,holdout,500M-2B,all,all,402,1492,-0.132,-1.1,0.522,ATR,-0.65
+any family,bracket +3/−4 20b,holdout,500M-2B,all,bull,365,1355,-0.062,-0.5,0.526,ATR,-0.55
+any family,bracket +3/−4 20b,holdout,2B-5B,all,all,880,3266,0.057,0.7,0.562,ATR,-0.01
+any family,bracket +3/−4 20b,holdout,2B-5B,all,bull,790,2932,0.173,2.1,0.575,ATR,0.25
+any family,bracket +3/−4 20b,holdout,2B-5B,<3,all,286,1061,0.326,2.2,0.608,ATR,0.81
+any family,bracket +3/−4 20b,holdout,2B-5B,<3,bull,264,980,0.481,3.2,0.625,ATR,1.21
+any family,bracket +3/−4 20b,holdout,2B-5B,3-5,all,333,1236,-0.08,-0.6,0.544,ATR,-0.21
+any family,bracket +3/−4 20b,holdout,2B-5B,3-5,bull,290,1076,0.143,1.0,0.572,ATR,0.57
+any family,bracket +3/−4 20b,holdout,2B-5B,5-8,all,181,672,-0.224,-1.4,0.514,ATR,-1.59
+any family,bracket +3/−4 20b,holdout,2B-5B,5-8,bull,168,624,-0.285,-1.7,0.5,ATR,-1.94
+any family,bracket +3/−4 20b,holdout,>5B,all,all,1882,6985,0.282,5.0,0.597,ATR,0.75
+any family,bracket +3/−4 20b,holdout,>5B,all,bull,1726,6406,0.4,7.0,0.614,ATR,1.11
+any family,bracket +3/−4 20b,holdout,>5B,all,bear,156,579,-1.025,-4.5,0.404,ATR,-3.2
+any family,bracket +3/−4 20b,holdout,>5B,<3,all,987,3663,0.392,4.8,0.617,ATR,0.94
+any family,bracket +3/−4 20b,holdout,>5B,<3,bull,938,3481,0.492,6.1,0.631,ATR,1.18
+any family,bracket +3/−4 20b,holdout,>5B,3-5,all,609,2260,0.251,2.5,0.581,ATR,0.86
+any family,bracket +3/−4 20b,holdout,>5B,3-5,bull,534,1982,0.439,4.4,0.612,ATR,1.51
+any family,bracket +3/−4 20b,holdout,>5B,5-8,all,203,753,0.017,0.1,0.571,ATR,0.06
+any family,bracket +3/−4 20b,holdout,>5B,5-8,bull,180,668,0.011,0.1,0.567,ATR,-0.03
+any family,scalp +0.5/−3 10b,in-sample,all,all,all,7668,10565,0.119,10.9,0.861,ATR,0.48
+any family,scalp +0.5/−3 10b,in-sample,all,all,bull,5286,7283,0.074,5.7,0.851,ATR,0.3
+any family,scalp +0.5/−3 10b,in-sample,all,all,bear,2382,3282,0.219,11.2,0.882,ATR,0.89
+any family,scalp +0.5/−3 10b,in-sample,all,<3,all,3526,4858,0.093,5.3,0.859,ATR,0.24
+any family,scalp +0.5/−3 10b,in-sample,all,<3,bull,2635,3631,0.058,2.9,0.855,ATR,0.16
+any family,scalp +0.5/−3 10b,in-sample,all,<3,bear,891,1228,0.195,5.3,0.871,ATR,0.46
+any family,scalp +0.5/−3 10b,in-sample,all,3-5,all,2622,3613,0.147,8.4,0.877,ATR,0.56
+any family,scalp +0.5/−3 10b,in-sample,all,3-5,bull,1734,2389,0.082,3.7,0.858,ATR,0.32
+any family,scalp +0.5/−3 10b,in-sample,all,3-5,bear,888,1223,0.274,10.0,0.914,ATR,1.03
+any family,scalp +0.5/−3 10b,in-sample,all,5-8,all,1065,1467,0.135,4.9,0.84,ATR,0.82
+any family,scalp +0.5/−3 10b,in-sample,all,5-8,bull,663,913,0.121,3.7,0.833,ATR,0.75
+any family,scalp +0.5/−3 10b,in-sample,all,5-8,bear,402,554,0.158,3.3,0.853,ATR,0.94
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,all,all,838,1155,0.069,2.0,0.831,ATR,0.2
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,all,bull,567,781,0.037,0.9,0.827,ATR,0.08
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,all,bear,271,373,0.135,2.2,0.838,ATR,0.46
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,<3,all,241,332,0.08,1.1,0.842,ATR,0.14
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,<3,bull,166,229,0.046,0.6,0.831,ATR,0.09
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,all,324,446,0.041,0.7,0.843,ATR,0.15
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,bull,230,317,0.018,0.3,0.848,ATR,0.07
+any family,scalp +0.5/−3 10b,in-sample,500M-2B,5-8,all,176,242,0.136,2.1,0.824,ATR,0.86
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,all,all,2066,2847,0.101,4.7,0.855,ATR,0.51
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,all,bull,1428,1968,0.089,3.6,0.852,ATR,0.42
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,all,bear,638,879,0.128,3.1,0.861,ATR,0.72
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,<3,all,680,937,0.031,0.7,0.844,ATR,0.13
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bull,509,701,0.062,1.4,0.861,ATR,0.22
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bear,171,236,-0.061,-0.6,0.795,ATR,-0.16
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,all,825,1137,0.115,3.5,0.868,ATR,0.45
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bull,564,777,0.074,1.9,0.851,ATR,0.29
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bear,261,360,0.202,3.5,0.904,ATR,0.78
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,all,386,532,0.18,4.3,0.86,ATR,1.15
+any family,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,bull,248,342,0.188,4.0,0.863,ATR,1.19
+any family,scalp +0.5/−3 10b,in-sample,>5B,all,all,4742,6534,0.136,9.9,0.868,ATR,0.52
+any family,scalp +0.5/−3 10b,in-sample,>5B,all,bull,3278,4516,0.075,4.5,0.854,ATR,0.29
+any family,scalp +0.5/−3 10b,in-sample,>5B,all,bear,1464,2017,0.272,11.7,0.9,ATR,1.04
+any family,scalp +0.5/−3 10b,in-sample,>5B,<3,all,2588,3566,0.109,5.5,0.864,ATR,0.27
+any family,scalp +0.5/−3 10b,in-sample,>5B,<3,bull,1950,2687,0.058,2.5,0.855,ATR,0.15
+any family,scalp +0.5/−3 10b,in-sample,>5B,<3,bear,638,879,0.263,6.7,0.89,ATR,0.64
+any family,scalp +0.5/−3 10b,in-sample,>5B,3-5,all,1472,2028,0.188,8.6,0.889,ATR,0.72
+any family,scalp +0.5/−3 10b,in-sample,>5B,3-5,bull,940,1295,0.102,3.5,0.864,ATR,0.4
+any family,scalp +0.5/−3 10b,in-sample,>5B,3-5,bear,532,733,0.34,11.2,0.934,ATR,1.28
+any family,scalp +0.5/−3 10b,in-sample,>5B,5-8,all,500,689,0.105,2.5,0.834,ATR,0.59
+any family,scalp +0.5/−3 10b,in-sample,>5B,5-8,bull,296,408,0.088,1.7,0.824,ATR,0.52
+any family,scalp +0.5/−3 10b,in-sample,>5B,5-8,bear,204,281,0.129,1.8,0.848,ATR,0.69
+any family,scalp +0.5/−3 10b,holdout,all,all,all,3172,11772,0.037,2.1,0.819,ATR,0.21
+any family,scalp +0.5/−3 10b,holdout,all,all,bull,2889,10722,0.023,1.2,0.812,ATR,0.14
+any family,scalp +0.5/−3 10b,holdout,all,all,bear,283,1050,0.181,3.4,0.887,ATR,1.02
+any family,scalp +0.5/−3 10b,holdout,all,<3,all,1384,5136,-0.019,-0.6,0.812,ATR,-0.03
+any family,scalp +0.5/−3 10b,holdout,all,<3,bull,1304,4840,-0.008,-0.3,0.814,ATR,-0.01
+any family,scalp +0.5/−3 10b,holdout,all,3-5,all,1081,4012,0.086,2.9,0.835,ATR,0.33
+any family,scalp +0.5/−3 10b,holdout,all,3-5,bull,950,3526,0.046,1.4,0.82,ATR,0.18
+any family,scalp +0.5/−3 10b,holdout,all,5-8,all,485,1800,0.061,1.5,0.81,ATR,0.33
+any family,scalp +0.5/−3 10b,holdout,all,5-8,bull,437,1622,0.047,1.1,0.803,ATR,0.25
+any family,scalp +0.5/−3 10b,holdout,500M-2B,all,all,402,1492,0.076,1.6,0.831,ATR,0.39
+any family,scalp +0.5/−3 10b,holdout,500M-2B,all,bull,365,1355,0.057,1.1,0.825,ATR,0.34
+any family,scalp +0.5/−3 10b,holdout,2B-5B,all,all,880,3266,0.049,1.5,0.812,ATR,0.25
+any family,scalp +0.5/−3 10b,holdout,2B-5B,all,bull,790,2932,0.023,0.6,0.801,ATR,0.12
+any family,scalp +0.5/−3 10b,holdout,2B-5B,<3,all,286,1061,0.02,0.3,0.822,ATR,0.08
+any family,scalp +0.5/−3 10b,holdout,2B-5B,<3,bull,264,980,0.016,0.3,0.818,ATR,0.08
+any family,scalp +0.5/−3 10b,holdout,2B-5B,3-5,all,333,1236,0.087,1.7,0.826,ATR,0.37
+any family,scalp +0.5/−3 10b,holdout,2B-5B,3-5,bull,290,1076,0.042,0.7,0.807,ATR,0.21
+any family,scalp +0.5/−3 10b,holdout,2B-5B,5-8,all,181,672,-0.04,-0.6,0.757,ATR,-0.36
+any family,scalp +0.5/−3 10b,holdout,2B-5B,5-8,bull,168,624,-0.052,-0.7,0.756,ATR,-0.42
+any family,scalp +0.5/−3 10b,holdout,>5B,all,all,1882,6985,0.023,1.0,0.819,ATR,0.17
+any family,scalp +0.5/−3 10b,holdout,>5B,all,bull,1726,6406,0.016,0.6,0.815,ATR,0.11
+any family,scalp +0.5/−3 10b,holdout,>5B,all,bear,156,579,0.104,1.3,0.872,ATR,0.85
+any family,scalp +0.5/−3 10b,holdout,>5B,<3,all,987,3663,-0.041,-1.2,0.806,ATR,-0.08
+any family,scalp +0.5/−3 10b,holdout,>5B,<3,bull,938,3481,-0.025,-0.7,0.81,ATR,-0.05
+any family,scalp +0.5/−3 10b,holdout,>5B,3-5,all,609,2260,0.098,2.6,0.839,ATR,0.35
+any family,scalp +0.5/−3 10b,holdout,>5B,3-5,bull,534,1982,0.063,1.5,0.826,ATR,0.22
+any family,scalp +0.5/−3 10b,holdout,>5B,5-8,all,203,753,0.106,1.7,0.837,ATR,0.65
+any family,scalp +0.5/−3 10b,holdout,>5B,5-8,bull,180,668,0.101,1.6,0.828,ATR,0.6
+any family,close 10 bars,in-sample,all,all,all,7668,10565,0.868,7.7,0.609,%,0.87
+any family,close 10 bars,in-sample,all,all,bull,5286,7283,0.704,6.0,0.614,%,0.7
+any family,close 10 bars,in-sample,all,all,bear,2382,3282,1.23,4.8,0.597,%,1.23
+any family,close 10 bars,in-sample,all,<3,all,3526,4858,1.019,11.0,0.607,%,1.02
+any family,close 10 bars,in-sample,all,<3,bull,2635,3631,0.818,8.2,0.619,%,0.82
+any family,close 10 bars,in-sample,all,<3,bear,891,1228,1.614,7.4,0.574,%,1.61
+any family,close 10 bars,in-sample,all,3-5,all,2622,3613,1.854,10.1,0.638,%,1.85
+any family,close 10 bars,in-sample,all,3-5,bull,1734,2389,1.395,6.9,0.627,%,1.4
+any family,close 10 bars,in-sample,all,3-5,bear,888,1223,2.75,7.5,0.659,%,2.75
+any family,close 10 bars,in-sample,all,5-8,all,1065,1467,0.275,0.7,0.574,%,0.28
+any family,close 10 bars,in-sample,all,5-8,bull,663,913,1.036,2.5,0.6,%,1.04
+any family,close 10 bars,in-sample,all,5-8,bear,402,554,-0.98,-1.2,0.53,%,-0.98
+any family,close 10 bars,in-sample,500M-2B,all,all,838,1155,-0.02,-0.0,0.57,%,-0.02
+any family,close 10 bars,in-sample,500M-2B,all,bull,567,781,0.693,1.5,0.6,%,0.69
+any family,close 10 bars,in-sample,500M-2B,all,bear,271,373,-1.514,-1.8,0.509,%,-1.51
+any family,close 10 bars,in-sample,500M-2B,<3,all,241,332,0.419,1.2,0.535,%,0.42
+any family,close 10 bars,in-sample,500M-2B,<3,bull,166,229,0.491,1.2,0.566,%,0.49
+any family,close 10 bars,in-sample,500M-2B,3-5,all,324,446,1.417,2.7,0.62,%,1.42
+any family,close 10 bars,in-sample,500M-2B,3-5,bull,230,317,1.505,2.5,0.643,%,1.51
+any family,close 10 bars,in-sample,500M-2B,5-8,all,176,242,-0.237,-0.2,0.551,%,-0.24
+any family,close 10 bars,in-sample,2B-5B,all,all,2066,2847,0.472,2.0,0.58,%,0.47
+any family,close 10 bars,in-sample,2B-5B,all,bull,1428,1968,0.395,1.5,0.585,%,0.39
+any family,close 10 bars,in-sample,2B-5B,all,bear,638,879,0.644,1.3,0.571,%,0.64
+any family,close 10 bars,in-sample,2B-5B,<3,all,680,937,0.6,2.6,0.566,%,0.6
+any family,close 10 bars,in-sample,2B-5B,<3,bull,509,701,0.642,2.5,0.591,%,0.64
+any family,close 10 bars,in-sample,2B-5B,<3,bear,171,236,0.474,0.9,0.491,%,0.47
+any family,close 10 bars,in-sample,2B-5B,3-5,all,825,1137,1.688,4.9,0.617,%,1.69
+any family,close 10 bars,in-sample,2B-5B,3-5,bull,564,777,1.044,2.7,0.596,%,1.04
+any family,close 10 bars,in-sample,2B-5B,3-5,bear,261,360,3.08,4.5,0.663,%,3.08
+any family,close 10 bars,in-sample,2B-5B,5-8,all,386,532,-0.028,-0.0,0.56,%,-0.03
+any family,close 10 bars,in-sample,2B-5B,5-8,bull,248,342,1.229,1.8,0.597,%,1.23
+any family,close 10 bars,in-sample,>5B,all,all,4742,6534,1.206,9.3,0.628,%,1.21
+any family,close 10 bars,in-sample,>5B,all,bull,3278,4516,0.84,6.8,0.629,%,0.84
+any family,close 10 bars,in-sample,>5B,all,bear,1464,2017,2.027,6.4,0.625,%,2.03
+any family,close 10 bars,in-sample,>5B,<3,all,2588,3566,1.174,11.1,0.624,%,1.17
+any family,close 10 bars,in-sample,>5B,<3,bull,1950,2687,0.88,7.9,0.629,%,0.88
+any family,close 10 bars,in-sample,>5B,<3,bear,638,879,2.075,8.0,0.608,%,2.07
+any family,close 10 bars,in-sample,>5B,3-5,all,1472,2028,2.047,8.6,0.654,%,2.05
+any family,close 10 bars,in-sample,>5B,3-5,bull,940,1295,1.579,6.2,0.643,%,1.58
+any family,close 10 bars,in-sample,>5B,3-5,bear,532,733,2.873,6.0,0.675,%,2.87
+any family,close 10 bars,in-sample,>5B,5-8,all,500,689,0.728,1.2,0.594,%,0.73
+any family,close 10 bars,in-sample,>5B,5-8,bull,296,408,0.728,1.2,0.611,%,0.73
+any family,close 10 bars,in-sample,>5B,5-8,bear,204,281,0.728,0.6,0.569,%,0.73
+any family,close 10 bars,holdout,all,all,all,3172,11772,0.65,3.9,0.581,%,0.65
+any family,close 10 bars,holdout,all,all,bull,2889,10722,0.611,3.5,0.57,%,0.61
+any family,close 10 bars,holdout,all,all,bear,283,1050,1.045,2.2,0.693,%,1.05
+any family,close 10 bars,holdout,all,<3,all,1384,5136,0.614,4.3,0.556,%,0.61
+any family,close 10 bars,holdout,all,<3,bull,1304,4840,0.739,5.1,0.561,%,0.74
+any family,close 10 bars,holdout,all,3-5,all,1081,4012,1.04,4.4,0.619,%,1.04
+any family,close 10 bars,holdout,all,3-5,bull,950,3526,0.904,3.4,0.595,%,0.9
+any family,close 10 bars,holdout,all,5-8,all,485,1800,0.479,0.8,0.579,%,0.48
+any family,close 10 bars,holdout,all,5-8,bull,437,1622,0.201,0.3,0.558,%,0.2
+any family,close 10 bars,holdout,500M-2B,all,all,402,1492,0.038,0.1,0.565,%,0.04
+any family,close 10 bars,holdout,500M-2B,all,bull,365,1355,-0.179,-0.3,0.551,%,-0.18
+any family,close 10 bars,holdout,2B-5B,all,all,880,3266,0.466,1.3,0.56,%,0.47
+any family,close 10 bars,holdout,2B-5B,all,bull,790,2932,0.384,1.0,0.546,%,0.38
+any family,close 10 bars,holdout,2B-5B,<3,all,286,1061,0.389,1.2,0.528,%,0.39
+any family,close 10 bars,holdout,2B-5B,<3,bull,264,980,0.571,1.8,0.534,%,0.57
+any family,close 10 bars,holdout,2B-5B,3-5,all,333,1236,1.397,3.2,0.619,%,1.4
+any family,close 10 bars,holdout,2B-5B,3-5,bull,290,1076,1.389,2.8,0.597,%,1.39
+any family,close 10 bars,holdout,2B-5B,5-8,all,181,672,-0.374,-0.4,0.497,%,-0.37
+any family,close 10 bars,holdout,2B-5B,5-8,bull,168,624,-0.649,-0.6,0.482,%,-0.65
+any family,close 10 bars,holdout,>5B,all,all,1882,6985,0.888,4.9,0.595,%,0.89
+any family,close 10 bars,holdout,>5B,all,bull,1726,6406,0.905,4.7,0.586,%,0.9
+any family,close 10 bars,holdout,>5B,all,bear,156,579,0.699,1.3,0.692,%,0.7
+any family,close 10 bars,holdout,>5B,<3,all,987,3663,0.735,4.2,0.571,%,0.74
+any family,close 10 bars,holdout,>5B,<3,bull,938,3481,0.847,4.8,0.577,%,0.85
+any family,close 10 bars,holdout,>5B,3-5,all,609,2260,0.986,3.3,0.614,%,0.99
+any family,close 10 bars,holdout,>5B,3-5,bull,534,1982,0.844,2.6,0.588,%,0.84
+any family,close 10 bars,holdout,>5B,5-8,all,203,753,2.106,2.6,0.66,%,2.11
+any family,close 10 bars,holdout,>5B,5-8,bull,180,668,1.965,2.2,0.639,%,1.97
+any family,hole down,in-sample,all,all,all,7668,10565,-0.973,-5.7,0.477,%,-0.97
+any family,hole down,in-sample,all,all,bull,5286,7283,-1.51,-6.5,0.452,%,-1.51
+any family,hole down,in-sample,all,all,bear,2382,3282,0.218,1.1,0.531,%,0.22
+any family,hole down,in-sample,all,<3,all,3526,4858,-0.058,-0.7,0.439,%,-0.06
+any family,hole down,in-sample,all,<3,bull,2635,3631,-0.364,-3.3,0.436,%,-0.36
+any family,hole down,in-sample,all,<3,bear,891,1228,0.848,7.4,0.45,%,0.85
+any family,hole down,in-sample,all,3-5,all,2622,3613,-0.752,-3.7,0.521,%,-0.75
+any family,hole down,in-sample,all,3-5,bull,1734,2389,-1.57,-5.4,0.475,%,-1.57
+any family,hole down,in-sample,all,3-5,bear,888,1223,0.846,5.7,0.613,%,0.85
+any family,hole down,in-sample,all,5-8,all,1065,1467,-1.201,-1.9,0.494,%,-1.2
+any family,hole down,in-sample,all,5-8,bull,663,913,-2.374,-2.5,0.463,%,-2.37
+any family,hole down,in-sample,all,5-8,bear,402,554,0.732,1.3,0.545,%,0.73
+any family,hole down,in-sample,500M-2B,all,all,838,1155,-2.425,-3.6,0.461,%,-2.43
+any family,hole down,in-sample,500M-2B,all,bull,567,781,-2.812,-3.0,0.45,%,-2.81
+any family,hole down,in-sample,500M-2B,all,bear,271,373,-1.617,-2.2,0.483,%,-1.62
+any family,hole down,in-sample,500M-2B,<3,all,241,332,-0.217,-0.7,0.461,%,-0.22
+any family,hole down,in-sample,500M-2B,<3,bull,166,229,-0.522,-1.2,0.464,%,-0.52
+any family,hole down,in-sample,500M-2B,3-5,all,324,446,-0.977,-1.7,0.485,%,-0.98
+any family,hole down,in-sample,500M-2B,3-5,bull,230,317,-1.564,-2.1,0.478,%,-1.56
+any family,hole down,in-sample,500M-2B,5-8,all,176,242,-0.092,-0.0,0.449,%,-0.09
+any family,hole down,in-sample,2B-5B,all,all,2066,2847,-1.165,-3.3,0.47,%,-1.16
+any family,hole down,in-sample,2B-5B,all,bull,1428,1968,-1.781,-3.8,0.454,%,-1.78
+any family,hole down,in-sample,2B-5B,all,bear,638,879,0.215,0.5,0.505,%,0.22
+any family,hole down,in-sample,2B-5B,<3,all,680,937,-0.352,-1.5,0.393,%,-0.35
+any family,hole down,in-sample,2B-5B,<3,bull,509,701,-0.533,-1.8,0.409,%,-0.53
+any family,hole down,in-sample,2B-5B,<3,bear,171,236,0.187,0.7,0.345,%,0.19
+any family,hole down,in-sample,2B-5B,3-5,all,825,1137,-0.725,-1.7,0.505,%,-0.73
+any family,hole down,in-sample,2B-5B,3-5,bull,564,777,-1.552,-2.6,0.465,%,-1.55
+any family,hole down,in-sample,2B-5B,3-5,bear,261,360,1.062,3.4,0.594,%,1.06
+any family,hole down,in-sample,2B-5B,5-8,all,386,532,-2.023,-2.3,0.51,%,-2.02
+any family,hole down,in-sample,2B-5B,5-8,bull,248,342,-3.266,-2.6,0.508,%,-3.27
+any family,hole down,in-sample,>5B,all,all,4742,6534,-0.621,-3.2,0.482,%,-0.62
+any family,hole down,in-sample,>5B,all,bull,3278,4516,-1.166,-4.4,0.451,%,-1.17
+any family,hole down,in-sample,>5B,all,bear,1464,2017,0.599,2.8,0.551,%,0.6
+any family,hole down,in-sample,>5B,<3,all,2588,3566,0.021,0.2,0.449,%,0.02
+any family,hole down,in-sample,>5B,<3,bull,1950,2687,-0.318,-2.6,0.44,%,-0.32
+any family,hole down,in-sample,>5B,<3,bear,638,879,1.057,7.6,0.475,%,1.06
+any family,hole down,in-sample,>5B,3-5,all,1472,2028,-0.72,-3.0,0.538,%,-0.72
+any family,hole down,in-sample,>5B,3-5,bull,940,1295,-1.582,-4.4,0.48,%,-1.58
+any family,hole down,in-sample,>5B,3-5,bear,532,733,0.804,4.6,0.641,%,0.8
+any family,hole down,in-sample,>5B,5-8,all,500,689,-0.884,-1.2,0.498,%,-0.88
+any family,hole down,in-sample,>5B,5-8,bull,296,408,-2.372,-2.2,0.453,%,-2.37
+any family,hole down,in-sample,>5B,5-8,bear,204,281,1.276,1.5,0.564,%,1.28
+any family,hole down,holdout,all,all,all,3172,11772,-2.148,-9.0,0.448,%,-2.15
+any family,hole down,holdout,all,all,bull,2889,10722,-1.895,-7.5,0.436,%,-1.9
+any family,hole down,holdout,all,all,bear,283,1050,-4.73,-7.1,0.576,%,-4.73
+any family,hole down,holdout,all,<3,all,1384,5136,0.111,0.7,0.42,%,0.11
+any family,hole down,holdout,all,<3,bull,1304,4840,0.183,1.0,0.419,%,0.18
+any family,hole down,holdout,all,3-5,all,1081,4012,-1.232,-5.5,0.461,%,-1.23
+any family,hole down,holdout,all,3-5,bull,950,3526,-1.129,-4.5,0.433,%,-1.13
+any family,hole down,holdout,all,5-8,all,485,1800,-3.939,-3.7,0.499,%,-3.94
+any family,hole down,holdout,all,5-8,bull,437,1622,-3.689,-3.2,0.492,%,-3.69
+any family,hole down,holdout,500M-2B,all,all,402,1492,-3.82,-7.1,0.46,%,-3.82
+any family,hole down,holdout,500M-2B,all,bull,365,1355,-3.831,-6.9,0.438,%,-3.83
+any family,hole down,holdout,2B-5B,all,all,880,3266,-3.238,-7.1,0.426,%,-3.24
+any family,hole down,holdout,2B-5B,all,bull,790,2932,-2.997,-6.1,0.408,%,-3.0
+any family,hole down,holdout,2B-5B,<3,all,286,1061,-0.693,-2.4,0.374,%,-0.69
+any family,hole down,holdout,2B-5B,<3,bull,264,980,-0.621,-2.1,0.367,%,-0.62
+any family,hole down,holdout,2B-5B,3-5,all,333,1236,-1.249,-3.1,0.45,%,-1.25
+any family,hole down,holdout,2B-5B,3-5,bull,290,1076,-1.11,-2.5,0.421,%,-1.11
+any family,hole down,holdout,2B-5B,5-8,all,181,672,-5.325,-6.1,0.448,%,-5.33
+any family,hole down,holdout,2B-5B,5-8,bull,168,624,-5.272,-5.8,0.44,%,-5.27
+any family,hole down,holdout,>5B,all,all,1882,6985,-1.191,-3.8,0.456,%,-1.19
+any family,hole down,holdout,>5B,all,bull,1726,6406,-0.882,-2.6,0.448,%,-0.88
+any family,hole down,holdout,>5B,all,bear,156,579,-4.613,-5.5,0.545,%,-4.61
+any family,hole down,holdout,>5B,<3,all,987,3663,0.315,1.5,0.427,%,0.32
+any family,hole down,holdout,>5B,<3,bull,938,3481,0.387,1.7,0.426,%,0.39
+any family,hole down,holdout,>5B,3-5,all,609,2260,-1.331,-4.5,0.47,%,-1.33
+any family,hole down,holdout,>5B,3-5,bull,534,1982,-1.172,-3.5,0.448,%,-1.17
+any family,hole down,holdout,>5B,5-8,all,203,753,-1.634,-0.7,0.532,%,-1.63
+any family,hole down,holdout,>5B,5-8,bull,180,668,-0.909,-0.3,0.533,%,-0.91
+≥2 families,bracket +2/−4 20b,in-sample,all,all,all,153,211,0.406,2.3,0.667,ATR,0.87
+≥2 families,bracket +3/−4 20b,in-sample,all,all,all,153,211,0.449,2.1,0.582,ATR,1.14
+≥2 families,scalp +0.5/−3 10b,in-sample,all,all,all,153,211,0.21,3.2,0.882,ATR,0.63
+≥2 families,close 10 bars,in-sample,all,all,all,153,211,1.973,2.5,0.68,%,1.97
+≥2 families,hole down,in-sample,all,all,all,153,211,-1.246,-2.4,0.516,%,-1.25
+Dragon C,bracket +2/−4 20b,in-sample,all,all,all,30962,42660,-0.057,-4.4,0.613,ATR,-0.26
+Dragon C,bracket +2/−4 20b,in-sample,all,all,bull,27321,37643,-0.094,-6.8,0.613,ATR,-0.38
+Dragon C,bracket +2/−4 20b,in-sample,all,all,bear,3641,5017,0.217,5.8,0.615,ATR,0.65
+Dragon C,bracket +2/−4 20b,in-sample,all,<3,all,15728,21670,-0.027,-1.4,0.611,ATR,-0.02
+Dragon C,bracket +2/−4 20b,in-sample,all,<3,bull,14455,19916,-0.069,-3.5,0.611,ATR,-0.12
+Dragon C,bracket +2/−4 20b,in-sample,all,<3,bear,1273,1754,0.447,6.8,0.613,ATR,1.14
+Dragon C,bracket +2/−4 20b,in-sample,all,3-5,all,10740,14798,-0.061,-2.8,0.626,ATR,-0.24
+Dragon C,bracket +2/−4 20b,in-sample,all,3-5,bull,9335,12862,-0.091,-4.0,0.625,ATR,-0.34
+Dragon C,bracket +2/−4 20b,in-sample,all,3-5,bear,1405,1936,0.137,2.2,0.631,ATR,0.42
+Dragon C,bracket +2/−4 20b,in-sample,all,5-8,all,3716,5120,-0.134,-3.7,0.597,ATR,-0.86
+Dragon C,bracket +2/−4 20b,in-sample,all,5-8,bull,2929,4036,-0.164,-3.9,0.602,ATR,-1.01
+Dragon C,bracket +2/−4 20b,in-sample,all,5-8,bear,787,1084,-0.026,-0.3,0.577,ATR,-0.27
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,all,all,3277,4515,-0.166,-4.2,0.591,ATR,-0.6
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,all,bull,2908,4007,-0.178,-4.2,0.594,ATR,-0.64
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,all,bear,369,508,-0.069,-0.6,0.564,ATR,-0.3
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,<3,all,1102,1518,-0.241,-3.3,0.568,ATR,-0.54
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,<3,bull,1031,1421,-0.23,-3.1,0.576,ATR,-0.53
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,3-5,all,1342,1849,-0.164,-2.7,0.597,ATR,-0.6
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,3-5,bull,1203,1657,-0.175,-2.7,0.598,ATR,-0.61
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,5-8,all,677,933,-0.015,-0.2,0.623,ATR,-0.11
+Dragon C,bracket +2/−4 20b,in-sample,500M-2B,5-8,bull,553,762,-0.058,-0.6,0.626,ATR,-0.34
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,all,all,8980,12373,-0.138,-5.7,0.6,ATR,-0.51
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,all,bull,7958,10965,-0.157,-6.1,0.603,ATR,-0.56
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,all,bear,1022,1408,0.012,0.2,0.574,ATR,-0.13
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,<3,all,3495,4815,-0.165,-4.1,0.586,ATR,-0.31
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,<3,bull,3248,4475,-0.193,-4.6,0.587,ATR,-0.38
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,<3,bear,247,340,0.201,1.3,0.563,ATR,0.62
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,3-5,all,3716,5120,-0.123,-3.3,0.617,ATR,-0.47
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,3-5,bull,3283,4523,-0.137,-3.5,0.62,ATR,-0.52
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,3-5,bear,433,597,-0.015,-0.1,0.598,ATR,-0.14
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,5-8,all,1460,2012,-0.074,-1.3,0.609,ATR,-0.52
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,5-8,bull,1175,1619,-0.074,-1.1,0.622,ATR,-0.51
+Dragon C,bracket +2/−4 20b,in-sample,2B-5B,5-8,bear,285,393,-0.074,-0.6,0.554,ATR,-0.55
+Dragon C,bracket +2/−4 20b,in-sample,>5B,all,all,18660,25710,0.0,0.0,0.623,ATR,-0.07
+Dragon C,bracket +2/−4 20b,in-sample,>5B,all,bull,16414,22615,-0.049,-2.8,0.621,ATR,-0.24
+Dragon C,bracket +2/−4 20b,in-sample,>5B,all,bear,2246,3095,0.361,7.7,0.642,ATR,1.17
+Dragon C,bracket +2/−4 20b,in-sample,>5B,<3,all,11101,15295,0.036,1.6,0.623,ATR,0.13
+Dragon C,bracket +2/−4 20b,in-sample,>5B,<3,bull,10147,13981,-0.015,-0.6,0.622,ATR,0.0
+Dragon C,bracket +2/−4 20b,in-sample,>5B,<3,bear,954,1314,0.577,7.8,0.638,ATR,1.43
+Dragon C,bracket +2/−4 20b,in-sample,>5B,3-5,all,5676,7820,0.006,0.2,0.639,ATR,0.01
+Dragon C,bracket +2/−4 20b,in-sample,>5B,3-5,bull,4846,6677,-0.037,-1.2,0.636,ATR,-0.15
+Dragon C,bracket +2/−4 20b,in-sample,>5B,3-5,bear,830,1144,0.259,3.3,0.657,ATR,0.91
+Dragon C,bracket +2/−4 20b,in-sample,>5B,5-8,all,1576,2171,-0.238,-4.2,0.575,ATR,-1.47
+Dragon C,bracket +2/−4 20b,in-sample,>5B,5-8,bull,1198,1651,-0.295,-4.5,0.573,ATR,-1.79
+Dragon C,bracket +2/−4 20b,in-sample,>5B,5-8,bear,378,521,-0.056,-0.5,0.582,ATR,-0.46
+Dragon C,bracket +2/−4 20b,holdout,all,all,all,14941,55451,-0.105,-5.4,0.593,ATR,-0.32
+Dragon C,bracket +2/−4 20b,holdout,all,all,bull,14539,53959,-0.099,-5.0,0.593,ATR,-0.29
+Dragon C,bracket +2/−4 20b,holdout,all,all,bear,402,1492,-0.321,-2.6,0.58,ATR,-1.28
+Dragon C,bracket +2/−4 20b,holdout,all,<3,all,7079,26273,-0.148,-5.1,0.583,ATR,-0.37
+Dragon C,bracket +2/−4 20b,holdout,all,<3,bull,6987,25931,-0.14,-4.8,0.585,ATR,-0.35
+Dragon C,bracket +2/−4 20b,holdout,all,3-5,all,5549,20594,-0.066,-2.1,0.593,ATR,-0.18
+Dragon C,bracket +2/−4 20b,holdout,all,3-5,bull,5361,19896,-0.067,-2.1,0.593,ATR,-0.18
+Dragon C,bracket +2/−4 20b,holdout,all,3-5,bear,188,698,-0.045,-0.3,0.617,ATR,-0.16
+Dragon C,bracket +2/−4 20b,holdout,all,5-8,all,1833,6803,-0.066,-1.3,0.625,ATR,-0.51
+Dragon C,bracket +2/−4 20b,holdout,all,5-8,bull,1731,6424,-0.049,-0.9,0.627,ATR,-0.4
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,all,all,1943,7211,-0.279,-5.2,0.553,ATR,-0.98
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,all,bull,1897,7040,-0.293,-5.4,0.551,ATR,-1.03
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,<3,all,585,2171,-0.429,-4.2,0.513,ATR,-1.0
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,<3,bull,579,2149,-0.439,-4.3,0.511,ATR,-1.03
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,3-5,all,810,3006,-0.248,-3.0,0.552,ATR,-0.8
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,3-5,bull,795,2951,-0.257,-3.1,0.55,ATR,-0.82
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,5-8,all,427,1585,-0.168,-1.5,0.604,ATR,-1.15
+Dragon C,bracket +2/−4 20b,holdout,500M-2B,5-8,bull,407,1511,-0.19,-1.7,0.602,ATR,-1.28
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,all,all,4732,17562,-0.172,-5.0,0.578,ATR,-0.51
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,all,bull,4618,17139,-0.16,-4.6,0.579,ATR,-0.45
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,<3,all,1753,6506,-0.316,-5.3,0.549,ATR,-0.78
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,<3,bull,1743,6469,-0.302,-5.1,0.551,ATR,-0.74
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,3-5,all,2046,7593,-0.094,-1.8,0.584,ATR,-0.27
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,3-5,bull,1990,7386,-0.094,-1.8,0.583,ATR,-0.27
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,5-8,all,701,2602,-0.141,-1.7,0.608,ATR,-1.01
+Dragon C,bracket +2/−4 20b,holdout,2B-5B,5-8,bull,663,2461,-0.092,-1.1,0.615,ATR,-0.72
+Dragon C,bracket +2/−4 20b,holdout,>5B,all,all,8245,30600,-0.026,-1.0,0.611,ATR,-0.06
+Dragon C,bracket +2/−4 20b,holdout,>5B,all,bull,8003,29702,-0.019,-0.7,0.612,ATR,-0.03
+Dragon C,bracket +2/−4 20b,holdout,>5B,all,bear,242,898,-0.266,-1.6,0.591,ATR,-0.83
+Dragon C,bracket +2/−4 20b,holdout,>5B,<3,all,4726,17540,-0.053,-1.5,0.605,ATR,-0.14
+Dragon C,bracket +2/−4 20b,holdout,>5B,<3,bull,4650,17258,-0.044,-1.2,0.606,ATR,-0.12
+Dragon C,bracket +2/−4 20b,holdout,>5B,3-5,all,2693,9995,0.01,0.2,0.613,ATR,0.08
+Dragon C,bracket +2/−4 20b,holdout,>5B,3-5,bull,2576,9560,0.013,0.3,0.613,ATR,0.09
+Dragon C,bracket +2/−4 20b,holdout,>5B,5-8,all,705,2616,0.071,0.9,0.654,ATR,0.38
+Dragon C,bracket +2/−4 20b,holdout,>5B,5-8,bull,661,2453,0.081,1.0,0.654,ATR,0.45
+Dragon C,bracket +3/−4 20b,in-sample,all,all,all,30962,42660,-0.053,-3.6,0.561,ATR,-0.22
+Dragon C,bracket +3/−4 20b,in-sample,all,all,bull,27321,37643,-0.096,-6.1,0.562,ATR,-0.37
+Dragon C,bracket +3/−4 20b,in-sample,all,all,bear,3641,5017,0.266,6.3,0.558,ATR,0.89
+Dragon C,bracket +3/−4 20b,in-sample,all,<3,all,15728,21670,-0.029,-1.4,0.556,ATR,-0.0
+Dragon C,bracket +3/−4 20b,in-sample,all,<3,bull,14455,19916,-0.072,-3.3,0.557,ATR,-0.11
+Dragon C,bracket +3/−4 20b,in-sample,all,<3,bear,1273,1754,0.464,6.3,0.546,ATR,1.19
+Dragon C,bracket +3/−4 20b,in-sample,all,3-5,all,10740,14798,-0.051,-2.1,0.58,ATR,-0.2
+Dragon C,bracket +3/−4 20b,in-sample,all,3-5,bull,9335,12862,-0.091,-3.5,0.58,ATR,-0.34
+Dragon C,bracket +3/−4 20b,in-sample,all,3-5,bear,1405,1936,0.214,3.1,0.578,ATR,0.71
+Dragon C,bracket +3/−4 20b,in-sample,all,5-8,all,3716,5120,-0.132,-3.2,0.542,ATR,-0.83
+Dragon C,bracket +3/−4 20b,in-sample,all,5-8,bull,2929,4036,-0.167,-3.5,0.546,ATR,-1.02
+Dragon C,bracket +3/−4 20b,in-sample,all,5-8,bear,787,1084,-0.002,-0.0,0.527,ATR,-0.13
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,all,all,3277,4515,-0.194,-4.3,0.533,ATR,-0.64
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,all,bull,2908,4007,-0.217,-4.5,0.535,ATR,-0.73
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,all,bear,369,508,-0.012,-0.1,0.515,ATR,0.05
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,<3,all,1102,1518,-0.293,-3.6,0.503,ATR,-0.64
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,<3,bull,1031,1421,-0.289,-3.4,0.51,ATR,-0.62
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,3-5,all,1342,1849,-0.208,-3.0,0.544,ATR,-0.8
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,3-5,bull,1203,1657,-0.224,-3.1,0.544,ATR,-0.84
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,5-8,all,677,933,0.004,0.0,0.564,ATR,-0.01
+Dragon C,bracket +3/−4 20b,in-sample,500M-2B,5-8,bull,553,762,-0.049,-0.5,0.564,ATR,-0.29
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,all,all,8980,12373,-0.146,-5.3,0.546,ATR,-0.5
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,all,bull,7958,10965,-0.174,-6.0,0.55,ATR,-0.59
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,all,bear,1022,1408,0.078,1.0,0.52,ATR,0.23
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,<3,all,3495,4815,-0.205,-4.5,0.526,ATR,-0.37
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,<3,bull,3248,4475,-0.235,-5.0,0.529,ATR,-0.45
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,<3,bear,247,340,0.192,1.1,0.49,ATR,0.56
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,3-5,all,3716,5120,-0.11,-2.6,0.569,ATR,-0.42
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,3-5,bull,3283,4523,-0.134,-3.0,0.574,ATR,-0.5
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,3-5,bear,433,597,0.071,0.6,0.538,ATR,0.15
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,5-8,all,1460,2012,-0.062,-0.9,0.553,ATR,-0.41
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,5-8,bull,1175,1619,-0.076,-1.0,0.563,ATR,-0.49
+Dragon C,bracket +3/−4 20b,in-sample,2B-5B,5-8,bear,285,393,-0.002,-0.0,0.512,ATR,-0.1
+Dragon C,bracket +3/−4 20b,in-sample,>5B,all,all,18660,25710,0.015,0.8,0.573,ATR,-0.02
+Dragon C,bracket +3/−4 20b,in-sample,>5B,all,bull,16414,22615,-0.038,-1.9,0.572,ATR,-0.2
+Dragon C,bracket +3/−4 20b,in-sample,>5B,all,bear,2246,3095,0.401,7.6,0.584,ATR,1.35
+Dragon C,bracket +3/−4 20b,in-sample,>5B,<3,all,11101,15295,0.05,2.0,0.571,ATR,0.17
+Dragon C,bracket +3/−4 20b,in-sample,>5B,<3,bull,10147,13981,-0.001,-0.1,0.571,ATR,0.04
+Dragon C,bracket +3/−4 20b,in-sample,>5B,<3,bear,954,1314,0.598,7.2,0.572,ATR,1.51
+Dragon C,bracket +3/−4 20b,in-sample,>5B,3-5,all,5676,7820,0.026,0.8,0.596,ATR,0.09
+Dragon C,bracket +3/−4 20b,in-sample,>5B,3-5,bull,4846,6677,-0.028,-0.8,0.594,ATR,-0.11
+Dragon C,bracket +3/−4 20b,in-sample,>5B,3-5,bear,830,1144,0.343,3.9,0.606,ATR,1.24
+Dragon C,bracket +3/−4 20b,in-sample,>5B,5-8,all,1576,2171,-0.25,-3.9,0.522,ATR,-1.54
+Dragon C,bracket +3/−4 20b,in-sample,>5B,5-8,bull,1198,1651,-0.304,-4.1,0.521,ATR,-1.84
+Dragon C,bracket +3/−4 20b,in-sample,>5B,5-8,bear,378,521,-0.08,-0.7,0.526,ATR,-0.6
+Dragon C,bracket +3/−4 20b,holdout,all,all,all,14941,55451,-0.153,-7.0,0.523,ATR,-0.41
+Dragon C,bracket +3/−4 20b,holdout,all,all,bull,14539,53959,-0.143,-6.4,0.524,ATR,-0.37
+Dragon C,bracket +3/−4 20b,holdout,all,all,bear,402,1492,-0.535,-3.9,0.49,ATR,-1.79
+Dragon C,bracket +3/−4 20b,holdout,all,<3,all,7079,26273,-0.253,-7.8,0.504,ATR,-0.63
+Dragon C,bracket +3/−4 20b,holdout,all,<3,bull,6987,25931,-0.236,-7.2,0.506,ATR,-0.59
+Dragon C,bracket +3/−4 20b,holdout,all,3-5,all,5549,20594,-0.075,-2.1,0.53,ATR,-0.17
+Dragon C,bracket +3/−4 20b,holdout,all,3-5,bull,5361,19896,-0.074,-2.1,0.529,ATR,-0.16
+Dragon C,bracket +3/−4 20b,holdout,all,3-5,bear,188,698,-0.125,-0.6,0.548,ATR,-0.4
+Dragon C,bracket +3/−4 20b,holdout,all,5-8,all,1833,6803,-0.034,-0.6,0.575,ATR,-0.31
+Dragon C,bracket +3/−4 20b,holdout,all,5-8,bull,1731,6424,-0.013,-0.2,0.577,ATR,-0.19
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,all,all,1943,7211,-0.281,-4.7,0.497,ATR,-0.86
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,all,bull,1897,7040,-0.298,-4.9,0.493,ATR,-0.93
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,<3,all,585,2171,-0.543,-4.8,0.443,ATR,-1.3
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,<3,bull,579,2149,-0.55,-4.9,0.44,ATR,-1.32
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,3-5,all,810,3006,-0.221,-2.4,0.499,ATR,-0.68
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,3-5,bull,795,2951,-0.232,-2.5,0.496,ATR,-0.71
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,5-8,all,427,1585,-0.111,-0.9,0.564,ATR,-0.86
+Dragon C,bracket +3/−4 20b,holdout,500M-2B,5-8,bull,407,1511,-0.143,-1.1,0.56,ATR,-1.06
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,all,all,4732,17562,-0.255,-6.6,0.503,ATR,-0.73
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,all,bull,4618,17139,-0.238,-6.1,0.505,ATR,-0.63
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,<3,all,1753,6506,-0.495,-7.5,0.458,ATR,-1.21
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,<3,bull,1743,6469,-0.48,-7.3,0.46,ATR,-1.17
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,3-5,all,2046,7593,-0.125,-2.2,0.516,ATR,-0.37
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,3-5,bull,1990,7386,-0.118,-2.0,0.517,ATR,-0.34
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,5-8,all,701,2602,-0.175,-1.8,0.553,ATR,-1.17
+Dragon C,bracket +3/−4 20b,holdout,2B-5B,5-8,bull,663,2461,-0.107,-1.1,0.561,ATR,-0.77
+Dragon C,bracket +3/−4 20b,holdout,>5B,all,all,8245,30600,-0.064,-2.2,0.541,ATR,-0.12
+Dragon C,bracket +3/−4 20b,holdout,>5B,all,bull,8003,29702,-0.051,-1.7,0.542,ATR,-0.09
+Dragon C,bracket +3/−4 20b,holdout,>5B,all,bear,242,898,-0.509,-2.8,0.483,ATR,-1.24
+Dragon C,bracket +3/−4 20b,holdout,>5B,<3,all,4726,17540,-0.127,-3.2,0.528,ATR,-0.32
+Dragon C,bracket +3/−4 20b,holdout,>5B,<3,bull,4650,17258,-0.105,-2.6,0.532,ATR,-0.28
+Dragon C,bracket +3/−4 20b,holdout,>5B,3-5,all,2693,9995,0.006,0.1,0.55,ATR,0.13
+Dragon C,bracket +3/−4 20b,holdout,>5B,3-5,bull,2576,9560,0.009,0.2,0.55,ATR,0.14
+Dragon C,bracket +3/−4 20b,holdout,>5B,5-8,all,705,2616,0.153,1.6,0.603,ATR,0.88
+Dragon C,bracket +3/−4 20b,holdout,>5B,5-8,bull,661,2453,0.161,1.6,0.604,ATR,0.94
+Dragon C,scalp +0.5/−3 10b,in-sample,all,all,all,30962,42660,-0.037,-5.9,0.807,ATR,-0.21
+Dragon C,scalp +0.5/−3 10b,in-sample,all,all,bull,27321,37643,-0.053,-8.0,0.805,ATR,-0.27
+Dragon C,scalp +0.5/−3 10b,in-sample,all,all,bear,3641,5017,0.086,4.7,0.818,ATR,0.2
+Dragon C,scalp +0.5/−3 10b,in-sample,all,<3,all,15728,21670,0.008,0.9,0.824,ATR,0.03
+Dragon C,scalp +0.5/−3 10b,in-sample,all,<3,bull,14455,19916,-0.012,-1.3,0.821,ATR,-0.02
+Dragon C,scalp +0.5/−3 10b,in-sample,all,<3,bear,1273,1754,0.229,7.6,0.852,ATR,0.57
+Dragon C,scalp +0.5/−3 10b,in-sample,all,3-5,all,10740,14798,-0.065,-6.1,0.799,ATR,-0.27
+Dragon C,scalp +0.5/−3 10b,in-sample,all,3-5,bull,9335,12862,-0.079,-6.9,0.797,ATR,-0.32
+Dragon C,scalp +0.5/−3 10b,in-sample,all,3-5,bear,1405,1936,0.026,0.8,0.811,ATR,0.08
+Dragon C,scalp +0.5/−3 10b,in-sample,all,5-8,all,3716,5120,-0.119,-6.2,0.77,ATR,-0.75
+Dragon C,scalp +0.5/−3 10b,in-sample,all,5-8,bull,2929,4036,-0.145,-6.6,0.769,ATR,-0.9
+Dragon C,scalp +0.5/−3 10b,in-sample,all,5-8,bear,787,1084,-0.025,-0.6,0.774,ATR,-0.18
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,all,all,3277,4515,-0.085,-4.3,0.794,ATR,-0.39
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,all,bull,2908,4007,-0.088,-4.2,0.796,ATR,-0.4
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,all,bear,369,508,-0.065,-1.0,0.772,ATR,-0.31
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,<3,all,1102,1518,-0.035,-1.0,0.816,ATR,-0.1
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,<3,bull,1031,1421,-0.025,-0.7,0.822,ATR,-0.08
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,all,1342,1849,-0.121,-3.9,0.78,ATR,-0.46
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,bull,1203,1657,-0.136,-4.1,0.777,ATR,-0.52
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,5-8,all,677,933,-0.068,-1.5,0.793,ATR,-0.45
+Dragon C,scalp +0.5/−3 10b,in-sample,500M-2B,5-8,bull,553,762,-0.074,-1.5,0.799,ATR,-0.5
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,all,all,8980,12373,-0.035,-3.0,0.807,ATR,-0.21
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,all,bull,7958,10965,-0.046,-3.8,0.807,ATR,-0.26
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,all,bear,1022,1408,0.055,1.5,0.811,ATR,0.13
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,<3,all,3495,4815,0.0,0.0,0.821,ATR,0.02
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bull,3248,4475,-0.016,-0.8,0.819,ATR,-0.02
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bear,247,340,0.206,2.9,0.846,ATR,0.56
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,all,3716,5120,-0.033,-1.9,0.814,ATR,-0.16
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bull,3283,4523,-0.036,-1.9,0.815,ATR,-0.17
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bear,433,597,-0.01,-0.2,0.804,ATR,-0.07
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,all,1460,2012,-0.101,-3.4,0.771,ATR,-0.63
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,bull,1175,1619,-0.134,-4.0,0.766,ATR,-0.83
+Dragon C,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,bear,285,393,0.035,0.6,0.789,ATR,0.16
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,all,all,18660,25710,-0.03,-3.7,0.809,ATR,-0.17
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,all,bull,16414,22615,-0.051,-5.9,0.806,ATR,-0.24
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,all,bear,2246,3095,0.127,5.6,0.83,ATR,0.33
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,<3,all,11101,15295,0.014,1.4,0.825,ATR,0.04
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,<3,bull,10147,13981,-0.01,-0.9,0.821,ATR,-0.02
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,<3,bear,954,1314,0.264,8.0,0.863,ATR,0.64
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,3-5,all,5676,7820,-0.071,-4.8,0.795,ATR,-0.29
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,3-5,bull,4846,6677,-0.093,-5.8,0.791,ATR,-0.37
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,3-5,bear,830,1144,0.055,1.4,0.817,ATR,0.19
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,5-8,all,1576,2171,-0.158,-5.3,0.759,ATR,-0.98
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,5-8,bull,1198,1651,-0.188,-5.4,0.757,ATR,-1.15
+Dragon C,scalp +0.5/−3 10b,in-sample,>5B,5-8,bear,378,521,-0.066,-1.1,0.765,ATR,-0.43
+Dragon C,scalp +0.5/−3 10b,holdout,all,all,all,14941,55451,0.008,0.9,0.824,ATR,-0.01
+Dragon C,scalp +0.5/−3 10b,holdout,all,all,bull,14539,53959,0.009,1.0,0.824,ATR,0.0
+Dragon C,scalp +0.5/−3 10b,holdout,all,all,bear,402,1492,-0.051,-0.9,0.818,ATR,-0.34
+Dragon C,scalp +0.5/−3 10b,holdout,all,<3,all,7079,26273,0.027,2.1,0.837,ATR,0.05
+Dragon C,scalp +0.5/−3 10b,holdout,all,<3,bull,6987,25931,0.029,2.3,0.838,ATR,0.05
+Dragon C,scalp +0.5/−3 10b,holdout,all,3-5,all,5549,20594,-0.001,-0.1,0.813,ATR,0.0
+Dragon C,scalp +0.5/−3 10b,holdout,all,3-5,bull,5361,19896,-0.003,-0.2,0.811,ATR,0.0
+Dragon C,scalp +0.5/−3 10b,holdout,all,3-5,bear,188,698,0.043,0.5,0.846,ATR,0.11
+Dragon C,scalp +0.5/−3 10b,holdout,all,5-8,all,1833,6803,-0.043,-1.7,0.807,ATR,-0.33
+Dragon C,scalp +0.5/−3 10b,holdout,all,5-8,bull,1731,6424,-0.037,-1.4,0.809,ATR,-0.29
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,all,all,1943,7211,-0.038,-1.5,0.807,ATR,-0.18
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,all,bull,1897,7040,-0.037,-1.5,0.807,ATR,-0.17
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,<3,all,585,2171,-0.118,-2.4,0.783,ATR,-0.28
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,<3,bull,579,2149,-0.118,-2.4,0.782,ATR,-0.28
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,3-5,all,810,3006,0.051,1.4,0.841,ATR,0.22
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,3-5,bull,795,2951,0.048,1.3,0.839,ATR,0.21
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,5-8,all,427,1585,-0.071,-1.3,0.785,ATR,-0.54
+Dragon C,scalp +0.5/−3 10b,holdout,500M-2B,5-8,bull,407,1511,-0.064,-1.2,0.786,ATR,-0.47
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,all,all,4732,17562,0.004,0.3,0.822,ATR,0.0
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,all,bull,4618,17139,0.008,0.5,0.822,ATR,0.02
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,<3,all,1753,6506,0.026,1.0,0.839,ATR,0.07
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,<3,bull,1743,6469,0.03,1.2,0.839,ATR,0.08
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,3-5,all,2046,7593,-0.009,-0.4,0.808,ATR,-0.03
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,3-5,bull,1990,7386,-0.008,-0.3,0.808,ATR,-0.02
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,5-8,all,701,2602,-0.032,-0.8,0.81,ATR,-0.29
+Dragon C,scalp +0.5/−3 10b,holdout,2B-5B,5-8,bull,663,2461,-0.023,-0.6,0.813,ATR,-0.25
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,all,all,8245,30600,0.019,1.7,0.829,ATR,0.02
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,all,bull,8003,29702,0.02,1.7,0.829,ATR,0.02
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,all,bear,242,898,0.002,0.0,0.835,ATR,-0.03
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,<3,all,4726,17540,0.044,2.9,0.843,ATR,0.08
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,<3,bull,4650,17258,0.046,3.0,0.844,ATR,0.08
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,3-5,all,2693,9995,-0.011,-0.5,0.808,ATR,-0.04
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,3-5,bull,2576,9560,-0.014,-0.7,0.806,ATR,-0.05
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,5-8,all,705,2616,-0.036,-0.9,0.818,ATR,-0.25
+Dragon C,scalp +0.5/−3 10b,holdout,>5B,5-8,bull,661,2453,-0.035,-0.8,0.818,ATR,-0.23
+Dragon C,close 10 bars,in-sample,all,all,all,30962,42660,-0.266,-4.5,0.515,%,-0.27
+Dragon C,close 10 bars,in-sample,all,all,bull,27321,37643,-0.295,-4.7,0.515,%,-0.3
+Dragon C,close 10 bars,in-sample,all,all,bear,3641,5017,-0.048,-0.3,0.515,%,-0.05
+Dragon C,close 10 bars,in-sample,all,<3,all,15728,21670,-0.088,-2.0,0.518,%,-0.09
+Dragon C,close 10 bars,in-sample,all,<3,bull,14455,19916,-0.161,-3.6,0.518,%,-0.16
+Dragon C,close 10 bars,in-sample,all,<3,bear,1273,1754,0.731,4.3,0.524,%,0.73
+Dragon C,close 10 bars,in-sample,all,3-5,all,10740,14798,-0.071,-0.8,0.523,%,-0.07
+Dragon C,close 10 bars,in-sample,all,3-5,bull,9335,12862,-0.161,-1.8,0.523,%,-0.16
+Dragon C,close 10 bars,in-sample,all,3-5,bear,1405,1936,0.529,2.0,0.527,%,0.53
+Dragon C,close 10 bars,in-sample,all,5-8,all,3716,5120,0.124,0.5,0.493,%,0.12
+Dragon C,close 10 bars,in-sample,all,5-8,bull,2929,4036,0.375,1.2,0.5,%,0.38
+Dragon C,close 10 bars,in-sample,all,5-8,bear,787,1084,-0.811,-1.8,0.468,%,-0.81
+Dragon C,close 10 bars,in-sample,500M-2B,all,all,3277,4515,-0.939,-4.5,0.487,%,-0.94
+Dragon C,close 10 bars,in-sample,500M-2B,all,bull,2908,4007,-0.921,-4.2,0.49,%,-0.92
+Dragon C,close 10 bars,in-sample,500M-2B,all,bear,369,508,-1.078,-1.6,0.461,%,-1.08
+Dragon C,close 10 bars,in-sample,500M-2B,<3,all,1102,1518,-0.337,-1.8,0.476,%,-0.34
+Dragon C,close 10 bars,in-sample,500M-2B,<3,bull,1031,1421,-0.317,-1.7,0.485,%,-0.32
+Dragon C,close 10 bars,in-sample,500M-2B,3-5,all,1342,1849,-1.003,-4.2,0.484,%,-1.0
+Dragon C,close 10 bars,in-sample,500M-2B,3-5,bull,1203,1657,-1.154,-4.7,0.482,%,-1.15
+Dragon C,close 10 bars,in-sample,500M-2B,5-8,all,677,933,0.649,1.1,0.529,%,0.65
+Dragon C,close 10 bars,in-sample,500M-2B,5-8,bull,553,762,0.872,1.3,0.537,%,0.87
+Dragon C,close 10 bars,in-sample,2B-5B,all,all,8980,12373,-0.449,-3.8,0.501,%,-0.45
+Dragon C,close 10 bars,in-sample,2B-5B,all,bull,7958,10965,-0.451,-3.6,0.501,%,-0.45
+Dragon C,close 10 bars,in-sample,2B-5B,all,bear,1022,1408,-0.426,-1.1,0.498,%,-0.43
+Dragon C,close 10 bars,in-sample,2B-5B,<3,all,3495,4815,-0.332,-3.3,0.497,%,-0.33
+Dragon C,close 10 bars,in-sample,2B-5B,<3,bull,3248,4475,-0.389,-3.8,0.497,%,-0.39
+Dragon C,close 10 bars,in-sample,2B-5B,<3,bear,247,340,0.425,1.0,0.502,%,0.42
+Dragon C,close 10 bars,in-sample,2B-5B,3-5,all,3716,5120,-0.186,-1.3,0.515,%,-0.19
+Dragon C,close 10 bars,in-sample,2B-5B,3-5,bull,3283,4523,-0.235,-1.5,0.514,%,-0.23
+Dragon C,close 10 bars,in-sample,2B-5B,3-5,bear,433,597,0.179,0.3,0.524,%,0.18
+Dragon C,close 10 bars,in-sample,2B-5B,5-8,all,1460,2012,0.445,1.0,0.492,%,0.45
+Dragon C,close 10 bars,in-sample,2B-5B,5-8,bull,1175,1619,0.621,1.2,0.5,%,0.62
+Dragon C,close 10 bars,in-sample,2B-5B,5-8,bear,285,393,-0.278,-0.4,0.46,%,-0.28
+Dragon C,close 10 bars,in-sample,>5B,all,all,18660,25710,-0.054,-0.7,0.526,%,-0.05
+Dragon C,close 10 bars,in-sample,>5B,all,bull,16414,22615,-0.102,-1.3,0.526,%,-0.1
+Dragon C,close 10 bars,in-sample,>5B,all,bear,2246,3095,0.301,1.4,0.533,%,0.3
+Dragon C,close 10 bars,in-sample,>5B,<3,all,11101,15295,0.01,0.2,0.529,%,0.01
+Dragon C,close 10 bars,in-sample,>5B,<3,bull,10147,13981,-0.075,-1.5,0.527,%,-0.07
+Dragon C,close 10 bars,in-sample,>5B,<3,bear,954,1314,0.914,4.8,0.543,%,0.91
+Dragon C,close 10 bars,in-sample,>5B,3-5,all,5676,7820,0.233,2.0,0.539,%,0.23
+Dragon C,close 10 bars,in-sample,>5B,3-5,bull,4846,6677,0.141,1.1,0.539,%,0.14
+Dragon C,close 10 bars,in-sample,>5B,3-5,bear,830,1144,0.77,2.4,0.536,%,0.77
+Dragon C,close 10 bars,in-sample,>5B,5-8,all,1576,2171,-0.39,-1.0,0.48,%,-0.39
+Dragon C,close 10 bars,in-sample,>5B,5-8,bull,1198,1651,-0.082,-0.2,0.484,%,-0.08
+Dragon C,close 10 bars,in-sample,>5B,5-8,bear,378,521,-1.366,-2.2,0.466,%,-1.37
+Dragon C,close 10 bars,holdout,all,all,all,14941,55451,-0.249,-2.7,0.505,%,-0.25
+Dragon C,close 10 bars,holdout,all,all,bull,14539,53959,-0.224,-2.4,0.505,%,-0.22
+Dragon C,close 10 bars,holdout,all,all,bear,402,1492,-1.141,-1.8,0.502,%,-1.14
+Dragon C,close 10 bars,holdout,all,<3,all,7079,26273,-0.266,-4.0,0.501,%,-0.27
+Dragon C,close 10 bars,holdout,all,<3,bull,6987,25931,-0.24,-3.6,0.503,%,-0.24
+Dragon C,close 10 bars,holdout,all,3-5,all,5549,20594,-0.274,-2.2,0.506,%,-0.27
+Dragon C,close 10 bars,holdout,all,3-5,bull,5361,19896,-0.283,-2.2,0.505,%,-0.28
+Dragon C,close 10 bars,holdout,all,3-5,bear,188,698,-0.036,-0.1,0.537,%,-0.04
+Dragon C,close 10 bars,holdout,all,5-8,all,1833,6803,-0.092,-0.2,0.517,%,-0.09
+Dragon C,close 10 bars,holdout,all,5-8,bull,1731,6424,0.028,0.1,0.515,%,0.03
+Dragon C,close 10 bars,holdout,500M-2B,all,all,1943,7211,-0.993,-3.3,0.47,%,-0.99
+Dragon C,close 10 bars,holdout,500M-2B,all,bull,1897,7040,-1.046,-3.5,0.469,%,-1.05
+Dragon C,close 10 bars,holdout,500M-2B,<3,all,585,2171,-0.823,-3.2,0.453,%,-0.82
+Dragon C,close 10 bars,holdout,500M-2B,<3,bull,579,2149,-0.845,-3.3,0.451,%,-0.85
+Dragon C,close 10 bars,holdout,500M-2B,3-5,all,810,3006,-0.848,-2.7,0.463,%,-0.85
+Dragon C,close 10 bars,holdout,500M-2B,3-5,bull,795,2951,-0.868,-2.8,0.462,%,-0.87
+Dragon C,close 10 bars,holdout,500M-2B,5-8,all,427,1585,-1.642,-2.3,0.494,%,-1.64
+Dragon C,close 10 bars,holdout,500M-2B,5-8,bull,407,1511,-1.63,-2.2,0.494,%,-1.63
+Dragon C,close 10 bars,holdout,2B-5B,all,all,4732,17562,-0.569,-3.5,0.495,%,-0.57
+Dragon C,close 10 bars,holdout,2B-5B,all,bull,4618,17139,-0.497,-3.0,0.497,%,-0.5
+Dragon C,close 10 bars,holdout,2B-5B,<3,all,1753,6506,-0.697,-4.8,0.468,%,-0.7
+Dragon C,close 10 bars,holdout,2B-5B,<3,bull,1743,6469,-0.658,-4.5,0.47,%,-0.66
+Dragon C,close 10 bars,holdout,2B-5B,3-5,all,2046,7593,-0.269,-1.4,0.512,%,-0.27
+Dragon C,close 10 bars,holdout,2B-5B,3-5,bull,1990,7386,-0.274,-1.4,0.513,%,-0.27
+Dragon C,close 10 bars,holdout,2B-5B,5-8,all,701,2602,-0.896,-1.4,0.506,%,-0.9
+Dragon C,close 10 bars,holdout,2B-5B,5-8,bull,663,2461,-0.547,-0.8,0.51,%,-0.55
+Dragon C,close 10 bars,holdout,>5B,all,all,8245,30600,0.101,0.9,0.519,%,0.1
+Dragon C,close 10 bars,holdout,>5B,all,bull,8003,29702,0.119,1.0,0.519,%,0.12
+Dragon C,close 10 bars,holdout,>5B,all,bear,242,898,-0.474,-0.7,0.529,%,-0.47
+Dragon C,close 10 bars,holdout,>5B,<3,all,4726,17540,-0.032,-0.4,0.52,%,-0.03
+Dragon C,close 10 bars,holdout,>5B,<3,bull,4650,17258,-0.004,-0.1,0.521,%,-0.0
+Dragon C,close 10 bars,holdout,>5B,3-5,all,2693,9995,-0.106,-0.6,0.514,%,-0.11
+Dragon C,close 10 bars,holdout,>5B,3-5,bull,2576,9560,-0.109,-0.6,0.512,%,-0.11
+Dragon C,close 10 bars,holdout,>5B,5-8,all,705,2616,1.647,1.8,0.54,%,1.65
+Dragon C,close 10 bars,holdout,>5B,5-8,bull,661,2453,1.624,1.7,0.534,%,1.62
+Dragon C,hole down,in-sample,all,all,all,30962,42660,0.211,1.4,0.403,%,0.21
+Dragon C,hole down,in-sample,all,all,bull,27321,37643,0.282,1.7,0.408,%,0.28
+Dragon C,hole down,in-sample,all,all,bear,3641,5017,-0.325,-0.8,0.364,%,-0.33
+Dragon C,hole down,in-sample,all,<3,all,15728,21670,0.178,1.9,0.385,%,0.18
+Dragon C,hole down,in-sample,all,<3,bull,14455,19916,0.177,1.8,0.389,%,0.18
+Dragon C,hole down,in-sample,all,<3,bear,1273,1754,0.188,0.8,0.336,%,0.19
+Dragon C,hole down,in-sample,all,3-5,all,10740,14798,0.506,2.3,0.43,%,0.51
+Dragon C,hole down,in-sample,all,3-5,bull,9335,12862,0.539,2.2,0.438,%,0.54
+Dragon C,hole down,in-sample,all,3-5,bear,1405,1936,0.29,0.7,0.378,%,0.29
+Dragon C,hole down,in-sample,all,5-8,all,3716,5120,2.225,2.8,0.413,%,2.22
+Dragon C,hole down,in-sample,all,5-8,bull,2929,4036,2.692,2.8,0.427,%,2.69
+Dragon C,hole down,in-sample,all,5-8,bear,787,1084,0.486,0.4,0.362,%,0.49
+Dragon C,hole down,in-sample,500M-2B,all,all,3277,4515,-1.073,-2.0,0.369,%,-1.07
+Dragon C,hole down,in-sample,500M-2B,all,bull,2908,4007,-1.081,-2.0,0.379,%,-1.08
+Dragon C,hole down,in-sample,500M-2B,all,bear,369,508,-1.009,-0.5,0.293,%,-1.01
+Dragon C,hole down,in-sample,500M-2B,<3,all,1102,1518,-0.847,-2.6,0.353,%,-0.85
+Dragon C,hole down,in-sample,500M-2B,<3,bull,1031,1421,-0.733,-2.2,0.364,%,-0.73
+Dragon C,hole down,in-sample,500M-2B,3-5,all,1342,1849,-0.846,-1.2,0.372,%,-0.85
+Dragon C,hole down,in-sample,500M-2B,3-5,bull,1203,1657,-0.68,-0.9,0.381,%,-0.68
+Dragon C,hole down,in-sample,500M-2B,5-8,all,677,933,3.055,2.0,0.418,%,3.05
+Dragon C,hole down,in-sample,500M-2B,5-8,bull,553,762,3.754,2.1,0.438,%,3.75
+Dragon C,hole down,in-sample,2B-5B,all,all,8980,12373,0.241,0.7,0.388,%,0.24
+Dragon C,hole down,in-sample,2B-5B,all,bull,7958,10965,0.455,1.2,0.392,%,0.45
+Dragon C,hole down,in-sample,2B-5B,all,bear,1022,1408,-1.425,-1.9,0.35,%,-1.43
+Dragon C,hole down,in-sample,2B-5B,<3,all,3495,4815,-0.626,-3.4,0.349,%,-0.63
+Dragon C,hole down,in-sample,2B-5B,<3,bull,3248,4475,-0.61,-3.2,0.352,%,-0.61
+Dragon C,hole down,in-sample,2B-5B,<3,bear,247,340,-0.837,-1.6,0.308,%,-0.84
+Dragon C,hole down,in-sample,2B-5B,3-5,all,3716,5120,0.494,1.4,0.419,%,0.49
+Dragon C,hole down,in-sample,2B-5B,3-5,bull,3283,4523,0.604,1.6,0.426,%,0.6
+Dragon C,hole down,in-sample,2B-5B,3-5,bear,433,597,-0.339,-0.5,0.365,%,-0.34
+Dragon C,hole down,in-sample,2B-5B,5-8,all,1460,2012,5.539,3.5,0.414,%,5.54
+Dragon C,hole down,in-sample,2B-5B,5-8,bull,1175,1619,6.46,3.4,0.428,%,6.46
+Dragon C,hole down,in-sample,2B-5B,5-8,bear,285,393,1.744,0.9,0.354,%,1.74
+Dragon C,hole down,in-sample,>5B,all,all,18660,25710,0.402,2.4,0.416,%,0.4
+Dragon C,hole down,in-sample,>5B,all,bull,16414,22615,0.418,2.3,0.421,%,0.42
+Dragon C,hole down,in-sample,>5B,all,bear,2246,3095,0.289,0.7,0.382,%,0.29
+Dragon C,hole down,in-sample,>5B,<3,all,11101,15295,0.526,4.6,0.398,%,0.53
+Dragon C,hole down,in-sample,>5B,<3,bull,10147,13981,0.513,4.2,0.403,%,0.51
+Dragon C,hole down,in-sample,>5B,<3,bear,954,1314,0.658,2.4,0.354,%,0.66
+Dragon C,hole down,in-sample,>5B,3-5,all,5676,7820,0.843,2.8,0.452,%,0.84
+Dragon C,hole down,in-sample,>5B,3-5,bull,4846,6677,0.807,2.3,0.461,%,0.81
+Dragon C,hole down,in-sample,>5B,3-5,bear,830,1144,1.051,1.9,0.399,%,1.05
+Dragon C,hole down,in-sample,>5B,5-8,all,1576,2171,-1.169,-1.2,0.412,%,-1.17
+Dragon C,hole down,in-sample,>5B,5-8,bull,1198,1651,-1.449,-1.2,0.422,%,-1.45
+Dragon C,hole down,in-sample,>5B,5-8,bear,378,521,-0.281,-0.2,0.378,%,-0.28
+Dragon C,hole down,holdout,all,all,all,14941,55451,0.493,2.2,0.352,%,0.49
+Dragon C,hole down,holdout,all,all,bull,14539,53959,0.5,2.2,0.351,%,0.5
+Dragon C,hole down,holdout,all,all,bear,402,1492,0.242,0.2,0.368,%,0.24
+Dragon C,hole down,holdout,all,<3,all,7079,26273,-0.563,-4.3,0.329,%,-0.56
+Dragon C,hole down,holdout,all,<3,bull,6987,25931,-0.528,-4.0,0.331,%,-0.53
+Dragon C,hole down,holdout,all,3-5,all,5549,20594,0.974,3.0,0.361,%,0.97
+Dragon C,hole down,holdout,all,3-5,bull,5361,19896,0.937,2.9,0.359,%,0.94
+Dragon C,hole down,holdout,all,3-5,bear,188,698,2.019,1.1,0.426,%,2.02
+Dragon C,hole down,holdout,all,5-8,all,1833,6803,4.358,3.7,0.415,%,4.36
+Dragon C,hole down,holdout,all,5-8,bull,1731,6424,4.352,3.6,0.415,%,4.35
+Dragon C,hole down,holdout,500M-2B,all,all,1943,7211,-1.4,-1.8,0.314,%,-1.4
+Dragon C,hole down,holdout,500M-2B,all,bull,1897,7040,-1.554,-2.0,0.312,%,-1.55
+Dragon C,hole down,holdout,500M-2B,<3,all,585,2171,-1.769,-4.9,0.279,%,-1.77
+Dragon C,hole down,holdout,500M-2B,<3,bull,579,2149,-1.754,-4.8,0.278,%,-1.75
+Dragon C,hole down,holdout,500M-2B,3-5,all,810,3006,-1.371,-1.7,0.3,%,-1.37
+Dragon C,hole down,holdout,500M-2B,3-5,bull,795,2951,-1.582,-2.0,0.299,%,-1.58
+Dragon C,hole down,holdout,500M-2B,5-8,all,427,1585,-2.037,-1.1,0.375,%,-2.04
+Dragon C,hole down,holdout,500M-2B,5-8,bull,407,1511,-2.492,-1.4,0.371,%,-2.49
+Dragon C,hole down,holdout,2B-5B,all,all,4732,17562,-0.868,-2.5,0.335,%,-0.87
+Dragon C,hole down,holdout,2B-5B,all,bull,4618,17139,-0.841,-2.4,0.333,%,-0.84
+Dragon C,hole down,holdout,2B-5B,<3,all,1753,6506,-1.701,-7.3,0.282,%,-1.7
+Dragon C,hole down,holdout,2B-5B,<3,bull,1743,6469,-1.67,-7.1,0.283,%,-1.67
+Dragon C,hole down,holdout,2B-5B,3-5,all,2046,7593,-0.285,-0.7,0.348,%,-0.28
+Dragon C,hole down,holdout,2B-5B,3-5,bull,1990,7386,-0.357,-0.9,0.345,%,-0.36
+Dragon C,hole down,holdout,2B-5B,5-8,all,701,2602,2.765,1.7,0.414,%,2.76
+Dragon C,hole down,holdout,2B-5B,5-8,bull,663,2461,3.052,1.9,0.418,%,3.05
+Dragon C,hole down,holdout,>5B,all,all,8245,30600,1.752,5.7,0.371,%,1.75
+Dragon C,hole down,holdout,>5B,all,bull,8003,29702,1.794,5.7,0.371,%,1.79
+Dragon C,hole down,holdout,>5B,all,bear,242,898,0.389,0.2,0.351,%,0.39
+Dragon C,hole down,holdout,>5B,<3,all,4726,17540,0.009,0.1,0.352,%,0.01
+Dragon C,hole down,holdout,>5B,<3,bull,4650,17258,0.053,0.3,0.355,%,0.05
+Dragon C,hole down,holdout,>5B,3-5,all,2693,9995,2.636,5.0,0.388,%,2.64
+Dragon C,hole down,holdout,>5B,3-5,bull,2576,9560,2.715,5.0,0.387,%,2.71
+Dragon C,hole down,holdout,>5B,5-8,all,705,2616,9.815,4.2,0.441,%,9.81
+Dragon C,hole down,holdout,>5B,5-8,bull,661,2453,9.87,4.0,0.439,%,9.87
+hole up,bracket +2/−4 20b,in-sample,all,all,all,84970,117072,-0.032,-4.0,0.624,ATR,-0.1
+hole up,bracket +2/−4 20b,in-sample,all,all,bull,74827,103097,-0.072,-8.5,0.622,ATR,-0.24
+hole up,bracket +2/−4 20b,in-sample,all,all,bear,10143,13975,0.269,12.0,0.637,ATR,0.86
+hole up,bracket +2/−4 20b,in-sample,all,<3,all,50784,69970,-0.024,-2.3,0.624,ATR,-0.02
+hole up,bracket +2/−4 20b,in-sample,all,<3,bull,47065,64846,-0.066,-6.0,0.623,ATR,-0.11
+hole up,bracket +2/−4 20b,in-sample,all,<3,bear,3719,5124,0.505,13.1,0.645,ATR,1.2
+hole up,bracket +2/−4 20b,in-sample,all,3-5,all,24518,33781,-0.029,-2.0,0.633,ATR,-0.12
+hole up,bracket +2/−4 20b,in-sample,all,3-5,bull,20789,28643,-0.064,-4.1,0.631,ATR,-0.24
+hole up,bracket +2/−4 20b,in-sample,all,3-5,bear,3729,5138,0.165,4.4,0.641,ATR,0.58
+hole up,bracket +2/−4 20b,in-sample,all,5-8,all,7812,10763,-0.062,-2.5,0.607,ATR,-0.35
+hole up,bracket +2/−4 20b,in-sample,all,5-8,bull,5761,7938,-0.106,-3.6,0.606,ATR,-0.63
+hole up,bracket +2/−4 20b,in-sample,all,5-8,bear,2051,2826,0.065,1.4,0.61,ATR,0.45
+hole up,bracket +2/−4 20b,in-sample,500M-2B,all,all,8121,11189,-0.138,-5.4,0.6,ATR,-0.49
+hole up,bracket +2/−4 20b,in-sample,500M-2B,all,bull,7021,9674,-0.159,-5.8,0.602,ATR,-0.56
+hole up,bracket +2/−4 20b,in-sample,500M-2B,all,bear,1100,1516,-0.005,-0.1,0.585,ATR,-0.04
+hole up,bracket +2/−4 20b,in-sample,500M-2B,<3,all,3305,4554,-0.153,-3.7,0.598,ATR,-0.29
+hole up,bracket +2/−4 20b,in-sample,500M-2B,<3,bull,3035,4182,-0.179,-4.1,0.599,ATR,-0.35
+hole up,bracket +2/−4 20b,in-sample,500M-2B,<3,bear,270,372,0.133,0.9,0.585,ATR,0.43
+hole up,bracket +2/−4 20b,in-sample,500M-2B,3-5,all,3054,4208,-0.139,-3.4,0.61,ATR,-0.5
+hole up,bracket +2/−4 20b,in-sample,500M-2B,3-5,bull,2658,3662,-0.15,-3.4,0.611,ATR,-0.53
+hole up,bracket +2/−4 20b,in-sample,500M-2B,3-5,bear,396,546,-0.069,-0.6,0.598,ATR,-0.3
+hole up,bracket +2/−4 20b,in-sample,500M-2B,5-8,all,1396,1923,-0.061,-1.0,0.599,ATR,-0.33
+hole up,bracket +2/−4 20b,in-sample,500M-2B,5-8,bull,1080,1488,-0.079,-1.2,0.605,ATR,-0.44
+hole up,bracket +2/−4 20b,in-sample,500M-2B,5-8,bear,316,435,0.0,0.0,0.579,ATR,0.05
+hole up,bracket +2/−4 20b,in-sample,2B-5B,all,all,22374,30827,-0.082,-5.3,0.611,ATR,-0.26
+hole up,bracket +2/−4 20b,in-sample,2B-5B,all,bull,19441,26786,-0.126,-7.7,0.609,ATR,-0.4
+hole up,bracket +2/−4 20b,in-sample,2B-5B,all,bear,2933,4041,0.214,5.1,0.626,ATR,0.7
+hole up,bracket +2/−4 20b,in-sample,2B-5B,<3,all,9961,13724,-0.099,-4.1,0.606,ATR,-0.19
+hole up,bracket +2/−4 20b,in-sample,2B-5B,<3,bull,9168,12632,-0.152,-6.1,0.603,ATR,-0.3
+hole up,bracket +2/−4 20b,in-sample,2B-5B,<3,bear,793,1093,0.51,6.1,0.639,ATR,1.06
+hole up,bracket +2/−4 20b,in-sample,2B-5B,3-5,all,8452,11645,-0.072,-2.9,0.623,ATR,-0.28
+hole up,bracket +2/−4 20b,in-sample,2B-5B,3-5,bull,7328,10097,-0.104,-4.0,0.622,ATR,-0.39
+hole up,bracket +2/−4 20b,in-sample,2B-5B,3-5,bear,1124,1549,0.135,1.9,0.632,ATR,0.47
+hole up,bracket +2/−4 20b,in-sample,2B-5B,5-8,all,3190,4395,-0.044,-1.1,0.611,ATR,-0.2
+hole up,bracket +2/−4 20b,in-sample,2B-5B,5-8,bull,2417,3330,-0.082,-1.8,0.612,ATR,-0.45
+hole up,bracket +2/−4 20b,in-sample,2B-5B,5-8,bear,773,1065,0.075,1.0,0.607,ATR,0.59
+hole up,bracket +2/−4 20b,in-sample,>5B,all,all,54249,74744,0.004,0.4,0.632,ATR,0.01
+hole up,bracket +2/−4 20b,in-sample,>5B,all,bull,48163,66359,-0.039,-3.7,0.63,ATR,-0.13
+hole up,bracket +2/−4 20b,in-sample,>5B,all,bear,6086,8385,0.346,12.0,0.651,ATR,1.11
+hole up,bracket +2/−4 20b,in-sample,>5B,<3,all,37322,51422,0.005,0.4,0.631,ATR,0.05
+hole up,bracket +2/−4 20b,in-sample,>5B,<3,bull,34684,47788,-0.036,-2.8,0.629,ATR,-0.05
+hole up,bracket +2/−4 20b,in-sample,>5B,<3,bear,2638,3635,0.543,11.9,0.652,ATR,1.33
+hole up,bracket +2/−4 20b,in-sample,>5B,3-5,all,13004,17917,0.025,1.3,0.644,ATR,0.08
+hole up,bracket +2/−4 20b,in-sample,>5B,3-5,bull,10800,14880,-0.015,-0.7,0.642,ATR,-0.07
+hole up,bracket +2/−4 20b,in-sample,>5B,3-5,bear,2204,3037,0.225,4.7,0.653,ATR,0.81
+hole up,bracket +2/−4 20b,in-sample,>5B,5-8,all,3215,4430,-0.078,-2.0,0.608,ATR,-0.5
+hole up,bracket +2/−4 20b,in-sample,>5B,5-8,bull,2254,3106,-0.143,-3.0,0.601,ATR,-0.91
+hole up,bracket +2/−4 20b,in-sample,>5B,5-8,bear,961,1324,0.076,1.1,0.623,ATR,0.46
+hole up,bracket +2/−4 20b,holdout,all,all,all,41414,153701,-0.082,-7.0,0.604,ATR,-0.22
+hole up,bracket +2/−4 20b,holdout,all,all,bull,40008,148483,-0.08,-6.7,0.603,ATR,-0.23
+hole up,bracket +2/−4 20b,holdout,all,all,bear,1406,5218,-0.123,-1.9,0.618,ATR,0.17
+hole up,bracket +2/−4 20b,holdout,all,<3,all,22800,84619,-0.109,-6.7,0.6,ATR,-0.27
+hole up,bracket +2/−4 20b,holdout,all,<3,bull,22417,83197,-0.094,-5.8,0.602,ATR,-0.24
+hole up,bracket +2/−4 20b,holdout,all,<3,bear,383,1421,-0.961,-6.8,0.467,ATR,-2.25
+hole up,bracket +2/−4 20b,holdout,all,3-5,all,13428,49836,-0.064,-3.2,0.6,ATR,-0.19
+hole up,bracket +2/−4 20b,holdout,all,3-5,bull,12789,47464,-0.077,-3.7,0.597,ATR,-0.24
+hole up,bracket +2/−4 20b,holdout,all,3-5,bear,639,2372,0.191,2.1,0.66,ATR,0.83
+hole up,bracket +2/−4 20b,holdout,all,5-8,all,4193,15562,-0.01,-0.3,0.633,ATR,-0.08
+hole up,bracket +2/−4 20b,holdout,all,5-8,bull,3877,14389,-0.02,-0.6,0.629,ATR,-0.15
+hole up,bracket +2/−4 20b,holdout,all,5-8,bear,316,1173,0.12,1.0,0.68,ATR,0.74
+hole up,bracket +2/−4 20b,holdout,500M-2B,all,all,4569,16957,-0.217,-6.2,0.571,ATR,-0.69
+hole up,bracket +2/−4 20b,holdout,500M-2B,all,bull,4420,16404,-0.232,-6.5,0.568,ATR,-0.76
+hole up,bracket +2/−4 20b,holdout,500M-2B,<3,all,1638,6079,-0.268,-4.5,0.556,ATR,-0.64
+hole up,bracket +2/−4 20b,holdout,500M-2B,<3,bull,1622,6020,-0.281,-4.6,0.554,ATR,-0.67
+hole up,bracket +2/−4 20b,holdout,500M-2B,3-5,all,1803,6692,-0.28,-5.0,0.555,ATR,-1.0
+hole up,bracket +2/−4 20b,holdout,500M-2B,3-5,bull,1736,6443,-0.282,-4.9,0.553,ATR,-1.01
+hole up,bracket +2/−4 20b,holdout,500M-2B,5-8,all,883,3277,-0.055,-0.7,0.622,ATR,-0.42
+hole up,bracket +2/−4 20b,holdout,500M-2B,5-8,bull,835,3099,-0.082,-1.1,0.617,ATR,-0.59
+hole up,bracket +2/−4 20b,holdout,2B-5B,all,all,11793,43768,-0.198,-9.0,0.58,ATR,-0.55
+hole up,bracket +2/−4 20b,holdout,2B-5B,all,bull,11397,42298,-0.196,-8.7,0.58,ATR,-0.54
+hole up,bracket +2/−4 20b,holdout,2B-5B,all,bear,396,1470,-0.256,-2.1,0.583,ATR,-0.74
+hole up,bracket +2/−4 20b,holdout,2B-5B,<3,all,4950,18371,-0.315,-8.8,0.561,ATR,-0.79
+hole up,bracket +2/−4 20b,holdout,2B-5B,<3,bull,4888,18141,-0.302,-8.4,0.563,ATR,-0.75
+hole up,bracket +2/−4 20b,holdout,2B-5B,3-5,all,4808,17844,-0.143,-4.2,0.583,ATR,-0.46
+hole up,bracket +2/−4 20b,holdout,2B-5B,3-5,bull,4619,17143,-0.149,-4.3,0.583,ATR,-0.47
+hole up,bracket +2/−4 20b,holdout,2B-5B,3-5,bear,189,701,-0.015,-0.1,0.603,ATR,-0.04
+hole up,bracket +2/−4 20b,holdout,2B-5B,5-8,all,1583,5875,-0.1,-1.8,0.613,ATR,-0.64
+hole up,bracket +2/−4 20b,holdout,2B-5B,5-8,bull,1468,5448,-0.095,-1.6,0.614,ATR,-0.61
+hole up,bracket +2/−4 20b,holdout,>5B,all,all,24956,92620,-0.004,-0.3,0.62,ATR,0.02
+hole up,bracket +2/−4 20b,holdout,>5B,all,bull,24099,89440,0.001,0.0,0.62,ATR,0.01
+hole up,bracket +2/−4 20b,holdout,>5B,all,bear,857,3181,-0.13,-1.5,0.624,ATR,0.35
+hole up,bracket +2/−4 20b,holdout,>5B,<3,all,16128,59856,-0.033,-1.7,0.616,ATR,-0.08
+hole up,bracket +2/−4 20b,holdout,>5B,<3,bull,15825,58732,-0.014,-0.7,0.619,ATR,-0.04
+hole up,bracket +2/−4 20b,holdout,>5B,<3,bear,303,1125,-1.002,-6.3,0.459,ATR,-2.22
+hole up,bracket +2/−4 20b,holdout,>5B,3-5,all,6815,25293,0.048,1.7,0.625,ATR,0.21
+hole up,bracket +2/−4 20b,holdout,>5B,3-5,bull,6434,23879,0.029,1.0,0.62,ATR,0.13
+hole up,bracket +2/−4 20b,holdout,>5B,3-5,bear,381,1414,0.36,3.1,0.698,ATR,1.51
+hole up,bracket +2/−4 20b,holdout,>5B,5-8,all,1727,6409,0.096,1.8,0.656,ATR,0.6
+hole up,bracket +2/−4 20b,holdout,>5B,5-8,bull,1574,5842,0.083,1.5,0.649,ATR,0.52
+hole up,bracket +2/−4 20b,holdout,>5B,5-8,bear,153,568,0.234,1.3,0.732,ATR,1.46
+hole up,bracket +3/−4 20b,in-sample,all,all,all,84970,117072,-0.021,-2.3,0.569,ATR,-0.06
+hole up,bracket +3/−4 20b,in-sample,all,all,bull,74827,103097,-0.069,-7.1,0.568,ATR,-0.22
+hole up,bracket +3/−4 20b,in-sample,all,all,bear,10143,13975,0.334,13.1,0.581,ATR,1.1
+hole up,bracket +3/−4 20b,in-sample,all,<3,all,50784,69970,-0.015,-1.2,0.568,ATR,0.01
+hole up,bracket +3/−4 20b,in-sample,all,<3,bull,47065,64846,-0.062,-5.0,0.566,ATR,-0.1
+hole up,bracket +3/−4 20b,in-sample,all,<3,bear,3719,5124,0.588,13.4,0.582,ATR,1.39
+hole up,bracket +3/−4 20b,in-sample,all,3-5,all,24518,33781,-0.018,-1.1,0.583,ATR,-0.07
+hole up,bracket +3/−4 20b,in-sample,all,3-5,bull,20789,28643,-0.065,-3.7,0.582,ATR,-0.24
+hole up,bracket +3/−4 20b,in-sample,all,3-5,bear,3729,5138,0.243,5.7,0.589,ATR,0.88
+hole up,bracket +3/−4 20b,in-sample,all,5-8,all,7812,10763,-0.057,-2.0,0.549,ATR,-0.31
+hole up,bracket +3/−4 20b,in-sample,all,5-8,bull,5761,7938,-0.099,-2.9,0.547,ATR,-0.57
+hole up,bracket +3/−4 20b,in-sample,all,5-8,bear,2051,2826,0.061,1.2,0.556,ATR,0.44
+hole up,bracket +3/−4 20b,in-sample,500M-2B,all,all,8121,11189,-0.161,-5.5,0.54,ATR,-0.56
+hole up,bracket +3/−4 20b,in-sample,500M-2B,all,bull,7021,9674,-0.186,-5.9,0.543,ATR,-0.64
+hole up,bracket +3/−4 20b,in-sample,500M-2B,all,bear,1100,1516,-0.001,-0.0,0.522,ATR,-0.04
+hole up,bracket +3/−4 20b,in-sample,500M-2B,<3,all,3305,4554,-0.192,-4.0,0.533,ATR,-0.38
+hole up,bracket +3/−4 20b,in-sample,500M-2B,<3,bull,3035,4182,-0.222,-4.5,0.534,ATR,-0.45
+hole up,bracket +3/−4 20b,in-sample,500M-2B,<3,bear,270,372,0.149,0.9,0.519,ATR,0.4
+hole up,bracket +3/−4 20b,in-sample,500M-2B,3-5,all,3054,4208,-0.149,-3.2,0.555,ATR,-0.55
+hole up,bracket +3/−4 20b,in-sample,500M-2B,3-5,bull,2658,3662,-0.165,-3.3,0.557,ATR,-0.6
+hole up,bracket +3/−4 20b,in-sample,500M-2B,3-5,bear,396,546,-0.044,-0.3,0.543,ATR,-0.2
+hole up,bracket +3/−4 20b,in-sample,500M-2B,5-8,all,1396,1923,-0.073,-1.1,0.539,ATR,-0.41
+hole up,bracket +3/−4 20b,in-sample,500M-2B,5-8,bull,1080,1488,-0.087,-1.1,0.545,ATR,-0.5
+hole up,bracket +3/−4 20b,in-sample,500M-2B,5-8,bear,316,435,-0.024,-0.2,0.516,ATR,-0.1
+hole up,bracket +3/−4 20b,in-sample,2B-5B,all,all,22374,30827,-0.087,-4.9,0.555,ATR,-0.25
+hole up,bracket +3/−4 20b,in-sample,2B-5B,all,bull,19441,26786,-0.14,-7.4,0.553,ATR,-0.42
+hole up,bracket +3/−4 20b,in-sample,2B-5B,all,bear,2933,4041,0.268,5.7,0.566,ATR,0.91
+hole up,bracket +3/−4 20b,in-sample,2B-5B,<3,all,9961,13724,-0.12,-4.4,0.546,ATR,-0.23
+hole up,bracket +3/−4 20b,in-sample,2B-5B,<3,bull,9168,12632,-0.18,-6.4,0.544,ATR,-0.34
+hole up,bracket +3/−4 20b,in-sample,2B-5B,<3,bear,793,1093,0.574,6.0,0.567,ATR,1.14
+hole up,bracket +3/−4 20b,in-sample,2B-5B,3-5,all,8452,11645,-0.064,-2.3,0.573,ATR,-0.24
+hole up,bracket +3/−4 20b,in-sample,2B-5B,3-5,bull,7328,10097,-0.104,-3.5,0.573,ATR,-0.39
+hole up,bracket +3/−4 20b,in-sample,2B-5B,3-5,bear,1124,1549,0.202,2.6,0.572,ATR,0.74
+hole up,bracket +3/−4 20b,in-sample,2B-5B,5-8,all,3190,4395,-0.038,-0.8,0.551,ATR,-0.14
+hole up,bracket +3/−4 20b,in-sample,2B-5B,5-8,bull,2417,3330,-0.078,-1.5,0.55,ATR,-0.4
+hole up,bracket +3/−4 20b,in-sample,2B-5B,5-8,bear,773,1065,0.089,1.0,0.552,ATR,0.68
+hole up,bracket +3/−4 20b,in-sample,>5B,all,all,54249,74744,0.025,2.2,0.579,ATR,0.09
+hole up,bracket +3/−4 20b,in-sample,>5B,all,bull,48163,66359,-0.026,-2.1,0.577,ATR,-0.08
+hole up,bracket +3/−4 20b,in-sample,>5B,all,bear,6086,8385,0.428,13.0,0.599,ATR,1.41
+hole up,bracket +3/−4 20b,in-sample,>5B,<3,all,37322,51422,0.026,1.9,0.576,ATR,0.1
+hole up,bracket +3/−4 20b,in-sample,>5B,<3,bull,34684,47788,-0.02,-1.4,0.575,ATR,-0.01
+hole up,bracket +3/−4 20b,in-sample,>5B,<3,bear,2638,3635,0.64,12.4,0.594,ATR,1.58
+hole up,bracket +3/−4 20b,in-sample,>5B,3-5,all,13004,17917,0.043,1.9,0.596,ATR,0.15
+hole up,bracket +3/−4 20b,in-sample,>5B,3-5,bull,10800,14880,-0.013,-0.5,0.594,ATR,-0.05
+hole up,bracket +3/−4 20b,in-sample,>5B,3-5,bear,2204,3037,0.319,5.8,0.606,ATR,1.15
+hole up,bracket +3/−4 20b,in-sample,>5B,5-8,all,3215,4430,-0.065,-1.5,0.553,ATR,-0.41
+hole up,bracket +3/−4 20b,in-sample,>5B,5-8,bull,2254,3106,-0.121,-2.2,0.545,ATR,-0.76
+hole up,bracket +3/−4 20b,in-sample,>5B,5-8,bear,961,1324,0.066,0.9,0.572,ATR,0.43
+hole up,bracket +3/−4 20b,holdout,all,all,all,41414,153701,-0.118,-8.9,0.534,ATR,-0.29
+hole up,bracket +3/−4 20b,holdout,all,all,bull,40008,148483,-0.114,-8.4,0.534,ATR,-0.3
+hole up,bracket +3/−4 20b,holdout,all,all,bear,1406,5218,-0.237,-3.2,0.546,ATR,-0.05
+hole up,bracket +3/−4 20b,holdout,all,<3,all,22800,84619,-0.173,-9.4,0.525,ATR,-0.43
+hole up,bracket +3/−4 20b,holdout,all,<3,bull,22417,83197,-0.153,-8.3,0.528,ATR,-0.38
+hole up,bracket +3/−4 20b,holdout,all,<3,bear,383,1421,-1.348,-9.0,0.345,ATR,-3.21
+hole up,bracket +3/−4 20b,holdout,all,3-5,all,13428,49836,-0.076,-3.3,0.536,ATR,-0.21
+hole up,bracket +3/−4 20b,holdout,all,3-5,bull,12789,47464,-0.087,-3.7,0.533,ATR,-0.25
+hole up,bracket +3/−4 20b,holdout,all,3-5,bear,639,2372,0.14,1.3,0.598,ATR,0.67
+hole up,bracket +3/−4 20b,holdout,all,5-8,all,4193,15562,0.006,0.1,0.576,ATR,0.01
+hole up,bracket +3/−4 20b,holdout,all,5-8,bull,3877,14389,-0.008,-0.2,0.57,ATR,-0.08
+hole up,bracket +3/−4 20b,holdout,all,5-8,bear,316,1173,0.176,1.2,0.649,ATR,1.16
+hole up,bracket +3/−4 20b,holdout,500M-2B,all,all,4569,16957,-0.281,-7.1,0.504,ATR,-0.8
+hole up,bracket +3/−4 20b,holdout,500M-2B,all,bull,4420,16404,-0.293,-7.3,0.501,ATR,-0.85
+hole up,bracket +3/−4 20b,holdout,500M-2B,<3,all,1638,6079,-0.403,-6.0,0.478,ATR,-0.97
+hole up,bracket +3/−4 20b,holdout,500M-2B,<3,bull,1622,6020,-0.41,-6.1,0.477,ATR,-0.97
+hole up,bracket +3/−4 20b,holdout,500M-2B,3-5,all,1803,6692,-0.342,-5.5,0.489,ATR,-1.22
+hole up,bracket +3/−4 20b,holdout,500M-2B,3-5,bull,1736,6443,-0.339,-5.3,0.487,ATR,-1.21
+hole up,bracket +3/−4 20b,holdout,500M-2B,5-8,all,883,3277,-0.045,-0.5,0.571,ATR,-0.42
+hole up,bracket +3/−4 20b,holdout,500M-2B,5-8,bull,835,3099,-0.081,-0.9,0.564,ATR,-0.66
+hole up,bracket +3/−4 20b,holdout,2B-5B,all,all,11793,43768,-0.291,-11.7,0.506,ATR,-0.79
+hole up,bracket +3/−4 20b,holdout,2B-5B,all,bull,11397,42298,-0.286,-11.3,0.506,ATR,-0.77
+hole up,bracket +3/−4 20b,holdout,2B-5B,all,bear,396,1470,-0.43,-3.2,0.515,ATR,-1.42
+hole up,bracket +3/−4 20b,holdout,2B-5B,<3,all,4950,18371,-0.489,-12.3,0.473,ATR,-1.21
+hole up,bracket +3/−4 20b,holdout,2B-5B,<3,bull,4888,18141,-0.474,-11.8,0.474,ATR,-1.16
+hole up,bracket +3/−4 20b,holdout,2B-5B,3-5,all,4808,17844,-0.183,-4.8,0.518,ATR,-0.58
+hole up,bracket +3/−4 20b,holdout,2B-5B,3-5,bull,4619,17143,-0.183,-4.7,0.518,ATR,-0.57
+hole up,bracket +3/−4 20b,holdout,2B-5B,3-5,bear,189,701,-0.185,-1.0,0.529,ATR,-0.69
+hole up,bracket +3/−4 20b,holdout,2B-5B,5-8,all,1583,5875,-0.14,-2.2,0.553,ATR,-0.87
+hole up,bracket +3/−4 20b,holdout,2B-5B,5-8,bull,1468,5448,-0.127,-1.9,0.553,ATR,-0.8
+hole up,bracket +3/−4 20b,holdout,>5B,all,all,24956,92620,-0.008,-0.5,0.553,ATR,0.04
+hole up,bracket +3/−4 20b,holdout,>5B,all,bull,24099,89440,-0.001,-0.1,0.553,ATR,0.03
+hole up,bracket +3/−4 20b,holdout,>5B,all,bear,857,3181,-0.212,-2.2,0.548,ATR,0.4
+hole up,bracket +3/−4 20b,holdout,>5B,<3,all,16128,59856,-0.055,-2.5,0.545,ATR,-0.14
+hole up,bracket +3/−4 20b,holdout,>5B,<3,bull,15825,58732,-0.029,-1.3,0.549,ATR,-0.08
+hole up,bracket +3/−4 20b,holdout,>5B,<3,bear,303,1125,-1.385,-8.2,0.33,ATR,-3.1
+hole up,bracket +3/−4 20b,holdout,>5B,3-5,all,6815,25293,0.07,2.2,0.562,ATR,0.32
+hole up,bracket +3/−4 20b,holdout,>5B,3-5,bull,6434,23879,0.051,1.5,0.557,ATR,0.24
+hole up,bracket +3/−4 20b,holdout,>5B,3-5,bear,381,1414,0.386,2.9,0.64,ATR,1.69
+hole up,bracket +3/−4 20b,holdout,>5B,5-8,all,1727,6409,0.165,2.7,0.599,ATR,1.04
+hole up,bracket +3/−4 20b,holdout,>5B,5-8,bull,1574,5842,0.142,2.2,0.589,ATR,0.9
+hole up,bracket +3/−4 20b,holdout,>5B,5-8,bear,153,568,0.408,1.9,0.706,ATR,2.55
+hole up,scalp +0.5/−3 10b,in-sample,all,all,all,84970,117072,-0.022,-5.9,0.814,ATR,-0.11
+hole up,scalp +0.5/−3 10b,in-sample,all,all,bull,74827,103097,-0.037,-9.1,0.814,ATR,-0.16
+hole up,scalp +0.5/−3 10b,in-sample,all,all,bear,10143,13975,0.084,7.6,0.82,ATR,0.23
+hole up,scalp +0.5/−3 10b,in-sample,all,<3,all,50784,69970,-0.003,-0.6,0.824,ATR,0.0
+hole up,scalp +0.5/−3 10b,in-sample,all,<3,bull,47065,64846,-0.017,-3.3,0.822,ATR,-0.03
+hole up,scalp +0.5/−3 10b,in-sample,all,<3,bear,3719,5124,0.177,9.8,0.842,ATR,0.42
+hole up,scalp +0.5/−3 10b,in-sample,all,3-5,all,24518,33781,-0.042,-6.0,0.809,ATR,-0.17
+hole up,scalp +0.5/−3 10b,in-sample,all,3-5,bull,20789,28643,-0.056,-7.4,0.808,ATR,-0.22
+hole up,scalp +0.5/−3 10b,in-sample,all,3-5,bear,3729,5138,0.038,2.0,0.813,ATR,0.13
+hole up,scalp +0.5/−3 10b,in-sample,all,5-8,all,7812,10763,-0.067,-5.3,0.785,ATR,-0.4
+hole up,scalp +0.5/−3 10b,in-sample,all,5-8,bull,5761,7938,-0.1,-6.7,0.781,ATR,-0.6
+hole up,scalp +0.5/−3 10b,in-sample,all,5-8,bear,2051,2826,0.024,1.0,0.796,ATR,0.17
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,all,all,8121,11189,-0.056,-4.5,0.8,ATR,-0.24
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,all,bull,7021,9674,-0.068,-5.1,0.8,ATR,-0.29
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,all,bear,1100,1516,0.024,0.7,0.803,ATR,0.03
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,<3,all,3305,4554,-0.03,-1.6,0.811,ATR,-0.07
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,<3,bull,3035,4182,-0.042,-2.1,0.81,ATR,-0.1
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,<3,bear,270,372,0.099,1.4,0.819,ATR,0.29
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,all,3054,4208,-0.078,-3.8,0.797,ATR,-0.3
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,bull,2658,3662,-0.092,-4.2,0.795,ATR,-0.36
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,3-5,bear,396,546,0.017,0.3,0.811,ATR,0.09
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,5-8,all,1396,1923,-0.04,-1.4,0.794,ATR,-0.25
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,5-8,bull,1080,1488,-0.06,-1.8,0.795,ATR,-0.38
+hole up,scalp +0.5/−3 10b,in-sample,500M-2B,5-8,bear,316,435,0.027,0.4,0.791,ATR,0.21
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,all,all,22374,30827,-0.026,-3.6,0.811,ATR,-0.14
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,all,bull,19441,26786,-0.042,-5.3,0.81,ATR,-0.2
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,all,bear,2933,4041,0.077,3.8,0.819,ATR,0.22
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,<3,all,9961,13724,0.004,0.3,0.823,ATR,0.02
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bull,9168,12632,-0.014,-1.2,0.821,ATR,-0.02
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,<3,bear,793,1093,0.206,5.4,0.847,ATR,0.47
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,all,8452,11645,-0.035,-3.0,0.813,ATR,-0.15
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bull,7328,10097,-0.045,-3.6,0.813,ATR,-0.19
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,3-5,bear,1124,1549,0.032,0.9,0.815,ATR,0.11
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,all,3190,4395,-0.089,-4.4,0.778,ATR,-0.53
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,bull,2417,3330,-0.127,-5.4,0.77,ATR,-0.75
+hole up,scalp +0.5/−3 10b,in-sample,2B-5B,5-8,bear,773,1065,0.03,0.8,0.802,ATR,0.17
+hole up,scalp +0.5/−3 10b,in-sample,>5B,all,all,54249,74744,-0.016,-3.4,0.818,ATR,-0.08
+hole up,scalp +0.5/−3 10b,in-sample,>5B,all,bull,48163,66359,-0.03,-6.0,0.817,ATR,-0.12
+hole up,scalp +0.5/−3 10b,in-sample,>5B,all,bear,6086,8385,0.098,7.0,0.823,ATR,0.27
+hole up,scalp +0.5/−3 10b,in-sample,>5B,<3,all,37322,51422,-0.002,-0.4,0.825,ATR,0.0
+hole up,scalp +0.5/−3 10b,in-sample,>5B,<3,bull,34684,47788,-0.016,-2.7,0.823,ATR,-0.03
+hole up,scalp +0.5/−3 10b,in-sample,>5B,<3,bear,2638,3635,0.177,8.3,0.843,ATR,0.41
+hole up,scalp +0.5/−3 10b,in-sample,>5B,3-5,all,13004,17917,-0.037,-3.9,0.809,ATR,-0.15
+hole up,scalp +0.5/−3 10b,in-sample,>5B,3-5,bull,10800,14880,-0.055,-5.2,0.808,ATR,-0.21
+hole up,scalp +0.5/−3 10b,in-sample,>5B,3-5,bear,2204,3037,0.047,1.9,0.813,ATR,0.15
+hole up,scalp +0.5/−3 10b,in-sample,>5B,5-8,all,3215,4430,-0.056,-2.9,0.788,ATR,-0.34
+hole up,scalp +0.5/−3 10b,in-sample,>5B,5-8,bull,2254,3106,-0.088,-3.7,0.786,ATR,-0.54
+hole up,scalp +0.5/−3 10b,in-sample,>5B,5-8,bear,961,1324,0.017,0.5,0.792,ATR,0.15
+hole up,scalp +0.5/−3 10b,holdout,all,all,all,41414,153701,0.0,0.1,0.824,ATR,-0.01
+hole up,scalp +0.5/−3 10b,holdout,all,all,bull,40008,148483,0.001,0.2,0.824,ATR,-0.01
+hole up,scalp +0.5/−3 10b,holdout,all,all,bear,1406,5218,-0.02,-0.7,0.832,ATR,-0.03
+hole up,scalp +0.5/−3 10b,holdout,all,<3,all,22800,84619,0.01,1.4,0.833,ATR,0.01
+hole up,scalp +0.5/−3 10b,holdout,all,<3,bull,22417,83197,0.013,1.8,0.833,ATR,0.02
+hole up,scalp +0.5/−3 10b,holdout,all,<3,bear,383,1421,-0.155,-2.4,0.812,ATR,-0.34
+hole up,scalp +0.5/−3 10b,holdout,all,3-5,all,13428,49836,-0.013,-1.3,0.811,ATR,-0.04
+hole up,scalp +0.5/−3 10b,holdout,all,3-5,bull,12789,47464,-0.017,-1.8,0.809,ATR,-0.06
+hole up,scalp +0.5/−3 10b,holdout,all,3-5,bear,639,2372,0.077,1.8,0.858,ATR,0.3
+hole up,scalp +0.5/−3 10b,holdout,all,5-8,all,4193,15562,-0.021,-1.3,0.813,ATR,-0.15
+hole up,scalp +0.5/−3 10b,holdout,all,5-8,bull,3877,14389,-0.017,-1.0,0.814,ATR,-0.13
+hole up,scalp +0.5/−3 10b,holdout,all,5-8,bear,316,1173,-0.069,-1.1,0.807,ATR,-0.42
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,all,all,4569,16957,-0.032,-2.0,0.81,ATR,-0.12
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,all,bull,4420,16404,-0.033,-2.0,0.809,ATR,-0.12
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,<3,all,1638,6079,-0.055,-2.0,0.803,ATR,-0.14
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,<3,bull,1622,6020,-0.056,-2.0,0.803,ATR,-0.14
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,3-5,all,1803,6692,-0.011,-0.4,0.82,ATR,-0.02
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,3-5,bull,1736,6443,-0.01,-0.4,0.82,ATR,-0.02
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,5-8,all,883,3277,-0.025,-0.7,0.803,ATR,-0.22
+hole up,scalp +0.5/−3 10b,holdout,500M-2B,5-8,bull,835,3099,-0.03,-0.8,0.8,ATR,-0.25
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,all,all,11793,43768,-0.018,-1.8,0.815,ATR,-0.04
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,all,bull,11397,42298,-0.014,-1.4,0.816,ATR,-0.03
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,all,bear,396,1470,-0.138,-2.2,0.785,ATR,-0.5
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,<3,all,4950,18371,-0.016,-1.0,0.827,ATR,-0.04
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,<3,bull,4888,18141,-0.012,-0.7,0.828,ATR,-0.03
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,3-5,all,4808,17844,-0.023,-1.5,0.805,ATR,-0.08
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,3-5,bull,4619,17143,-0.019,-1.2,0.805,ATR,-0.06
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,3-5,bear,189,701,-0.121,-1.3,0.799,ATR,-0.5
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,5-8,all,1583,5875,-0.043,-1.6,0.801,ATR,-0.28
+hole up,scalp +0.5/−3 10b,holdout,2B-5B,5-8,bull,1468,5448,-0.038,-1.4,0.804,ATR,-0.26
+hole up,scalp +0.5/−3 10b,holdout,>5B,all,all,24956,92620,0.015,2.2,0.831,ATR,0.02
+hole up,scalp +0.5/−3 10b,holdout,>5B,all,bull,24099,89440,0.014,2.1,0.83,ATR,0.02
+hole up,scalp +0.5/−3 10b,holdout,>5B,all,bear,857,3181,0.03,0.8,0.854,ATR,0.19
+hole up,scalp +0.5/−3 10b,holdout,>5B,<3,all,16128,59856,0.025,3.0,0.838,ATR,0.04
+hole up,scalp +0.5/−3 10b,holdout,>5B,<3,bull,15825,58732,0.028,3.3,0.838,ATR,0.05
+hole up,scalp +0.5/−3 10b,holdout,>5B,<3,bear,303,1125,-0.133,-1.8,0.818,ATR,-0.27
+hole up,scalp +0.5/−3 10b,holdout,>5B,3-5,all,6815,25293,-0.006,-0.5,0.814,ATR,-0.02
+hole up,scalp +0.5/−3 10b,holdout,>5B,3-5,bull,6434,23879,-0.018,-1.3,0.809,ATR,-0.07
+hole up,scalp +0.5/−3 10b,holdout,>5B,3-5,bear,381,1414,0.191,4.1,0.892,ATR,0.73
+hole up,scalp +0.5/−3 10b,holdout,>5B,5-8,all,1727,6409,0.001,0.0,0.83,ATR,0.01
+hole up,scalp +0.5/−3 10b,holdout,>5B,5-8,bull,1574,5842,0.008,0.3,0.83,ATR,0.06
+hole up,scalp +0.5/−3 10b,holdout,>5B,5-8,bear,153,568,-0.074,-0.8,0.824,ATR,-0.5
+hole up,close 10 bars,in-sample,all,all,all,84970,117072,-0.268,-8.3,0.52,%,-0.27
+hole up,close 10 bars,in-sample,all,all,bull,74827,103097,-0.283,-8.5,0.518,%,-0.28
+hole up,close 10 bars,in-sample,all,all,bear,10143,13975,-0.153,-1.4,0.534,%,-0.15
+hole up,close 10 bars,in-sample,all,<3,all,50784,69970,-0.128,-5.3,0.524,%,-0.13
+hole up,close 10 bars,in-sample,all,<3,bull,47065,64846,-0.222,-9.0,0.521,%,-0.22
+hole up,close 10 bars,in-sample,all,<3,bear,3719,5124,1.06,10.2,0.56,%,1.06
+hole up,close 10 bars,in-sample,all,3-5,all,24518,33781,-0.076,-1.3,0.526,%,-0.08
+hole up,close 10 bars,in-sample,all,3-5,bull,20789,28643,-0.182,-3.0,0.522,%,-0.18
+hole up,close 10 bars,in-sample,all,3-5,bear,3729,5138,0.519,3.2,0.543,%,0.52
+hole up,close 10 bars,in-sample,all,5-8,all,7812,10763,0.096,0.5,0.497,%,0.1
+hole up,close 10 bars,in-sample,all,5-8,bull,5761,7938,0.417,1.9,0.507,%,0.42
+hole up,close 10 bars,in-sample,all,5-8,bear,2051,2826,-0.808,-2.8,0.47,%,-0.81
+hole up,close 10 bars,in-sample,500M-2B,all,all,8121,11189,-0.732,-5.7,0.498,%,-0.73
+hole up,close 10 bars,in-sample,500M-2B,all,bull,7021,9674,-0.692,-5.2,0.498,%,-0.69
+hole up,close 10 bars,in-sample,500M-2B,all,bear,1100,1516,-0.988,-2.3,0.497,%,-0.99
+hole up,close 10 bars,in-sample,500M-2B,<3,all,3305,4554,-0.26,-2.4,0.499,%,-0.26
+hole up,close 10 bars,in-sample,500M-2B,<3,bull,3035,4182,-0.331,-2.9,0.5,%,-0.33
+hole up,close 10 bars,in-sample,500M-2B,<3,bear,270,372,0.536,1.3,0.496,%,0.54
+hole up,close 10 bars,in-sample,500M-2B,3-5,all,3054,4208,-0.555,-3.4,0.5,%,-0.55
+hole up,close 10 bars,in-sample,500M-2B,3-5,bull,2658,3662,-0.618,-3.6,0.498,%,-0.62
+hole up,close 10 bars,in-sample,500M-2B,3-5,bear,396,546,-0.129,-0.3,0.513,%,-0.13
+hole up,close 10 bars,in-sample,500M-2B,5-8,all,1396,1923,0.414,0.9,0.51,%,0.41
+hole up,close 10 bars,in-sample,500M-2B,5-8,bull,1080,1488,0.588,1.1,0.516,%,0.59
+hole up,close 10 bars,in-sample,500M-2B,5-8,bear,316,435,-0.183,-0.3,0.491,%,-0.18
+hole up,close 10 bars,in-sample,2B-5B,all,all,22374,30827,-0.469,-6.7,0.506,%,-0.47
+hole up,close 10 bars,in-sample,2B-5B,all,bull,19441,26786,-0.452,-6.2,0.503,%,-0.45
+hole up,close 10 bars,in-sample,2B-5B,all,bear,2933,4041,-0.58,-2.5,0.526,%,-0.58
+hole up,close 10 bars,in-sample,2B-5B,<3,all,9961,13724,-0.285,-4.9,0.502,%,-0.28
+hole up,close 10 bars,in-sample,2B-5B,<3,bull,9168,12632,-0.389,-6.5,0.497,%,-0.39
+hole up,close 10 bars,in-sample,2B-5B,<3,bear,793,1093,0.915,3.7,0.554,%,0.92
+hole up,close 10 bars,in-sample,2B-5B,3-5,all,8452,11645,-0.209,-2.1,0.52,%,-0.21
+hole up,close 10 bars,in-sample,2B-5B,3-5,bull,7328,10097,-0.3,-2.9,0.515,%,-0.3
+hole up,close 10 bars,in-sample,2B-5B,3-5,bear,1124,1549,0.384,1.2,0.553,%,0.38
+hole up,close 10 bars,in-sample,2B-5B,5-8,all,3190,4395,0.189,0.7,0.496,%,0.19
+hole up,close 10 bars,in-sample,2B-5B,5-8,bull,2417,3330,0.407,1.2,0.504,%,0.41
+hole up,close 10 bars,in-sample,2B-5B,5-8,bear,773,1065,-0.492,-1.0,0.472,%,-0.49
+hole up,close 10 bars,in-sample,>5B,all,all,54249,74744,-0.114,-3.1,0.529,%,-0.11
+hole up,close 10 bars,in-sample,>5B,all,bull,48163,66359,-0.155,-4.1,0.527,%,-0.15
+hole up,close 10 bars,in-sample,>5B,all,bear,6086,8385,0.204,1.6,0.544,%,0.2
+hole up,close 10 bars,in-sample,>5B,<3,all,37322,51422,-0.077,-2.9,0.531,%,-0.08
+hole up,close 10 bars,in-sample,>5B,<3,bull,34684,47788,-0.171,-6.2,0.528,%,-0.17
+hole up,close 10 bars,in-sample,>5B,<3,bear,2638,3635,1.156,9.8,0.569,%,1.16
+hole up,close 10 bars,in-sample,>5B,3-5,all,13004,17917,0.128,1.6,0.536,%,0.13
+hole up,close 10 bars,in-sample,>5B,3-5,bull,10800,14880,0.007,0.1,0.534,%,0.01
+hole up,close 10 bars,in-sample,>5B,3-5,bear,2204,3037,0.72,3.5,0.545,%,0.72
+hole up,close 10 bars,in-sample,>5B,5-8,all,3215,4430,-0.119,-0.4,0.493,%,-0.12
+hole up,close 10 bars,in-sample,>5B,5-8,bull,2254,3106,0.373,1.1,0.507,%,0.37
+hole up,close 10 bars,in-sample,>5B,5-8,bear,961,1324,-1.271,-3.2,0.461,%,-1.27
+hole up,close 10 bars,holdout,all,all,all,41414,153701,-0.177,-3.4,0.508,%,-0.18
+hole up,close 10 bars,holdout,all,all,bull,40008,148483,-0.214,-4.3,0.505,%,-0.21
+hole up,close 10 bars,holdout,all,all,bear,1406,5218,0.87,1.5,0.581,%,0.87
+hole up,close 10 bars,holdout,all,<3,all,22800,84619,-0.218,-5.4,0.505,%,-0.22
+hole up,close 10 bars,holdout,all,<3,bull,22417,83197,-0.211,-5.7,0.505,%,-0.21
+hole up,close 10 bars,holdout,all,<3,bear,383,1421,-0.632,-0.6,0.47,%,-0.63
+hole up,close 10 bars,holdout,all,3-5,all,13428,49836,-0.241,-3.0,0.506,%,-0.24
+hole up,close 10 bars,holdout,all,3-5,bull,12789,47464,-0.317,-3.8,0.5,%,-0.32
+hole up,close 10 bars,holdout,all,3-5,bear,639,2372,1.274,3.6,0.635,%,1.27
+hole up,close 10 bars,holdout,all,5-8,all,4193,15562,0.38,1.3,0.53,%,0.38
+hole up,close 10 bars,holdout,all,5-8,bull,3877,14389,0.387,1.3,0.525,%,0.39
+hole up,close 10 bars,holdout,all,5-8,bear,316,1173,0.29,0.4,0.601,%,0.29
+hole up,close 10 bars,holdout,500M-2B,all,all,4569,16957,-0.554,-2.8,0.48,%,-0.55
+hole up,close 10 bars,holdout,500M-2B,all,bull,4420,16404,-0.587,-3.0,0.478,%,-0.59
+hole up,close 10 bars,holdout,500M-2B,<3,all,1638,6079,-0.698,-4.9,0.46,%,-0.7
+hole up,close 10 bars,holdout,500M-2B,<3,bull,1622,6020,-0.717,-5.0,0.457,%,-0.72
+hole up,close 10 bars,holdout,500M-2B,3-5,all,1803,6692,-0.892,-4.0,0.468,%,-0.89
+hole up,close 10 bars,holdout,500M-2B,3-5,bull,1736,6443,-0.896,-3.9,0.466,%,-0.9
+hole up,close 10 bars,holdout,500M-2B,5-8,all,883,3277,-0.077,-0.1,0.532,%,-0.08
+hole up,close 10 bars,holdout,500M-2B,5-8,bull,835,3099,-0.03,-0.0,0.531,%,-0.03
+hole up,close 10 bars,holdout,2B-5B,all,all,11793,43768,-0.583,-5.2,0.484,%,-0.58
+hole up,close 10 bars,holdout,2B-5B,all,bull,11397,42298,-0.626,-6.3,0.482,%,-0.63
+hole up,close 10 bars,holdout,2B-5B,all,bear,396,1470,0.643,0.4,0.513,%,0.64
+hole up,close 10 bars,holdout,2B-5B,<3,all,4950,18371,-0.647,-5.7,0.463,%,-0.65
+hole up,close 10 bars,holdout,2B-5B,<3,bull,4888,18141,-0.69,-8.0,0.465,%,-0.69
+hole up,close 10 bars,holdout,2B-5B,3-5,all,4808,17844,-0.485,-3.7,0.493,%,-0.48
+hole up,close 10 bars,holdout,2B-5B,3-5,bull,4619,17143,-0.508,-3.8,0.491,%,-0.51
+hole up,close 10 bars,holdout,2B-5B,3-5,bear,189,701,0.073,0.1,0.561,%,0.07
+hole up,close 10 bars,holdout,2B-5B,5-8,all,1583,5875,-0.432,-1.0,0.509,%,-0.43
+hole up,close 10 bars,holdout,2B-5B,5-8,bull,1468,5448,-0.259,-0.6,0.507,%,-0.26
+hole up,close 10 bars,holdout,>5B,all,all,24956,92620,0.081,1.4,0.524,%,0.08
+hole up,close 10 bars,holdout,>5B,all,bull,24099,89440,0.048,0.8,0.521,%,0.05
+hole up,close 10 bars,holdout,>5B,all,bear,857,3181,1.032,3.0,0.615,%,1.03
+hole up,close 10 bars,holdout,>5B,<3,all,16128,59856,-0.038,-0.9,0.521,%,-0.04
+hole up,close 10 bars,holdout,>5B,<3,bull,15825,58732,-0.011,-0.3,0.522,%,-0.01
+hole up,close 10 bars,holdout,>5B,<3,bear,303,1125,-1.435,-3.5,0.482,%,-1.43
+hole up,close 10 bars,holdout,>5B,3-5,all,6815,25293,0.101,0.9,0.525,%,0.1
+hole up,close 10 bars,holdout,>5B,3-5,bull,6434,23879,-0.024,-0.2,0.516,%,-0.02
+hole up,close 10 bars,holdout,>5B,3-5,bear,381,1414,2.203,4.9,0.693,%,2.2
+hole up,close 10 bars,holdout,>5B,5-8,all,1727,6409,1.357,2.8,0.549,%,1.36
+hole up,close 10 bars,holdout,>5B,5-8,bull,1574,5842,1.211,2.4,0.537,%,1.21
+hole up,close 10 bars,holdout,>5B,5-8,bear,153,568,2.857,2.4,0.667,%,2.86
+hole up,hole down,in-sample,all,all,all,84970,117072,0.26,3.1,0.399,%,0.26
+hole up,hole down,in-sample,all,all,bull,74827,103097,0.316,3.6,0.399,%,0.32
+hole up,hole down,in-sample,all,all,bear,10143,13975,-0.16,-0.6,0.397,%,-0.16
+hole up,hole down,in-sample,all,<3,all,50784,69970,0.086,1.8,0.385,%,0.09
+hole up,hole down,in-sample,all,<3,bull,47065,64846,0.07,1.4,0.385,%,0.07
+hole up,hole down,in-sample,all,<3,bear,3719,5124,0.289,2.0,0.378,%,0.29
+hole up,hole down,in-sample,all,3-5,all,24518,33781,0.526,3.8,0.425,%,0.53
+hole up,hole down,in-sample,all,3-5,bull,20789,28643,0.548,3.5,0.429,%,0.55
+hole up,hole down,in-sample,all,3-5,bear,3729,5138,0.401,1.5,0.401,%,0.4
+hole up,hole down,in-sample,all,5-8,all,7812,10763,2.427,4.4,0.414,%,2.43
+hole up,hole down,in-sample,all,5-8,bull,5761,7938,3.147,4.6,0.417,%,3.15
+hole up,hole down,in-sample,all,5-8,bear,2051,2826,0.402,0.5,0.406,%,0.4
+hole up,hole down,in-sample,500M-2B,all,all,8121,11189,-0.416,-1.3,0.375,%,-0.42
+hole up,hole down,in-sample,500M-2B,all,bull,7021,9674,-0.169,-0.5,0.381,%,-0.17
+hole up,hole down,in-sample,500M-2B,all,bear,1100,1516,-1.993,-1.8,0.335,%,-1.99
+hole up,hole down,in-sample,500M-2B,<3,all,3305,4554,-0.676,-3.4,0.352,%,-0.68
+hole up,hole down,in-sample,500M-2B,<3,bull,3035,4182,-0.653,-3.0,0.354,%,-0.65
+hole up,hole down,in-sample,500M-2B,<3,bear,270,372,-0.939,-1.9,0.337,%,-0.94
+hole up,hole down,in-sample,500M-2B,3-5,all,3054,4208,0.279,0.6,0.396,%,0.28
+hole up,hole down,in-sample,500M-2B,3-5,bull,2658,3662,0.55,1.1,0.404,%,0.55
+hole up,hole down,in-sample,500M-2B,3-5,bear,396,546,-1.54,-2.2,0.343,%,-1.54
+hole up,hole down,in-sample,500M-2B,5-8,all,1396,1923,3.455,2.8,0.408,%,3.46
+hole up,hole down,in-sample,500M-2B,5-8,bull,1080,1488,4.305,3.0,0.428,%,4.31
+hole up,hole down,in-sample,500M-2B,5-8,bear,316,435,0.551,0.2,0.339,%,0.55
+hole up,hole down,in-sample,2B-5B,all,all,22374,30827,-0.094,-0.5,0.382,%,-0.09
+hole up,hole down,in-sample,2B-5B,all,bull,19441,26786,0.073,0.4,0.383,%,0.07
+hole up,hole down,in-sample,2B-5B,all,bear,2933,4041,-1.202,-2.3,0.374,%,-1.2
+hole up,hole down,in-sample,2B-5B,<3,all,9961,13724,-0.738,-6.8,0.351,%,-0.74
+hole up,hole down,in-sample,2B-5B,<3,bull,9168,12632,-0.683,-6.0,0.352,%,-0.68
+hole up,hole down,in-sample,2B-5B,<3,bear,793,1093,-1.375,-3.7,0.334,%,-1.37
+hole up,hole down,in-sample,2B-5B,3-5,all,8452,11645,0.207,0.9,0.412,%,0.21
+hole up,hole down,in-sample,2B-5B,3-5,bull,7328,10097,0.303,1.2,0.418,%,0.3
+hole up,hole down,in-sample,2B-5B,3-5,bear,1124,1549,-0.422,-1.0,0.375,%,-0.42
+hole up,hole down,in-sample,2B-5B,5-8,all,3190,4395,4.049,4.2,0.407,%,4.05
+hole up,hole down,in-sample,2B-5B,5-8,bull,2417,3330,5.432,4.5,0.411,%,5.43
+hole up,hole down,in-sample,2B-5B,5-8,bear,773,1065,-0.274,-0.3,0.392,%,-0.27
+hole up,hole down,in-sample,>5B,all,all,54249,74744,0.501,5.4,0.409,%,0.5
+hole up,hole down,in-sample,>5B,all,bull,48163,66359,0.48,5.0,0.407,%,0.48
+hole up,hole down,in-sample,>5B,all,bear,6086,8385,0.672,1.9,0.418,%,0.67
+hole up,hole down,in-sample,>5B,<3,all,37322,51422,0.369,6.6,0.396,%,0.37
+hole up,hole down,in-sample,>5B,<3,bull,34684,47788,0.328,5.5,0.396,%,0.33
+hole up,hole down,in-sample,>5B,<3,bear,2638,3635,0.918,5.5,0.395,%,0.92
+hole up,hole down,in-sample,>5B,3-5,all,13004,17917,0.795,4.2,0.439,%,0.79
+hole up,hole down,in-sample,>5B,3-5,bull,10800,14880,0.718,3.3,0.442,%,0.72
+hole up,hole down,in-sample,>5B,3-5,bear,2204,3037,1.17,3.2,0.424,%,1.17
+hole up,hole down,in-sample,>5B,5-8,all,3215,4430,0.396,0.5,0.426,%,0.4
+hole up,hole down,in-sample,>5B,5-8,bull,2254,3106,0.185,0.2,0.421,%,0.19
+hole up,hole down,in-sample,>5B,5-8,bear,961,1324,0.889,0.7,0.439,%,0.89
+hole up,hole down,holdout,all,all,all,41414,153701,0.595,2.0,0.356,%,0.59
+hole up,hole down,holdout,all,all,bull,40008,148483,0.5,1.7,0.354,%,0.5
+hole up,hole down,holdout,all,all,bear,1406,5218,3.298,3.1,0.427,%,3.3
+hole up,hole down,holdout,all,<3,all,22800,84619,-0.167,-2.1,0.341,%,-0.17
+hole up,hole down,holdout,all,<3,bull,22417,83197,-0.158,-2.0,0.343,%,-0.16
+hole up,hole down,holdout,all,<3,bear,383,1421,-0.73,-0.6,0.23,%,-0.73
+hole up,hole down,holdout,all,3-5,all,13428,49836,0.505,2.6,0.363,%,0.51
+hole up,hole down,holdout,all,3-5,bull,12789,47464,0.399,2.0,0.356,%,0.4
+hole up,hole down,holdout,all,3-5,bear,639,2372,2.63,3.2,0.493,%,2.63
+hole up,hole down,holdout,all,5-8,all,4193,15562,3.348,4.3,0.41,%,3.35
+hole up,hole down,holdout,all,5-8,bull,3877,14389,2.844,3.5,0.402,%,2.84
+hole up,hole down,holdout,all,5-8,bear,316,1173,9.52,3.2,0.516,%,9.52
+hole up,hole down,holdout,500M-2B,all,all,4569,16957,-0.594,-1.0,0.323,%,-0.59
+hole up,hole down,holdout,500M-2B,all,bull,4420,16404,-0.923,-1.6,0.319,%,-0.92
+hole up,hole down,holdout,500M-2B,<3,all,1638,6079,-1.259,-5.2,0.299,%,-1.26
+hole up,hole down,holdout,500M-2B,<3,bull,1622,6020,-1.268,-5.2,0.3,%,-1.27
+hole up,hole down,holdout,500M-2B,3-5,all,1803,6692,-1.978,-4.1,0.3,%,-1.98
+hole up,hole down,holdout,500M-2B,3-5,bull,1736,6443,-2.133,-4.4,0.296,%,-2.13
+hole up,hole down,holdout,500M-2B,5-8,all,883,3277,0.863,0.5,0.386,%,0.86
+hole up,hole down,holdout,500M-2B,5-8,bull,835,3099,-0.268,-0.2,0.38,%,-0.27
+hole up,hole down,holdout,2B-5B,all,all,11793,43768,-0.361,-0.4,0.325,%,-0.36
+hole up,hole down,holdout,2B-5B,all,bull,11397,42298,-0.408,-0.4,0.322,%,-0.41
+hole up,hole down,holdout,2B-5B,all,bear,396,1470,0.995,0.4,0.407,%,0.99
+hole up,hole down,holdout,2B-5B,<3,all,4950,18371,-1.624,-10.0,0.28,%,-1.62
+hole up,hole down,holdout,2B-5B,<3,bull,4888,18141,-1.694,-11.8,0.281,%,-1.69
+hole up,hole down,holdout,2B-5B,3-5,all,4808,17844,-0.786,-2.9,0.341,%,-0.79
+hole up,hole down,holdout,2B-5B,3-5,bull,4619,17143,-0.857,-3.1,0.336,%,-0.86
+hole up,hole down,holdout,2B-5B,3-5,bear,189,701,0.952,0.7,0.476,%,0.95
+hole up,hole down,holdout,2B-5B,5-8,all,1583,5875,0.774,0.7,0.394,%,0.77
+hole up,hole down,holdout,2B-5B,5-8,bull,1468,5448,0.766,0.7,0.393,%,0.77
+hole up,hole down,holdout,>5B,all,all,24956,92620,1.279,8.5,0.378,%,1.28
+hole up,hole down,holdout,>5B,all,bull,24099,89440,1.209,8.0,0.376,%,1.21
+hole up,hole down,holdout,>5B,all,bear,857,3181,3.264,3.3,0.433,%,3.26
+hole up,hole down,holdout,>5B,<3,all,16128,59856,0.39,3.9,0.364,%,0.39
+hole up,hole down,holdout,>5B,<3,bull,15825,58732,0.432,4.3,0.367,%,0.43
+hole up,hole down,holdout,>5B,<3,bear,303,1125,-1.81,-1.9,0.231,%,-1.81
+hole up,hole down,holdout,>5B,3-5,all,6815,25293,2.067,6.9,0.394,%,2.07
+hole up,hole down,holdout,>5B,3-5,bull,6434,23879,1.984,6.4,0.387,%,1.98
+hole up,hole down,holdout,>5B,3-5,bear,381,1414,3.46,3.3,0.512,%,3.46
+hole up,hole down,holdout,>5B,5-8,all,1727,6409,6.977,5.2,0.438,%,6.98
+hole up,hole down,holdout,>5B,5-8,bull,1574,5842,6.434,4.6,0.422,%,6.43
+hole up,hole down,holdout,>5B,5-8,bear,153,568,12.561,3.0,0.608,%,12.56
