@@ -1,0 +1,405 @@
+{
+ "id": "PUB;0f80bcf05d544d4c98fde06faab1c976",
+ "name": "Self-Aware Trend System [WillyAlgoTrader]",
+ "likes": 18460,
+ "version": 6,
+ "alerts": [
+  {
+   "condition": "enableAlertsInput and (confirmedBuy)",
+   "title": "🟢 Buy Signal",
+   "message": "🟢 BUY on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.0,
+    "enter_short": 0.0,
+    "enter_long": 1.0,
+    "exit_short": 0.0,
+    "exit_long": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (confirmedSell)",
+   "title": "🔴 Sell Signal",
+   "message": "🔴 SELL on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.01,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "enter_long": 0.0,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (buyScoreAPlus)",
+   "title": "🟢 Buy Signal (Score A+ only, ≥80)",
+   "message": "🟢 BUY A+ (score) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_long": 1.0,
+    "exit_long": 0.0,
+    "none": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (sellScoreAPlus)",
+   "title": "🔴 Sell Signal (Score A+ only, ≥80)",
+   "message": "🔴 SELL A+ (score) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.01,
+    "enter_short": 0.0,
+    "enter_long": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (buyScoreAOrBetter)",
+   "title": "🟢 Buy Signal (Score A+ and A, ≥60)",
+   "message": "🟢 BUY A+/A (score) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "none": 0.0,
+    "exit_long": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 1.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (sellScoreAOrBetter)",
+   "title": "🔴 Sell Signal (Score A+ and A, ≥60)",
+   "message": "🔴 SELL A+/A (score) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 0.0,
+    "exit_long": 1.0,
+    "enter_short": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (buyScoreBOrBetter)",
+   "title": "🟢 Buy Signal (Score A+/A/B, ≥40)",
+   "message": "🟢 BUY A+/A/B (score) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_long": 1.0,
+    "exit_short": 0.0,
+    "none": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (sellScoreBOrBetter)",
+   "title": "🔴 Sell Signal (Score A+/A/B, ≥40)",
+   "message": "🔴 SELL A+/A/B (score) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_long": 1.0,
+    "none": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (buyTqiAPlus)",
+   "title": "🟢 Buy Signal (TQI A+ only, ≥0.70)",
+   "message": "🟢 BUY A+ (TQI) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "none": 0.0,
+    "exit_long": 0.0,
+    "enter_short": 0.0,
+    "enter_long": 1.0,
+    "exit_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (sellTqiAPlus)",
+   "title": "🔴 Sell Signal (TQI A+ only, ≥0.70)",
+   "message": "🔴 SELL A+ (TQI) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "enter_long": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.99,
+    "none": 0.01
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (buyTqiAOrBetter)",
+   "title": "🟢 Buy Signal (TQI A+ and A, ≥0.50)",
+   "message": "🟢 BUY A+/A (TQI) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_long": 1.0,
+    "none": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (sellTqiAOrBetter)",
+   "title": "🔴 Sell Signal (TQI A+ and A, ≥0.50)",
+   "message": "🔴 SELL A+/A (TQI) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.01,
+    "enter_long": 0.0,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (buyTqiBOrBetter)",
+   "title": "🟢 Buy Signal (TQI A+/A/B, ≥0.35)",
+   "message": "🟢 BUY A+/A/B (TQI) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.0,
+    "none": 0.0,
+    "enter_long": 1.0,
+    "enter_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (sellTqiBOrBetter)",
+   "title": "🔴 Sell Signal (TQI A+/A/B, ≥0.35)",
+   "message": "🔴 SELL A+/A/B (TQI) on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 1.0,
+    "enter_short": 0.0,
+    "none": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (tp1Event)",
+   "title": "🎯 TP1 Hit",
+   "message": "🎯 TP1 HIT on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.86,
+   "probabilities": {
+    "exit_long": 0.89,
+    "enter_short": 0.0,
+    "none": 0.1,
+    "exit_short": 0.0,
+    "enter_long": 0.01
+   },
+   "direction": "no_direction",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (tp2Event)",
+   "title": "🎯 TP2 Hit",
+   "message": "🎯 TP2 HIT on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.91,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.93,
+    "enter_short": 0.0,
+    "none": 0.06,
+    "enter_long": 0.01
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "enableAlertsInput and (tp3Event)",
+   "title": "🏆 TP3 Hit",
+   "message": "🏆 TP3 HIT on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.92,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.9299999999999999,
+    "enter_long": 0.01,
+    "none": 0.06,
+    "enter_short": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "enableAlertsInput and (slEvent)",
+   "title": "🛑 SL Hit",
+   "message": "🛑 SL HIT on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.92,
+   "probabilities": {
+    "none": 0.05,
+    "exit_short": 0.01,
+    "exit_long": 0.94,
+    "enter_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (timeoutFlag)",
+   "title": "⏱ Timeout Exit",
+   "message": "⏱ TIMEOUT EXIT on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.95,
+   "probabilities": {
+    "none": 0.04,
+    "exit_long": 0.96,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "enableAlertsInput and (flipExitFlag)",
+   "title": "🔁 Flip Exit",
+   "message": "🔁 FLIP EXIT on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.94,
+   "probabilities": {
+    "none": 0.04,
+    "enter_long": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.96
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.72
+  },
+  {
+   "condition": "enableAlertsInput and (confirmedCharFlip)",
+   "title": "🔄 Character-Flip",
+   "message": "🔄 CHAR-FLIP on {{ticker}} | TF: {{interval}} | Price: {{close}} (TQI collapsed)",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "exit_long",
+   "confidence": 0.71,
+   "probabilities": {
+    "enter_long": 0.03,
+    "enter_short": 0.0,
+    "none": 0.19,
+    "exit_long": 0.78,
+    "exit_short": 0.0
+   },
+   "direction": "either_side",
+   "direction_confidence": 0.59
+  },
+  {
+   "condition": "enableAlertsInput and (confirmedBuy or confirmedSell)",
+   "title": "⚡ Any Signal (Buy or Sell)",
+   "message": "⚡ Signal on {{ticker}} | TF: {{interval}} | Price: {{close}}",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.85,
+   "probabilities": {
+    "none": 0.88,
+    "exit_long": 0.03,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 0.09
+   },
+   "direction": "either_side",
+   "direction_confidence": 1.0
+  }
+ ],
+ "metrics_name_collisions": []
+}

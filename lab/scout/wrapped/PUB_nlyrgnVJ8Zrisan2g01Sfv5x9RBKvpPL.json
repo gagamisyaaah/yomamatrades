@@ -1,0 +1,63 @@
+{
+ "id": "PUB;nlyrgnVJ8Zrisan2g01Sfv5x9RBKvpPL",
+ "name": "SuperTrend [everget]",
+ "likes": 13405,
+ "version": 6,
+ "alerts": [
+  {
+   "condition": "dir != dir[1]",
+   "title": "SuperTrend Direction Change",
+   "message": "SuperTrend has changed direction, {{exchange}}:{{ticker}}",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "exit_long",
+   "confidence": 0.41,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_long": 0.53,
+    "enter_long": 0.05,
+    "exit_short": 0.0,
+    "none": 0.42
+   },
+   "direction": "either_side",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "buySignal",
+   "title": "SuperTrend Buy",
+   "message": "SuperTrend Buy, {{exchange}}:{{ticker}}",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "none": 0.0,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0,
+    "enter_long": 1.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "sellSignal",
+   "title": "SuperTrend Sell",
+   "message": "SuperTrend Sell, {{exchange}}:{{ticker}}",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 1.0,
+    "enter_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  }
+ ],
+ "metrics_name_collisions": []
+}

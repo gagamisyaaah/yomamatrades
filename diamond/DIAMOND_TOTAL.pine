@@ -4,9 +4,12 @@
 // diamonds) · Mountain (0–4) · plus Voila levels (gold band, purple pivot resistance) and the Bubble meter.
 // A diamond only COUNTS once it is confirmed (its bar's high closes over within 3 bars), else it is invalidated.
 // Readings (input "Entry") — long-only, entry at the NEXT open:
-//   "Strict"  = 3 confirmed blue diamonds + Mountain 4 + close above gold + Bubble not overheated
-//               (out-of-sample on 94 tickers: +5.8 % avg per trade with the flip exit vs +3.0 % random; PF 2.1; rare)
-//   "2 of 3"  = 2 confirmed blue + Mountain ≥ 3 + above gold (5× more signals, thinner edge)
+//   "Strict"  = 3 confirmed blue diamonds + Mountain 4 + close above gold + Bubble not overheated  ← DEFAULT
+//               Calibration sweep (54 settings, 94 tickers, out-of-sample 2024+, flip exit, random entries = +3.0 %):
+//               confirmation window 5 bars → +8.9 % avg per trade, PF 2.7, ~2.8 signals/week (402 trades; the robust
+//               pick, now the default); window 2 + strict Mountain → +10.5–11.2 %, PF > 3, but ~1.2/week.
+//               Wave travel 10 keeps the diamonds on the founders' own bars (IREN, SLNH, ONDS anchors) — do not lower it.
+//   "2 of 3"  = 2 confirmed blue + Mountain ≥ 3 + above gold — ~3.4 % per trade, barely above random; kept for reference
 //   "Mountain maxed + above gold"
 // Exit: "Flip" = 2 pink confirmed OR Mountain ≤ 2 OR a close below the gold band · "Flip or overheated" (also
 //   > 2 ATR above gold while bubble > 8.7) · "Chandelier 3 ATR".  Alerts: DIAMOND go / out / armed.
@@ -14,7 +17,9 @@ indicator("DIAMOND TOTAL", "DIAMOND", overlay=true, max_labels_count=100)
 
 entryMode = input.string("Strict", "Entry", options=["Strict", "2 of 3", "Mountain maxed + above gold"])
 exitMode  = input.string("Flip", "Exit", options=["Flip", "Flip or overheated", "Chandelier 3 ATR"])
-minMove = input.float(10.0, "Min wave travel between diamonds", minval=0)
+minMove = input.float(10.0, "Min wave travel between diamonds (10 = founders' bars)", minval=0)
+confirmBars = input.int(5, "Diamond confirmation window (bars to close through the diamond bar)", minval=1, maxval=10)
+mtnStrict = input.bool(false, "Strict Mountain (hype & flow > 10, maxed only if it persisted 3 bars) — fewer, bigger trades")
 showTbl = input.bool(true, "Panel table")
 
 atr14 = ta.atr(14)
@@ -64,7 +69,7 @@ confirmed(bool b, bool p) =>
         ok := true
     if st == -1 and not ok and close < lvl
         ok := true
-    if not ok and since > 3
+    if not ok and since > confirmBars
         st := 0
     ok ? st : 0
 cB = confirmed(bravoBlue, bravoPink)
@@ -72,7 +77,11 @@ cE = confirmed(echoBlue, echoPink)
 cT = confirmed(tangoBlue, tangoPink)
 nBlueC = (cB == 1 ? 1 : 0) + (cE == 1 ? 1 : 0) + (cT == 1 ? 1 : 0)
 nPinkC = (cB == -1 ? 1 : 0) + (cE == -1 ? 1 : 0) + (cT == -1 ? 1 : 0)
-mountain = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (e1 > e3 and e1 > e1[1] ? 1 : 0)
+bandUp = e1 > e3 and e1 > e1[1]
+mtnA = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (bandUp ? 1 : 0)
+mtnB = (hype > 10 ? 1 : 0) + (flow > 10 ? 1 : 0) + (close > goldTop ? 1 : 0) + (bandUp ? 1 : 0)
+mtnPersist = mtnB >= 2 and mtnB[1] >= 2 and mtnB[2] >= 2
+mountain = mtnStrict ? (mtnB == 4 and not mtnPersist ? 3 : mtnB) : mtnA
 
 phD = ta.pivothigh(high, 5, 5)
 var float purple = na

@@ -1,0 +1,24 @@
+{
+ "terms": {
+  "breakout": 100,
+  "squeeze": 100,
+  "volatility contraction": 8,
+  "momentum": 100,
+  "trend": 100,
+  "reversal": 99,
+  "volume": 100,
+  "smart money": 100,
+  "whale": 100,
+  "chip distribution": 1,
+  "diamond": 69,
+  "swing": 100,
+  "buy sell signal": 100,
+  "supertrend": 100,
+  "trend following": 100
+ },
+ "cards_found": 1277,
+ "unique": 1217,
+ "open_source": 979,
+ "top_targets": 60,
+ "fetched": 60
+}

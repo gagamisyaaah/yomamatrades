@@ -45,14 +45,3 @@ commission, orders on close.
 `legend-delete-action`, `legend-settings-action`) with text fallbacks. If a step fails, run
 `python3.12 -c "import tvh; tvh.connect(); tvh.open_chart(); print(tvh.probe())"` and paste the output —
 selectors are adjusted in one place.
-
-## `mine/` — the data-mining side (no browser needed)
-
-| step | command | output |
-|---|---|---|
-| prices | `python3.12 -m mine.data --universe core` (or `broad` = + S&P 500 + NASDAQ-100) | `mine/cache/<TICKER>.csv` (Nasdaq history API; Yahoo with cookie+crumb as fallback) |
-| panel states | `python3.12 -m mine.features` | one row per ticker-day: every Dragon and Diamond panel reading (`mine/dragon.py`, `mine/diamond.py` = the Pine formulas in pandas) + forward outcomes |
-| the readings as written | `python3.12 -m mine.evaluate` | `evaluate.md` / `evaluate.csv` / `trades_ledger.csv.gz`: event backtests of each total-signal reading × 5 exits, in/out-of-sample, vs random-entry controls |
-| what the panels showed at profit points | `python3.12 -m mine.mine` | `report.md` / `rules.json`: within-ticker lift of every state for +3 ATR spikes, −3 ATR spikes and tops-while-long; depth-4 trees → conjunction rules scored out-of-sample |
-
-Rule of the lab: a reading only counts if it beats the random-entry control **with the same exit**.

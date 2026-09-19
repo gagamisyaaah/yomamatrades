@@ -10,6 +10,8 @@ startDate = input.time(timestamp("2018-01-01T00:00:00+0000"), "Backtest from")
 inWin = time >= startDate
 exitMode = input.string("Flip or chandelier", "Exit", options=["Signal flip", "Chandelier 3 ATR", "Target 2R stop 1R", "Time stop 5 bars", "Flip or chandelier"])
 minMove = input.float(10.0, "Min wave travel between diamonds", minval=0)
+confirmBars = input.int(3, "Confirm window", minval=1, maxval=10)
+mtnStrict = input.bool(false, "Strict Mountain")
 
 // waves (same defaults as the indicators)
 signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
@@ -52,7 +54,11 @@ stT = lastState(tangoBlue, tangoPink)
 nBlue = (stB == 1 ? 1 : 0) + (stE == 1 ? 1 : 0) + (stT == 1 ? 1 : 0)
 nPink = (stB == -1 ? 1 : 0) + (stE == -1 ? 1 : 0) + (stT == -1 ? 1 : 0)
 
-score = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (e1 > e3 and e1 > e1[1] ? 1 : 0)
+bandUp = e1 > e3 and e1 > e1[1]
+mtnA = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (bandUp ? 1 : 0)
+mtnB = (hype > 10 ? 1 : 0) + (flow > 10 ? 1 : 0) + (close > goldTop ? 1 : 0) + (bandUp ? 1 : 0)
+mtnPersist = mtnB >= 2 and mtnB[1] >= 2 and mtnB[2] >= 2
+score = mtnStrict ? (mtnB == 4 and not mtnPersist ? 3 : mtnB) : mtnA
 
 // ── Diamond total: the four panels read together, the founders' way ──
 // Diamonds count only once "confirmed on the next candle" (the diamond bar's high/low breaks within 3 bars,
@@ -74,7 +80,7 @@ confirmed(bool b, bool p) =>
         ok := true
     if st == -1 and not ok and close < lvl
         ok := true
-    if not ok and since > 3
+    if not ok and since > confirmBars
         st := 0
     ok ? st : 0
 cB = confirmed(bravoBlue, bravoPink)

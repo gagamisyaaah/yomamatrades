@@ -63,9 +63,24 @@ def main():
         import typesafe_judge as judge  # noqa
 
     tvh.connect()
-    new_tab("https://x.com/home")
+    from browser_harness.helpers import activate_tab, current_tab, cdp
+    t = new_tab("https://x.com/home")
+    tid = t.get("targetId") if isinstance(t, dict) else (current_tab() or "")
+    if isinstance(tid, dict):
+        tid = tid.get("targetId", "")
+    if tid:
+        activate_tab(tid)                       # X only renders and paginates the feed in a visible tab
+    tvh.focus_emulation()
     wait_for_load(30)
     posts: dict[str, dict] = {}
+    prev = HERE / "x_posts.jsonl"
+    if prev.exists():                                      # merge with earlier passes (timeline + keyword searches)
+        for line in prev.read_text(encoding="utf-8").splitlines():
+            try:
+                p0 = json.loads(line)
+                posts[p0["url"]] = p0
+            except Exception:
+                pass
     for acct in args.accounts:
         url = f"https://x.com/search?q={args.query.replace(' ', '%20')}%20from%3A{acct}&src=typed_query&f=live" if args.query else f"https://x.com/{acct}"
         got = harvest(url, args.scrolls)
@@ -74,6 +89,11 @@ def main():
         posts.update(got)
         print(f"{acct}: {len(got)} posts")
 
+    if tid:
+        try:
+            cdp("Target.closeTarget", targetId=tid)   # leave the founder's browser as we found it
+        except Exception:
+            pass
     raw = HERE / "x_posts.jsonl"
     with raw.open("w", encoding="utf-8") as fh:
         for p in posts.values():
@@ -82,11 +102,12 @@ def main():
     out = HERE / "x_claims.csv"
     with out.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["account", "date", "url", "tickers", "numbers", "signal", "signal_p", "has_numbers", "conviction", "text"])
+        w.writerow(["account", "date", "url", "tickers", "numbers", "signal", "signal_p", "direction", "direction_p", "has_numbers", "conviction", "text"])
         for p in posts.values():
             tickers = " ".join(sorted(set(TICK.findall(p["text"]))))
             numbers = " ".join(NUM.findall(p["text"])[:12])
             sig = sp = hn = conv = ""
+            a = {}
             if judge and (tickers or numbers):
                 try:
                     a = judge.extract_claim(p["account"], p["text"])
@@ -96,7 +117,7 @@ def main():
                     conv = round(a["conviction"]["score"], 2)
                 except Exception as e:
                     sig = f"err:{e}"[:40]
-            w.writerow([p["account"], p["date"], p["url"], tickers, numbers, sig, sp, hn, conv, p["text"].replace("\n", " ")[:500]])
+            w.writerow([p["account"], p["date"], p["url"], tickers, numbers, sig, sp, a.get("direction", {}).get("choice", ""), round(a.get("direction", {}).get("confidence", 0) or 0, 2), hn, conv, p["text"].replace("\n", " ")[:500]])
     print(f"wrote {raw} and {out} ({len(posts)} posts)")
 
 

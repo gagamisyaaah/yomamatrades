@@ -4,16 +4,34 @@
 // 3 Volatility Hole (broke up / in force / broke down)  4 CD momentum bar (POC of the 120-bar cost distribution)
 // 5 TE main line  6 MCDX whales / retail  7 MACD + RSI×3.
 // Readings (input "Entry") — all long-only, entry at the NEXT open:
-//   "Hole broke up + whales ≥ 50 + TE up"  ← the reading that beat random entries out-of-sample on 94 tickers
-//                                            (+7.7 % avg per trade with the flip exit vs +3.0 % random; PF 2.2)
-//   "All 7 panels", "5 of 7", "Red candle confirmed + ribbon + whales"
-// Exit (input "Exit"): "Flip" = the reading's own bearish flip · "Flip or overheated" = also leave when price is
-//   > 2 ATR above the gold band while the bubble meter is > 8.7 (mined top signature) · "Chandelier 3 ATR".
+//   "Hole break + Diamond vetoes (C)"  ← DEFAULT. Hole BROKE UP + whales ≥ 50 % + TE line rising, vetoed when the
+//        Diamond bubble is hot, Mountain < 3 or price is inside/below the gold band. Out-of-sample on 94 tickers
+//        with the "Hole broke down" exit: +11.8 % avg per trade, PF 2.5, ~11 signals/week (random entries: +2.8 %).
+//        Tiers (inputs): "Fresh break only" (≤ 3 bars since the break) → +12.9 %; + "Min panels" 6 → +14.2 %;
+//        "Min ATR %" 5 (volatile names only) → +17.6 %. Fewer signals each step (~6/week).
+//   "Hole broke up + whales ≥ 50 + TE up" (the un-vetoed reading), "All 7 panels", "5 of 7",
+//   "Red candle confirmed + ribbon + whales".
+// Exit (input "Exit"): "Hole broke down" ← DEFAULT (two closes below the hole's lower boundary; the TE line turning
+//   down exited too early: +7.7 → +10.3 %) · "Flip" = the reading's own bearish flip · "Flip or overheated" ·
+//   "Chandelier 3 ATR".
+// Market guard (input, default ON): no entries while the S&P 500 is below its 200-day line, and leave when it crosses
+//   below. Per-year test on 94 tickers: 2022 went from 237 trades at −9.6 % to 52 at −4.3 %, 2018 from −2.6 % to
+//   −0.2 %, while 2024+ stayed at +11 %. The reading is a bull-regime breakout system; the guard is what keeps it
+//   out of 2022-type years.
+// Exit frontier (same signals, 94 tickers, in AND out of sample): "Scalp +0.5 / −3 ATR" = 85–90 % of trades end
+//   profitable, about +0.1 ATR (≈ +0.5 %) per trade — a volume business; "Bracket +2 / −4 ATR" = 64–65 % winners at
+//   ≈ +0.3 ATR (+1.5 %) per trade; "Hole broke down" = 41 % winners at ≈ +2 ATR (+11 %) per trade. Pick the win rate you
+//   can live with; the panels set the edge, the exit sets the win rate. Use the scalp only with Tier E + ATR ≥ 5.
 // Alerts: DRAGON go / DRAGON out / DRAGON armed (5+ panels).  Table: every panel's state right now.
 indicator("DRAGON TOTAL", "DRAGON", overlay=true, max_bars_back=1500, max_labels_count=100)
 
-entryMode = input.string("Hole broke up + whales ≥ 50 + TE up", "Entry", options=["Hole broke up + whales ≥ 50 + TE up", "All 7 panels", "5 of 7", "Red candle confirmed + ribbon + whales"])
-exitMode  = input.string("Flip", "Exit", options=["Flip", "Flip or overheated", "Chandelier 3 ATR"])
+entryMode = input.string("Hole break + Diamond vetoes (C)", "Entry", options=["Hole break + Diamond vetoes (C)", "Hole broke up + whales ≥ 50 + TE up", "All 7 panels", "5 of 7", "Red candle confirmed + ribbon + whales"])
+exitMode  = input.string("Hole broke down", "Exit", options=["Hole broke down", "Scalp +0.5 / −3 ATR, 10 bars (≈85 % winners)", "Bracket +2 / −4 ATR, 20 bars (≈65 % winners)", "Flip", "Flip or overheated", "Chandelier 3 ATR"])
+freshOnly = input.bool(false, "Tier D · fresh break only (≤ 3 bars since the hole broke up)")
+minPanels = input.int(0, "Tier E · min Dragon panels bullish (0 = off, 6 = strict)", minval=0, maxval=7)
+minAtrPct = input.float(0.0, "Tier F · min ATR % of price (0 = off, 5 = volatile names only)", minval=0, step=0.5)
+guardOn = input.bool(true, "Market guard · S&P 500 above its 200-day line (no entries below, exit on the cross)")
+guardSym = input.symbol("SP:SPX", "Guard index")
 holeK = input.float(1.4, "Hole k·ATR", step=0.1)
 pivL  = input.int(4, "Hole pivot strength", minval=1)
 showTbl = input.bool(true, "Panel table")
@@ -144,30 +162,56 @@ hype = ta.ema((volE > 0 ? 100.0 * ta.ema(signedVol, 10) / volE : 0.0) / 2.0, 3)
 flow = ta.ema(ta.mfi(hlc3, 14) - 50.0, 3)
 bubble = math.max(0.0, (close - ta.ema(close, 200)) / atrV) + (hype > 25 ? 1.0 : 0.0) + (flow > 25 ? 1.0 : 0.0)
 overheated = (close - goldTop) / atrV > 2.0 and bubble > 8.7
+bubbleHot = (timeframe.isdaily or timeframe.isweekly) and bubble >= 6.0          // the Diamond Bubble veto
+mountain = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (e21 > e55 and e21 > e21[1] ? 1 : 0)
+freshBreak = hState == 1 and hState[3] != 1
+atrPct = atrV / close * 100.0
+mktBull = request.security(guardSym, "D", close > ta.sma(close, 200), lookahead=barmerge.lookahead_off)
+guardOk = not guardOn or mktBull
+guardOff = guardOn and not mktBull
 
 // ── total signal ──
 nBull = (ssConfirm ? 1 : 0) + (bbeBull ? 1 : 0) + (holeBull ? 1 : 0) + (pocBull ? 1 : 0) + (teBull ? 1 : 0) + (mcdxBull and retailShrinking ? 1 : 0) + (macdBull and rsiUp ? 1 : 0)
-stateOn = entryMode == "Hole broke up + whales ≥ 50 + TE up" ? (holeBull and mcdxBull and teBull) : entryMode == "All 7 panels" ? (ssConfirm and nBull >= 7) : entryMode == "5 of 7" ? (ssConfirm and nBull >= 5) : (ssConfirm and bbeBull and mcdxBull)
-flipOff = entryMode == "Hole broke up + whales ≥ 50 + TE up" ? (holeBear or not teBull) : entryMode == "All 7 panels" ? nBull <= 5 : entryMode == "5 of 7" ? nBull <= 3 : (not ssBull or not bbeBull)
+holeC = holeBull and mcdxBull and teBull and not bubbleHot and mountain >= 3 and close > goldTop and (not freshOnly or freshBreak) and nBull >= minPanels and atrPct >= minAtrPct and guardOk
+stateOn = entryMode == "Hole break + Diamond vetoes (C)" ? holeC : entryMode == "Hole broke up + whales ≥ 50 + TE up" ? (holeBull and mcdxBull and teBull) : entryMode == "All 7 panels" ? (ssConfirm and nBull >= 7) : entryMode == "5 of 7" ? (ssConfirm and nBull >= 5) : (ssConfirm and bbeBull and mcdxBull)
+flipOff = entryMode == "Hole break + Diamond vetoes (C)" ? holeBear : entryMode == "Hole broke up + whales ≥ 50 + TE up" ? (holeBear or not teBull) : entryMode == "All 7 panels" ? nBull <= 5 : entryMode == "5 of 7" ? nBull <= 3 : (not ssBull or not bbeBull)
 
 hh22 = ta.highest(high, 22)
 var bool inPos = false
 var float trail = na
+var float entryPx = na
+var float entryAtr = na
+var int entryBar = na
 goNow = stateOn and not stateOn[1] and not inPos
 if goNow
     inPos := true
     trail := hh22 - 3.0 * atrV
 else if inPos
     trail := math.max(nz(trail, 0.0), hh22 - 3.0 * atrV)
-outNow = inPos and not goNow and (exitMode == "Flip" ? flipOff : exitMode == "Flip or overheated" ? (flipOff or overheated) : close < trail)
+if inPos and na(entryPx) and not goNow          // the position was opened at THIS bar's open (the bar after GO)
+    entryPx := open
+    entryAtr := atrV[1]
+    entryBar := bar_index
+isScalp = exitMode == "Scalp +0.5 / −3 ATR, 10 bars (≈85 % winners)"
+isBracket = exitMode == "Bracket +2 / −4 ATR, 20 bars (≈65 % winners)"
+tgtMult = isScalp ? 0.5 : 2.0
+stpMult = isScalp ? 3.0 : 4.0
+maxBars = isScalp ? 10 : 20
+bracketOut = not na(entryPx) and (high >= entryPx + tgtMult * entryAtr or low <= entryPx - stpMult * entryAtr or bar_index - entryBar >= maxBars)
+outNow = inPos and not goNow and (guardOff or (exitMode == "Hole broke down" ? holeBear : (isScalp or isBracket) ? bracketOut : exitMode == "Flip" ? flipOff : exitMode == "Flip or overheated" ? (flipOff or overheated) : close < trail))
 if outNow
     inPos := false
     trail := na
+    entryPx := na
+    entryAtr := na
+    entryBar := na
 
 bgcolor(stateOn ? color.new(color.red, 90) : na, title="Reading ON")
 plotshape(goNow, "DRAGON go", shape.labelup, location.belowbar, color=color.new(color.red, 0), text="GO", textcolor=color.white, size=size.small)
 plotshape(outNow, "DRAGON out", shape.xcross, location.abovebar, color=color.new(color.gray, 0), size=size.small)
 plot(inPos and exitMode == "Chandelier 3 ATR" ? trail : na, "Chandelier", color=color.new(color.orange, 0), style=plot.style_circles)
+plot(inPos and (isScalp or isBracket) and not na(entryPx) ? entryPx + tgtMult * entryAtr : na, "Target", color=color.new(color.lime, 0), style=plot.style_linebr)
+plot(inPos and (isScalp or isBracket) and not na(entryPx) ? entryPx - stpMult * entryAtr : na, "Stop", color=color.new(color.red, 0), style=plot.style_linebr)
 plotshape(hState == 1 and hState[1] != 1, "Hole broke up", shape.circle, location.belowbar, color=color.new(color.aqua, 0), size=size.tiny)
 plotshape(hState == -1 and hState[1] != -1, "Hole broke down", shape.circle, location.abovebar, color=color.new(color.purple, 0), size=size.tiny)
 
@@ -180,7 +224,7 @@ cell(int r, string k, string v, bool good) =>
     table.cell(tbl, 0, r, k, text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
     table.cell(tbl, 1, r, v, text_color=color.white, bgcolor=good ? color.new(color.red, 20) : color.new(color.gray, 60), text_size=size.small)
 if showTbl and barstate.islast
-    cell(0, "DRAGON", stateOn ? "ON" : "off", stateOn)
+    cell(0, "DRAGON", stateOn ? "ON" : guardOff ? "off · MARKET GUARD" : "off", stateOn)
     cell(1, "Panels bullish", str.tostring(nBull) + " / 7", nBull >= 5)
     cell(2, "SS candle", ssConfirm ? "red, confirmed" : ssBull ? "red" : "yellow/blue", ssBull)
     cell(3, "Ribbon", bbeBull ? "red" : "blue", bbeBull)
@@ -188,4 +232,4 @@ if showTbl and barstate.islast
     cell(5, "POC bar", pocBull ? "closes above" : "below", pocBull)
     cell(6, "TE line", teBull ? "rising" : "falling", teBull)
     cell(7, "Whales / retail", str.tostring(whales, "#") + "% / " + str.tostring(retail, "#") + "%", mcdxBull)
-    cell(8, "MACD·RSI / heat", (macdBull and rsiUp ? "up" : "no") + (overheated ? " · OVERHEATED" : ""), macdBull and rsiUp and not overheated)
+    cell(8, "MACD·RSI / Diamond", (macdBull and rsiUp ? "up" : "no") + " · Mtn " + str.tostring(mountain) + (close > goldTop ? " · >gold" : " · ≤gold") + (bubbleHot ? " · BUBBLE" : ""), macdBull and rsiUp and mountain >= 3 and close > goldTop and not bubbleHot)

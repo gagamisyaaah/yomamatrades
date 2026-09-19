@@ -1,0 +1,297 @@
+{
+ "id": "PUB;6daafb2cabe6419d98ae25229d2327f8",
+ "name": "Smart Money Concepts (SMC) [LuxAlgo]",
+ "likes": 167524,
+ "version": 5,
+ "alerts": [
+  {
+   "condition": "currentAlerts.internalBullishBOS",
+   "title": "Internal Bullish BOS",
+   "message": "Internal Bullish BOS formed",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0,
+    "none": 0.0,
+    "enter_long": 1.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.internalBullishCHoCH",
+   "title": "Internal Bullish CHoCH",
+   "message": "Internal Bullish CHoCH formed",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.0,
+    "exit_long": 0.0,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "enter_long": 1.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.internalBearishBOS",
+   "title": "Internal Bearish BOS",
+   "message": "Internal Bearish BOS formed",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "exit_long": 0.99,
+    "none": 0.01,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.internalBearishCHoCH",
+   "title": "Internal Bearish CHoCH",
+   "message": "Internal Bearish CHoCH formed",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "enter_long": 0.0,
+    "exit_long": 0.99,
+    "exit_short": 0.0,
+    "none": 0.01,
+    "enter_short": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.swingBullishBOS",
+   "title": "Bullish BOS",
+   "message": "Internal Bullish BOS formed",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.0,
+    "enter_long": 1.0,
+    "none": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.swingBullishCHoCH",
+   "title": "Bullish CHoCH",
+   "message": "Internal Bullish CHoCH formed",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "enter_long": 1.0,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0,
+    "none": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.swingBearishBOS",
+   "title": "Bearish BOS",
+   "message": "Bearish BOS formed",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "exit_long": 0.99,
+    "exit_short": 0.0,
+    "none": 0.01,
+    "enter_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.swingBearishCHoCH",
+   "title": "Bearish CHoCH",
+   "message": "Bearish CHoCH formed",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.0,
+    "exit_long": 1.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.internalBullishOrderBlock",
+   "title": "Bullish Internal OB Breakout",
+   "message": "Price broke bullish internal OB",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_long": 1.0,
+    "none": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0,
+    "exit_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.internalBearishOrderBlock",
+   "title": "Bearish Internal OB Breakout",
+   "message": "Price broke bearish internal OB",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.99,
+    "enter_long": 0.0,
+    "none": 0.01,
+    "enter_short": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.swingBullishOrderBlock",
+   "title": "Bullish Swing OB Breakout",
+   "message": "Price broke bullish swing OB",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_long": 0.0,
+    "enter_long": 1.0,
+    "none": 0.0,
+    "exit_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.swingBearishOrderBlock",
+   "title": "Bearish Swing OB Breakout",
+   "message": "Price broke bearish swing OB",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.99,
+    "none": 0.01,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.equalHighs",
+   "title": "Equal Highs",
+   "message": "Equal highs detected",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.38,
+   "probabilities": {
+    "enter_long": 0.19,
+    "enter_short": 0.01,
+    "none": 0.3,
+    "exit_long": 0.5,
+    "exit_short": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.75
+  },
+  {
+   "condition": "currentAlerts.equalLows",
+   "title": "Equal Lows",
+   "message": "Equal lows detected",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "enter_long",
+   "confidence": 0.66,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.22,
+    "enter_long": 0.73,
+    "exit_long": 0.05
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.63
+  },
+  {
+   "condition": "currentAlerts.bullishFairValueGap",
+   "title": "Bullish FVG",
+   "message": "Bullish FVG formed",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "none": 0.0,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0,
+    "enter_long": 1.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "currentAlerts.bearishFairValueGap",
+   "title": "Bearish FVG",
+   "message": "Bearish FVG formed",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.96,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.02,
+    "enter_long": 0.0,
+    "exit_long": 0.98
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  }
+ ],
+ "metrics_name_collisions": []
+}

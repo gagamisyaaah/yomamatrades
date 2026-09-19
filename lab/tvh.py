@@ -22,12 +22,12 @@ from browser_harness.helpers import js as _js
 def js(expression, target_id=None):
     """helpers.js with retries: TradingView occasionally blocks the main thread past the 5 s evaluate budget."""
     last = None
-    for attempt in range(4):
+    for attempt in range(8):                     # heavy scripts can block the page for tens of seconds
         try:
             return _js(expression, target_id)
         except RuntimeError as e:
             last = e
-            time.sleep(1.0 + attempt)
+            time.sleep(1.0 + 1.5 * attempt)
     raise last
 
 TV = "https://www.tradingview.com"
@@ -162,13 +162,23 @@ def _focus_editor():
 
 def set_pine_source(code: str) -> int:
     """Replace the whole editor buffer: trusted ⌘A, then a synthetic clipboard `paste` event on Monaco's textarea
-    (the same path a real ⌘V takes; multi-line Input.insertText gets re-indented by Monaco and mangles line 1)."""
+    (the same path a real ⌘V takes; multi-line Input.insertText gets re-indented by Monaco and mangles line 1).
+    Scripts above ~24 KB go through the real clipboard (pbcopy + trusted ⌘V) because the harness IPC drops
+    oversized evaluate calls; the founder's clipboard is restored afterwards."""
     _focus_editor()
     press_key("a", 4)
     wait(0.3)
-    js(f"""(() => {{ const ta = document.querySelector({json.dumps(_EDITOR_TA)}); const dt = new DataTransfer();
-        dt.setData('text/plain', {json.dumps(code)});
-        ta.dispatchEvent(new ClipboardEvent('paste', {{clipboardData: dt, bubbles: true, cancelable: true}})); return 1; }})()""")
+    if len(code) > 24000:
+        import subprocess
+        old = subprocess.run(["pbpaste"], capture_output=True).stdout
+        subprocess.run(["pbcopy"], input=code.encode("utf-8"), check=True)
+        press_key("v", 4)
+        wait(2.5 + len(code) / 40000)
+        subprocess.run(["pbcopy"], input=old)
+    else:
+        js(f"""(() => {{ const ta = document.querySelector({json.dumps(_EDITOR_TA)}); const dt = new DataTransfer();
+            dt.setData('text/plain', {json.dumps(code)});
+            ta.dispatchEvent(new ClipboardEvent('paste', {{clipboardData: dt, bubbles: true, cancelable: true}})); return 1; }})()""")
     wait(2.0)
     head = editor_text_head(14).replace("\xa0", " ")
     return 1 if head.startswith("//@version") else -1

@@ -1,0 +1,135 @@
+{
+ "id": "PUB;92ff5628d7c643419a350022e0e3866c",
+ "name": "Trend Targets [AlgoAlpha]",
+ "likes": 15537,
+ "version": 6,
+ "alerts": [
+  {
+   "condition": "ta.crossover(close, SL)",
+   "title": "Trend Change: Bullish",
+   "message": "Price crossed above SL - Potential Bullish Trend",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "exit_short": 0.0,
+    "none": 0.0,
+    "enter_long": 1.0,
+    "enter_short": 0.0,
+    "exit_long": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossunder(close, SL)",
+   "title": "Trend Change: Bearish",
+   "message": "Price crossed below SL - Potential Bearish Trend",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "none": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 1.0,
+    "enter_short": 0.0,
+    "enter_long": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossover(high, SL) and close < SL",
+   "title": "Rejection: Bearish",
+   "message": "Price rejected at SL - Bearish Rejection",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "enter_long": 0.0,
+    "exit_long": 0.99,
+    "exit_short": 0.0,
+    "none": 0.01,
+    "enter_short": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 0.98
+  },
+  {
+   "condition": "ta.crossunder(low, SL) and close > SL",
+   "title": "Rejection: Bullish",
+   "message": "Price rejected at SL - Bullish Rejection",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.0,
+    "enter_long": 0.99,
+    "exit_long": 0.01
+   },
+   "direction": "bullish",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossover(close, TP1_lvl)",
+   "title": "TP1 Hit",
+   "message": "Price reached TP1 level",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.85,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.88,
+    "none": 0.09,
+    "enter_long": 0.03
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.97
+  },
+  {
+   "condition": "ta.crossover(close, TP2_lvl)",
+   "title": "TP2 Hit",
+   "message": "Price reached TP2 level",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.82,
+   "probabilities": {
+    "none": 0.12,
+    "enter_long": 0.02,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.86
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.97
+  },
+  {
+   "condition": "ta.crossover(close, TP3_lvl)",
+   "title": "TP3 Hit",
+   "message": "Price reached TP3 level",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.9,
+   "probabilities": {
+    "enter_long": 0.01,
+    "enter_short": 0.0,
+    "exit_long": 0.93,
+    "none": 0.06,
+    "exit_short": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.97
+  }
+ ],
+ "metrics_name_collisions": []
+}

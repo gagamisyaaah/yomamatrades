@@ -121,10 +121,44 @@ def wikipedia_tickers() -> list[str]:
     return out
 
 
-def universe(kind: str = "core") -> list[str]:
+def screener_tickers(min_cap: float = 2e9) -> list[str]:
+    """Every US-listed common stock above `min_cap` market cap, from Nasdaq's screener (all exchanges)."""
+    url = "https://api.nasdaq.com/api/screener/stocks?tableonly=true&limit=6000&offset=0"
+    req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
+    rows = json.load(urllib.request.urlopen(req, timeout=60))["data"]["table"]["rows"]
+    out = []
+    for r in rows:
+        sym = (r.get("symbol") or "").strip()
+        cap = (r.get("marketCap") or "").replace(",", "")
+        try:
+            capv = float(cap)
+        except ValueError:
+            continue
+        if not re.fullmatch(r"[A-Z]{1,5}", sym) or capv < min_cap:
+            continue
+        if re.search(r"Preferred|Warrant|Right|Unit|Depositary|ETF|Fund|Trust", r.get("name") or "", re.I):
+            continue
+        out.append(sym)
+    return out
+
+
+def sp500_tickers() -> list[str]:
+    url = "https://raw.githubusercontent.com/datasets/s-and-p-500-companies/main/data/constituents.csv"
+    req = urllib.request.Request(url, headers={"User-Agent": UA})
+    lines = urllib.request.urlopen(req, timeout=30).read().decode().splitlines()[1:]
+    return [ln.split(",")[0].replace(".", "-") for ln in lines if ln.strip()]
+
+
+def universe(kind: str = "core", min_cap: float = 2e9) -> list[str]:
     f = HERE / "universe.txt"
     if kind == "broad":
-        ticks = list(dict.fromkeys(CORE + wikipedia_tickers()))
+        extra = []
+        for fn in (sp500_tickers, screener_tickers):
+            try:
+                extra += fn() if fn is sp500_tickers else fn(min_cap)
+            except Exception as e:  # noqa: BLE001
+                print(f"  {fn.__name__}: {e}", file=sys.stderr)
+        ticks = list(dict.fromkeys(CORE + extra))
         f.write_text("\n".join(ticks))
         return ticks
     return CORE

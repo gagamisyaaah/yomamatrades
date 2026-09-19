@@ -1,0 +1,405 @@
+{
+ "id": "PUB;d7eefaf9a1ea4811bb0cbc0c1d9a7334",
+ "name": "Zero Lag Trend Signals (MTF) [AlgoAlpha]",
+ "likes": 16609,
+ "version": 5,
+ "alerts": [
+  {
+   "condition": "ta.crossover(close, zlema) and trend == 1 and trend[1] == 1",
+   "title": "Bullish Entry Signal",
+   "message": "Bullish Entry Signal detected. Consider entering a long position.",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_short": 0.0,
+    "enter_long": 1.0,
+    "none": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossunder(close, zlema) and trend == -1 and trend[1] == -1",
+   "title": "Bearish Entry Signal",
+   "message": "Bearish Entry Signal detected. Consider entering a short position.",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.77,
+   "probabilities": {
+    "none": 0.01,
+    "exit_long": 0.82,
+    "exit_short": 0.0,
+    "enter_long": 0.0,
+    "enter_short": 0.17
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossover(trend, 0)",
+   "title": "Bullish Trend",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "exit_long": 0.01,
+    "enter_long": 0.99,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossunder(trend, 0)",
+   "title": "Bearish Trend",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_long": 0.0,
+    "enter_short": 0.0,
+    "none": 0.0,
+    "exit_long": 1.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.cross(trend, 0)",
+   "title": "(Bullish or Bearish) Trend",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.35,
+   "probabilities": {
+    "enter_long": 0.13,
+    "none": 0.49,
+    "exit_long": 0.38,
+    "exit_short": 0.0,
+    "enter_short": 0.0
+   },
+   "direction": "either_side",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossover(s1, 0)",
+   "title": "Bullish Trend Time Frame 1",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.95,
+   "probabilities": {
+    "none": 0.01,
+    "exit_long": 0.03,
+    "enter_short": 0.0,
+    "enter_long": 0.96,
+    "exit_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossunder(s1, 0)",
+   "title": "Bearish Trend Time Frame 1",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.01,
+    "enter_long": 0.0,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.cross(s1, 0)",
+   "title": "(Bullish or Bearish) Trend Time Frame 1",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.63,
+   "probabilities": {
+    "exit_long": 0.16,
+    "enter_long": 0.13,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.71
+   },
+   "direction": "either_side",
+   "direction_confidence": 0.97
+  },
+  {
+   "condition": "ta.crossover(s2, 0)",
+   "title": "Bullish Trend Time Frame 2",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.9,
+   "probabilities": {
+    "enter_short": 0.0,
+    "enter_long": 0.92,
+    "none": 0.02,
+    "exit_long": 0.06,
+    "exit_short": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossunder(s2, 0)",
+   "title": "Bearish Trend Time Frame 2",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.01,
+    "enter_long": 0.0,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.cross(s2, 0)",
+   "title": "(Bullish or Bearish) Trend Time Frame 2",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.56,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_long": 0.23,
+    "exit_short": 0.0,
+    "enter_long": 0.12,
+    "none": 0.65
+   },
+   "direction": "either_side",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossover(s3, 0)",
+   "title": "Bullish Trend Time Frame 3",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.94,
+   "probabilities": {
+    "enter_long": 0.95,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.04,
+    "none": 0.01
+   },
+   "direction": "bullish",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossunder(s3, 0)",
+   "title": "Bearish Trend Time Frame 3",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "enter_long": 0.0,
+    "none": 0.01,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.cross(s3, 0)",
+   "title": "(Bullish or Bearish) Trend Time Frame 3",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.57,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.21,
+    "enter_long": 0.13,
+    "none": 0.66,
+    "enter_short": 0.0
+   },
+   "direction": "either_side",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossover(s4, 0)",
+   "title": "Bullish Trend Time Frame 4",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.96,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.02,
+    "enter_short": 0.0,
+    "enter_long": 0.97,
+    "none": 0.01
+   },
+   "direction": "bullish",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossunder(s4, 0)",
+   "title": "Bearish Trend Time Frame 4",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "none": 0.01,
+    "exit_long": 0.99,
+    "enter_long": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.cross(s4, 0)",
+   "title": "(Bullish or Bearish) Trend Time Frame 4",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.59,
+   "probabilities": {
+    "exit_long": 0.2,
+    "enter_long": 0.13,
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.67
+   },
+   "direction": "either_side",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossover(s5, 0)",
+   "title": "Bullish Trend Time Frame 5",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 0.97,
+   "probabilities": {
+    "exit_short": 0.0,
+    "enter_short": 0.0,
+    "none": 0.0,
+    "enter_long": 0.98,
+    "exit_long": 0.02
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossunder(s5, 0)",
+   "title": "Bearish Trend Time Frame 5",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "enter_short": 0.0,
+    "enter_long": 0.0,
+    "exit_short": 0.0,
+    "none": 0.01,
+    "exit_long": 0.99
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.cross(s5, 0)",
+   "title": "(Bullish or Bearish) Trend Time Frame 5",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.48,
+   "probabilities": {
+    "exit_short": 0.0,
+    "none": 0.59,
+    "enter_long": 0.19,
+    "enter_short": 0.0,
+    "exit_long": 0.22
+   },
+   "direction": "either_side",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "ta.crossover(close, zlema) and trend == 1 and trend[1] == 1",
+   "title": "Bullish Entry",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "enter_long",
+   "confidence": 1.0,
+   "probabilities": {
+    "enter_long": 1.0,
+    "none": 0.0,
+    "enter_short": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.0
+   },
+   "direction": "bullish",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "ta.crossunder(close, zlema) and trend == -1 and trend[1] == -1",
+   "title": "Bearish Entry",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.98,
+   "probabilities": {
+    "none": 0.0,
+    "exit_short": 0.0,
+    "exit_long": 0.99,
+    "enter_long": 0.0,
+    "enter_short": 0.01
+   },
+   "direction": "bearish",
+   "direction_confidence": 1.0
+  }
+ ],
+ "metrics_name_collisions": []
+}

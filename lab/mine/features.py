@@ -66,7 +66,7 @@ def regime() -> pd.Series:
     return (s > s.rolling(200).mean()).rename("regime_bull")
 
 
-def build(tickers: list[str], min_bars: int = 300) -> pd.DataFrame:
+def build(tickers: list[str], min_bars: int = 300, out: str = "features") -> pd.DataFrame:
     reg = regime()
     frames = []
     for i, t in enumerate(tickers):
@@ -86,9 +86,9 @@ def build(tickers: list[str], min_bars: int = 300) -> pd.DataFrame:
         frames.append(f)
         if i % 10 == 0:
             print(f"  features {i}/{len(tickers)} ({t}, {len(df)} bars)", flush=True)
-    out = pd.concat(frames, ignore_index=True)
-    out.to_parquet(HERE / "features.parquet") if _has_parquet() else out.to_csv(HERE / "features.csv", index=False)
-    return out
+    table = pd.concat(frames, ignore_index=True)
+    table.to_parquet(HERE / f"{out}.parquet") if _has_parquet() else table.to_csv(HERE / f"{out}.csv", index=False)
+    return table
 
 
 def _has_parquet() -> bool:
@@ -99,14 +99,16 @@ def _has_parquet() -> bool:
         return False
 
 
-def load() -> pd.DataFrame:
-    p = HERE / "features.parquet"
+def load(name: str = "features") -> pd.DataFrame:
+    p = HERE / f"{name}.parquet"
     if p.exists():
         return pd.read_parquet(p)
-    return pd.read_csv(HERE / "features.csv", parse_dates=["date"])
+    return pd.read_csv(HERE / f"{name}.csv", parse_dates=["date"])
 
 
 if __name__ == "__main__":
-    ticks = sys.argv[1:] or [p.stem for p in (HERE / "cache").glob("*.csv")]
-    f = build(ticks)
-    print(f"{len(f)} ticker-days, {f['ticker'].nunique()} tickers → mine/features.*")
+    args = [a for a in sys.argv[1:] if not a.startswith("--out=")]
+    out = next((a.split("=", 1)[1] for a in sys.argv[1:] if a.startswith("--out=")), "features")
+    ticks = args or [p.stem for p in (HERE / "cache").glob("*.csv")]
+    f = build(ticks, out=out)
+    print(f"{len(f)} ticker-days, {f['ticker'].nunique()} tickers → mine/{out}.*")

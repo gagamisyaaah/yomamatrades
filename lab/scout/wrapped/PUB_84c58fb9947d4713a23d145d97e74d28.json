@@ -1,0 +1,117 @@
+{
+ "id": "PUB;84c58fb9947d4713a23d145d97e74d28",
+ "name": "Machine Learning Adaptive SuperTrend [AlgoAlpha]",
+ "likes": 30579,
+ "version": 5,
+ "alerts": [
+  {
+   "condition": "ta.crossunder(dir, 0) and barstate.isconfirmed",
+   "title": "Bullish Trend Shift",
+   "message": "",
+   "local_scope": false,
+   "role": "enter_long",
+   "role_raw": "exit_long",
+   "confidence": 0.39,
+   "probabilities": {
+    "enter_short": 0.0,
+    "exit_long": 0.52,
+    "exit_short": 0.0,
+    "none": 0.01,
+    "enter_long": 0.47
+   },
+   "direction": "bullish",
+   "direction_confidence": 0.72
+  },
+  {
+   "condition": "ta.crossover(dir, 0) and barstate.isconfirmed",
+   "title": "Bearish Trend Shift",
+   "message": "",
+   "local_scope": false,
+   "role": "exit_long",
+   "role_raw": "exit_long",
+   "confidence": 0.99,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.99,
+    "enter_long": 0.0,
+    "none": 0.01,
+    "enter_short": 0.0
+   },
+   "direction": "bearish",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "cluster == 0 and cluster[1] != 0 and barstate.isconfirmed",
+   "title": "High Volatility",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.78,
+   "probabilities": {
+    "none": 0.83,
+    "exit_long": 0.14,
+    "enter_short": 0.0,
+    "enter_long": 0.03,
+    "exit_short": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "cluster == 1 and cluster[1] != 1 and barstate.isconfirmed",
+   "title": "Medium Volatility",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.59,
+   "probabilities": {
+    "enter_long": 0.26,
+    "exit_long": 0.06,
+    "exit_short": 0.0,
+    "none": 0.68,
+    "enter_short": 0.0
+   },
+   "direction": "no_direction",
+   "direction_confidence": 0.99
+  },
+  {
+   "condition": "cluster == 2 and cluster[1] != 2 and barstate.isconfirmed",
+   "title": "Low Volatility",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.81,
+   "probabilities": {
+    "none": 0.85,
+    "exit_short": 0.0,
+    "exit_long": 0.12,
+    "enter_short": 0.0,
+    "enter_long": 0.03
+   },
+   "direction": "no_direction",
+   "direction_confidence": 1.0
+  },
+  {
+   "condition": "cluster == 2 and cluster[1] != 2 and barstate.isconfirmed",
+   "title": "Low Volatility",
+   "message": "",
+   "local_scope": false,
+   "role": "none",
+   "role_raw": "none",
+   "confidence": 0.82,
+   "probabilities": {
+    "exit_short": 0.0,
+    "exit_long": 0.12,
+    "enter_short": 0.0,
+    "enter_long": 0.02,
+    "none": 0.86
+   },
+   "direction": "no_direction",
+   "direction_confidence": 1.0
+  }
+ ],
+ "metrics_name_collisions": []
+}

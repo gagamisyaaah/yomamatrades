@@ -4,11 +4,12 @@
 // orders fill at the NEXT OPEN. The status line exposes BH, Alpha, TPW, Bear, Bull, Short, Exp for the lab.
 strategy("Homily twin", "Homily twin", overlay=true, initial_capital=10000, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, process_orders_on_close=false, calc_on_every_tick=false, max_bars_back=1500)
 
-sig = input.string("SS candle", "Signal", options=["SS candle", "BBE ribbon", "Volatility hole", "MCDX whales", "TE main line", "MACD zero", "RSI x3", "Dragon total (all 7)", "Dragon total (5 of 7)"])
+sig = input.string("SS candle", "Signal", options=["SS candle", "BBE ribbon", "Volatility hole", "MCDX whales", "TE main line", "MACD zero", "RSI x3", "Dragon total (all 7)", "Dragon total (5 of 7)", "Dragon hole ref", "Dragon hole C", "Dragon hole D", "Dragon hole E", "Dragon hole F"])
 dirMode = input.string("Long only", "Direction", options=["Long only", "Long + Short"])
 startDate = input.time(timestamp("2018-01-01T00:00:00+0000"), "Backtest from")
 inWin = time >= startDate
-exitMode = input.string("Flip or chandelier", "Exit", options=["Signal flip", "Chandelier 3 ATR", "Target 2R stop 1R", "Time stop 5 bars", "Flip or chandelier"])
+exitMode = input.string("Signal flip", "Exit", options=["Signal flip", "Hole broke down", "Scalp 0.5/3 ATR 10b", "Bracket 2/4 ATR 20b", "Chandelier 3 ATR", "Target 2R stop 1R", "Time stop 5 bars", "Flip or chandelier"])
+guardOn = input.bool(false, "Market guard (SPX above 200-day; exit on the cross)")
 
 // ── SS candle: KDJ(9,3,3) J vs 50 ──
 smaCN(float x, int n) =>
@@ -140,6 +141,24 @@ r3 = ta.rsi(close, 24)
 rsiBull = r1 > r1[1] and r2 > r2[1] and r3 > r3[1] and r2 > 50
 rsiBear = r1 < r1[1] and r2 < r2[1] and r3 < r3[1] and r2 < 50
 
+// ── Diamond vetoes used by the "Dragon hole" readings (same formulas as the Diamond twin) ──
+e21 = ta.ema(close, 21)
+e34 = ta.ema(close, 34)
+e55 = ta.ema(close, 55)
+goldTop = math.max(e21, math.max(e34, e55))
+signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
+volE = ta.ema(volume, 10)
+hype = ta.ema((volE > 0 ? 100.0 * ta.ema(signedVol, 10) / volE : 0.0) / 2.0, 3)
+flow = ta.ema(ta.mfi(hlc3, 14) - 50.0, 3)
+bubble = math.max(0.0, (close - ta.ema(close, 200)) / atrV) + (hype > 25 ? 1.0 : 0.0) + (flow > 25 ? 1.0 : 0.0)
+bubbleHot = (timeframe.isdaily or timeframe.isweekly) and bubble >= 6.0
+mountain = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (e21 > e55 and e21 > e21[1] ? 1 : 0)
+freshBreak = hState == 1 and hState[3] != 1
+atrPct = atrV / close * 100.0
+mktBull = request.security("SP:SPX", "D", close > ta.sma(close, 200), lookahead=barmerge.lookahead_off)
+guardOk = not guardOn or mktBull
+guardOff = guardOn and not mktBull
+
 // ── Dragon total: read all five panels together, Danny's way ──
 // 1 candle confirmed (J > 50 and price surpassed the red candle's high)   2 ribbon red   3 hole not broken down
 // (broke up = surge watch)   4 closes above the POC momentum bar   5 TE main line rising   6 whales ≥ 50 % with
@@ -151,9 +170,17 @@ need = sig == "Dragon total (all 7)" ? 7 : 5
 totalL = ssConfirmL and nBull >= need and not (holeBear)
 totalS = ssConfirmS and nBear >= need and not (holeBull)
 
-bull = sig == "SS candle" ? ssBull : sig == "BBE ribbon" ? bbeBull : sig == "Volatility hole" ? holeBull : sig == "MCDX whales" ? mcdxBull : sig == "TE main line" ? teBull : sig == "MACD zero" ? macdBull : sig == "RSI x3" ? rsiBull : totalL
-bear = sig == "Volatility hole" ? holeBear : sig == "RSI x3" ? rsiBear : isTotal ? totalS : not bull
-flatL = isTotal ? (nBull <= need - 2 or close < redLo) : not bull
+holeRef = holeBull and mcdxBull and teBull
+holeC = holeRef and not bubbleHot and mountain >= 3 and close > goldTop and guardOk
+holeD = holeC and freshBreak
+holeE = holeD and nBull >= 6
+holeF = holeC and atrPct >= 5.0
+isHole = sig == "Dragon hole ref" or sig == "Dragon hole C" or sig == "Dragon hole D" or sig == "Dragon hole E" or sig == "Dragon hole F"
+holeSig = sig == "Dragon hole ref" ? holeRef : sig == "Dragon hole C" ? holeC : sig == "Dragon hole D" ? holeD : sig == "Dragon hole E" ? holeE : holeF
+
+bull = sig == "SS candle" ? ssBull : sig == "BBE ribbon" ? bbeBull : sig == "Volatility hole" ? holeBull : sig == "MCDX whales" ? mcdxBull : sig == "TE main line" ? teBull : sig == "MACD zero" ? macdBull : sig == "RSI x3" ? rsiBull : isHole ? holeSig : totalL
+bear = sig == "Volatility hole" ? holeBear : sig == "RSI x3" ? rsiBear : isTotal ? totalS : isHole ? false : not bull
+flatL = isTotal ? (nBull <= need - 2 or close < redLo) : isHole ? (sig == "Dragon hole ref" ? (holeBear or not teBull) : holeBear) : not bull
 flatS = isTotal ? (nBear <= need - 2 or close > yelHi) : not bear
 
 // ── exits (the knob that turns a signal into profit per trade) ──
@@ -178,7 +205,12 @@ xTrailS = not na(trail) and close > trail
 xTgtL = close >= px + 2.0 * rAtEntry or close <= px - rAtEntry
 xTgtS = close <= px - 2.0 * rAtEntry or close >= px + rAtEntry
 xTime = barsIn >= 5
-exitL = exitMode == "Signal flip" ? flatL : exitMode == "Chandelier 3 ATR" ? xTrailL : exitMode == "Target 2R stop 1R" ? xTgtL : exitMode == "Time stop 5 bars" ? xTime : (flatL or xTrailL)
+var float atrAtEntry = na
+if strategy.position_size != 0 and barsIn == 0
+    atrAtEntry := atrX[1]
+xScalp = not na(atrAtEntry) and (high >= px + 0.5 * atrAtEntry or low <= px - 3.0 * atrAtEntry or barsIn >= 10)
+xBrk = not na(atrAtEntry) and (high >= px + 2.0 * atrAtEntry or low <= px - 4.0 * atrAtEntry or barsIn >= 20)
+exitL = guardOff and isHole ? true : exitMode == "Signal flip" ? flatL : exitMode == "Hole broke down" ? holeBear : exitMode == "Scalp 0.5/3 ATR 10b" ? xScalp : exitMode == "Bracket 2/4 ATR 20b" ? xBrk : exitMode == "Chandelier 3 ATR" ? xTrailL : exitMode == "Target 2R stop 1R" ? xTgtL : exitMode == "Time stop 5 bars" ? xTime : (flatL or xTrailL)
 exitS = exitMode == "Signal flip" ? flatS : exitMode == "Chandelier 3 ATR" ? xTrailS : exitMode == "Target 2R stop 1R" ? xTgtS : exitMode == "Time stop 5 bars" ? xTime : (flatS or xTrailS)
 
 if inWin and bull and strategy.position_size <= 0

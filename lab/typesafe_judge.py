@@ -69,6 +69,15 @@ def extract_claim(author: str, text: str) -> dict:
                 "none": "no concrete indicator event",
             },
         },
+        "direction": {
+            "type": "choice",
+            "instructions": "Which way is the author calling the named stock(s) in this post?",
+            "criteria": {
+                "bullish": "expects the price to rise: buy, long, breakout, surge, bottom, accumulate",
+                "bearish": "expects the price to fall: sell, short, top, drop, take profits, distribution",
+                "neutral": "no directional call, commentary, education, or unclear",
+            },
+        },
         "has_numbers": {
             "type": "noul",
             "instructions": "Does the post state explicit price levels or dates that can be checked against a chart?",

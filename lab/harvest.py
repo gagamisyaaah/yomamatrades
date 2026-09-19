@@ -55,6 +55,8 @@ def main():
     ap.add_argument("--settle", type=float, default=2.0, help="seconds to wait for the tester after a symbol change")
     ap.add_argument("--signals", nargs="*", help="regex filters: only Signal options matching one of these")
     ap.add_argument("--exits", nargs="*", help="Exit options to iterate (default: the twin's default exit only)")
+    ap.add_argument("--guard", action="store_true", help="switch the twin's 'Market guard' input on")
+    ap.add_argument("--set", nargs="*", default=[], help="override input defaults by variable name, e.g. confirmBars=5 mtnStrict=true")
     args = ap.parse_args()
 
     judge = None
@@ -90,7 +92,16 @@ def main():
               for ex in exits:
                 exname = ex or default_of(code, "Exit")
                 tvh.open_pine_editor()
-                tvh.set_pine_source(variant(variant(code, sig), ex, "Exit"))
+                src = variant(variant(code, sig), ex, "Exit")
+                if args.guard:
+                    src = src.replace('input.bool(false, "Market guard', 'input.bool(true, "Market guard')
+                    exname += " +guard"
+                for kv in args.set:
+                    k, v = kv.split("=", 1)
+                    src, n = re.subn(rf"^({re.escape(k)}\s*=\s*input\.\w+\()[^,]+(,)", rf"\g<1>{v}\2", src, count=1, flags=re.M)
+                    if n:
+                        exname += f" {k}={v}"
+                tvh.set_pine_source(src)
                 res = tvh.add_to_chart()
                 if not res["ok"]:
                     print(f"{suite}:{sig}/{exname} did not compile → {res['tail'][-200:]}")
