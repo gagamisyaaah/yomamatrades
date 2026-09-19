@@ -1,0 +1,178 @@
+//@version=5
+// VCP Coil — the volatility-contraction overlay (indicator 1 of 2).
+// Nine contraction "engines" share one entry/exit contract that was backtested on the Strategy-report grid
+// (MRNA, PLTR, NVDA, INTC, IREN, ONDS, SLNH, BITF, CLSK × 4H/D/W). The engine code is identical to the
+// strategy twin in lab/strategies/strat_vcp.pine, so what you see on the chart is what was measured.
+//   • tint    = the coil is armed (contraction detected, waiting for the break)
+//   • line    = the pivot the break must clear
+//   • ▲       = breakout entry (trend + volume filters applied)
+//   • dots    = chandelier stop while the simulated position is open; ✕ = exit
+// Alerts: "Coil armed", "Coil breakout", "Coil exit".
+indicator("VCP Coil", "VCP Coil", overlay=true, max_lines_count=50, max_labels_count=50)
+
+sig      = input.string("ATR percentile", "Engine", options=["TTM squeeze", "BB bandwidth low", "NR7 breakout", "ATR percentile", "Minervini VCP", "Donchian coil", "Inside-bar cluster", "EMA coil thrust", "CHOP-ADX regime"])
+trailK   = input.float(3.0, "Chandelier exit k·ATR", minval=0.5, step=0.5)
+volMult  = input.float(1.2, "Breakout volume ≥ k × SMA20 (0 = off)", minval=0, step=0.1)
+trendOn  = input.bool(true, "Only above 50-EMA")
+showTint = input.bool(true, "Tint armed bars")
+showTbl  = input.bool(true, "Status table")
+
+atr14 = ta.atr(14)
+volOk = volMult == 0 or volume >= volMult * ta.sma(volume, 20)
+trendOk = not trendOn or close > ta.ema(close, 50)
+
+// ── 1. TTM squeeze ──
+bbBasis = ta.sma(close, 20)
+bbDev = 2.0 * ta.stdev(close, 20)
+kcRange = 1.5 * ta.atr(20)
+sqzOn = (bbBasis - bbDev > bbBasis - kcRange) and (bbBasis + bbDev < bbBasis + kcRange)
+mom = ta.linreg(close - math.avg(math.avg(ta.highest(high, 20), ta.lowest(low, 20)), ta.sma(close, 20)), 20, 0)
+var int sqzN = 0
+sqzN := sqzOn ? sqzN + 1 : 0
+ttmEnter = sqzN[1] >= 6 and not sqzOn and mom > 0 and mom > mom[1] and close > bbBasis
+ttmExit  = mom < mom[1] and mom[1] < mom[2]
+
+// ── 2. Bollinger bandwidth at a 125-bar low, then close above the upper band ──
+bw = (2.0 * bbDev) / bbBasis
+bwLow = bw <= ta.lowest(bw, 125) * 1.0001
+var bool bwArmed = false
+bwArmed := bwLow ? true : (close > bbBasis + bbDev or close < bbBasis - bbDev) ? false : bwArmed
+bbEnter = bwArmed[1] and close > bbBasis + bbDev
+bbExit  = close < bbBasis
+
+// ── 3. NR7 ──
+rng = high - low
+nr7 = rng <= ta.lowest(rng, 7)
+var float nr7High = na
+var float nr7Low  = na
+if nr7
+    nr7High := high
+    nr7Low  := low
+nr7Enter = not na(nr7High) and close > nr7High and not nr7
+nr7Exit  = not na(nr7Low) and close < nr7Low
+
+// ── 4. ATR percentile ──
+atrN = atr14 / close
+atrPct = ta.percentrank(atrN, 200)
+atrArmed = atrPct <= 20
+hh20p = ta.highest(high, 20)[1]
+ll10p = ta.lowest(low, 10)[1]
+ll20p = ta.lowest(low, 20)[1]
+atrEnter = atrArmed[1] and close > hh20p
+atrExit  = close < ll10p
+
+// ── 5. Minervini VCP: three successive pullbacks, each shallower; volume dry-up; pivot break ──
+ph = ta.pivothigh(high, 5, 5)
+pl = ta.pivotlow(low, 5, 5)
+var float h1 = na
+var float h2 = na
+var float h3 = na
+var float l1 = na
+var float l2 = na
+var float l3 = na
+if not na(ph)
+    h3 := h2
+    h2 := h1
+    h1 := ph
+if not na(pl)
+    l3 := l2
+    l2 := l1
+    l1 := pl
+d1 = na(h1) or na(l1) ? na : (h1 - l1) / h1
+d2 = na(h2) or na(l2) ? na : (h2 - l2) / h2
+d3 = na(h3) or na(l3) ? na : (h3 - l3) / h3
+vcpShape = not na(d3) and d1 < d2 and d2 < d3 and d1 < 0.12
+volDry = ta.sma(volume, 10) < ta.sma(volume, 50)
+vcpEnter = vcpShape and volDry[1] and close > h1 and volOk
+vcpExit  = close < l1
+
+// ── 6. Donchian coil ──
+dcW = (ta.highest(high, 20) - ta.lowest(low, 20)) / close
+dcCoil = dcW <= ta.lowest(dcW, 100) * 1.0001
+var bool dcArmed = false
+dcArmed := dcCoil ? true : dcArmed
+dcEnter = dcArmed[1] and close > hh20p
+if dcEnter or close < ll20p
+    dcArmed := false
+dcExit = close < ll10p
+
+// ── 7. Inside-bar cluster ──
+inside = high <= high[1] and low >= low[1]
+cluster = inside and inside[1]
+var float motherH = na
+var float motherL = na
+if cluster
+    motherH := math.max(high[1], high[2])
+    motherL := math.min(low[1], low[2])
+ibEnter = not na(motherH) and close > motherH and not inside
+ibExit  = not na(motherL) and close < motherL
+
+// ── 8. EMA 10/20 coil + 1-ADR thrust ──
+ema10 = ta.ema(close, 10)
+ema20 = ta.ema(close, 20)
+ema50 = ta.ema(close, 50)
+adr20 = ta.sma(high - low, 20)
+coil = math.abs(ema10 - ema20) / ema20 < 0.003 and ema50 > ema50[1] and close > ema10 and close > ema20 and close - ema20 < 1.5 * adr20
+var int coilN = 0
+coilN := coil ? coilN + 1 : 0
+coilEnter = coilN[1] >= 2 and close > open and close - open >= adr20
+coilExit  = close < ema20
+
+// ── 9. CHOP-ADX regime ──
+chop = 100 * math.log10(math.sum(ta.tr(true), 14) / (ta.highest(high, 14) - ta.lowest(low, 14))) / math.log10(14)
+[diP, diM, adx] = ta.dmi(14, 14)
+regime = chop > 61.8 and adx < 20
+var int regN = 0
+regN := regime ? regN + 1 : 0
+chopEnter = regN[1] >= 5 and close > hh20p and diP > diM
+chopExit  = chop > 61.8 or close < ll10p
+
+// ── contract ──
+enterRaw = sig == "TTM squeeze" ? ttmEnter : sig == "BB bandwidth low" ? bbEnter : sig == "NR7 breakout" ? nr7Enter : sig == "ATR percentile" ? atrEnter : sig == "Minervini VCP" ? vcpEnter : sig == "Donchian coil" ? dcEnter : sig == "Inside-bar cluster" ? ibEnter : sig == "EMA coil thrust" ? coilEnter : chopEnter
+enter = enterRaw and trendOk and (sig == "Minervini VCP" or volOk)
+exit_ = sig == "TTM squeeze" ? ttmExit : sig == "BB bandwidth low" ? bbExit : sig == "NR7 breakout" ? nr7Exit : sig == "ATR percentile" ? atrExit : sig == "Minervini VCP" ? vcpExit : sig == "Donchian coil" ? dcExit : sig == "Inside-bar cluster" ? ibExit : sig == "EMA coil thrust" ? coilExit : chopExit
+armed = sig == "TTM squeeze" ? sqzOn : sig == "BB bandwidth low" ? bwArmed : sig == "NR7 breakout" ? (not na(nr7High) and close <= nr7High) : sig == "ATR percentile" ? atrArmed : sig == "Minervini VCP" ? (vcpShape and volDry) : sig == "Donchian coil" ? dcArmed : sig == "Inside-bar cluster" ? (not na(motherH) and close <= motherH) : sig == "EMA coil thrust" ? coil : regime
+pivot = sig == "TTM squeeze" ? ta.highest(high, math.max(sqzN, 1)) : sig == "BB bandwidth low" ? bbBasis + bbDev : sig == "NR7 breakout" ? nr7High : sig == "Minervini VCP" ? h1 : sig == "Inside-bar cluster" ? motherH : sig == "EMA coil thrust" ? high[1] : hh20p
+
+// simulated position so the stop and the exit marks match the strategy twin
+hh22 = ta.highest(high, 22)
+var bool inPos = false
+var float trail = na
+entryNow = enter and not inPos
+if entryNow
+    inPos := true
+    trail := hh22 - trailK * atr14
+else if inPos
+    trail := math.max(nz(trail, 0.0), hh22 - trailK * atr14)
+exitNow = inPos and not entryNow and (exit_ or (not na(trail) and close < trail))
+if exitNow
+    inPos := false
+    trail := na
+
+// ── drawing ──
+bgcolor(showTint and armed ? color.new(color.aqua, 88) : na, title="Armed tint")
+plot(armed ? pivot : na, "Pivot", color=color.new(color.orange, 0), style=plot.style_linebr, linewidth=1)
+plotshape(entryNow, "Breakout", shape.triangleup, location.belowbar, color=color.new(color.lime, 0), size=size.small, text="coil")
+plot(inPos ? trail : na, "Chandelier stop", color=color.new(color.red, 0), style=plot.style_circles, linewidth=1)
+plotshape(exitNow, "Exit", shape.xcross, location.abovebar, color=color.new(color.red, 0), size=size.tiny)
+
+alertcondition(armed and not armed[1], "Coil armed", "{{ticker}} {{interval}}: volatility coil armed")
+alertcondition(entryNow, "Coil breakout", "{{ticker}} {{interval}}: coil breakout")
+alertcondition(exitNow, "Coil exit", "{{ticker}} {{interval}}: coil exit")
+
+// ── status table ──
+var table tbl = table.new(position.top_right, 2, 6, border_width=1)
+bwPct = ta.percentrank(bw, 200)
+if showTbl and barstate.islast
+    table.cell(tbl, 0, 0, "Engine", text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, 0, sig, text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 0, 1, "Armed", text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, 1, armed ? "YES" : "no", text_color=color.white, bgcolor=armed ? color.new(color.teal, 0) : color.new(color.gray, 40), text_size=size.small)
+    table.cell(tbl, 0, 2, "ATR% rank", text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, 2, str.tostring(atrPct, "#") + " / 100", text_color=color.white, bgcolor=atrPct <= 20 ? color.new(color.teal, 0) : color.new(color.gray, 40), text_size=size.small)
+    table.cell(tbl, 0, 3, "BBW rank", text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, 3, str.tostring(bwPct, "#") + " / 100", text_color=color.white, bgcolor=bwPct <= 20 ? color.new(color.teal, 0) : color.new(color.gray, 40), text_size=size.small)
+    table.cell(tbl, 0, 4, "Squeeze bars", text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, 4, str.tostring(sqzN), text_color=color.white, bgcolor=sqzN >= 6 ? color.new(color.teal, 0) : color.new(color.gray, 40), text_size=size.small)
+    table.cell(tbl, 0, 5, "Trend / Vol", text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, 5, (trendOk ? "up" : "down") + " / " + (volDry ? "dry" : "wet"), text_color=color.white, bgcolor=trendOk and volDry ? color.new(color.teal, 0) : color.new(color.gray, 40), text_size=size.small)

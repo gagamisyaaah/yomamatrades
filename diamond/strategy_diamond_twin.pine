@@ -1,0 +1,224 @@
+//@version=5
+// Strategy twin of the Startup.io ("Diamond") clones — one signal family at a time (input "Signal") or the
+// whole group ("Diamond group": 2 of 3 diamonds blue AND Mountain ≥ 3). Long AND short (pink mirrors),
+// orders fill at the NEXT OPEN. The status line exposes BH, Alpha, TPW, Bear, Bull, Short, Exp for the lab.
+strategy("Startup.io twin", "SU twin", overlay=true, initial_capital=10000, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, process_orders_on_close=false, calc_on_every_tick=false)
+
+sig = input.string("Echo diamonds", "Signal", options=["Echo diamonds", "Tango diamonds", "Bravo diamonds", "2 of 3 diamonds", "Mountain green", "Hype wave zero", "Gold band", "Diamond total (strict)", "Diamond total (2 of 3)"])
+dirMode = input.string("Long only", "Direction", options=["Long only", "Long + Short"])
+startDate = input.time(timestamp("2018-01-01T00:00:00+0000"), "Backtest from")
+inWin = time >= startDate
+exitMode = input.string("Flip or chandelier", "Exit", options=["Signal flip", "Chandelier 3 ATR", "Target 2R stop 1R", "Time stop 5 bars", "Flip or chandelier"])
+minMove = input.float(10.0, "Min wave travel between diamonds", minval=0)
+
+// waves (same defaults as the indicators)
+signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
+volE = ta.ema(volume, 10)
+svE  = ta.ema(signedVol, 10)
+hype = ta.ema((volE > 0 ? 100.0 * svE / volE : 0.0) / 2.0, 3)
+hypeSig = ta.ema(hype, 5)
+flow = ta.ema(ta.mfi(hlc3, 14) - 50.0, 3)
+flowSig = ta.ema(flow, 5)
+e1 = ta.ema(close, 21)
+e2 = ta.ema(close, 34)
+e3 = ta.ema(close, 55)
+goldTop = math.max(e1, math.max(e2, e3))
+goldBot = math.min(e1, math.min(e2, e3))
+
+diamondEngine(float w, float s) =>
+    var float hi = na
+    var float lo = na
+    hi := na(hi) ? w : math.max(hi, w)
+    lo := na(lo) ? w : math.min(lo, w)
+    travel = hi - lo
+    up = ta.crossover(w, s) and travel >= minMove
+    dn = ta.crossunder(w, s) and travel >= minMove
+    if up or dn
+        hi := w
+        lo := w
+    [up, dn]
+[echoBlue, echoPink]   = diamondEngine(hype, hypeSig)
+[tangoBlue, tangoPink] = diamondEngine(flow, flowSig)
+bravoBlue = ta.crossover(close, goldTop) and hype > hypeSig
+bravoPink = ta.crossunder(close, goldBot) and hype < hypeSig
+
+lastState(bool b, bool p) =>
+    var int st = 0
+    st := b ? 1 : p ? -1 : st
+    st
+stB = lastState(bravoBlue, bravoPink)
+stE = lastState(echoBlue, echoPink)
+stT = lastState(tangoBlue, tangoPink)
+nBlue = (stB == 1 ? 1 : 0) + (stE == 1 ? 1 : 0) + (stT == 1 ? 1 : 0)
+nPink = (stB == -1 ? 1 : 0) + (stE == -1 ? 1 : 0) + (stT == -1 ? 1 : 0)
+
+score = (hype > 0 ? 1 : 0) + (flow > 0 ? 1 : 0) + (close > goldTop ? 1 : 0) + (e1 > e3 and e1 > e1[1] ? 1 : 0)
+
+// ── Diamond total: the four panels read together, the founders' way ──
+// Diamonds count only once "confirmed on the next candle" (the diamond bar's high/low breaks within 3 bars,
+// otherwise the diamond is invalidated). Sun's checklist: above gold support · maxed-out Mountain · triple blue
+// diamonds (2 of 3 minimum) · weak resistance (no purple pivot high within 2 ATR) · Bubble not overheated.
+confirmed(bool b, bool p) =>
+    var int st = 0          // last diamond: 1 blue, -1 pink, 0 none / invalidated
+    var float lvl = na      // that diamond bar's high (blue) or low (pink)
+    var int since = 0
+    var bool ok = false     // confirmed by a close through lvl within 3 bars
+    if b or p
+        st := b ? 1 : -1
+        lvl := b ? high : low
+        since := 0
+        ok := false
+    else
+        since += 1
+    if st == 1 and not ok and close > lvl
+        ok := true
+    if st == -1 and not ok and close < lvl
+        ok := true
+    if not ok and since > 3
+        st := 0
+    ok ? st : 0
+cB = confirmed(bravoBlue, bravoPink)
+cE = confirmed(echoBlue, echoPink)
+cT = confirmed(tangoBlue, tangoPink)
+nBlueC = (cB == 1 ? 1 : 0) + (cE == 1 ? 1 : 0) + (cT == 1 ? 1 : 0)
+nPinkC = (cB == -1 ? 1 : 0) + (cE == -1 ? 1 : 0) + (cT == -1 ? 1 : 0)
+atrD = ta.atr(14)
+phD = ta.pivothigh(high, 5, 5)
+plD = ta.pivotlow(low, 5, 5)
+var float purple = na
+var float green = na
+if not na(phD)
+    purple := phD
+if not na(plD)
+    green := plD
+if not na(purple) and close > purple
+    purple := na
+if not na(green) and close < green
+    green := na
+weakRes = na(purple) or purple - close > 2.0 * atrD
+weakSup = na(green) or close - green > 2.0 * atrD
+bubble = math.max(0.0, (close - ta.ema(close, 200)) / atrD) + (hype > 25 ? 1.0 : 0.0) + (flow > 25 ? 1.0 : 0.0)
+overheated = (timeframe.isdaily or timeframe.isweekly) and bubble >= 6.0
+strict = sig == "Diamond total (strict)"
+totalL = (strict ? nBlueC == 3 and score == 4 : nBlueC >= 2 and score >= 3) and close > goldTop and weakRes and not overheated
+totalS = (strict ? nPinkC == 3 and score == 0 : nPinkC >= 2 and score <= 1) and close < goldBot and weakSup
+grpUp = totalL
+grpDn = totalS
+
+bool enterL = false
+bool exitL = false
+bool enterS = false
+bool exitS = false
+if sig == "Echo diamonds"
+    enterL := echoBlue
+    exitL := echoPink
+    enterS := echoPink
+    exitS := echoBlue
+else if sig == "Tango diamonds"
+    enterL := tangoBlue
+    exitL := tangoPink
+    enterS := tangoPink
+    exitS := tangoBlue
+else if sig == "Bravo diamonds"
+    enterL := bravoBlue
+    exitL := bravoPink
+    enterS := bravoPink
+    exitS := bravoBlue
+else if sig == "2 of 3 diamonds"
+    enterL := nBlue >= 2
+    exitL := nPink >= 2
+    enterS := nPink >= 2
+    exitS := nBlue >= 2
+else if sig == "Mountain green"
+    enterL := score >= 3
+    exitL := score < 3
+    enterS := score <= 1
+    exitS := score > 1
+else if sig == "Hype wave zero"
+    enterL := hype > 0
+    exitL := hype <= 0
+    enterS := hype < 0
+    exitS := hype >= 0
+else if sig == "Gold band"
+    enterL := close > goldTop
+    exitL := close < goldBot
+    enterS := close < goldBot
+    exitS := close > goldTop
+else
+    enterL := grpUp and not grpUp[1]
+    exitL := nPinkC >= 2 or score <= 2 or close < goldBot      // "prices continue up until green columns turn grey again"; gold breached by a close
+    enterS := grpDn and not grpDn[1]
+    exitS := nBlueC >= 2 or score >= 2 or close > goldTop
+
+// ── exits (the knob that turns a signal into profit per trade) ──
+hh22 = ta.highest(high, 22)
+ll22 = ta.lowest(low, 22)
+var float trail = na
+if strategy.position_size > 0
+    trail := math.max(nz(trail, 0.0), hh22 - 3.0 * atrD)
+else if strategy.position_size < 0
+    trail := math.min(nz(trail, 1e12), ll22 + 3.0 * atrD)
+else
+    trail := na
+eb = strategy.opentrades > 0 ? strategy.opentrades.entry_bar_index(strategy.opentrades - 1) : na
+barsIn = na(eb) ? 0 : bar_index - eb
+var float rAtEntry = na
+if strategy.position_size != 0 and barsIn == 0
+    rAtEntry := 1.5 * atrD
+px = strategy.position_avg_price
+xTrailL = not na(trail) and close < trail
+xTrailS = not na(trail) and close > trail
+xTgtL = close >= px + 2.0 * rAtEntry or close <= px - rAtEntry
+xTgtS = close <= px - 2.0 * rAtEntry or close >= px + rAtEntry
+xTime = barsIn >= 5
+xL = exitMode == "Signal flip" ? exitL : exitMode == "Chandelier 3 ATR" ? xTrailL : exitMode == "Target 2R stop 1R" ? xTgtL : exitMode == "Time stop 5 bars" ? xTime : (exitL or xTrailL)
+xS = exitMode == "Signal flip" ? exitS : exitMode == "Chandelier 3 ATR" ? xTrailS : exitMode == "Target 2R stop 1R" ? xTgtS : exitMode == "Time stop 5 bars" ? xTime : (exitS or xTrailS)
+
+if inWin and enterL and strategy.position_size <= 0
+    strategy.entry("L", strategy.long)
+if inWin and enterS and strategy.position_size >= 0 and dirMode == "Long + Short"
+    strategy.entry("S", strategy.short)
+if xL and strategy.position_size > 0
+    strategy.close("L")
+if xS and strategy.position_size < 0
+    strategy.close("S")
+
+// ── metrics in the status line (the lab reads these from the legend) ──
+var float c0 = na
+var int t0 = na
+if inWin and na(c0)
+    c0 := close
+    t0 := time
+bhPct = na(c0) ? na : (close / c0 - 1.0) * 100.0
+netPct = strategy.netprofit / strategy.initial_capital * 100.0
+weeks = na(t0) ? 1.0 : math.max(1.0, (time - t0) / 604800000.0)
+tpw = strategy.closedtrades / weeks
+spx = request.security("SP:SPX", timeframe.period, close)
+regLen = timeframe.isweekly ? 40 : timeframe.isintraday ? 300 : 200
+bullMkt = spx > ta.sma(spx, regLen)
+var bool[] regimes = array.new_bool()
+array.push(regimes, bullMkt)
+var float bearPnl = 0.0
+var float bullPnl = 0.0
+var float shortPnl = 0.0
+if strategy.closedtrades > nz(strategy.closedtrades[1])
+    for i = nz(strategy.closedtrades[1]) to strategy.closedtrades - 1
+        p = strategy.closedtrades.profit(i) / strategy.initial_capital * 100.0
+        if array.get(regimes, strategy.closedtrades.entry_bar_index(i))
+            bullPnl += p
+        else
+            bearPnl += p
+        if strategy.closedtrades.size(i) < 0
+            shortPnl += p
+var int inBars = 0
+var int winBars = 0
+inBars += strategy.position_size != 0 ? 1 : 0
+winBars += inWin ? 1 : 0
+expPct = inBars / math.max(winBars, 1) * 100.0
+plot(bhPct, "BH", display=display.status_line)
+plot(netPct - bhPct, "Alpha", display=display.status_line)
+plot(tpw, "TPW", display=display.status_line)
+plot(bearPnl, "Bear", display=display.status_line)
+plot(bullPnl, "Bull", display=display.status_line)
+plot(shortPnl, "Short", display=display.status_line)
+plot(expPct, "Exp", display=display.status_line)

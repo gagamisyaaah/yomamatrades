@@ -1,0 +1,5 @@
+suite,signal,tf,cells,valid,median_pf,pf_gt1,median_net,median_dd,median_win,trades,typesafe_rob,score
+vcp,TTM squeeze,all,15,10,1.05,0.5,1.8,15.8,42.3,91,0.36,0.443
+vcp,TTM squeeze,240,5,4,0.72,0.25,-6.7,17.5,38.1,36,0.24,0.148
+vcp,TTM squeeze,D,5,4,1.45,0.5,14.6,20.5,37.5,46,0.55,0.576
+vcp,TTM squeeze,W,5,2,10.0,1.0,122.1,11.5,75.0,9,0.23,8.845

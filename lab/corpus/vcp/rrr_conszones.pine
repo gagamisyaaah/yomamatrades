@@ -1,0 +1,96 @@
+// This Pine Script® code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © RiskReaperReward
+
+//@version=6
+indicator("Consolidation Zones (Range + ATR + optional ADX)", overlay=true, max_boxes_count=200)
+
+// Inputs
+lenRange   = input.int(20, "Range Lookback (bars)", minval=5)
+rangePctTh = input.float(0.80, "Max Range % of Price", step=0.05)
+
+lenATR     = input.int(14, "ATR Length", minval=1)
+atrPctTh   = input.float(0.60, "Max ATR % of Price", step=0.05)
+
+useADX     = input.bool(true, "Use ADX filter?")
+lenADX     = input.int(14, "ADX Length", minval=1)
+adxMax     = input.float(18.0, "Max ADX", step=0.5)
+
+minBars    = input.int(8, "Min bars to qualify a zone", minval=1)
+
+// Styling
+shadeOn    = input.bool(true, "Shade background during consolidation")
+boxOn      = input.bool(true, "Draw boxes around zones")
+showLabels = input.bool(false, "Show start/end labels")
+
+// Metrics
+hh = ta.highest(high, lenRange)
+ll = ta.lowest(low,  lenRange)
+rangePct = (hh - ll) / close * 100.0
+
+atr = ta.atr(lenATR)
+atrPct = atr / close * 100.0
+
+// ADX (compatible): get it from DMI
+[plusDI, minusDI, adx] = ta.dmi(lenADX, lenADX)
+
+// Consolidation condition
+baseConsol = rangePct <= rangePctTh and atrPct <= atrPctTh 
+consol = useADX ? (baseConsol and adx <= adxMax) : baseConsol
+
+// Background shading
+bgcolor(shadeOn and consol ? color.new(color.gray, 85) : na)
+
+// Zone tracking + box drawing
+var bool inZone = false
+var int  zoneStart = na
+var float zoneHigh = na
+var float zoneLow  = na
+var box zoneBox = na
+
+if consol and not inZone
+    inZone := true
+    zoneStart := bar_index
+    zoneHigh := high
+    zoneLow  := low
+    if boxOn
+        zoneBox := box.new(bar_index, high, bar_index, low,
+            border_color=color.new(color.gray, 20),
+            bgcolor=color.new(color.gray, 88))
+    if showLabels
+        label.new(bar_index, high, "Consol start",
+            style=label.style_label_down, textcolor=color.white, color=color.new(color.gray, 0))
+
+if consol and inZone
+    zoneHigh := math.max(zoneHigh, high)
+    zoneLow  := math.min(zoneLow,  low)
+    if boxOn and not na(zoneBox)
+        box.set_right(zoneBox, bar_index)
+        box.set_top(zoneBox, zoneHigh)
+        box.set_bottom(zoneBox, zoneLow)
+
+if (not consol) and inZone
+    zoneBars = bar_index - zoneStart
+    if zoneBars < minBars and boxOn and not na(zoneBox)
+        box.delete(zoneBox)
+    else
+        if boxOn and not na(zoneBox)
+            box.set_border_color(zoneBox, color.new(#47c447, 0))
+            box.set_bgcolor(zoneBox, color.new(color.silver, 88))
+        if showLabels
+            label.new(bar_index, zoneHigh, "Consol end",
+                style=label.style_label_down, textcolor=color.white, color=color.new(color.silver, 0))
+
+    inZone := false
+    zoneStart := na
+    zoneHigh := na
+    zoneLow  := na
+    zoneBox := na
+
+// Data window helpers
+plot(rangePct, "Range %", display=display.data_window)
+plot(atrPct,   "ATR %",   display=display.data_window)
+plot(useADX ? adx : na, "ADX", display=display.data_window)
+
+// Alerts
+alertcondition(consol and not consol[1], "Consolidation Started", "Consolidation started") 
+alertcondition((not consol) and consol[1], "Consolidation Ended", "Consolidation ended")

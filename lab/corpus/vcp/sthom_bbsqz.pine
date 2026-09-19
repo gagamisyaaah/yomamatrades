@@ -1,0 +1,52 @@
+// This source code is subject to the terms of the Mozilla Public License 2.0 at https://mozilla.org/MPL/2.0/
+// © SThom27
+//@version=4
+//Bollinger Bands w/ Squeeze Alert
+study(shorttitle="BB", title="Bollinger Bands", overlay=true, resolution="")
+
+//Variables
+length = input(20, minval=1)
+src = input(close, title="Source")
+mult = input(2.0, minval=0.001, maxval=50, title="StdDev")
+offset = input(0, "Offset", type = input.integer, minval = -500, maxval = 500)
+comp_len=input(125, "Back comparison period for squeeze detection (bars)")
+use_complicated = input(title="Use complicated version", type=input.bool, defval=false)
+show_bulge = input(title="Show Bulge", type=input.bool, defval=false)
+
+//Bollinger Bands
+[basis, upper, lower] = bb(src, length, mult)
+
+//Calculate BandWidth
+bandWidth = bbw(src, length, mult)
+squeeze = lowest(bandWidth, comp_len)
+bulge = highest(bandWidth, comp_len)
+var c = color.new(color.blue, 95)
+
+//Calculate Complicated Squeeze
+comp_squeeze_basis = stdev(src, 20)
+[middle, comp_upper, comp_lower] = bb(comp_squeeze_basis, comp_len, 1.5)
+
+//Assign fill colors
+if use_complicated and not show_bulge
+    c := bandWidth<=squeeze or comp_squeeze_basis<=comp_lower ? color.new(color.red, 50) : color.new(color.blue, 95)
+else if not use_complicated and show_bulge
+    c := bandWidth<=squeeze ? color.new(color.red, 50) : bandWidth>=bulge and bandWidth>= bandWidth[1] ? color.new(color.green, 50) : color.new(color.blue, 95)
+else if use_complicated and show_bulge
+    c := bandWidth<=squeeze or comp_squeeze_basis<=comp_lower ? color.new(color.red, 50) : bandWidth>=bulge or (comp_squeeze_basis>=comp_upper and bandWidth>=bandWidth[1]) ? color.new(color.green, 50) : color.new(color.blue, 95)
+else
+    c := bandWidth<=squeeze ? color.new(color.red, 50) : color.new(color.blue, 95)
+
+//Plot the Bands
+plot(basis, "Basis", color=color.white, offset = offset)
+p1 = plot(upper, "Upper", color=color.teal, offset = offset)
+p2 = plot(lower, "Lower", color=color.teal, offset = offset)
+fill(p1, p2, title = "Background", color = c)
+
+
+
+
+
+
+
+
+

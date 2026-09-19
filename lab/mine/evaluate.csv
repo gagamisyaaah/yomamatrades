@@ -1,0 +1,221 @@
+rule,exit,sample,n,total,win,avg,med,avg_atr,pf,per_wk,tick_pos,bear_n,bear_avg,excess_avg_vs_random
+Dragon: all 7 panels,time5,train,3374,3345.9,0.52,0.99,0.25,0.17,1.33,8.88,0.64,603,-0.23,0.43
+Dragon: all 7 panels,time5,TEST,2219,1283.3,0.499,0.58,0.0,0.11,1.15,15.67,0.56,54,4.99,-0.49
+Dragon: all 7 panels,time10,train,3374,6223.2,0.528,1.84,0.59,0.35,1.44,8.88,0.66,603,0.18,0.56
+Dragon: all 7 panels,time10,TEST,2219,6815.1,0.539,3.07,1.07,0.52,1.64,15.67,0.68,54,9.76,0.96
+Dragon: all 7 panels,flip,train,3374,3365.6,0.38,1.0,-1.06,0.17,1.39,8.88,0.56,603,-0.19,-0.58
+Dragon: all 7 panels,flip,TEST,2219,537.5,0.358,0.24,-1.64,0.07,1.07,15.67,0.49,54,5.97,-2.77
+Dragon: all 7 panels,bracket,train,3374,3910.3,0.389,1.16,-4.11,0.23,1.27,8.88,0.68,603,0.92,-0.03
+Dragon: all 7 panels,bracket,TEST,2219,1961.3,0.376,0.88,-4.86,0.17,1.18,15.67,0.6,54,8.59,-0.79
+Dragon: all 7 panels,trail,train,3374,14765.0,0.442,4.38,-2.36,0.96,1.81,8.88,0.7,603,4.96,0.28
+Dragon: all 7 panels,trail,TEST,2219,9214.1,0.439,4.15,-2.28,0.81,1.65,15.67,0.62,54,22.77,-1.71
+Dragon: 6 of 7,time5,train,5386,4827.5,0.535,0.9,0.36,0.19,1.36,14.17,0.63,1123,0.35,0.34
+Dragon: 6 of 7,time5,TEST,2933,2072.8,0.508,0.71,0.13,0.18,1.2,20.72,0.62,81,4.46,-0.36
+Dragon: 6 of 7,time10,train,5386,9179.4,0.545,1.7,0.71,0.38,1.49,14.17,0.73,1123,1.07,0.42
+Dragon: 6 of 7,time10,TEST,2933,7305.2,0.525,2.49,0.66,0.48,1.53,20.72,0.71,81,8.8,0.38
+Dragon: 6 of 7,flip,train,5386,8037.6,0.374,1.49,-1.07,0.31,1.58,14.17,0.7,1123,1.02,-0.09
+Dragon: 6 of 7,flip,TEST,2933,4327.9,0.352,1.48,-1.8,0.29,1.42,20.72,0.59,81,11.04,-1.53
+Dragon: 6 of 7,bracket,train,5386,6272.9,0.407,1.16,-3.05,0.31,1.31,14.17,0.71,1123,1.24,-0.03
+Dragon: 6 of 7,bracket,TEST,2933,3539.1,0.39,1.21,-4.21,0.24,1.26,20.72,0.63,81,10.89,-0.46
+Dragon: 6 of 7,trail,train,5386,21175.3,0.467,3.93,-1.03,1.03,1.84,14.17,0.73,1123,4.65,-0.17
+Dragon: 6 of 7,trail,TEST,2933,10350.9,0.436,3.53,-2.41,0.71,1.57,20.72,0.6,81,23.27,-2.33
+Dragon: 5 of 7,time5,train,4522,5059.4,0.531,1.12,0.33,0.22,1.44,11.9,0.77,1116,0.58,0.56
+Dragon: 5 of 7,time5,TEST,2558,1468.1,0.5,0.57,0.0,0.16,1.16,18.07,0.65,136,3.25,-0.5
+Dragon: 5 of 7,time10,train,4522,9077.0,0.547,2.01,0.63,0.42,1.56,11.9,0.8,1116,1.76,0.73
+Dragon: 5 of 7,time10,TEST,2558,5599.5,0.516,2.19,0.46,0.44,1.46,18.07,0.71,136,8.96,0.08
+Dragon: 5 of 7,flip,train,4522,10668.5,0.371,2.36,-1.43,0.54,1.76,11.9,0.74,1116,1.43,0.78
+Dragon: 5 of 7,flip,TEST,2558,6125.7,0.344,2.39,-2.42,0.51,1.54,18.07,0.66,136,11.53,-0.62
+Dragon: 5 of 7,bracket,train,4522,6674.0,0.412,1.48,-3.13,0.34,1.38,11.9,0.78,1116,1.62,0.29
+Dragon: 5 of 7,bracket,TEST,2558,2578.0,0.384,1.01,-4.58,0.21,1.21,18.07,0.63,136,8.81,-0.66
+Dragon: 5 of 7,trail,train,4522,19771.8,0.465,4.37,-1.09,1.0,1.88,11.9,0.8,1116,5.07,0.27
+Dragon: 5 of 7,trail,TEST,2558,10358.7,0.44,4.05,-2.69,0.8,1.64,18.07,0.69,136,25.07,-1.81
+Dragon: red candle confirmed + ribbon red + whales≥50,time5,train,3124,3173.2,0.536,1.02,0.41,0.22,1.39,8.22,0.64,651,0.06,0.46
+Dragon: red candle confirmed + ribbon red + whales≥50,time5,TEST,1881,765.1,0.494,0.41,-0.03,0.14,1.11,13.29,0.57,60,3.66,-0.66
+Dragon: red candle confirmed + ribbon red + whales≥50,time10,train,3124,6830.5,0.541,2.19,0.72,0.42,1.61,8.22,0.73,651,0.58,0.91
+Dragon: red candle confirmed + ribbon red + whales≥50,time10,TEST,1881,3873.0,0.521,2.06,0.54,0.42,1.41,13.29,0.62,60,8.26,-0.05
+Dragon: red candle confirmed + ribbon red + whales≥50,flip,train,3124,6789.7,0.414,2.17,-1.21,0.44,1.72,8.22,0.77,651,0.35,0.59
+Dragon: red candle confirmed + ribbon red + whales≥50,flip,TEST,1881,2614.8,0.38,1.39,-2.16,0.29,1.32,13.29,0.59,60,11.73,-1.62
+Dragon: red candle confirmed + ribbon red + whales≥50,bracket,train,3124,4501.1,0.407,1.44,-3.38,0.31,1.36,8.22,0.63,651,1.01,0.25
+Dragon: red candle confirmed + ribbon red + whales≥50,bracket,TEST,1881,1603.5,0.377,0.85,-4.6,0.18,1.17,13.29,0.52,60,7.84,-0.82
+Dragon: red candle confirmed + ribbon red + whales≥50,trail,train,3124,14912.6,0.461,4.77,-1.35,1.04,1.97,8.22,0.77,651,4.73,0.67
+Dragon: red candle confirmed + ribbon red + whales≥50,trail,TEST,1881,6145.8,0.431,3.27,-2.94,0.65,1.5,13.29,0.61,60,19.51,-2.59
+Dragon: hole BROKE UP + whales≥50 + TE up,time5,train,2529,3153.3,0.534,1.25,0.44,0.23,1.46,6.66,0.69,532,0.11,0.69
+Dragon: hole BROKE UP + whales≥50 + TE up,time5,TEST,1509,1712.9,0.5,1.14,0.01,0.2,1.32,10.66,0.61,45,5.51,0.07
+Dragon: hole BROKE UP + whales≥50 + TE up,time10,train,2529,4537.1,0.535,1.79,0.62,0.37,1.47,6.66,0.71,532,0.58,0.51
+Dragon: hole BROKE UP + whales≥50 + TE up,time10,TEST,1509,4847.0,0.524,3.21,0.61,0.55,1.68,10.66,0.69,45,8.89,1.1
+Dragon: hole BROKE UP + whales≥50 + TE up,flip,train,2529,16129.4,0.399,6.38,-2.81,1.38,2.28,6.66,0.67,532,7.76,4.8
+Dragon: hole BROKE UP + whales≥50 + TE up,flip,TEST,1509,11550.4,0.387,7.65,-3.76,1.35,2.22,10.66,0.67,45,24.95,4.64
+Dragon: hole BROKE UP + whales≥50 + TE up,bracket,train,2529,3225.6,0.403,1.28,-3.41,0.3,1.31,6.66,0.69,532,1.09,0.09
+Dragon: hole BROKE UP + whales≥50 + TE up,bracket,TEST,1509,1612.9,0.384,1.07,-4.51,0.2,1.22,10.66,0.61,45,9.77,-0.6
+Dragon: hole BROKE UP + whales≥50 + TE up,trail,train,2529,10307.2,0.453,4.08,-1.56,0.97,1.79,6.66,0.72,532,4.44,-0.02
+Dragon: hole BROKE UP + whales≥50 + TE up,trail,TEST,1509,6420.4,0.447,4.25,-2.06,0.85,1.7,10.66,0.73,45,21.23,-1.61
+Dragon: SS candle only (J>50),time5,train,7272,3745.6,0.514,0.52,0.2,0.14,1.16,19.14,0.66,2230,-0.19,-0.04
+Dragon: SS candle only (J>50),time5,TEST,4069,3608.1,0.513,0.89,0.26,0.16,1.26,28.74,0.73,370,1.65,-0.18
+Dragon: SS candle only (J>50),time10,train,7272,11798.4,0.524,1.62,0.41,0.36,1.38,19.14,0.77,2230,1.2,0.34
+Dragon: SS candle only (J>50),time10,TEST,4069,9528.1,0.518,2.34,0.41,0.39,1.52,28.74,0.89,370,6.08,0.23
+Dragon: SS candle only (J>50),flip,train,7272,9885.5,0.359,1.36,-1.58,0.28,1.4,19.14,0.7,2230,0.67,-0.22
+Dragon: SS candle only (J>50),flip,TEST,4069,7137.0,0.357,1.75,-2.26,0.3,1.47,28.74,0.8,370,6.88,-1.26
+Dragon: SS candle only (J>50),bracket,train,7272,8796.9,0.402,1.21,-3.76,0.28,1.24,19.14,0.72,2230,1.57,0.02
+Dragon: SS candle only (J>50),bracket,TEST,4069,7910.5,0.408,1.94,-4.6,0.31,1.37,28.74,0.83,370,8.95,0.27
+Dragon: SS candle only (J>50),trail,train,7272,31037.8,0.449,4.27,-1.76,0.83,1.68,19.14,0.9,2230,5.58,0.17
+Dragon: SS candle only (J>50),trail,TEST,4069,21325.0,0.443,5.24,-2.36,0.76,1.78,28.74,0.84,370,25.45,-0.62
+Dragon: whales ≥ 75 (surge zone) + candle red,time5,train,2506,2805.6,0.539,1.12,0.54,0.23,1.41,6.59,0.69,405,0.27,0.56
+Dragon: whales ≥ 75 (surge zone) + candle red,time5,TEST,1605,1232.8,0.496,0.77,-0.06,0.17,1.2,11.34,0.65,30,3.04,-0.3
+Dragon: whales ≥ 75 (surge zone) + candle red,time10,train,2506,7515.7,0.554,3.0,0.94,0.57,1.81,6.59,0.72,405,1.24,1.72
+Dragon: whales ≥ 75 (surge zone) + candle red,time10,TEST,1605,3951.5,0.517,2.46,0.44,0.48,1.49,11.34,0.63,30,9.99,0.35
+Dragon: whales ≥ 75 (surge zone) + candle red,flip,train,2506,6698.7,0.402,2.67,-1.21,0.51,1.89,6.59,0.7,405,1.35,1.09
+Dragon: whales ≥ 75 (surge zone) + candle red,flip,TEST,1605,2713.3,0.36,1.69,-2.27,0.31,1.4,11.34,0.57,30,12.36,-1.32
+Dragon: whales ≥ 75 (surge zone) + candle red,bracket,train,2506,4213.3,0.417,1.68,-3.22,0.37,1.43,6.59,0.73,405,1.37,0.49
+Dragon: whales ≥ 75 (surge zone) + candle red,bracket,TEST,1605,1158.9,0.378,0.72,-4.6,0.18,1.14,11.34,0.6,30,6.29,-0.95
+Dragon: whales ≥ 75 (surge zone) + candle red,trail,train,2506,13281.7,0.47,5.3,-0.91,1.11,2.1,6.59,0.7,405,5.87,1.2
+Dragon: whales ≥ 75 (surge zone) + candle red,trail,TEST,1605,4898.7,0.421,3.05,-2.9,0.64,1.44,11.34,0.61,30,21.05,-2.81
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",time5,train,511,-39.1,0.517,-0.08,0.2,0.04,0.98,1.34,0.48,106,-1.73,-0.64
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",time5,TEST,338,872.4,0.521,2.58,0.47,0.37,1.76,2.39,0.53,10,5.45,1.51
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",time10,train,511,863.0,0.536,1.69,0.54,0.38,1.39,1.34,0.59,106,-1.87,0.41
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",time10,TEST,338,1319.9,0.53,3.9,1.23,0.54,1.78,2.39,0.55,10,7.45,1.79
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",flip,train,511,1675.1,0.35,3.28,-1.91,0.53,1.81,1.34,0.48,106,-0.08,1.7
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",flip,TEST,338,1945.4,0.388,5.76,-2.87,0.8,2.11,2.39,0.46,10,17.14,2.75
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",bracket,train,511,541.5,0.401,1.06,-3.6,0.27,1.25,1.34,0.57,106,-0.71,-0.13
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",bracket,TEST,338,422.3,0.408,1.25,-4.68,0.31,1.25,2.39,0.55,10,5.67,-0.42
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",trail,train,511,2099.1,0.462,4.11,-1.21,1.09,1.78,1.34,0.64,106,0.34,0.01
+"Diamond: strict (3 confirmed blue, Mountain 4, above gold, not overheated)",trail,TEST,338,1376.0,0.447,4.07,-1.11,0.78,1.59,2.39,0.5,10,25.33,-1.79
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,time5,train,2932,2105.1,0.516,0.72,0.17,0.16,1.26,7.72,0.58,677,0.2,0.16
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,time5,TEST,1768,977.0,0.501,0.55,0.03,0.16,1.16,12.49,0.63,68,2.38,-0.52
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,time10,train,2932,5523.1,0.541,1.88,0.55,0.4,1.52,7.72,0.71,677,1.23,0.6
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,time10,TEST,1768,4375.7,0.512,2.47,0.28,0.47,1.52,12.49,0.76,68,8.41,0.36
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,flip,train,2932,8054.9,0.347,2.75,-1.69,0.53,1.81,7.72,0.64,677,2.35,1.17
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,flip,TEST,1768,6157.0,0.336,3.48,-2.62,0.6,1.76,12.49,0.66,68,10.56,0.47
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,bracket,train,2932,3784.4,0.407,1.29,-3.3,0.32,1.33,7.72,0.68,677,1.35,0.1
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,bracket,TEST,1768,1176.6,0.375,0.67,-4.67,0.17,1.13,12.49,0.55,68,5.25,-1.0
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,trail,train,2932,12723.9,0.465,4.34,-1.07,0.95,1.87,7.72,0.73,677,4.79,0.24
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold,trail,TEST,1768,6623.0,0.44,3.75,-2.69,0.73,1.58,12.49,0.68,68,21.1,-2.11
+"Diamond: 2 of 3 blue (last state, unconfirmed)",time5,train,4807,1027.2,0.498,0.21,0.0,0.09,1.06,12.65,0.61,1500,0.0,-0.35
+"Diamond: 2 of 3 blue (last state, unconfirmed)",time5,TEST,2796,3043.5,0.508,1.09,0.22,0.17,1.32,19.75,0.65,245,3.34,0.02
+"Diamond: 2 of 3 blue (last state, unconfirmed)",time10,train,4807,5982.9,0.514,1.24,0.26,0.3,1.27,12.65,0.7,1500,1.01,-0.04
+"Diamond: 2 of 3 blue (last state, unconfirmed)",time10,TEST,2796,7101.4,0.519,2.54,0.49,0.39,1.56,19.75,0.79,245,8.51,0.43
+"Diamond: 2 of 3 blue (last state, unconfirmed)",flip,train,4807,7380.6,0.447,1.54,-0.9,0.32,1.34,12.65,0.73,1500,0.47,-0.04
+"Diamond: 2 of 3 blue (last state, unconfirmed)",flip,TEST,2796,6073.2,0.44,2.17,-1.22,0.38,1.47,19.75,0.71,245,6.27,-0.84
+"Diamond: 2 of 3 blue (last state, unconfirmed)",bracket,train,4807,4875.4,0.393,1.01,-3.94,0.24,1.2,12.65,0.72,1500,1.45,-0.18
+"Diamond: 2 of 3 blue (last state, unconfirmed)",bracket,TEST,2796,5396.0,0.412,1.93,-4.58,0.31,1.36,19.75,0.73,245,8.5,0.26
+"Diamond: 2 of 3 blue (last state, unconfirmed)",trail,train,4807,19067.1,0.443,3.97,-2.21,0.74,1.6,12.65,0.76,1500,4.65,-0.13
+"Diamond: 2 of 3 blue (last state, unconfirmed)",trail,TEST,2796,15379.2,0.451,5.5,-2.31,0.83,1.82,19.75,0.86,245,26.99,-0.36
+Diamond: 3 of 3 blue + Mountain green (≥3),time5,train,2620,1427.6,0.508,0.54,0.1,0.14,1.18,6.89,0.58,575,-0.41,-0.02
+Diamond: 3 of 3 blue + Mountain green (≥3),time5,TEST,1580,318.5,0.477,0.2,-0.27,0.1,1.05,11.16,0.59,66,3.14,-0.87
+Diamond: 3 of 3 blue + Mountain green (≥3),time10,train,2620,3849.7,0.53,1.47,0.4,0.34,1.39,6.89,0.72,575,0.02,0.19
+Diamond: 3 of 3 blue + Mountain green (≥3),time10,TEST,1580,3241.5,0.492,2.05,-0.23,0.42,1.41,11.16,0.71,66,7.75,-0.06
+Diamond: 3 of 3 blue + Mountain green (≥3),flip,train,2620,1362.8,0.393,0.52,-0.87,0.13,1.22,6.89,0.51,575,-0.33,-1.06
+Diamond: 3 of 3 blue + Mountain green (≥3),flip,TEST,1580,420.0,0.361,0.27,-1.54,0.08,1.08,11.16,0.53,66,3.29,-2.74
+Diamond: 3 of 3 blue + Mountain green (≥3),bracket,train,2620,2824.8,0.402,1.08,-3.36,0.29,1.26,6.89,0.64,575,0.46,-0.11
+Diamond: 3 of 3 blue + Mountain green (≥3),bracket,TEST,1580,411.8,0.366,0.26,-5.03,0.13,1.05,11.16,0.54,66,7.31,-1.41
+Diamond: 3 of 3 blue + Mountain green (≥3),trail,train,2620,11541.9,0.466,4.41,-1.16,0.98,1.84,6.89,0.73,575,3.38,0.31
+Diamond: 3 of 3 blue + Mountain green (≥3),trail,TEST,1580,4559.9,0.423,2.89,-3.59,0.61,1.4,11.16,0.6,66,19.79,-2.97
+Diamond: Echo blue diamond confirmed,time5,train,3822,609.1,0.49,0.16,-0.04,0.07,1.05,10.06,0.53,1124,-0.44,-0.4
+Diamond: Echo blue diamond confirmed,time5,TEST,2133,628.9,0.492,0.29,-0.09,0.08,1.08,15.07,0.56,145,3.13,-0.78
+Diamond: Echo blue diamond confirmed,time10,train,3822,5060.4,0.516,1.32,0.27,0.26,1.3,10.06,0.73,1124,0.72,0.04
+Diamond: Echo blue diamond confirmed,time10,TEST,2133,4459.0,0.511,2.09,0.24,0.37,1.46,15.07,0.74,145,8.35,-0.02
+Diamond: Echo blue diamond confirmed,flip,train,3822,2243.7,0.449,0.59,-0.62,0.15,1.17,10.06,0.59,1124,-0.08,-0.99
+Diamond: Echo blue diamond confirmed,flip,TEST,2133,2009.1,0.457,0.94,-0.66,0.17,1.26,15.07,0.64,145,5.75,-2.07
+Diamond: Echo blue diamond confirmed,bracket,train,3822,3538.9,0.392,0.93,-3.83,0.23,1.19,10.06,0.68,1124,1.35,-0.26
+Diamond: Echo blue diamond confirmed,bracket,TEST,2133,2644.3,0.39,1.24,-4.7,0.22,1.24,15.07,0.7,145,9.35,-0.43
+Diamond: Echo blue diamond confirmed,trail,train,3822,13522.9,0.439,3.54,-2.16,0.71,1.57,10.06,0.79,1124,5.48,-0.56
+Diamond: Echo blue diamond confirmed,trail,TEST,2133,9835.3,0.442,4.61,-2.19,0.74,1.7,15.07,0.78,145,24.2,-1.25
+Diamond: Mountain maxed (4) + above gold,time5,train,3815,2761.8,0.524,0.72,0.24,0.16,1.27,10.04,0.69,775,0.22,0.16
+Diamond: Mountain maxed (4) + above gold,time5,TEST,2219,2006.3,0.499,0.9,0.0,0.2,1.25,15.67,0.61,74,2.05,-0.17
+Diamond: Mountain maxed (4) + above gold,time10,train,3815,8472.6,0.539,2.22,0.63,0.46,1.59,10.04,0.72,775,0.71,0.94
+Diamond: Mountain maxed (4) + above gold,time10,TEST,2219,5516.7,0.523,2.49,0.67,0.49,1.51,15.67,0.68,74,8.61,0.38
+Diamond: Mountain maxed (4) + above gold,flip,train,3815,11295.7,0.333,2.96,-1.69,0.76,1.9,10.04,0.64,775,3.33,1.38
+Diamond: Mountain maxed (4) + above gold,flip,TEST,2219,9055.5,0.316,4.08,-2.78,0.76,1.9,15.67,0.67,74,10.59,1.07
+Diamond: Mountain maxed (4) + above gold,bracket,train,3815,5210.3,0.406,1.37,-3.31,0.31,1.34,10.04,0.67,775,1.2,0.18
+Diamond: Mountain maxed (4) + above gold,bracket,TEST,2219,1903.9,0.39,0.86,-4.58,0.23,1.16,15.67,0.61,74,5.29,-0.81
+Diamond: Mountain maxed (4) + above gold,trail,train,3815,18352.6,0.47,4.81,-1.05,1.06,1.97,10.04,0.74,775,4.59,0.71
+Diamond: Mountain maxed (4) + above gold,trail,TEST,2219,8531.4,0.438,3.84,-2.46,0.83,1.58,15.67,0.7,74,21.26,-2.02
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,time5,train,2529,3153.3,0.534,1.25,0.44,0.23,1.46,6.66,0.69,532,0.11,0.69
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,time5,TEST,1509,1712.9,0.5,1.14,0.01,0.2,1.32,10.66,0.61,45,5.51,0.07
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,time10,train,2529,4537.1,0.535,1.79,0.62,0.37,1.47,6.66,0.71,532,0.58,0.51
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,time10,TEST,1509,4847.0,0.524,3.21,0.61,0.55,1.68,10.66,0.69,45,8.89,1.1
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,flip,train,2529,7777.6,0.483,3.08,-0.49,0.59,1.7,6.66,0.75,532,2.49,1.5
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,flip,TEST,1509,5892.5,0.458,3.9,-1.6,0.66,1.69,10.66,0.66,45,14.08,0.89
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,bracket,train,2529,3225.6,0.403,1.28,-3.41,0.3,1.31,6.66,0.69,532,1.09,0.09
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,bracket,TEST,1509,1612.9,0.384,1.07,-4.51,0.2,1.22,10.66,0.61,45,9.77,-0.6
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,trail,train,2529,10307.2,0.453,4.08,-1.56,0.97,1.79,6.66,0.72,532,4.44,-0.02
+Dragon: hole BROKE UP + whales≥50 + TE up — exit flip OR overheated,trail,TEST,1509,6420.4,0.447,4.25,-2.06,0.85,1.7,10.66,0.73,45,21.23,-1.61
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,time5,train,3214,4312.3,0.53,1.34,0.38,0.23,1.49,8.46,0.64,620,0.3,0.78
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,time5,TEST,1943,3264.7,0.522,1.68,0.44,0.29,1.51,13.72,0.67,48,5.54,0.61
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,time10,train,3214,6246.0,0.54,1.94,0.66,0.4,1.51,8.46,0.74,620,0.91,0.66
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,time10,TEST,1943,7598.4,0.541,3.91,1.06,0.66,1.9,13.72,0.71,48,8.41,1.8
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,flip,train,3214,20204.9,0.394,6.29,-2.7,1.35,2.27,8.46,0.62,620,7.54,4.71
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,flip,TEST,1943,14441.0,0.397,7.43,-3.43,1.36,2.25,13.72,0.64,48,23.71,4.42
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,bracket,train,3214,3645.6,0.398,1.13,-3.34,0.28,1.28,8.46,0.69,620,1.28,-0.06
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,bracket,TEST,1943,2837.6,0.398,1.46,-4.28,0.28,1.31,13.72,0.64,48,9.61,-0.21
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,trail,train,3214,13523.3,0.448,4.21,-1.6,0.98,1.83,8.46,0.72,620,4.54,0.11
+Dragon: hole BROKE UP + whales≥50 + TE up + NOT overheated at entry,trail,TEST,1943,9167.5,0.459,4.72,-1.51,0.94,1.81,13.72,0.71,48,20.64,-1.14
+Diamond: strict — exit flip OR overheated,time5,train,511,-39.1,0.517,-0.08,0.2,0.04,0.98,1.34,0.48,106,-1.73,-0.64
+Diamond: strict — exit flip OR overheated,time5,TEST,338,872.4,0.521,2.58,0.47,0.37,1.76,2.39,0.53,10,5.45,1.51
+Diamond: strict — exit flip OR overheated,time10,train,511,863.0,0.536,1.69,0.54,0.38,1.39,1.34,0.59,106,-1.87,0.41
+Diamond: strict — exit flip OR overheated,time10,TEST,338,1319.9,0.53,3.9,1.23,0.54,1.78,2.39,0.55,10,7.45,1.79
+Diamond: strict — exit flip OR overheated,flip,train,511,840.5,0.364,1.64,-1.78,0.31,1.41,1.34,0.48,106,0.02,0.06
+Diamond: strict — exit flip OR overheated,flip,TEST,338,1004.9,0.391,2.97,-2.87,0.46,1.57,2.39,0.47,10,4.56,-0.04
+Diamond: strict — exit flip OR overheated,bracket,train,511,541.5,0.401,1.06,-3.6,0.27,1.25,1.34,0.57,106,-0.71,-0.13
+Diamond: strict — exit flip OR overheated,bracket,TEST,338,422.3,0.408,1.25,-4.68,0.31,1.25,2.39,0.55,10,5.67,-0.42
+Diamond: strict — exit flip OR overheated,trail,train,511,2099.1,0.462,4.11,-1.21,1.09,1.78,1.34,0.64,106,0.34,0.01
+Diamond: strict — exit flip OR overheated,trail,TEST,338,1376.0,0.447,4.07,-1.11,0.78,1.59,2.39,0.5,10,25.33,-1.79
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,time5,train,2932,2105.1,0.516,0.72,0.17,0.16,1.26,7.72,0.58,677,0.2,0.16
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,time5,TEST,1768,977.0,0.501,0.55,0.03,0.16,1.16,12.49,0.63,68,2.38,-0.52
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,time10,train,2932,5523.1,0.541,1.88,0.55,0.4,1.52,7.72,0.71,677,1.23,0.6
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,time10,TEST,1768,4375.7,0.512,2.47,0.28,0.47,1.52,12.49,0.76,68,8.41,0.36
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,flip,train,2932,5421.0,0.392,1.85,-1.22,0.35,1.6,7.72,0.71,677,1.62,0.27
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,flip,TEST,1768,3177.3,0.37,1.8,-2.05,0.32,1.42,12.49,0.6,68,6.64,-1.21
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,bracket,train,2932,3784.4,0.407,1.29,-3.3,0.32,1.33,7.72,0.68,677,1.35,0.1
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,bracket,TEST,1768,1176.6,0.375,0.67,-4.67,0.17,1.13,12.49,0.55,68,5.25,-1.0
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,trail,train,2932,12723.9,0.465,4.34,-1.07,0.95,1.87,7.72,0.73,677,4.79,0.24
+Diamond: 2 of 3 confirmed + Mountain ≥ 3 + above gold — exit flip OR overheated,trail,TEST,1768,6623.0,0.44,3.75,-2.69,0.73,1.58,12.49,0.68,68,21.1,-2.11
+Dragon 5/7 AND Diamond 2/3 confirmed,time5,train,2801,1865.0,0.518,0.67,0.2,0.16,1.26,7.37,0.66,613,0.59,0.11
+Dragon 5/7 AND Diamond 2/3 confirmed,time5,TEST,1681,879.2,0.51,0.52,0.15,0.16,1.15,11.87,0.65,57,2.55,-0.55
+Dragon 5/7 AND Diamond 2/3 confirmed,time10,train,2801,4170.7,0.538,1.49,0.56,0.32,1.42,7.37,0.69,613,1.54,0.21
+Dragon 5/7 AND Diamond 2/3 confirmed,time10,TEST,1681,3994.7,0.521,2.38,0.52,0.48,1.49,11.87,0.68,57,8.89,0.27
+Dragon 5/7 AND Diamond 2/3 confirmed,flip,train,2801,6653.3,0.382,2.38,-1.48,0.52,1.75,7.37,0.63,613,1.44,0.8
+Dragon 5/7 AND Diamond 2/3 confirmed,flip,TEST,1681,4047.3,0.371,2.41,-2.29,0.5,1.53,11.87,0.66,57,14.81,-0.6
+Dragon 5/7 AND Diamond 2/3 confirmed,bracket,train,2801,3233.3,0.402,1.15,-3.21,0.29,1.3,7.37,0.7,613,1.61,-0.04
+Dragon 5/7 AND Diamond 2/3 confirmed,bracket,TEST,1681,1467.2,0.381,0.87,-4.44,0.2,1.18,11.87,0.61,57,7.31,-0.8
+Dragon 5/7 AND Diamond 2/3 confirmed,trail,train,2801,11365.7,0.461,4.06,-1.22,0.97,1.83,7.37,0.71,613,5.05,-0.04
+Dragon 5/7 AND Diamond 2/3 confirmed,trail,TEST,1681,6255.7,0.443,3.72,-2.61,0.75,1.59,11.87,0.67,57,23.96,-2.14
+SHORT Dragon: 5 of 7 bearish,time5,train,4091,-2093.7,0.498,-0.51,0.0,-0.07,0.86,10.77,0.36,1549,-0.81,-1.07
+SHORT Dragon: 5 of 7 bearish,time5,TEST,2437,-2142.0,0.491,-0.88,-0.19,-0.11,0.79,17.21,0.35,259,-2.07,-1.95
+SHORT Dragon: 5 of 7 bearish,time10,train,4091,-5397.0,0.484,-1.32,-0.23,-0.24,0.78,10.77,0.32,1549,-1.58,-2.6
+SHORT Dragon: 5 of 7 bearish,time10,TEST,2437,-3238.4,0.49,-1.33,-0.19,-0.18,0.77,17.21,0.32,259,-5.54,-3.44
+SHORT Dragon: 5 of 7 bearish,flip,train,4091,-8885.0,0.295,-2.17,-3.2,-0.33,0.66,10.77,0.18,1549,-4.04,-3.75
+SHORT Dragon: 5 of 7 bearish,flip,TEST,2437,-7437.3,0.285,-3.05,-3.86,-0.38,0.51,17.21,0.16,259,-9.12,-6.06
+SHORT Dragon: 5 of 7 bearish,bracket,train,4091,-2447.1,0.328,-0.6,-5.2,-0.13,0.91,10.77,0.35,1549,-1.66,-1.79
+SHORT Dragon: 5 of 7 bearish,bracket,TEST,2437,-5964.5,0.302,-2.45,-6.52,-0.27,0.67,17.21,0.24,259,-7.61,-4.12
+SHORT Dragon: 5 of 7 bearish,trail,train,4091,-13090.6,0.344,-3.2,-5.25,-0.48,0.68,10.77,0.23,1549,-4.75,-7.3
+SHORT Dragon: 5 of 7 bearish,trail,TEST,2437,-11834.3,0.336,-4.86,-7.0,-0.58,0.53,17.21,0.14,259,-14.39,-10.72
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,time5,train,2550,-1371.6,0.496,-0.54,0.0,-0.1,0.86,6.71,0.34,1062,-0.84,-1.1
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,time5,TEST,1563,-1688.4,0.47,-1.08,-0.5,-0.15,0.75,11.04,0.35,173,-1.5,-2.15
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,time10,train,2550,-1790.0,0.494,-0.7,-0.1,-0.14,0.87,6.71,0.35,1062,-1.4,-1.98
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,time10,TEST,1563,-3151.0,0.483,-2.02,-0.48,-0.28,0.68,11.04,0.31,173,-5.05,-4.13
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,flip,train,2550,-6477.8,0.324,-2.54,-4.0,-0.36,0.67,6.71,0.2,1062,-4.23,-4.12
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,flip,TEST,1563,-6705.5,0.295,-4.29,-5.5,-0.54,0.49,11.04,0.18,173,-12.33,-7.3
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,bracket,train,2550,-1495.9,0.337,-0.59,-5.38,-0.08,0.91,6.71,0.38,1062,-1.67,-1.78
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,bracket,TEST,1563,-3432.5,0.31,-2.2,-6.74,-0.23,0.7,11.04,0.28,173,-6.65,-3.87
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,trail,train,2550,-7521.9,0.342,-2.95,-5.29,-0.43,0.69,6.71,0.26,1062,-4.43,-7.05
+SHORT Diamond: 2 of 3 pink confirmed + Mountain ≤ 1 + below gold,trail,TEST,1563,-8601.0,0.336,-5.5,-7.49,-0.65,0.51,11.04,0.13,173,-14.65,-11.36
+BASELINE: random days (same exits; flip ≈ 10 bars),time5,train,11811,6652.0,0.509,0.56,0.1,0.11,1.18,31.08,0.68,3683,0.56,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),time5,TEST,6632,7119.6,0.507,1.07,0.15,0.16,1.33,46.85,0.78,542,2.99,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),time10,train,11811,15166.8,0.518,1.28,0.3,0.28,1.3,31.08,0.83,3683,1.31,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),time10,TEST,6632,13978.2,0.521,2.11,0.55,0.34,1.48,46.85,0.82,542,6.72,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),flip,train,11811,18630.6,0.51,1.58,0.13,0.3,1.41,31.08,0.76,3683,2.4,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),flip,TEST,6632,19989.7,0.529,3.01,0.52,0.43,1.8,46.85,0.83,542,6.64,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),bracket,train,11811,14103.3,0.396,1.19,-3.84,0.25,1.23,31.08,0.76,3683,2.49,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),bracket,TEST,6632,11107.1,0.399,1.67,-4.73,0.25,1.31,46.85,0.77,542,7.85,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),trail,train,11811,48448.4,0.442,4.1,-2.07,inf,1.63,31.08,0.8,3683,5.66,0.0
+BASELINE: random days (same exits; flip ≈ 10 bars),trail,TEST,6632,38871.1,0.446,5.86,-2.25,0.81,1.88,46.85,0.84,542,27.13,0.0
+BASELINE: every up day (close > close[1]),time5,train,27874,16678.7,0.515,0.6,0.2,0.13,1.2,73.35,0.83,8439,0.58,0.04
+BASELINE: every up day (close > close[1]),time5,TEST,15980,11818.2,0.496,0.74,-0.03,0.13,1.22,112.88,0.82,1493,1.06,-0.33
+BASELINE: every up day (close > close[1]),time10,train,27874,35368.1,0.519,1.27,0.38,0.29,1.3,73.35,0.86,8439,1.14,-0.01
+BASELINE: every up day (close > close[1]),time10,TEST,15980,33854.8,0.517,2.12,0.45,0.35,1.47,112.88,0.91,1493,6.03,0.01
+BASELINE: every up day (close > close[1]),flip,train,27874,3800.5,0.32,0.14,-0.67,0.02,1.08,73.35,0.61,8439,0.21,-1.44
+BASELINE: every up day (close > close[1]),flip,TEST,15980,814.4,0.312,0.05,-0.92,0.02,1.03,112.88,0.55,1493,-0.78,-2.96
+BASELINE: every up day (close > close[1]),bracket,train,27874,34715.7,0.399,1.25,-3.81,0.27,1.25,73.35,0.78,8439,2.34,0.06
+BASELINE: every up day (close > close[1]),bracket,TEST,15980,25161.2,0.397,1.57,-4.8,0.25,1.28,112.88,0.84,1493,8.32,-0.1
+BASELINE: every up day (close > close[1]),trail,train,27874,116046.7,0.445,4.16,-2.01,0.8,1.65,73.35,0.84,8439,5.68,0.06
+BASELINE: every up day (close > close[1]),trail,TEST,15980,94067.6,0.45,5.89,-2.33,0.84,1.87,112.88,0.87,1493,27.33,0.03

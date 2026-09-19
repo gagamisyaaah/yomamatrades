@@ -1,0 +1,222 @@
+//@version=5
+// Strategy twin for the VOLATILITY-CONTRACTION theme — one contraction family at a time (input "Signal"),
+// or the whole group ("Group 2-of-9"). Long AND short (mirrored breakdowns), orders fill at the NEXT OPEN
+// (you enter pre-market the day after the signal). Exit = family exit or chandelier trail.
+// The status line exposes the anti-bias metrics the lab reads: BH (buy & hold % of the same range), Alpha
+// (net % − BH), TPW (closed trades per week), Bear/Bull (profit % from trades entered while SPX was below /
+// above its 200-bar line), Short (profit % from short trades), Exp (% of bars in the market).
+strategy("VCP twin", "VCP twin", overlay=true, initial_capital=10000, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, process_orders_on_close=false, calc_on_every_tick=false)
+
+sig = input.string("TTM squeeze", "Signal", options=["TTM squeeze", "BB bandwidth low", "NR7 breakout", "ATR percentile", "Minervini VCP", "Donchian coil", "Inside-bar cluster", "EMA coil thrust", "CHOP-ADX regime", "Group 2-of-9"])
+dirMode = input.string("Long only", "Direction", options=["Long only", "Long + Short"])
+startDate = input.time(timestamp("2018-01-01T00:00:00+0000"), "Backtest from")
+inWin = time >= startDate
+trailK = input.float(3.0, "Chandelier exit k·ATR", minval=0.5, step=0.5)
+volMult = input.float(1.2, "Breakout volume ≥ k × SMA20 (0 = off)", minval=0, step=0.1)
+trendOn = input.bool(true, "Trend filter (50-EMA side)")
+
+atr14 = ta.atr(14)
+ema50 = ta.ema(close, 50)
+volOk = volMult == 0 or volume >= volMult * ta.sma(volume, 20)
+trendOkL = not trendOn or close > ema50
+trendOkS = not trendOn or close < ema50
+hh20p = ta.highest(high, 20)[1]
+ll20p = ta.lowest(low, 20)[1]
+hh10p = ta.highest(high, 10)[1]
+ll10p = ta.lowest(low, 10)[1]
+
+// ── 1. TTM squeeze (Carter: ≥ 6 squeeze bars, release with momentum in the trade direction) ──
+bbBasis = ta.sma(close, 20)
+bbDev = 2.0 * ta.stdev(close, 20)
+kcRange = 1.5 * ta.atr(20)
+sqzOn = (bbBasis - bbDev > bbBasis - kcRange) and (bbBasis + bbDev < bbBasis + kcRange)
+mom = ta.linreg(close - math.avg(math.avg(ta.highest(high, 20), ta.lowest(low, 20)), ta.sma(close, 20)), 20, 0)
+var int sqzN = 0
+sqzN := sqzOn ? sqzN + 1 : 0
+released = sqzN[1] >= 6 and not sqzOn
+ttmL = released and mom > 0 and mom > mom[1] and close > bbBasis
+ttmS = released and mom < 0 and mom < mom[1] and close < bbBasis
+ttmXL = mom < mom[1] and mom[1] < mom[2]
+ttmXS = mom > mom[1] and mom[1] > mom[2]
+
+// ── 2. Bollinger bandwidth at a 125-bar low, then a close outside the bands ──
+bw = (2.0 * bbDev) / bbBasis
+bwLow = bw <= ta.lowest(bw, 125) * 1.0001
+var bool bwArmed = false
+bwArmed := bwLow ? true : (close > bbBasis + bbDev or close < bbBasis - bbDev) ? false : bwArmed
+bbL = bwArmed[1] and close > bbBasis + bbDev
+bbS = bwArmed[1] and close < bbBasis - bbDev
+bbXL = close < bbBasis
+bbXS = close > bbBasis
+
+// ── 3. NR7: narrowest range of 7, then a break of that bar ──
+rng = high - low
+nr7 = rng <= ta.lowest(rng, 7)
+var float nr7High = na
+var float nr7Low = na
+if nr7
+    nr7High := high
+    nr7Low := low
+nr7L = not na(nr7High) and close > nr7High and not nr7
+nr7S = not na(nr7Low) and close < nr7Low and not nr7
+nr7XL = not na(nr7Low) and close < nr7Low
+nr7XS = not na(nr7High) and close > nr7High
+
+// ── 4. ATR percentile: ATR/close in its lowest 20 % of 200 bars, then a 20-bar channel break ──
+atrPct = ta.percentrank(atr14 / close, 200)
+atrArmed = atrPct <= 20
+atrL = atrArmed[1] and close > hh20p
+atrS = atrArmed[1] and close < ll20p
+atrXL = close < ll10p
+atrXS = close > hh10p
+
+// ── 5. Minervini VCP: three successive shallower pullbacks, volume dry-up, pivot break (long only) ──
+ph = ta.pivothigh(high, 5, 5)
+pl = ta.pivotlow(low, 5, 5)
+var float h1 = na
+var float h2 = na
+var float h3 = na
+var float l1 = na
+var float l2 = na
+var float l3 = na
+if not na(ph)
+    h3 := h2
+    h2 := h1
+    h1 := ph
+if not na(pl)
+    l3 := l2
+    l2 := l1
+    l1 := pl
+d1 = na(h1) or na(l1) ? na : (h1 - l1) / h1
+d2 = na(h2) or na(l2) ? na : (h2 - l2) / h2
+d3 = na(h3) or na(l3) ? na : (h3 - l3) / h3
+vcpShape = not na(d3) and d1 < d2 and d2 < d3 and d1 < 0.12
+volDry = ta.sma(volume, 10) < ta.sma(volume, 50)
+vcpL = vcpShape and volDry[1] and close > h1 and volOk
+vcpXL = close < l1
+
+// ── 6. Donchian coil: 20-bar width at a 100-bar low, then a channel break ──
+dcW = (ta.highest(high, 20) - ta.lowest(low, 20)) / close
+dcCoil = dcW <= ta.lowest(dcW, 100) * 1.0001
+var bool dcArmed = false
+dcArmed := dcCoil ? true : dcArmed
+dcL = dcArmed[1] and close > hh20p
+dcS = dcArmed[1] and close < ll20p
+if dcL or dcS
+    dcArmed := false
+dcXL = close < ll10p
+dcXS = close > hh10p
+
+// ── 7. Inside-bar cluster: ≥ 2 inside bars, then a break of the mother bar ──
+inside = high <= high[1] and low >= low[1]
+cluster = inside and inside[1]
+var float motherH = na
+var float motherL = na
+if cluster
+    motherH := math.max(high[1], high[2])
+    motherL := math.min(low[1], low[2])
+ibL = not na(motherH) and close > motherH and not inside
+ibS = not na(motherL) and close < motherL and not inside
+ibXL = not na(motherL) and close < motherL
+ibXS = not na(motherH) and close > motherH
+
+// ── 8. EMA 10/20 coil (≤ 0.3 % apart, 50-EMA sloping with the trade) for ≥ 2 bars, then a 1-ADR thrust bar ──
+ema10 = ta.ema(close, 10)
+ema20 = ta.ema(close, 20)
+adr20 = ta.sma(high - low, 20)
+tight = math.abs(ema10 - ema20) / ema20 < 0.003
+coilUp = tight and ema50 > ema50[1] and close > ema10 and close > ema20 and close - ema20 < 1.5 * adr20
+coilDn = tight and ema50 < ema50[1] and close < ema10 and close < ema20 and ema20 - close < 1.5 * adr20
+var int coilN = 0
+var int coilSN = 0
+coilN := coilUp ? coilN + 1 : 0
+coilSN := coilDn ? coilSN + 1 : 0
+coilL = coilN[1] >= 2 and close > open and close - open >= adr20
+coilS = coilSN[1] >= 2 and close < open and open - close >= adr20
+coilXL = close < ema20
+coilXS = close > ema20
+
+// ── 9. Choppiness > 61.8 with ADX < 20 for ≥ 5 bars, then a 20-bar break with the DI leading ──
+chop = 100 * math.log10(math.sum(ta.tr(true), 14) / (ta.highest(high, 14) - ta.lowest(low, 14))) / math.log10(14)
+[diP, diM, adx] = ta.dmi(14, 14)
+regime = chop > 61.8 and adx < 20
+var int regN = 0
+regN := regime ? regN + 1 : 0
+chopL = regN[1] >= 5 and close > hh20p and diP > diM
+chopS = regN[1] >= 5 and close < ll20p and diM > diP
+chopXL = chop > 61.8 or close < ll10p
+chopXS = chop > 61.8 or close > hh10p
+
+// ── group: at least two different engines fired the same way within the last 3 bars ──
+recent(bool b) => ta.barssince(b) <= 2 ? 1 : 0
+grpLn = recent(ttmL) + recent(bbL) + recent(nr7L) + recent(atrL) + recent(vcpL) + recent(dcL) + recent(ibL) + recent(coilL) + recent(chopL)
+grpSn = recent(ttmS) + recent(bbS) + recent(nr7S) + recent(atrS) + recent(dcS) + recent(ibS) + recent(coilS) + recent(chopS)
+grpL = grpLn >= 2 and grpLn > grpLn[1]
+grpS = grpSn >= 2 and grpSn > grpSn[1]
+grpXL = close < ll10p
+grpXS = close > hh10p
+
+enterL = (sig == "TTM squeeze" ? ttmL : sig == "BB bandwidth low" ? bbL : sig == "NR7 breakout" ? nr7L : sig == "ATR percentile" ? atrL : sig == "Minervini VCP" ? vcpL : sig == "Donchian coil" ? dcL : sig == "Inside-bar cluster" ? ibL : sig == "EMA coil thrust" ? coilL : sig == "CHOP-ADX regime" ? chopL : grpL) and trendOkL and (sig == "Minervini VCP" or volOk)
+enterS = (sig == "TTM squeeze" ? ttmS : sig == "BB bandwidth low" ? bbS : sig == "NR7 breakout" ? nr7S : sig == "ATR percentile" ? atrS : sig == "Minervini VCP" ? false : sig == "Donchian coil" ? dcS : sig == "Inside-bar cluster" ? ibS : sig == "EMA coil thrust" ? coilS : sig == "CHOP-ADX regime" ? chopS : grpS) and trendOkS and volOk and dirMode == "Long + Short"
+exitL = sig == "TTM squeeze" ? ttmXL : sig == "BB bandwidth low" ? bbXL : sig == "NR7 breakout" ? nr7XL : sig == "ATR percentile" ? atrXL : sig == "Minervini VCP" ? vcpXL : sig == "Donchian coil" ? dcXL : sig == "Inside-bar cluster" ? ibXL : sig == "EMA coil thrust" ? coilXL : sig == "CHOP-ADX regime" ? chopXL : grpXL
+exitS = sig == "TTM squeeze" ? ttmXS : sig == "BB bandwidth low" ? bbXS : sig == "NR7 breakout" ? nr7XS : sig == "ATR percentile" ? atrXS : sig == "Minervini VCP" ? true : sig == "Donchian coil" ? dcXS : sig == "Inside-bar cluster" ? ibXS : sig == "EMA coil thrust" ? coilXS : sig == "CHOP-ADX regime" ? chopXS : grpXS
+
+// chandelier trail on top of every family (both sides)
+hh22 = ta.highest(high, 22)
+ll22 = ta.lowest(low, 22)
+var float trail = na
+if strategy.position_size > 0
+    trail := math.max(nz(trail, 0.0), hh22 - trailK * atr14)
+else if strategy.position_size < 0
+    trail := math.min(nz(trail, 1e12), ll22 + trailK * atr14)
+else
+    trail := na
+
+if inWin and enterL and strategy.position_size <= 0
+    strategy.entry("L", strategy.long)
+if inWin and enterS and strategy.position_size >= 0
+    strategy.entry("S", strategy.short)
+if strategy.position_size > 0 and (exitL or (not na(trail) and close < trail))
+    strategy.close("L")
+if strategy.position_size < 0 and (exitS or (not na(trail) and close > trail))
+    strategy.close("S")
+
+// ── metrics in the status line (the lab reads these from the legend) ──
+var float c0 = na
+var int t0 = na
+if inWin and na(c0)
+    c0 := close
+    t0 := time
+bhPct = na(c0) ? na : (close / c0 - 1.0) * 100.0
+netPct = strategy.netprofit / strategy.initial_capital * 100.0
+weeks = na(t0) ? 1.0 : math.max(1.0, (time - t0) / 604800000.0)
+tpw = strategy.closedtrades / weeks
+spx = request.security("SP:SPX", timeframe.period, close)
+regLen = timeframe.isweekly ? 40 : timeframe.isintraday ? 300 : 200
+bullMkt = spx > ta.sma(spx, regLen)
+var bool[] regimes = array.new_bool()
+array.push(regimes, bullMkt)
+var float bearPnl = 0.0
+var float bullPnl = 0.0
+var float shortPnl = 0.0
+if strategy.closedtrades > nz(strategy.closedtrades[1])
+    for i = nz(strategy.closedtrades[1]) to strategy.closedtrades - 1
+        p = strategy.closedtrades.profit(i) / strategy.initial_capital * 100.0
+        if array.get(regimes, strategy.closedtrades.entry_bar_index(i))
+            bullPnl += p
+        else
+            bearPnl += p
+        if strategy.closedtrades.size(i) < 0
+            shortPnl += p
+var int inBars = 0
+var int winBars = 0
+inBars += strategy.position_size != 0 ? 1 : 0
+winBars += inWin ? 1 : 0
+expPct = inBars / math.max(winBars, 1) * 100.0
+plot(bhPct, "BH", display=display.status_line)
+plot(netPct - bhPct, "Alpha", display=display.status_line)
+plot(tpw, "TPW", display=display.status_line)
+plot(bearPnl, "Bear", display=display.status_line)
+plot(bullPnl, "Bull", display=display.status_line)
+plot(shortPnl, "Short", display=display.status_line)
+plot(expPct, "Exp", display=display.status_line)

@@ -1,0 +1,231 @@
+//@version=5
+// Strategy twin of the Homily ("Dragon") clones — one signal family at a time (input "Signal") or the whole
+// group ("Dragon group": 5 of 7 panels bullish). Long AND short ("in while bullish, short while bearish"),
+// orders fill at the NEXT OPEN. The status line exposes BH, Alpha, TPW, Bear, Bull, Short, Exp for the lab.
+strategy("Homily twin", "Homily twin", overlay=true, initial_capital=10000, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, process_orders_on_close=false, calc_on_every_tick=false, max_bars_back=1500)
+
+sig = input.string("SS candle", "Signal", options=["SS candle", "BBE ribbon", "Volatility hole", "MCDX whales", "TE main line", "MACD zero", "RSI x3", "Dragon total (all 7)", "Dragon total (5 of 7)"])
+dirMode = input.string("Long only", "Direction", options=["Long only", "Long + Short"])
+startDate = input.time(timestamp("2018-01-01T00:00:00+0000"), "Backtest from")
+inWin = time >= startDate
+exitMode = input.string("Flip or chandelier", "Exit", options=["Signal flip", "Chandelier 3 ATR", "Target 2R stop 1R", "Time stop 5 bars", "Flip or chandelier"])
+
+// ── SS candle: KDJ(9,3,3) J vs 50 ──
+smaCN(float x, int n) =>
+    float s = na
+    s := (x + (n - 1) * nz(s[1], x)) / n
+    s
+hh9 = ta.highest(high, 9)
+ll9 = ta.lowest(low, 9)
+rsv = hh9 == ll9 ? 50.0 : (close - ll9) / (hh9 - ll9) * 100.0
+kK = smaCN(rsv, 3)
+dK = smaCN(kK, 3)
+jK = 3.0 * kK - 2.0 * dK
+ssBull = jK > 50.0
+// Danny: "the price must surpass the high point of the red candle; a close below its low negates it"
+var float redHi = na
+var float redLo = na
+var float yelHi = na
+var float yelLo = na
+if ta.crossover(jK, 50.0)
+    redHi := high
+    redLo := low
+if ta.crossunder(jK, 50.0)
+    yelHi := high
+    yelLo := low
+ssConfirmL = ssBull and not na(redHi) and close > redHi and not (close < redLo)
+ssConfirmS = not ssBull and not na(yelLo) and close < yelLo and not (close > yelHi)
+
+// ── BBE ribbon ──
+src = (close + low) / 2.0
+bbeBull = ta.ema(src, 8) > ta.ema(ta.ema(src, 20), 8)
+
+// ── Volatility hole (pivot-confirmed, MA10 ± 1.4·ATR14, 2 closes to break) ──
+holeK = input.float(1.4, "Hole k·ATR", step=0.1)
+pivL  = input.int(4, "Hole pivot strength", minval=1)
+atrV  = ta.atr(14)
+maV   = ta.sma(close, 10)
+ph = ta.pivothigh(high, pivL, pivL)
+pl = ta.pivotlow(low, pivL, pivL)
+var float hUp = na
+var float hDn = na
+var int   hState = 0        // 0 in force, 1 broke up, -1 broke down
+if not na(ph) or not na(pl)
+    hUp := maV[pivL] + holeK * atrV[pivL]
+    hDn := maV[pivL] - holeK * atrV[pivL]
+    hState := 0
+if hState == 0 and not na(hUp)
+    if close > hUp and close[1] > hUp
+        hState := 1
+    else if close < hDn and close[1] < hDn
+        hState := -1
+holeBull = hState == 1
+holeBear = hState == -1
+
+// ── MCDX whales (rolling cost distribution, profit chips ≥ 50) ──
+winN = 120
+binPct = 0.5
+lnStep = math.log(1.0 + binPct / 100.0)
+binOf(float p) => int(math.floor(math.log(p) / lnStep))
+var float[] chips = array.new_float()
+var int[] loA = array.new_int(1, 0)
+ensure(int bL, int bH) =>
+    if array.size(chips) == 0
+        array.set(loA, 0, bL)
+        for b = bL to bH
+            array.push(chips, 0.0)
+    else
+        while bL < array.get(loA, 0)
+            array.unshift(chips, 0.0)
+            array.set(loA, 0, array.get(loA, 0) - 1)
+        while bH > array.get(loA, 0) + array.size(chips) - 1
+            array.push(chips, 0.0)
+    true
+addRange(int bL, int bH, float v) =>
+    per = v / float(bH - bL + 1)
+    l0 = array.get(loA, 0)
+    for b = bL to bH
+        array.set(chips, b - l0, array.get(chips, b - l0) + per)
+    true
+if nz(volume) > 0 and low > 0 and high >= low
+    bL = binOf(low)
+    bH = binOf(high)
+    ensure(bL, bH)
+    addRange(bL, bH, volume)
+if bar_index >= winN and nz(volume[winN]) > 0 and low[winN] > 0 and high[winN] >= low[winN]
+    addRange(binOf(low[winN]), binOf(high[winN]), -nz(volume[winN]))
+float tot = 0.0
+float belowLo = 0.0
+float aboveHi = 0.0
+float vMax = 0.0
+float pocPx = na
+sz = array.size(chips)
+if sz > 0
+    l0 = array.get(loA, 0)
+    loT = close * 0.96
+    hiT = close * 1.04
+    for i = 0 to sz - 1
+        v = math.max(0.0, array.get(chips, i))
+        if v > 0
+            tot += v
+            px = math.exp((l0 + i + 0.5) * lnStep)
+            if px < loT
+                belowLo += v
+            if px > hiT
+                aboveHi += v
+            if v > vMax
+                vMax := v
+                pocPx := px
+whales = tot > 0 ? ta.sma(belowLo / tot * 100.0, 3) : na
+retail = tot > 0 ? ta.sma(aboveHi / tot * 100.0, 3) : na
+mcdxBull = whales >= 50.0
+retailShrinking = not na(retail) and retail < retail[3]
+// CD momentum bars: "closing consistently above the longest momentum bar (POC) triggers a surge"
+pocBull = not na(pocPx) and close > pocPx and close[1] > pocPx[1]
+pocBear = not na(pocPx) and close < pocPx and close[1] < pocPx[1]
+
+// ── TE main line (趋势王 line 7) ──
+trip(int a, int b, int c) => (ta.ema(ohlc4, a) + ta.ema(ohlc4, b) + ta.ema(ohlc4, c)) / 3.0
+v7 = ta.linreg(trip(21, 34, 68), 6, 0)
+teBull = v7 > v7[1]
+
+// ── MACD zero (CN) ──
+dif = ta.ema(close, 12) - ta.ema(close, 26)
+macdBull = dif > 0
+
+// ── RSI ×3 ──
+r1 = ta.rsi(close, 9)
+r2 = ta.rsi(close, 14)
+r3 = ta.rsi(close, 24)
+rsiBull = r1 > r1[1] and r2 > r2[1] and r3 > r3[1] and r2 > 50
+rsiBear = r1 < r1[1] and r2 < r2[1] and r3 < r3[1] and r2 < 50
+
+// ── Dragon total: read all five panels together, Danny's way ──
+// 1 candle confirmed (J > 50 and price surpassed the red candle's high)   2 ribbon red   3 hole not broken down
+// (broke up = surge watch)   4 closes above the POC momentum bar   5 TE main line rising   6 whales ≥ 50 % with
+// retail shrinking   7 MACD > 0 and all three RSIs curling up.  Bearish mirror for shorts.
+nBull = (ssConfirmL ? 1 : 0) + (bbeBull ? 1 : 0) + (holeBull ? 1 : 0) + (pocBull ? 1 : 0) + (teBull ? 1 : 0) + (mcdxBull and retailShrinking ? 1 : 0) + (macdBull and rsiBull ? 1 : 0)
+nBear = (ssConfirmS ? 1 : 0) + (bbeBull ? 0 : 1) + (holeBear ? 1 : 0) + (pocBear ? 1 : 0) + (teBull ? 0 : 1) + (not mcdxBull ? 1 : 0) + (not macdBull and rsiBear ? 1 : 0)
+isTotal = sig == "Dragon total (all 7)" or sig == "Dragon total (5 of 7)"
+need = sig == "Dragon total (all 7)" ? 7 : 5
+totalL = ssConfirmL and nBull >= need and not (holeBear)
+totalS = ssConfirmS and nBear >= need and not (holeBull)
+
+bull = sig == "SS candle" ? ssBull : sig == "BBE ribbon" ? bbeBull : sig == "Volatility hole" ? holeBull : sig == "MCDX whales" ? mcdxBull : sig == "TE main line" ? teBull : sig == "MACD zero" ? macdBull : sig == "RSI x3" ? rsiBull : totalL
+bear = sig == "Volatility hole" ? holeBear : sig == "RSI x3" ? rsiBear : isTotal ? totalS : not bull
+flatL = isTotal ? (nBull <= need - 2 or close < redLo) : not bull
+flatS = isTotal ? (nBear <= need - 2 or close > yelHi) : not bear
+
+// ── exits (the knob that turns a signal into profit per trade) ──
+atrX = ta.atr(14)
+hh22 = ta.highest(high, 22)
+ll22 = ta.lowest(low, 22)
+var float trail = na
+if strategy.position_size > 0
+    trail := math.max(nz(trail, 0.0), hh22 - 3.0 * atrX)
+else if strategy.position_size < 0
+    trail := math.min(nz(trail, 1e12), ll22 + 3.0 * atrX)
+else
+    trail := na
+eb = strategy.opentrades > 0 ? strategy.opentrades.entry_bar_index(strategy.opentrades - 1) : na
+barsIn = na(eb) ? 0 : bar_index - eb
+var float rAtEntry = na
+if strategy.position_size != 0 and barsIn == 0
+    rAtEntry := 1.5 * atrX
+px = strategy.position_avg_price
+xTrailL = not na(trail) and close < trail
+xTrailS = not na(trail) and close > trail
+xTgtL = close >= px + 2.0 * rAtEntry or close <= px - rAtEntry
+xTgtS = close <= px - 2.0 * rAtEntry or close >= px + rAtEntry
+xTime = barsIn >= 5
+exitL = exitMode == "Signal flip" ? flatL : exitMode == "Chandelier 3 ATR" ? xTrailL : exitMode == "Target 2R stop 1R" ? xTgtL : exitMode == "Time stop 5 bars" ? xTime : (flatL or xTrailL)
+exitS = exitMode == "Signal flip" ? flatS : exitMode == "Chandelier 3 ATR" ? xTrailS : exitMode == "Target 2R stop 1R" ? xTgtS : exitMode == "Time stop 5 bars" ? xTime : (flatS or xTrailS)
+
+if inWin and bull and strategy.position_size <= 0
+    strategy.entry("L", strategy.long)
+if inWin and bear and strategy.position_size >= 0 and dirMode == "Long + Short"
+    strategy.entry("S", strategy.short)
+if exitL and strategy.position_size > 0
+    strategy.close("L")
+if exitS and strategy.position_size < 0
+    strategy.close("S")
+
+// ── metrics in the status line (the lab reads these from the legend) ──
+var float c0 = na
+var int t0 = na
+if inWin and na(c0)
+    c0 := close
+    t0 := time
+bhPct = na(c0) ? na : (close / c0 - 1.0) * 100.0
+netPct = strategy.netprofit / strategy.initial_capital * 100.0
+weeks = na(t0) ? 1.0 : math.max(1.0, (time - t0) / 604800000.0)
+tpw = strategy.closedtrades / weeks
+spx = request.security("SP:SPX", timeframe.period, close)
+regLen = timeframe.isweekly ? 40 : timeframe.isintraday ? 300 : 200
+bullMkt = spx > ta.sma(spx, regLen)
+var bool[] regimes = array.new_bool()
+array.push(regimes, bullMkt)
+var float bearPnl = 0.0
+var float bullPnl = 0.0
+var float shortPnl = 0.0
+if strategy.closedtrades > nz(strategy.closedtrades[1])
+    for i = nz(strategy.closedtrades[1]) to strategy.closedtrades - 1
+        p = strategy.closedtrades.profit(i) / strategy.initial_capital * 100.0
+        if array.get(regimes, strategy.closedtrades.entry_bar_index(i))
+            bullPnl += p
+        else
+            bearPnl += p
+        if strategy.closedtrades.size(i) < 0
+            shortPnl += p
+var int inBars = 0
+var int winBars = 0
+inBars += strategy.position_size != 0 ? 1 : 0
+winBars += inWin ? 1 : 0
+expPct = inBars / math.max(winBars, 1) * 100.0
+plot(bhPct, "BH", display=display.status_line)
+plot(netPct - bhPct, "Alpha", display=display.status_line)
+plot(tpw, "TPW", display=display.status_line)
+plot(bearPnl, "Bear", display=display.status_line)
+plot(bullPnl, "Bull", display=display.status_line)
+plot(shortPnl, "Short", display=display.status_line)
+plot(expPct, "Exp", display=display.status_line)

@@ -1,0 +1,191 @@
+//@version=5
+// DRAGON TOTAL — the five Dragon (Homily / DannyTrades) panels read together as ONE signal, in one indicator.
+// Panels: 1 Strong-Signal candle (KDJ J vs 50, confirmed when price clears the red candle's high)  2 BBE ribbon
+// 3 Volatility Hole (broke up / in force / broke down)  4 CD momentum bar (POC of the 120-bar cost distribution)
+// 5 TE main line  6 MCDX whales / retail  7 MACD + RSI×3.
+// Readings (input "Entry") — all long-only, entry at the NEXT open:
+//   "Hole broke up + whales ≥ 50 + TE up"  ← the reading that beat random entries out-of-sample on 94 tickers
+//                                            (+7.7 % avg per trade with the flip exit vs +3.0 % random; PF 2.2)
+//   "All 7 panels", "5 of 7", "Red candle confirmed + ribbon + whales"
+// Exit (input "Exit"): "Flip" = the reading's own bearish flip · "Flip or overheated" = also leave when price is
+//   > 2 ATR above the gold band while the bubble meter is > 8.7 (mined top signature) · "Chandelier 3 ATR".
+// Alerts: DRAGON go / DRAGON out / DRAGON armed (5+ panels).  Table: every panel's state right now.
+indicator("DRAGON TOTAL", "DRAGON", overlay=true, max_bars_back=1500, max_labels_count=100)
+
+entryMode = input.string("Hole broke up + whales ≥ 50 + TE up", "Entry", options=["Hole broke up + whales ≥ 50 + TE up", "All 7 panels", "5 of 7", "Red candle confirmed + ribbon + whales"])
+exitMode  = input.string("Flip", "Exit", options=["Flip", "Flip or overheated", "Chandelier 3 ATR"])
+holeK = input.float(1.4, "Hole k·ATR", step=0.1)
+pivL  = input.int(4, "Hole pivot strength", minval=1)
+showTbl = input.bool(true, "Panel table")
+
+// ── 1. SS candle ──
+smaCN(float x, int n) =>
+    float s = na
+    s := (x + (n - 1) * nz(s[1], x)) / n
+    s
+hh9 = ta.highest(high, 9)
+ll9 = ta.lowest(low, 9)
+rsv = hh9 == ll9 ? 50.0 : (close - ll9) / (hh9 - ll9) * 100.0
+kK = smaCN(rsv, 3)
+dK = smaCN(kK, 3)
+jK = 3.0 * kK - 2.0 * dK
+ssBull = jK > 50.0
+var float redHi = na
+var float redLo = na
+if ta.crossover(jK, 50.0)
+    redHi := high
+    redLo := low
+ssConfirm = ssBull and not na(redHi) and close > redHi and not (close < redLo)
+
+// ── 2. BBE ribbon ──
+src = (close + low) / 2.0
+bbeBull = ta.ema(src, 8) > ta.ema(ta.ema(src, 20), 8)
+
+// ── 3. Volatility hole ──
+atrV = ta.atr(14)
+maV = ta.sma(close, 10)
+ph = ta.pivothigh(high, pivL, pivL)
+pl = ta.pivotlow(low, pivL, pivL)
+var float hUp = na
+var float hDn = na
+var int hState = 0
+if not na(ph) or not na(pl)
+    hUp := maV[pivL] + holeK * atrV[pivL]
+    hDn := maV[pivL] - holeK * atrV[pivL]
+    hState := 0
+if hState == 0 and not na(hUp)
+    if close > hUp and close[1] > hUp
+        hState := 1
+    else if close < hDn and close[1] < hDn
+        hState := -1
+holeBull = hState == 1
+holeBear = hState == -1
+
+// ── 4 + 6. cost distribution: POC momentum bar, whales, retail ──
+winN = 120
+lnStep = math.log(1.005)
+binOf(float p) => int(math.floor(math.log(p) / lnStep))
+var float[] chips = array.new_float()
+var int[] loA = array.new_int(1, 0)
+ensure(int bL, int bH) =>
+    if array.size(chips) == 0
+        array.set(loA, 0, bL)
+        for b = bL to bH
+            array.push(chips, 0.0)
+    else
+        while bL < array.get(loA, 0)
+            array.unshift(chips, 0.0)
+            array.set(loA, 0, array.get(loA, 0) - 1)
+        while bH > array.get(loA, 0) + array.size(chips) - 1
+            array.push(chips, 0.0)
+    true
+addRange(int bL, int bH, float v) =>
+    per = v / float(bH - bL + 1)
+    l0 = array.get(loA, 0)
+    for b = bL to bH
+        array.set(chips, b - l0, array.get(chips, b - l0) + per)
+    true
+if nz(volume) > 0 and low > 0 and high >= low
+    bL = binOf(low)
+    bH = binOf(high)
+    ensure(bL, bH)
+    addRange(bL, bH, volume)
+if bar_index >= winN and nz(volume[winN]) > 0 and low[winN] > 0 and high[winN] >= low[winN]
+    addRange(binOf(low[winN]), binOf(high[winN]), -nz(volume[winN]))
+float tot = 0.0
+float belowLo = 0.0
+float aboveHi = 0.0
+float vMax = 0.0
+float pocPx = na
+sz = array.size(chips)
+if sz > 0
+    l0 = array.get(loA, 0)
+    loT = close * 0.96
+    hiT = close * 1.04
+    for i = 0 to sz - 1
+        v = math.max(0.0, array.get(chips, i))
+        if v > 0
+            tot += v
+            px = math.exp((l0 + i + 0.5) * lnStep)
+            if px < loT
+                belowLo += v
+            if px > hiT
+                aboveHi += v
+            if v > vMax
+                vMax := v
+                pocPx := px
+whales = tot > 0 ? ta.sma(belowLo / tot * 100.0, 3) : na
+retail = tot > 0 ? ta.sma(aboveHi / tot * 100.0, 3) : na
+mcdxBull = whales >= 50.0
+retailShrinking = not na(retail) and retail < retail[3]
+pocBull = not na(pocPx) and close > pocPx and close[1] > pocPx[1]
+
+// ── 5. TE main line ──
+trip(int a, int b, int c) => (ta.ema(ohlc4, a) + ta.ema(ohlc4, b) + ta.ema(ohlc4, c)) / 3.0
+v7 = ta.linreg(trip(21, 34, 68), 6, 0)
+teBull = v7 > v7[1]
+
+// ── 7. MACD + RSI×3 ──
+dif = ta.ema(close, 12) - ta.ema(close, 26)
+macdBull = dif > 0
+r1 = ta.rsi(close, 9)
+r2 = ta.rsi(close, 14)
+r3 = ta.rsi(close, 24)
+rsiUp = r1 > r1[1] and r2 > r2[1] and r3 > r3[1] and r2 > 50
+
+// ── overheat meter (mined top signature: > 2 ATR above the gold band while the bubble is > 8.7) ──
+e21 = ta.ema(close, 21)
+e34 = ta.ema(close, 34)
+e55 = ta.ema(close, 55)
+goldTop = math.max(e21, math.max(e34, e55))
+signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
+volE = ta.ema(volume, 10)
+hype = ta.ema((volE > 0 ? 100.0 * ta.ema(signedVol, 10) / volE : 0.0) / 2.0, 3)
+flow = ta.ema(ta.mfi(hlc3, 14) - 50.0, 3)
+bubble = math.max(0.0, (close - ta.ema(close, 200)) / atrV) + (hype > 25 ? 1.0 : 0.0) + (flow > 25 ? 1.0 : 0.0)
+overheated = (close - goldTop) / atrV > 2.0 and bubble > 8.7
+
+// ── total signal ──
+nBull = (ssConfirm ? 1 : 0) + (bbeBull ? 1 : 0) + (holeBull ? 1 : 0) + (pocBull ? 1 : 0) + (teBull ? 1 : 0) + (mcdxBull and retailShrinking ? 1 : 0) + (macdBull and rsiUp ? 1 : 0)
+stateOn = entryMode == "Hole broke up + whales ≥ 50 + TE up" ? (holeBull and mcdxBull and teBull) : entryMode == "All 7 panels" ? (ssConfirm and nBull >= 7) : entryMode == "5 of 7" ? (ssConfirm and nBull >= 5) : (ssConfirm and bbeBull and mcdxBull)
+flipOff = entryMode == "Hole broke up + whales ≥ 50 + TE up" ? (holeBear or not teBull) : entryMode == "All 7 panels" ? nBull <= 5 : entryMode == "5 of 7" ? nBull <= 3 : (not ssBull or not bbeBull)
+
+hh22 = ta.highest(high, 22)
+var bool inPos = false
+var float trail = na
+goNow = stateOn and not stateOn[1] and not inPos
+if goNow
+    inPos := true
+    trail := hh22 - 3.0 * atrV
+else if inPos
+    trail := math.max(nz(trail, 0.0), hh22 - 3.0 * atrV)
+outNow = inPos and not goNow and (exitMode == "Flip" ? flipOff : exitMode == "Flip or overheated" ? (flipOff or overheated) : close < trail)
+if outNow
+    inPos := false
+    trail := na
+
+bgcolor(stateOn ? color.new(color.red, 90) : na, title="Reading ON")
+plotshape(goNow, "DRAGON go", shape.labelup, location.belowbar, color=color.new(color.red, 0), text="GO", textcolor=color.white, size=size.small)
+plotshape(outNow, "DRAGON out", shape.xcross, location.abovebar, color=color.new(color.gray, 0), size=size.small)
+plot(inPos and exitMode == "Chandelier 3 ATR" ? trail : na, "Chandelier", color=color.new(color.orange, 0), style=plot.style_circles)
+plotshape(hState == 1 and hState[1] != 1, "Hole broke up", shape.circle, location.belowbar, color=color.new(color.aqua, 0), size=size.tiny)
+plotshape(hState == -1 and hState[1] != -1, "Hole broke down", shape.circle, location.abovebar, color=color.new(color.purple, 0), size=size.tiny)
+
+alertcondition(goNow, "DRAGON go", "{{ticker}} {{interval}}: DRAGON total signal ON — enter next open")
+alertcondition(outNow, "DRAGON out", "{{ticker}} {{interval}}: DRAGON exit")
+alertcondition(nBull >= 5 and nBull[1] < 5, "DRAGON armed", "{{ticker}} {{interval}}: 5+ Dragon panels bullish")
+
+var table tbl = table.new(position.top_right, 2, 9, border_width=1)
+cell(int r, string k, string v, bool good) =>
+    table.cell(tbl, 0, r, k, text_color=color.white, bgcolor=color.new(color.gray, 20), text_size=size.small)
+    table.cell(tbl, 1, r, v, text_color=color.white, bgcolor=good ? color.new(color.red, 20) : color.new(color.gray, 60), text_size=size.small)
+if showTbl and barstate.islast
+    cell(0, "DRAGON", stateOn ? "ON" : "off", stateOn)
+    cell(1, "Panels bullish", str.tostring(nBull) + " / 7", nBull >= 5)
+    cell(2, "SS candle", ssConfirm ? "red, confirmed" : ssBull ? "red" : "yellow/blue", ssBull)
+    cell(3, "Ribbon", bbeBull ? "red" : "blue", bbeBull)
+    cell(4, "Hole", hState == 1 ? "BROKE UP" : hState == -1 ? "BROKE DOWN" : "in force", hState == 1)
+    cell(5, "POC bar", pocBull ? "closes above" : "below", pocBull)
+    cell(6, "TE line", teBull ? "rising" : "falling", teBull)
+    cell(7, "Whales / retail", str.tostring(whales, "#") + "% / " + str.tostring(retail, "#") + "%", mcdxBull)
+    cell(8, "MACD·RSI / heat", (macdBull and rsiUp ? "up" : "no") + (overheated ? " · OVERHEATED" : ""), macdBull and rsiUp and not overheated)

@@ -1,0 +1,54 @@
+//@version=5
+indicator("Minervini VCP mit Breakout, Exit & EMA-Filter", overlay=true)
+
+vcpPeriod = input.int(50, "VCP-Periode")
+pivotLookback = input.int(20, "Pivot-Widerstand (Lookback)")
+volFactor = input.float(1.1, "Volatilitaets-Toleranz", step=0.1)
+volStopPeriode = input.int(5, "Volumenvergleich (Exit)")
+rangeStopPeriode = input.int(5, "TrueRange-Vergleich (Exit)")
+vcpNachlauf = input.int(5, "Max Tage nach VCP erlaubt")
+emaPeriode = input.int(50, "EMA-Filterperiode")
+
+// === ATR / TR / VOLUME
+atr = ta.atr(14)
+tr = high - low
+avgTR = ta.sma(tr, rangeStopPeriode)
+avgVol = ta.sma(volume, volStopPeriode)
+
+// === EMA-FILTER
+ema = ta.ema(close, emaPeriode)
+preisUeberEMA = close > ema
+
+// === VCP-BEDINGUNG
+lowVol = ta.lowest(atr, vcpPeriod)
+volContraction = atr <= lowVol * volFactor
+vcpKriterium = volContraction and preisUeberEMA
+plotshape(vcpKriterium, title="VCP-Potential (mit EMA)", location=location.belowbar, color=color.yellow, style=shape.circle, size=size.tiny)
+
+// === VCP-TIMER
+var int vcpCountdown = 0
+if vcpKriterium
+    vcpCountdown := vcpNachlauf
+else
+    vcpCountdown := math.max(vcpCountdown - 1, 0)
+
+vcpAktiv = vcpCountdown > 0
+
+// === PIVOT-ZONE FIXIEREN
+var float pivotHigh = na
+if vcpKriterium or (na(pivotHigh) and vcpAktiv)
+    pivotHigh := ta.highest(high, pivotLookback)
+
+plot(pivotHigh, title="Pivot-Level", color=color.red, linewidth=1, style=plot.style_line)
+
+// === BREAKOUT
+var bool inBreakout = false
+breakoutNow = vcpAktiv and not inBreakout and close > pivotHigh and preisUeberEMA
+exitCondition = inBreakout and (volume < avgVol) and (tr < avgTR)
+
+if breakoutNow
+    inBreakout := true
+else if exitCondition
+    inBreakout := false
+
+plotshape(inBreakout ? 1 : na, title="Breakout-Aktiv (mit EMA)", location=location.belowbar, color=color.green, style=shape.circle, size=size.small)

@@ -1,0 +1,55 @@
+//@version=5
+// VCP Pressure — the volatility-contraction pane (indicator 2 of 2).
+//   • columns = TTM squeeze momentum (Carter / LazyBear with the Bollinger multiplier fixed at 2.0)
+//   • dots on zero = squeeze tier (white = early 2.0·KC, red = original 1.5·KC, orange = power 1.0·KC)
+//   • coil score 0–100 (blue line) = how tight the tape is versus its own last 200 bars:
+//     average of ATR%-tightness, Bollinger-bandwidth tightness and volume dry-up, ×0.5 when the last 20 bars
+//     travelled efficiently (a trend, not a coil). ≥ 80 is a hard coil.
+// Alerts: "6th squeeze bar", "Squeeze released up", "Squeeze released down", "Hard coil (score ≥ 80)".
+indicator("VCP Pressure", "VCP Pressure", overlay=false)
+
+length  = input.int(20, "Squeeze length", minval=5)
+lookback = input.int(200, "Rank lookback (bars)", minval=50)
+hard    = input.int(80, "Hard-coil score", minval=50, maxval=100)
+
+// squeeze (Bollinger 20/2.0 inside three Keltner tiers)
+basis = ta.sma(close, length)
+dev = 2.0 * ta.stdev(close, length)
+devKC = ta.sma(ta.tr, length)
+upBB = basis + dev
+loBB = basis - dev
+inside(m) => loBB > basis - devKC * m and upBB < basis + devKC * m
+sqzLow  = inside(2.0)
+sqzMid  = inside(1.5)
+sqzHigh = inside(1.0)
+sqzOn = sqzMid
+var int sqzN = 0
+sqzN := sqzOn ? sqzN + 1 : 0
+
+mom = ta.linreg(close - math.avg(math.avg(ta.highest(high, length), ta.lowest(low, length)), ta.sma(close, length)), length, 0)
+momCol = mom > 0 ? (mom > nz(mom[1]) ? color.new(color.aqua, 0) : color.new(#2962ff, 0)) : (mom < nz(mom[1]) ? color.new(color.red, 0) : color.new(color.yellow, 0))
+dotCol = sqzHigh ? color.new(color.orange, 0) : sqzMid ? color.new(color.red, 0) : sqzLow ? color.new(color.white, 0) : color.new(color.green, 0)
+
+// coil score
+atrPctRank = ta.percentrank(ta.atr(14) / close, lookback)
+bw = (upBB - loBB) / basis
+bwRank = ta.percentrank(bw, lookback)
+volRatio = ta.sma(volume, 5) / math.max(ta.sma(volume, 50), 1.0)
+sAtr = 100 - atrPctRank
+sBw = 100 - bwRank
+sVol = 100 * math.max(0.0, math.min(1.0, 1.0 - volRatio))
+efficiency = math.abs(close - close[20]) / math.max(math.sum(ta.tr(true), 20), 0.000001)
+raw = (0.4 * sAtr + 0.4 * sBw + 0.2 * sVol) * (efficiency > 0.5 ? 0.5 : 1.0)
+score = ta.ema(raw, 3)
+scoreCol = score >= hard ? color.new(#00e676, 0) : score >= 60 ? color.new(#2962ff, 0) : color.new(#787b86, 0)
+
+plot(mom, "Squeeze momentum", color=momCol, style=plot.style_columns, linewidth=2)
+plot(0, "Squeeze dots", color=dotCol, style=plot.style_circles, linewidth=3)
+plot(score, "Coil score", color=scoreCol, linewidth=2, display=display.pane + display.status_line)
+hline(hard, "Hard coil", color=color.new(color.gray, 50), linestyle=hline.style_dotted)
+hline(60, "Coil", color=color.new(color.gray, 70), linestyle=hline.style_dotted)
+
+alertcondition(sqzN == 6, "6th squeeze bar", "{{ticker}} {{interval}}: 6th squeeze bar — coil is mature")
+alertcondition(sqzOn[1] and not sqzOn and mom > 0, "Squeeze released up", "{{ticker}} {{interval}}: squeeze released, momentum up")
+alertcondition(sqzOn[1] and not sqzOn and mom < 0, "Squeeze released down", "{{ticker}} {{interval}}: squeeze released, momentum down")
+alertcondition(ta.crossover(score, hard), "Hard coil", "{{ticker}} {{interval}}: coil score crossed the hard-coil line")
