@@ -14,6 +14,28 @@ formulas over every US stock above $2B.
 
 Everything compiled clean on a live TradingView chart. Two active indicators are enough: DRAGON TOTAL + DIAMOND TOTAL.
 
+## The full-universe verdict (read this first)
+
+`lab/bend/` is the whole reading rebuilt in **Bend 2** — every Dragon and Diamond panel per bar, the C reading's
+rising edges scored under six exits next to a random-entry control with the *same* exits, tickers in parallel; the
+state machine, signal, panel count and bracket decisions are covered by 23 proven laws (`bend PROOF.bend`), and the
+float paths agree bar-for-bar with the Python ports. It runs the complete universe of US common stocks above $100M
+(2,174 names with history, 2016–2026) in about a minute, so the question "does Dragon time entries?" is finally
+answered on everything rather than on a watch-list:
+
+| timeframe | C signals | random entries | Δ hole exit | Δ +2/−4 ATR bracket | Δ 10-bar close |
+|---|---|---|---|---|---|
+| daily | 101,261 | 496,799 | +0.27 % ± 0.21 | **−0.05 ± 0.02 ATR** | −0.11 % ± 0.09 |
+| weekly | 32,722 | 110,342 | +0.97 % ± 1.83 | **+0.05 ± 0.03 ATR** | −0.05 % ± 0.30 |
+
+(differences matched within year × ATR-band cells, ± = 95 % interval). **On daily bars the C reading — and every tier
+of it — enters no better than a coin; on weekly bars it is worth about +0.05 ATR per bracket trade, a third of a
+percent.** At random entries every bullish panel state is followed by a slightly *negative* ten-day excess. The
+earlier +11.8 % per trade on the 94 tuning tickers was the survivorship of those names plus a control with a
+different exit: the random control with the hole exit makes +2.1 % per trade on its own (drift plus a trend-following
+exit). Details, tables and the live view: [`lab/bend/README.md`](lab/bend/README.md). Everything below this line is
+the earlier, watch-list-scale work and should be read with that verdict in mind.
+
 ## What the tests say — read in this order
 
 Method everywhere: one fixed-size unit per trade, entered at the **next open** after the signal bar, closed by the
