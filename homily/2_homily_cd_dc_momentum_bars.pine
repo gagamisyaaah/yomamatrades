@@ -1,0 +1,170 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Homily Chart · CD + DC clone (overlay)
+//  CD  = Chips Distribution: plain volume-at-price over a lookback = Homily's blue horizontal bars.
+//        DannyTrades' "momentum bars" are the longest CD bars (support / resistance).
+//  DC  = Dynamic Chips: turnover-decayed cost distribution (CYQ 筹码分布) = Homily's yellow
+//        histogram + the "Profit %" (获利) and "Hung Up %" (套牢) readouts.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Homily CD/DC — Momentum bars + Profit / Hung Up", "Homily CD/DC", overlay=true, max_boxes_count=500, max_labels_count=50, max_lines_count=50)
+
+max_bars_back(high, 1600)
+max_bars_back(low, 1600)
+max_bars_back(volume, 1600)
+
+gCD     = "CD — Chips Distribution (blue 'momentum bars')"
+cdShow  = input.bool(true, "Show CD", group=gCD)
+cdLook  = input.int(250, "Lookback (bars)", minval=20, maxval=1500, group=gCD)
+cdRows  = input.int(120, "Rows", minval=10, maxval=240, group=gCD)
+cdWidth = input.int(70, "Max bar width (bars)", minval=5, maxval=300, group=gCD)
+cdTopN  = input.int(3, "Highlight N longest = momentum bars", minval=1, maxval=10, group=gCD)
+cdCol   = input.color(#2f80ed, "CD colour", group=gCD)
+cdTr    = input.int(45, "CD transparency", minval=0, maxval=100, group=gCD)
+cdHot   = input.color(#8fe3ff, "Momentum-bar colour", group=gCD)
+
+gDC     = "DC — Dynamic Chips (yellow) + Profit / Hung Up"
+dcShow  = input.bool(true, "Show DC histogram", group=gDC)
+dcRows  = input.int(100, "Rows", minval=10, maxval=240, group=gDC)
+dcWidth = input.int(45, "Max width (bars)", minval=5, maxval=300, group=gDC)
+dcCol   = input.color(#ffd400, "DC colour", group=gDC)
+dcTr    = input.int(35, "DC transparency", minval=0, maxval=100, group=gDC)
+dcMode  = input.string("Turnover (float shares)", "Decay", options=["Turnover (float shares)", "Fixed half-life"], group=gDC)
+dcHalf  = input.int(40, "Half-life (bars) when fixed / no float data", minval=1, group=gDC)
+dcCap   = input.float(0.5, "Max daily turnover applied", minval=0.01, maxval=1.0, group=gDC)
+dcSpan  = input.int(1500, "Engine memory (bars)", minval=100, maxval=5000, group=gDC)
+binPct  = input.float(0.25, "Price bin (%)", minval=0.05, step=0.05, group=gDC)
+
+// ═══════════════ cost-distribution engine (CYQ) ═══════════════
+// log-spaced price bins; stored values are pre-scaled by 1/G so decay is O(1) per bar
+lnStep = math.log(1.0 + binPct / 100.0)
+binOf(float p) => int(math.floor(math.log(p) / lnStep))
+
+var float[] chips = array.new_float()
+var int     lo    = 0
+var float   G     = 1.0
+
+if bar_index > last_bar_index - dcSpan and nz(volume) > 0 and low > 0 and high >= low
+    float t = 0.0
+    if dcMode == "Turnover (float shares)" and not na(syminfo.shares_outstanding_float) and syminfo.shares_outstanding_float > 0
+        t := math.min(volume / syminfo.shares_outstanding_float, dcCap)
+    else
+        t := 1.0 - math.pow(0.5, 1.0 / dcHalf)
+    G := G * (1.0 - t)
+    if G < 1.0e-150
+        if array.size(chips) > 0
+            for i = 0 to array.size(chips) - 1
+                array.set(chips, i, array.get(chips, i) * G)
+        G := 1.0
+    bL = binOf(low)
+    bH = binOf(high)
+    if array.size(chips) == 0
+        lo := bL
+        for b = bL to bH
+            array.push(chips, 0.0)
+    else
+        while bL < lo
+            array.unshift(chips, 0.0)
+            lo := lo - 1
+        while bH > lo + array.size(chips) - 1
+            array.push(chips, 0.0)
+    per = volume / float(bH - bL + 1) / G
+    for b = bL to bH
+        idx = b - lo
+        array.set(chips, idx, array.get(chips, idx) + per)
+
+// ═══════════════ drawing (last bar only) ═══════════════
+var box[]   cdBoxes = array.new_box()
+var label[] cdLbls  = array.new_label()
+var box[]   dcBoxes = array.new_box()
+var table   tb      = table.new(position.top_right, 1, 3, bgcolor=color.new(color.black, 35), border_width=1)
+
+if barstate.islast
+    while array.size(cdBoxes) > 0
+        box.delete(array.pop(cdBoxes))
+    while array.size(cdLbls) > 0
+        label.delete(array.pop(cdLbls))
+    while array.size(dcBoxes) > 0
+        box.delete(array.pop(dcBoxes))
+
+    // ── CD: volume at price over the lookback ──
+    if cdShow
+        n = math.min(cdLook, bar_index + 1)
+        float pMax = -1.0e10
+        float pMin =  1.0e10
+        for i = 0 to n - 1
+            pMax := math.max(pMax, high[i])
+            pMin := math.min(pMin, low[i])
+        if pMax > pMin
+            rowH = (pMax - pMin) / cdRows
+            rows = array.new_float(cdRows, 0.0)
+            for i = 0 to n - 1
+                r1 = math.max(0, math.min(cdRows - 1, int(math.floor((low[i]  - pMin) / rowH))))
+                r2 = math.max(0, math.min(cdRows - 1, int(math.floor((high[i] - pMin) / rowH))))
+                per = nz(volume[i]) / float(r2 - r1 + 1)
+                for r = r1 to r2
+                    array.set(rows, r, array.get(rows, r) + per)
+            vMax = array.max(rows)
+            srt  = array.copy(rows)
+            array.sort(srt, order.descending)
+            thr  = array.get(srt, math.min(cdTopN, cdRows) - 1)
+            left = bar_index - n + 1
+            if vMax > 0
+                for r = 0 to cdRows - 1
+                    v   = array.get(rows, r)
+                    w   = int(math.round(v / vMax * cdWidth))
+                    bot = pMin + r * rowH
+                    top = bot + rowH
+                    hot = v >= thr and v > 0
+                    array.push(cdBoxes, box.new(left, top, left + w, bot, color.new(cdCol, 100), 1, line.style_solid, extend.none, xloc.bar_index, hot ? color.new(cdHot, 10) : color.new(cdCol, cdTr)))
+                    if hot
+                        tag = v >= vMax ? "  POC" : ""
+                        array.push(cdLbls, label.new(left + w, (top + bot) / 2.0, str.tostring((top + bot) / 2.0, format.mintick) + tag, xloc.bar_index, yloc.price, color.new(color.black, 20), label.style_label_left, cdHot, size.small))
+
+    // ── DC: decayed chips → histogram + Profit / Hung Up ──
+    float profitPct = na
+    float avgCost   = na
+    sz = array.size(chips)
+    if sz > 0
+        float tot   = 0.0
+        float below = 0.0
+        float wsum  = 0.0
+        int firstNZ = -1
+        int lastNZ  = -1
+        for i = 0 to sz - 1
+            v = array.get(chips, i) * G
+            if v > 0
+                pr = math.exp((lo + i + 0.5) * lnStep)
+                tot   += v
+                wsum  += v * pr
+                if pr < close
+                    below += v
+                if firstNZ < 0
+                    firstNZ := i
+                lastNZ := i
+        if tot > 0
+            profitPct := below / tot * 100.0
+            avgCost   := wsum / tot
+            if dcShow and lastNZ >= firstNZ
+                pLo   = math.exp((lo + firstNZ) * lnStep)
+                pHi   = math.exp((lo + lastNZ + 1) * lnStep)
+                rowH2 = (pHi - pLo) / dcRows
+                rows2 = array.new_float(dcRows, 0.0)
+                for i = firstNZ to lastNZ
+                    v = array.get(chips, i) * G
+                    if v > 0
+                        pr = math.exp((lo + i + 0.5) * lnStep)
+                        r  = math.max(0, math.min(dcRows - 1, int(math.floor((pr - pLo) / rowH2))))
+                        array.set(rows2, r, array.get(rows2, r) + v)
+                vMax2 = array.max(rows2)
+                if vMax2 > 0
+                    for r = 0 to dcRows - 1
+                        v = array.get(rows2, r)
+                        w = int(math.round(v / vMax2 * dcWidth))
+                        if w > 0
+                            bot = pLo + r * rowH2
+                            top = bot + rowH2
+                            array.push(dcBoxes, box.new(bar_index + 2, top, bar_index + 2 + w, bot, color.new(dcCol, 100), 1, line.style_solid, extend.none, xloc.bar_index, color.new(dcCol, dcTr)))
+
+    table.cell(tb, 0, 0, "Profit: "  + (na(profitPct) ? "n/a" : str.tostring(profitPct, "#.#") + "%"),         text_color=color.new(#8fe3ff, 0), text_size=size.small)
+    table.cell(tb, 0, 1, "Hung Up: " + (na(profitPct) ? "n/a" : str.tostring(100.0 - profitPct, "#.#") + "%"), text_color=color.new(#ffd400, 0), text_size=size.small)
+    table.cell(tb, 0, 2, "Avg cost: " + (na(avgCost) ? "n/a" : str.tostring(avgCost, format.mintick)),          text_color=color.white, text_size=size.small)

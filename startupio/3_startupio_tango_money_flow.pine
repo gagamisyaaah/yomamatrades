@@ -1,0 +1,84 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Startup.io-style · TANGO — "Smart Money Flow" (±50)
+//  Calibrated against IREN weekly: MFI(14) − 50 tracks the cyan pane within a few points
+//  (−4 in May → +17/+29 in June → +42…+48 Aug–Oct → +40 early Nov). Lightly smoothed.
+//  Diamonds in a fixed lane (default −30): blue = buy, pink = sell.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Startup.io-style · Tango (Smart Money Flow)", "SU Tango", overlay=false, precision=1, max_labels_count=200)
+
+len     = input.int(14, "Money-flow length (MFI)", minval=2)
+invalBars = input.int(3, "Invalidate diamond if its high/low is not broken within (bars)", minval=1)
+sm      = input.int(3,  "Smoothing", minval=1)
+sigL    = input.int(5,  "Signal EMA", minval=1)
+zone    = input.float(25.0, "Zone level (±)", minval=5, maxval=49)
+lane    = input.float(-30.0, "Diamond lane (y)", minval=-50, maxval=50)
+minMove = input.float(10.0, "Min wave travel between diamonds", minval=0)
+cUp   = input.color(#2fd0c8, "Bull area (teal)")
+cDn   = input.color(#8a6cd6, "Bear area (purple)")
+cBlue = input.color(#58c0ff, "Blue diamond")
+cPink = input.color(#ff5fa2, "Pink diamond")
+
+wave = ta.ema(ta.mfi(hlc3, len) - 50.0, sm)
+sig  = ta.ema(wave, sigL)
+
+plot(wave, "Money flow", color=wave >= 0 ? color.new(cUp, 35) : color.new(cDn, 35), style=plot.style_area)
+plot(wave, "Money flow line", color=wave >= 0 ? cUp : cDn, linewidth=2)
+plot(sig,  "Signal", color=color.new(color.white, 60), linewidth=1)
+
+hZ  = hline(0.0, "Zero", color=color.new(color.white, 60), linestyle=hline.style_dotted)
+hUp = hline(zone, "Upper zone", color=color.new(cUp, 100))
+hUx = hline(50.0, "Top", color=color.new(cUp, 100))
+hDn = hline(-zone, "Lower zone", color=color.new(cDn, 100))
+hDx = hline(-50.0, "Bottom", color=color.new(cDn, 100))
+fill(hUp, hUx, color=color.new(cUp, 85), title="Upper zone")
+fill(hDn, hDx, color=color.new(cDn, 85), title="Lower zone (diamond lane)")
+
+var float hi = na
+var float lo = na
+hi := na(hi) ? wave : math.max(hi, wave)
+lo := na(lo) ? wave : math.min(lo, wave)
+travel = hi - lo
+blueD = ta.crossover(wave, sig) and travel >= minMove
+pinkD = ta.crossunder(wave, sig) and travel >= minMove
+if blueD or pinkD
+    hi := wave
+    lo := wave
+
+plotshape(blueD ? lane : na, "Blue diamond", shape.diamond, location.absolute, cBlue, size=size.normal)
+plotshape(pinkD ? lane : na, "Pink diamond", shape.diamond, location.absolute, cPink, size=size.normal)
+
+// invalidation: a blue diamond expects its bar's high to break soon; a pink one expects its low to break.
+var int   dBar = na
+var int   dDir = 0
+var float dHi  = na
+var float dLo  = na
+var bool  dOpen = false
+if blueD or pinkD
+    dBar := bar_index
+    dDir := blueD ? 1 : -1
+    dHi  := high
+    dLo  := low
+    dOpen := true
+bool invalidated = false
+if dOpen and bar_index > dBar
+    if dDir == 1
+        if high > dHi
+            dOpen := false
+        else if close < dLo or bar_index - dBar > invalBars
+            dOpen := false
+            invalidated := true
+    else
+        if low < dLo
+            dOpen := false
+        else if close > dHi or bar_index - dBar > invalBars
+            dOpen := false
+            invalidated := true
+if invalidated
+    label.new(dBar, lane, "✕", xloc.bar_index, yloc.price, color.new(color.white, 100), label.style_none, color.white, size.large)
+
+alertcondition(blueD, "SU Tango BLUE diamond", "Tango (money flow): blue diamond — buy confirmation")
+alertcondition(pinkD, "SU Tango PINK diamond", "Tango (money flow): pink diamond — sell confirmation")
+alertcondition(invalidated, "SU Tango diamond INVALIDATED", "Tango: last diamond invalidated (its high/low did not break)")
+alertcondition(ta.crossover(wave, 0.0),  "SU Tango flow > 0", "Money flow crossed above zero")
+alertcondition(ta.crossunder(wave, 0.0), "SU Tango flow < 0", "Money flow crossed below zero")

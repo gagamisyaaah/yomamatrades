@@ -1,0 +1,27 @@
+//@version=5
+// Homily Chart · RSI ×3 (9 / 14 / 24) with 80 / 50 / 20 lines. Danny: three RSIs curling up together = bullish; compare previous lows to call the bottom.
+indicator("Homily RSI ×3 (9 / 14 / 24)", "Homily RSI3", overlay=false)
+
+l1 = input.int(9,  "RSI 1", minval=1)
+l2 = input.int(14, "RSI 2", minval=1)
+l3 = input.int(24, "RSI 3", minval=1)
+c1 = input.color(#ffe600, "RSI 1 colour")
+c2 = input.color(#ff5a5a, "RSI 2 colour")
+c3 = input.color(#ffffff, "RSI 3 colour")
+
+r1 = ta.rsi(close, l1)
+r2 = ta.rsi(close, l2)
+r3 = ta.rsi(close, l3)
+
+plot(r1, "RSI(9)",  c1, 1)
+plot(r2, "RSI(14)", c2, 1)
+plot(r3, "RSI(24)", c3, 1)
+hline(80.0, "80", color=color.new(#2fe8ff, 30))
+hline(50.0, "50", color=color.new(color.white, 60))
+hline(20.0, "20", color=color.new(#2fe8ff, 30))
+
+allUp = r1 > r1[1] and r2 > r2[1] and r3 > r3[1]
+allDn = r1 < r1[1] and r2 < r2[1] and r3 < r3[1]
+alertcondition(allUp and not allUp[1], "Homily RSI: all three curling UP",   "RSI 9/14/24 all rising")
+alertcondition(allDn and not allDn[1], "Homily RSI: all three curling DOWN", "RSI 9/14/24 all falling")
+alertcondition(ta.crossover(r1, 30.0), "Homily RSI(9) leaves oversold", "RSI(9) crossed above 30")

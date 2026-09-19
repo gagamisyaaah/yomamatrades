@@ -1,0 +1,41 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Startup.io-style · BUBBLE — overheat meter for MAJOR tops (daily & weekly only)
+//  Official description: "used to predict major tops, via the daily and weekly timeframes only,
+//  with brighter columns indicating more overheated markets".
+//  Clone: overheat = distance of close above a long EMA measured in ATR units, blended with the
+//  hype wave and money flow both being in their upper zones; columns brighten as it rises.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Startup.io-style · Bubble", "SU Bubble", overlay=false, precision=1)
+
+baseLen = input.int(200, "Long EMA", minval=20)
+atrLen  = input.int(14, "ATR length", minval=1)
+hLen    = input.int(10, "Hype wave length", minval=2)
+mLen    = input.int(14, "Money-flow length", minval=2)
+hot     = input.float(6.0, "Overheated threshold (ATR units)", minval=1, step=0.5)
+cCold   = input.color(#3a2a5c, "Cool column")
+cHot    = input.color(#ff2e9a, "Overheated column")
+
+isDW = timeframe.isdaily or timeframe.isweekly
+ema  = ta.ema(close, baseLen)
+atr  = ta.atr(atrLen)
+dist = atr > 0 ? (close - ema) / atr : 0.0
+signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
+volE = ta.ema(volume, hLen)
+svE  = ta.ema(signedVol, hLen)
+hype = (volE > 0 ? 100.0 * svE / volE : 0.0) / 2.0
+flow = ta.mfi(hlc3, mLen) - 50.0
+boost = (hype > 25 ? 1.0 : 0.0) + (flow > 25 ? 1.0 : 0.0)
+bubble = math.max(0.0, dist) + boost
+heat = math.min(1.0, bubble / hot)
+col  = color.from_gradient(heat, 0.0, 1.0, cCold, cHot)
+
+plot(isDW ? bubble : na, "Bubble", color=col, style=plot.style_columns)
+hline(hot, "Overheated", color=color.new(#ff2e9a, 40), linestyle=hline.style_dashed)
+var label warn = na
+if barstate.islast and not isDW
+    label.delete(warn)
+    warn := label.new(bar_index, 0, "Bubble is meant for D / W charts only", style=label.style_label_left, color=color.new(color.black, 40), textcolor=color.white, size=size.small)
+
+alertcondition(isDW and bubble >= hot and bubble[1] < hot, "SU Bubble overheated", "Bubble entered the overheated zone (major-top watch)")
+alertcondition(isDW and bubble < hot and bubble[1] >= hot, "SU Bubble cooling", "Bubble left the overheated zone")

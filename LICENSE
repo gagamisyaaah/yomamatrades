@@ -1,0 +1,11 @@
+Mozilla Public License Version 2.0
+==================================
+
+This repository contains reverse-engineered clones of third-party proprietary indicators, written
+from public documentation, videos and independent calibration on real market data. It is not
+affiliated with, endorsed by, or a copy of any original vendor's code.
+
+The Pine Script files in this repository are released under the terms of the Mozilla Public
+License, v. 2.0. A copy of the MPL 2.0 is available at https://mozilla.org/MPL/2.0/ .
+
+No warranty is provided. Trading is risky; nothing here is financial advice.

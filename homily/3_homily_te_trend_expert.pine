@@ -1,0 +1,60 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Homily Chart · TE — Trend Expert (Chinese version: 趋势王 "Trend King")
+//  Port of the leaked 通达信 formula:
+//    a1..a7 = mean of three EMAs of OHLC4 with periods (3,6,9) (5,10,20) (7,14,28) (9,18,36) (11,22,44) (13,26,52) (21,34,68)
+//    var_i  = FORCAST(a_i, 6)  → linear-regression value  (Pine: ta.linreg(x, 6, 0))
+//    dotted lines: purple when rising, green when falling; line 7 drawn thick
+//    tower  = FORCAST(EMA((3C+2O+H+L)/7, 3), 6); bars from tower[1] to tower: red rising, green falling
+//  Danny's read: red bar = bullish sentiment, green bar = bearish; purple line = mid-term uptrend, green line = mid-term downtrend.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Homily TE — Trend Expert (趋势王)", "Homily TE", overlay=false, format=format.price, precision=3)
+
+fc       = input.int(6, "Forecast (linear-regression) length", minval=2)
+src      = input.source(ohlc4, "Source")
+showBars = input.bool(true, "Show tower bars")
+cUpL     = input.color(#ff33ff, "Rising line (purple)")
+cDnL     = input.color(#22e022, "Falling line (green)")
+cUpB     = input.color(#ff2a2a, "Rising bar (red)")
+cDnB     = input.color(#22e022, "Falling bar (green)")
+
+trip(int a, int b, int c) =>
+    (ta.ema(src, a) + ta.ema(src, b) + ta.ema(src, c)) / 3.0
+
+a1 = trip(3, 6, 9)
+a2 = trip(5, 10, 20)
+a3 = trip(7, 14, 28)
+a4 = trip(9, 18, 36)
+a5 = trip(11, 22, 44)
+a6 = trip(13, 26, 52)
+a7 = trip(21, 34, 68)
+
+v1 = ta.linreg(a1, fc, 0)
+v2 = ta.linreg(a2, fc, 0)
+v3 = ta.linreg(a3, fc, 0)
+v4 = ta.linreg(a4, fc, 0)
+v5 = ta.linreg(a5, fc, 0)
+v6 = ta.linreg(a6, fc, 0)
+v7 = ta.linreg(a7, fc, 0)
+
+lc(float v) => v > v[1] ? cUpL : cDnL
+
+plot(v1, "Line 1", lc(v1), 1, plot.style_circles)
+plot(v2, "Line 2", lc(v2), 1, plot.style_circles)
+plot(v3, "Line 3", lc(v3), 1, plot.style_circles)
+plot(v4, "Line 4", lc(v4), 1, plot.style_circles)
+plot(v5, "Line 5", lc(v5), 1, plot.style_circles)
+plot(v6, "Line 6", lc(v6), 1, plot.style_circles)
+plot(v7, "Line 7 (main, thick)", lc(v7), 2, plot.style_line)
+
+tower = ta.linreg(ta.ema((3.0 * close + 2.0 * open + high + low) / 7.0, 3), fc, 0)
+tUp   = tower >= tower[1]
+bCol  = tUp ? cUpB : cDnB
+plotcandle(showBars ? tower[1] : na, showBars ? math.max(tower, tower[1]) : na, showBars ? math.min(tower, tower[1]) : na, showBars ? tower : na, "Tower bars", bCol, bCol, bordercolor=bCol)
+
+mainUp = v7 > v7[1]
+allUp  = v1 > v1[1] and v2 > v2[1] and v3 > v3[1] and v4 > v4[1] and v5 > v5[1] and v6 > v6[1] and v7 > v7[1]
+alertcondition(mainUp and not mainUp[1], "Homily TE: main line turned PURPLE", "TE main line green → purple (mid-term turning up)")
+alertcondition((not mainUp) and mainUp[1], "Homily TE: main line turned GREEN", "TE main line purple → green (mid-term turning down)")
+alertcondition(tUp and not tUp[1], "Homily TE: bars turned RED", "TE tower bars green → red (bullish sentiment)")
+alertcondition(allUp and not allUp[1], "Homily TE: all 7 lines rising", "TE: all seven lines purple")

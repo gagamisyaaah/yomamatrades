@@ -1,0 +1,92 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Startup.io-style · ECHO — "Hype Wave" (volume-driven momentum, ±50)
+//  Calibrated against IREN weekly / ONDS daily screenshots: a volume-zone oscillator
+//  (signed-volume EMA ÷ volume EMA, halved to ±50, lightly smoothed) reproduces the
+//  wave's valleys/peaks that price-only oscillators (RSI, WaveTrend, Stochastic) miss.
+//  Diamonds print in a fixed lane (default −30) — blue = buy, pink = sell — when the wave
+//  crosses its signal after a meaningful move. Zones ±25…±50 are shaded like the original.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Startup.io-style · Echo (Hype Wave)", "SU Echo", overlay=false, precision=1, max_labels_count=200)
+
+len     = input.int(10, "Wave length (EMA)", minval=2)
+invalBars = input.int(3, "Invalidate diamond if its high/low is not broken within (bars)", minval=1)
+sm      = input.int(3,  "Wave smoothing", minval=1)
+sigL    = input.int(5,  "Signal EMA", minval=1)
+zone    = input.float(25.0, "Zone level (±)", minval=5, maxval=49)
+lane    = input.float(-30.0, "Diamond lane (y)", minval=-50, maxval=50)
+minMove = input.float(10.0, "Min wave travel between diamonds", minval=0)
+cUp   = input.color(#4c8dff, "Bull area (blue)")
+cDn   = input.color(#e58ab5, "Bear area (pink)")
+cBlue = input.color(#58c0ff, "Blue diamond")
+cPink = input.color(#ff5fa2, "Pink diamond")
+
+signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
+volE = ta.ema(volume, len)
+svE  = ta.ema(signedVol, len)
+raw  = volE > 0 ? 100.0 * svE / volE : 0.0
+wave = ta.ema(raw / 2.0, sm)
+sig  = ta.ema(wave, sigL)
+
+plot(wave, "Hype wave", color=wave >= 0 ? color.new(cUp, 35) : color.new(cDn, 35), style=plot.style_area)
+plot(wave, "Hype wave line", color=wave >= 0 ? cUp : cDn, linewidth=2)
+plot(sig,  "Signal", color=color.new(color.white, 60), linewidth=1)
+
+hZ  = hline(0.0, "Zero", color=color.new(color.white, 60), linestyle=hline.style_dotted)
+hUp = hline(zone, "Upper zone", color=color.new(cUp, 100))
+hUx = hline(50.0, "Top", color=color.new(cUp, 100))
+hDn = hline(-zone, "Lower zone", color=color.new(cDn, 100))
+hDx = hline(-50.0, "Bottom", color=color.new(cDn, 100))
+fill(hUp, hUx, color=color.new(cUp, 85), title="Upper zone")
+fill(hDn, hDx, color=color.new(cDn, 85), title="Lower zone (diamond lane)")
+
+// diamond engine: cross of signal + minimum travel since the last diamond
+var float hi = na
+var float lo = na
+hi := na(hi) ? wave : math.max(hi, wave)
+lo := na(lo) ? wave : math.min(lo, wave)
+travel = hi - lo
+blueD = ta.crossover(wave, sig) and travel >= minMove
+pinkD = ta.crossunder(wave, sig) and travel >= minMove
+if blueD or pinkD
+    hi := wave
+    lo := wave
+
+plotshape(blueD ? lane : na, "Blue diamond", shape.diamond, location.absolute, cBlue, size=size.normal)
+plotshape(pinkD ? lane : na, "Pink diamond", shape.diamond, location.absolute, cPink, size=size.normal)
+
+// invalidation: a blue diamond expects its bar's high to break soon; a pink one expects its low to break.
+// Official wording: diamonds are "confirmed on the next candle" and "can be invalidated".
+var int   dBar = na
+var int   dDir = 0
+var float dHi  = na
+var float dLo  = na
+var bool  dOpen = false
+if blueD or pinkD
+    dBar := bar_index
+    dDir := blueD ? 1 : -1
+    dHi  := high
+    dLo  := low
+    dOpen := true
+bool invalidated = false
+if dOpen and bar_index > dBar
+    if dDir == 1
+        if high > dHi
+            dOpen := false
+        else if close < dLo or bar_index - dBar > invalBars
+            dOpen := false
+            invalidated := true
+    else
+        if low < dLo
+            dOpen := false
+        else if close > dHi or bar_index - dBar > invalBars
+            dOpen := false
+            invalidated := true
+if invalidated
+    label.new(dBar, lane, "✕", xloc.bar_index, yloc.price, color.new(color.white, 100), label.style_none, color.white, size.large)
+
+alertcondition(blueD, "SU Echo BLUE diamond", "Echo (hype wave): blue diamond — buy confirmation")
+alertcondition(pinkD, "SU Echo PINK diamond", "Echo (hype wave): pink diamond — sell confirmation")
+alertcondition(invalidated, "SU Echo diamond INVALIDATED", "Echo: last diamond invalidated (its high/low did not break)")
+alertcondition(ta.crossover(wave, 0.0),  "SU Echo wave > 0", "Hype wave crossed above zero")
+alertcondition(ta.crossunder(wave, 0.0), "SU Echo wave < 0", "Hype wave crossed below zero")

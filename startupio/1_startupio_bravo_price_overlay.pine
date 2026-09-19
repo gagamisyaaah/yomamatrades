@@ -1,0 +1,274 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Startup.io-style · BRAVO + VOILA (price overlay)
+//  Open reverse-engineering of the two Startup.io price-pane indicators:
+//    BRAVO = diamonds + shapes on the candles; VOILA = the support/resistance layer
+//    (Wayne Liang, V7 walkthrough: grey bands strongest, gold line second, green-teal/purple crosses weakest).
+//    • teal / purple candles (up / down), WHITE candle = close breaches a Gold level
+//    • GOLD levels   = 3-EMA band (Sun Liao: "1. Gold levels")
+//    • GREEN / PURPLE levels = last confirmed pivot low / high, held until breached (Sun: "2. Green/Purple levels")
+//    • SILVER levels = nested percentile channels (Sun: "3. Silver levels")
+//    • DIAMONDS  = long-term inflection (blue below bar = buy, pink above bar = sell); "confirmed on the next
+//                  candle" and "can be invalidated" if the diamond bar's high/low does not break soon (✕ mark)
+//    • SHAPES    = short-term inflection, ranked: square+X > square > triangle > circle;
+//                  above candle = bearish, below = bullish (official "Non-Diamond Shapes" guide)
+//    • Confirmation table: Bravo / Echo / Tango last diamond on 4H · D · W ("3/3 blue diamonds")
+//  Startup.io's formulas are proprietary; every rule here is a documented approximation.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Startup.io-style · Bravo + Voila (price)", "SU Bravo·Voila", overlay=true, max_labels_count=500)
+
+// ═══════════════ inputs ═══════════════
+gC = "Candles"
+cUpC   = input.color(#20c9a5, "Up candle (teal)",    group=gC)
+cDnC   = input.color(#6f5cf0, "Down candle (purple)", group=gC)
+cWhite = input.color(#ffffff, "Gold-breach candle (white)", group=gC)
+whiteOn = input.bool(true, "Paint gold-breach candles white", group=gC)
+
+gG = "Gold levels (EMA band)"
+g1 = input.int(21, "EMA 1", minval=1, group=gG)
+g2 = input.int(34, "EMA 2", minval=1, group=gG)
+g3 = input.int(55, "EMA 3", minval=1, group=gG)
+cGold = input.color(#c9b28e, "Gold colour", group=gG)
+
+gS = "Silver levels (percentile channels)"
+sLen = input.int(100, "Window (bars)", minval=20, maxval=500, group=gS)
+pOut = input.float(95, "Outer percentile", minval=80, maxval=99.5, step=0.5, group=gS)
+pMid = input.float(85, "Middle percentile", minval=60, maxval=99, step=0.5, group=gS)
+pIn  = input.float(75, "Inner percentile", minval=51, maxval=98, step=0.5, group=gS)
+cSil = input.color(#9a9a9a, "Silver colour", group=gS)
+
+gL = "Green / Purple levels (pivots held until breached)"
+pivL = input.int(6, "Pivot strength (bars each side)", minval=1, maxval=30, group=gL)
+cSup = input.color(#20c9a5, "Support (green)", group=gL)
+cRes = input.color(#8f7cff, "Resistance (purple)", group=gL)
+
+gW = "Waves (same defaults as Echo / Tango panes)"
+hLen = input.int(10, "Hype wave length", minval=2, group=gW)
+hSm  = input.int(3,  "Hype wave smoothing", minval=1, group=gW)
+mLen = input.int(14, "Money-flow length", minval=2, group=gW)
+mSm  = input.int(3,  "Money-flow smoothing", minval=1, group=gW)
+sigL = input.int(5,  "Signal EMA (both waves)", minval=1, group=gW)
+minMove = input.float(10, "Min wave travel between diamonds", minval=0, group=gW)
+
+gD = "Diamonds & shapes"
+cBlue = input.color(#58c0ff, "Blue diamond (buy)", group=gD)
+cPink = input.color(#ff5fa2, "Pink diamond (sell)", group=gD)
+showShapes = input.bool(true, "Show short-term shapes", group=gD)
+divLen = input.int(5, "Divergence pivot length", minval=2, group=gD)
+showTable = input.bool(true, "Show confirmation table (4H / D / W)", group=gD)
+bravoCool = input.int(8, "Bravo diamond cooldown (bars)", minval=0, group=gD)
+invalBars = input.int(3, "Invalidate diamond if its high/low is not broken within (bars)", minval=1, group=gD)
+
+// ═══════════════ candles ═══════════════
+e1 = ta.ema(close, g1)
+e2 = ta.ema(close, g2)
+e3 = ta.ema(close, g3)
+goldTop = math.max(e1, math.max(e2, e3))
+goldBot = math.min(e1, math.min(e2, e3))
+aboveGold = close > goldTop
+belowGold = close < goldBot
+goldBreach = (aboveGold and not aboveGold[1]) or (belowGold and not belowGold[1])
+candleCol = whiteOn and goldBreach ? cWhite : close >= open ? cUpC : cDnC
+barcolor(candleCol, title="Candle colour")
+
+// ═══════════════ gold band ═══════════════
+pg1 = plot(e1, "Gold EMA 1", color=color.new(cGold, 0), linewidth=1)
+pg2 = plot(e2, "Gold EMA 2", color=color.new(cGold, 0), linewidth=1)
+pg3 = plot(e3, "Gold EMA 3", color=color.new(cGold, 0), linewidth=1)
+pgT = plot(goldTop, "Gold top", color=na, display=display.none)
+pgB = plot(goldBot, "Gold bottom", color=na, display=display.none)
+fill(pgT, pgB, color=color.new(cGold, 70), title="Gold band")
+
+// ═══════════════ silver percentile channels ═══════════════
+sUpO = ta.percentile_linear_interpolation(high, sLen, pOut)
+sUpM = ta.percentile_linear_interpolation(high, sLen, pMid)
+sUpI = ta.percentile_linear_interpolation(high, sLen, pIn)
+sDnO = ta.percentile_linear_interpolation(low,  sLen, 100 - pOut)
+sDnM = ta.percentile_linear_interpolation(low,  sLen, 100 - pMid)
+sDnI = ta.percentile_linear_interpolation(low,  sLen, 100 - pIn)
+psUO = plot(sUpO, "Silver upper (outer)",  color=color.new(cSil, 0),  linewidth=2)
+psUM = plot(sUpM, "Silver upper (middle)", color=color.new(cSil, 60), linewidth=1)
+psUI = plot(sUpI, "Silver upper (inner)",  color=color.new(cSil, 75), linewidth=1)
+psDO = plot(sDnO, "Silver lower (outer)",  color=color.new(cSil, 0),  linewidth=2)
+psDM = plot(sDnM, "Silver lower (middle)", color=color.new(cSil, 60), linewidth=1)
+psDI = plot(sDnI, "Silver lower (inner)",  color=color.new(cSil, 75), linewidth=1)
+fill(psUO, psUM, color=color.new(cSil, 82), title="Silver upper outer band")
+fill(psUM, psUI, color=color.new(cSil, 88), title="Silver upper inner band")
+fill(psDI, psDM, color=color.new(cSil, 88), title="Silver lower inner band")
+fill(psDM, psDO, color=color.new(cSil, 82), title="Silver lower outer band")
+
+// ═══════════════ green / purple structure levels ═══════════════
+ph = ta.pivothigh(high, pivL, pivL)
+pl = ta.pivotlow(low, pivL, pivL)
+var float resLvl = na
+var float supLvl = na
+if not na(ph) and ph > close
+    resLvl := ph
+if not na(pl) and pl < close
+    supLvl := pl
+if not na(resLvl) and close > resLvl
+    resLvl := na
+if not na(supLvl) and close < supLvl
+    supLvl := na
+plot(resLvl, "Purple resistance", color=cRes, style=plot.style_cross, linewidth=1)
+plot(supLvl, "Green support",     color=cSup, style=plot.style_cross, linewidth=1)
+
+// ═══════════════ waves (Echo = hype/volume, Tango = money flow) ═══════════════
+signedVol = close > close[1] ? volume : close < close[1] ? -volume : 0.0
+volE      = ta.ema(volume, hLen)
+svE       = ta.ema(signedVol, hLen)
+hypeRaw   = volE > 0 ? 100.0 * svE / volE : 0.0
+hype      = ta.ema(hypeRaw / 2.0, hSm)          // ±50
+hypeSig   = ta.ema(hype, sigL)
+flow      = ta.ema(ta.mfi(hlc3, mLen) - 50.0, mSm) // ±50
+flowSig   = ta.ema(flow, sigL)
+
+// diamond engine: cross of signal + minimum travel since the last diamond
+diamondEngine(float w, float s) =>
+    var float hi = na
+    var float lo = na
+    hi := na(hi) ? w : math.max(hi, w)
+    lo := na(lo) ? w : math.min(lo, w)
+    travel = hi - lo
+    up = ta.crossover(w, s) and travel >= minMove
+    dn = ta.crossunder(w, s) and travel >= minMove
+    if up or dn
+        hi := w
+        lo := w
+    [up, dn]
+
+[echoBlue, echoPink]   = diamondEngine(hype, hypeSig)
+[tangoBlue, tangoPink] = diamondEngine(flow, flowSig)
+
+// Bravo diamond (price): long-term inflection = close crosses the gold band with the hype wave agreeing
+bravoBlueRaw = ta.crossover(close, goldTop) and hype > hypeSig
+bravoPinkRaw = ta.crossunder(close, goldBot) and hype < hypeSig
+var int lastBravoBlue = -100000
+var int lastBravoPink = -100000
+bravoBlue = bravoBlueRaw and bar_index - lastBravoBlue > bravoCool
+bravoPink = bravoPinkRaw and bar_index - lastBravoPink > bravoCool
+if bravoBlue
+    lastBravoBlue := bar_index
+if bravoPink
+    lastBravoPink := bar_index
+plotshape(bravoBlue, "Bravo blue diamond", shape.diamond, location.belowbar, cBlue, size=size.normal)
+plotshape(bravoPink, "Bravo pink diamond", shape.diamond, location.abovebar, cPink, size=size.normal)
+
+// diamond invalidation (official: diamonds "can be invalidated" when the high/low doesn't break right away)
+var int   dBar = na
+var int   dDir = 0
+var float dHi  = na
+var float dLo  = na
+var bool  dOpen = false
+if bravoBlue or bravoPink
+    dBar := bar_index
+    dDir := bravoBlue ? 1 : -1
+    dHi  := high
+    dLo  := low
+    dOpen := true
+bool bravoInvalid = false
+if dOpen and bar_index > dBar
+    if dDir == 1
+        if high > dHi
+            dOpen := false
+        else if close < dLo or bar_index - dBar > invalBars
+            dOpen := false
+            bravoInvalid := true
+    else
+        if low < dLo
+            dOpen := false
+        else if close > dHi or bar_index - dBar > invalBars
+            dOpen := false
+            bravoInvalid := true
+if bravoInvalid
+    label.new(dBar, dDir == 1 ? dLo : dHi, "✕", xloc.bar_index, yloc.price, color.new(color.white, 100), dDir == 1 ? label.style_label_up : label.style_label_down, color.white, size.normal)
+
+// ═══════════════ short-term shapes ═══════════════
+// circle   = hype wave slope turns            (weakest)
+// triangle = hype wave crosses its signal
+// square   = money-flow wave crosses its signal (strongest single shape)
+// X        = regular divergence between price and the hype wave (square + X = strongest)
+hypeUpTurn = hype > hype[1] and hype[1] <= hype[2]
+hypeDnTurn = hype < hype[1] and hype[1] >= hype[2]
+triUp  = ta.crossover(hype, hypeSig)
+triDn  = ta.crossunder(hype, hypeSig)
+sqUp   = ta.crossover(flow, flowSig)
+sqDn   = ta.crossunder(flow, flowSig)
+
+// divergence on the hype wave (pivot based)
+wPL = ta.pivotlow(hype, divLen, divLen)
+wPH = ta.pivothigh(hype, divLen, divLen)
+var float lastWL = na
+var float lastPL = na
+var float lastWH = na
+var float lastPH = na
+bool bullDiv = false
+bool bearDiv = false
+if not na(wPL)
+    pxL = low[divLen]
+    if not na(lastWL) and pxL < lastPL and wPL > lastWL
+        bullDiv := true
+    lastWL := wPL
+    lastPL := pxL
+if not na(wPH)
+    pxH = high[divLen]
+    if not na(lastWH) and pxH > lastPH and wPH < lastWH
+        bearDiv := true
+    lastWH := wPH
+    lastPH := pxH
+
+plotshape(showShapes and hypeUpTurn and not triUp, "Circle (bull)", shape.circle, location.belowbar, color.new(color.white, 0), size=size.tiny)
+plotshape(showShapes and hypeDnTurn and not triDn, "Circle (bear)", shape.circle, location.abovebar, color.new(color.white, 0), size=size.tiny)
+plotshape(showShapes and triUp, "Triangle (bull)", shape.triangleup,   location.belowbar, color.new(color.white, 0), size=size.tiny)
+plotshape(showShapes and triDn, "Triangle (bear)", shape.triangledown, location.abovebar, color.new(color.white, 0), size=size.tiny)
+plotshape(showShapes and sqUp, "Square (bull)", shape.square, location.belowbar, color.new(color.white, 0), size=size.tiny)
+plotshape(showShapes and sqDn, "Square (bear)", shape.square, location.abovebar, color.new(color.white, 0), size=size.tiny)
+plotshape(showShapes and bullDiv, "X divergence (bull)", shape.xcross, location.belowbar, color.new(color.white, 0), size=size.tiny, offset=-divLen)
+plotshape(showShapes and bearDiv, "X divergence (bear)", shape.xcross, location.abovebar, color.new(color.white, 0), size=size.tiny, offset=-divLen)
+
+// ═══════════════ confirmation table (last diamond per indicator per timeframe) ═══════════════
+lastState(bool b, bool p) =>
+    var int st = 0
+    st := b ? 1 : p ? -1 : st
+    st
+stB = lastState(bravoBlue, bravoPink)
+stE = lastState(echoBlue, echoPink)
+stT = lastState(tangoBlue, tangoPink)
+[b4, e4, t4] = request.security(syminfo.tickerid, "240", [stB, stE, stT], lookahead=barmerge.lookahead_off)
+[bD, eD, tD] = request.security(syminfo.tickerid, "D",   [stB, stE, stT], lookahead=barmerge.lookahead_off)
+[bW, eW, tW] = request.security(syminfo.tickerid, "W",   [stB, stE, stT], lookahead=barmerge.lookahead_off)
+
+var table tb = table.new(position.top_right, 4, 5, bgcolor=color.new(color.black, 30), border_width=1)
+cellTxt(int s) => s == 1 ? "◆ blue" : s == -1 ? "◆ pink" : "—"
+cellCol(int s) => s == 1 ? cBlue : s == -1 ? cPink : color.gray
+if showTable and barstate.islast
+    table.cell(tb, 0, 0, "last ◆", text_color=color.white, text_size=size.small)
+    table.cell(tb, 1, 0, "4H", text_color=color.white, text_size=size.small)
+    table.cell(tb, 2, 0, "D",  text_color=color.white, text_size=size.small)
+    table.cell(tb, 3, 0, "W",  text_color=color.white, text_size=size.small)
+    table.cell(tb, 0, 1, "Bravo", text_color=color.white, text_size=size.small)
+    table.cell(tb, 1, 1, cellTxt(b4), text_color=cellCol(b4), text_size=size.small)
+    table.cell(tb, 2, 1, cellTxt(bD), text_color=cellCol(bD), text_size=size.small)
+    table.cell(tb, 3, 1, cellTxt(bW), text_color=cellCol(bW), text_size=size.small)
+    table.cell(tb, 0, 2, "Echo", text_color=color.white, text_size=size.small)
+    table.cell(tb, 1, 2, cellTxt(e4), text_color=cellCol(e4), text_size=size.small)
+    table.cell(tb, 2, 2, cellTxt(eD), text_color=cellCol(eD), text_size=size.small)
+    table.cell(tb, 3, 2, cellTxt(eW), text_color=cellCol(eW), text_size=size.small)
+    table.cell(tb, 0, 3, "Tango", text_color=color.white, text_size=size.small)
+    table.cell(tb, 1, 3, cellTxt(t4), text_color=cellCol(t4), text_size=size.small)
+    table.cell(tb, 2, 3, cellTxt(tD), text_color=cellCol(tD), text_size=size.small)
+    table.cell(tb, 3, 3, cellTxt(tW), text_color=cellCol(tW), text_size=size.small)
+    nBlue = (stB == 1 ? 1 : 0) + (stE == 1 ? 1 : 0) + (stT == 1 ? 1 : 0)
+    nPink = (stB == -1 ? 1 : 0) + (stE == -1 ? 1 : 0) + (stT == -1 ? 1 : 0)
+    verdict = nBlue >= 2 ? "chart TF: " + str.tostring(nBlue) + "/3 BLUE → buy bias" : nPink >= 2 ? "chart TF: " + str.tostring(nPink) + "/3 PINK → sell bias" : "chart TF: no 2/3 confirmation"
+    table.cell(tb, 0, 4, verdict, text_color=nBlue >= 2 ? cBlue : nPink >= 2 ? cPink : color.silver, text_size=size.small)
+    table.merge_cells(tb, 0, 4, 3, 4)
+
+// ═══════════════ alerts ═══════════════
+alertcondition(bravoBlue, "SU Bravo BLUE diamond", "Bravo: blue diamond (long-term bullish inflection)")
+alertcondition(bravoPink, "SU Bravo PINK diamond", "Bravo: pink diamond (long-term bearish inflection)")
+alertcondition(bravoInvalid, "SU Bravo diamond INVALIDATED", "Bravo: last diamond invalidated (its high/low did not break)")
+alertcondition(goldBreach and aboveGold, "SU white candle above gold", "Close breached above the gold band")
+alertcondition(goldBreach and belowGold, "SU white candle below gold", "Close breached below the gold band")
+alertcondition(sqUp and bullDiv, "SU square+X bull", "Square with X below candle (strongest short-term bullish shape)")
+alertcondition(sqDn and bearDiv, "SU square+X bear", "Square with X above candle (strongest short-term bearish shape)")

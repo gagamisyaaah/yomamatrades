@@ -1,0 +1,22 @@
+//@version=5
+// Homily Chart · MACD (Chinese convention). Homily header "FAST(12) SLOW(26) DIF(9)" shows DIF, DEA and bar = 2·(DIF−DEA).
+indicator("Homily MACD (CN style)", "Homily MACD", overlay=false)
+
+fastLen = input.int(12, "FAST", minval=1)
+slowLen = input.int(26, "SLOW", minval=1)
+sigLen  = input.int(9,  "DEA", minval=1)
+cUp     = input.color(#ff2a2a, "Bar up (red)")
+cDn     = input.color(#22e022, "Bar down (green)")
+
+dif = ta.ema(close, fastLen) - ta.ema(close, slowLen)
+dea = ta.ema(dif, sigLen)
+bar = 2.0 * (dif - dea)
+
+plot(bar, "MACD bar = 2·(DIF−DEA)", bar >= 0 ? cUp : cDn, 2, plot.style_histogram)
+plot(dif, "DIF (Homily 'FAST')", color.new(#ff9a2a, 0), 1)
+plot(dea, "DEA (Homily 'SLOW')", color.new(#ffe600, 0), 1)
+hline(0.0, "Zero", color=color.new(color.white, 60))
+
+alertcondition(ta.crossover(dif, dea),  "Homily MACD golden cross", "DIF crossed above DEA")
+alertcondition(ta.crossunder(dif, dea), "Homily MACD dead cross",   "DIF crossed below DEA")
+alertcondition(ta.crossover(dif, 0.0),  "Homily MACD above zero",   "DIF crossed above 0 (bullish momentum)")

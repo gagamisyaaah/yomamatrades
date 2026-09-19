@@ -1,0 +1,277 @@
+//@version=5
+// ─────────────────────────────────────────────────────────────────────────────
+//  Homily Chart · Panel 1 clone
+//  SS candle colours (Strong Signal) + BBE ribbon (Bull & Bear Expert)
+//  + Homily Wave (Wave Expert zigzag) + Volatility Hole (Homily TBH "Time Black Hole")
+//
+//  Sources: Homily official descriptions (hc.homilychart.com), Thai/Malay Homily manuals,
+//  leaked 通达信 imitations (强势信号 = KDJ J-line vs 50), DannyTrades' own posts.
+//  Homily's exact SS / BBE / TBH formulas are proprietary — this is a behavioural clone.
+// ─────────────────────────────────────────────────────────────────────────────
+indicator("Homily P1 — SS candles + BBE ribbon + Wave + Volatility Hole", "Homily P1", overlay=true, max_lines_count=500, max_labels_count=500, max_polylines_count=100)
+
+max_bars_back(high, 1500)
+max_bars_back(low, 1500)
+max_bars_back(close, 1500)
+
+// ═══════════════ 1 · SS candles (Strong Signal) ═══════════════
+// Homily: red = opening position (fresh buy), yellow = closing position (fresh sell),
+//         dark blue = holding position (uptrend persists), light blue = holding money (downtrend persists).
+gSS  = "1 · SS candles (Strong Signal — KDJ J-line vs 50)"
+kN   = input.int(9,  "KDJ N",  minval=1, group=gSS)
+kM1  = input.int(3,  "KDJ M1", minval=1, group=gSS)
+kM2  = input.int(3,  "KDJ M2", minval=1, group=gSS)
+jLvl = input.float(50.0, "J cross level", group=gSS)
+cRed = input.color(#ff2d2d, "Red — fresh bullish",          group=gSS)
+cYel = input.color(#ffd500, "Yellow — fresh bearish",       group=gSS)
+cDBl = input.color(#2130e0, "Dark blue — uptrend persists", group=gSS)
+cLBl = input.color(#5fd9ff, "Light blue — downtrend persists", group=gSS)
+
+// Chinese SMA(X,N,1): s = (X + (N-1)·s[1]) / N
+smaCN(float x, int n) =>
+    float s = na
+    s := (x + (n - 1) * nz(s[1], x)) / n
+    s
+
+hhK = ta.highest(high, kN)
+llK = ta.lowest(low, kN)
+rsv = hhK == llK ? 50.0 : (close - llK) / (hhK - llK) * 100.0
+kK  = smaCN(rsv, kM1)
+dK  = smaCN(kK, kM2)
+jK  = 3.0 * kK - 2.0 * dK
+
+jUp     = jK > jLvl
+freshUp = jUp and not jUp[1]
+freshDn = (not jUp) and jUp[1]
+ssCol   = freshUp ? cRed : freshDn ? cYel : jUp ? cDBl : cLBl
+barcolor(ssCol, title="SS candle colour")
+alertcondition(freshUp, "Homily RED candle",    "Red candle: KDJ J crossed above 50 (fresh short-term bullish)")
+alertcondition(freshDn, "Homily YELLOW candle", "Yellow candle: KDJ J crossed below 50 (fresh short-term bearish)")
+
+// ═══════════════ 2 · BBE ribbon (Bull & Bear Expert) ═══════════════
+// Homily: "judge by the colour & direction of the red long band / green short band".
+// Default line pair = Homily's leaked main-chart pair 快线 EMA((C+L)/2,8) vs 均衡 EMA(EMA((C+L)/2,20),8).
+gBBE    = "2 · BBE ribbon (Bull & Bear Expert)"
+bbeSrcO = input.string("(close+low)/2", "Source", options=["(close+low)/2", "close", "hl2", "ohlc4"], group=gBBE)
+bbeFast = input.int(8,  "Fast EMA", minval=1, group=gBBE)
+bbeSlow = input.int(20, "Slow EMA", minval=1, group=gBBE)
+bbeSm   = input.int(8,  "Slow line re-smoothing (1 = off)", minval=1, group=gBBE)
+cRibUp  = input.color(#e0232a, "Ribbon up (red)",    group=gBBE)
+cRibDn  = input.color(#1bc9e8, "Ribbon down (blue)", group=gBBE)
+ribTr   = input.int(30, "Ribbon transparency", minval=0, maxval=100, group=gBBE)
+
+bbeSrc  = bbeSrcO == "close" ? close : bbeSrcO == "hl2" ? hl2 : bbeSrcO == "ohlc4" ? ohlc4 : (close + low) / 2.0
+fastL   = ta.ema(bbeSrc, bbeFast)
+slowL   = ta.ema(ta.ema(bbeSrc, bbeSlow), bbeSm)
+ribBull = fastL > slowL
+ribCol  = ribBull ? cRibUp : cRibDn
+pF = plot(fastL, "BBE fast line", color=ribCol, linewidth=1)
+pS = plot(slowL, "BBE slow line", color=ribCol, linewidth=1)
+fill(pF, pS, color=color.new(ribCol, ribTr), title="BBE ribbon")
+alertcondition(ribBull and not ribBull[1],   "Homily ribbon → RED",  "BBE ribbon turned red (mid-term uptrend)")
+alertcondition((not ribBull) and ribBull[1], "Homily ribbon → BLUE", "BBE ribbon turned blue (mid-term downtrend)")
+
+// ═══════════════ 3 · Homily Wave (Wave Expert zigzag) ═══════════════
+gW      = "3 · Homily Wave (zigzag)"
+showW   = input.bool(true, "Show wave", group=gW)
+wavePct = input.float(8.0, "Reversal %", minval=0.3, step=0.5, group=gW)
+waveCol = input.color(#ffe600, "Wave colour", group=gW)
+waveW   = input.int(2, "Width", minval=1, maxval=4, group=gW)
+
+var int    zdir = 1
+var float  extP = na
+var int    extB = na
+var float  pivP = na
+var int    pivB = na
+var line   legL = na
+var line[] waveLines = array.new_line()
+
+bool  newPivot  = false
+int   newPivBar = na
+float newPivPr  = na
+int   newPivDir = 0
+
+if bar_index == 0
+    extP := high
+    extB := bar_index
+    pivP := low
+    pivB := bar_index
+else
+    if zdir == 1
+        if high > extP
+            extP := high
+            extB := bar_index
+        else if low <= extP * (1.0 - wavePct / 100.0)
+            newPivot  := true
+            newPivBar := extB
+            newPivPr  := extP
+            newPivDir := 1
+            if showW
+                array.push(waveLines, line.new(pivB, pivP, extB, extP, xloc.bar_index, extend.none, waveCol, line.style_solid, waveW))
+            pivP := extP
+            pivB := extB
+            zdir := -1
+            extP := low
+            extB := bar_index
+    else
+        if low < extP
+            extP := low
+            extB := bar_index
+        else if high >= extP * (1.0 + wavePct / 100.0)
+            newPivot  := true
+            newPivBar := extB
+            newPivPr  := extP
+            newPivDir := -1
+            if showW
+                array.push(waveLines, line.new(pivB, pivP, extB, extP, xloc.bar_index, extend.none, waveCol, line.style_solid, waveW))
+            pivP := extP
+            pivB := extB
+            zdir := 1
+            extP := high
+            extB := bar_index
+
+if showW
+    if na(legL)
+        legL := line.new(pivB, pivP, extB, extP, xloc.bar_index, extend.none, waveCol, line.style_dotted, waveW)
+    else
+        line.set_xy1(legL, pivB, pivP)
+        line.set_xy2(legL, extB, extP)
+    while array.size(waveLines) > 250
+        line.delete(array.shift(waveLines))
+
+// ═══════════════ 4 · Volatility Hole (Homily TBH — Time Black Hole) ═══════════════
+// Homily: marker at a turning point; break above → rise, break below → fall; edges = strong S/R.
+// Danny: "in force" while price stays inside; consistent close above upper → surge, below lower → plummet;
+//        his quoted boundaries are computed, volatility-scaled values (≈ 1.3–1.4 × ATR either side of a short MA).
+// Clone: a hole is created at each confirmed Wave pivot (turning point); boundaries per `holeMode`.
+gH       = "4 · Volatility Hole (Homily TBH)"
+showH    = input.bool(true, "Show holes", group=gH)
+holeWin  = input.int(8, "Hole window (bars, circle width)", minval=2, maxval=60, group=gH)
+holeOff  = input.int(0, "Window shift vs pivot (bars, + = later)", minval=-30, maxval=30, group=gH)
+holeMode = input.string("MA ± k·ATR", "Boundaries", options=["MA ± k·ATR", "Pivot ± k·ATR", "Window high/low"], group=gH)
+holeMa   = input.int(10, "Centre MA length (MA mode)", minval=1, group=gH)
+holeK    = input.float(1.4, "k (ATR multiple)", minval=0.1, step=0.1, group=gH)
+holeAtr  = input.int(14, "ATR length", minval=1, group=gH)
+confirmN = input.int(2, "Consecutive closes to break a boundary", minval=1, maxval=10, group=gH)
+maxHoles = input.int(30, "Max holes kept", minval=1, maxval=45, group=gH)
+cHole    = input.color(#ffffff, "Hole colour", group=gH)
+cUp      = input.color(#2bff5a, "Broke-up colour", group=gH)
+cDn      = input.color(#ff3b3b, "Broke-down colour", group=gH)
+
+atrV = ta.atr(holeAtr)
+maV  = ta.sma(close, holeMa)
+max_bars_back(atrV, 1500)
+max_bars_back(maV, 1500)
+
+var float[]    hUp  = array.new_float()
+var float[]    hDn  = array.new_float()
+var int[]      hSt  = array.new_int()     // 0 = in force · 1 = broke up · -1 = broke down
+var int[]      hCnt = array.new_int()
+var line[]     hUpL = array.new_line()
+var line[]     hDnL = array.new_line()
+var label[]    hLbl = array.new_label()
+var polyline[] hCir = array.new<polyline>()
+var line[]     hCrs = array.new_line()    // 2 crosshair lines per hole
+
+deleteOldest() =>
+    if array.size(hUp) > 0
+        array.shift(hUp)
+        array.shift(hDn)
+        array.shift(hSt)
+        array.shift(hCnt)
+        line.delete(array.shift(hUpL))
+        line.delete(array.shift(hDnL))
+        label.delete(array.shift(hLbl))
+        polyline.delete(array.shift(hCir))
+        line.delete(array.shift(hCrs))
+        line.delete(array.shift(hCrs))
+    true
+
+makeCircle(int cx, float cy, int rx, float ry) =>
+    pts = array.new<chart.point>()
+    for dx = -rx to rx
+        yy = ry * math.sqrt(math.max(0.0, 1.0 - math.pow(dx / float(rx), 2)))
+        array.push(pts, chart.point.from_index(cx + dx, cy + yy))
+    for dx = rx to -rx
+        yy = ry * math.sqrt(math.max(0.0, 1.0 - math.pow(dx / float(rx), 2)))
+        array.push(pts, chart.point.from_index(cx + dx, cy - yy))
+    polyline.new(pts, false, true, xloc.bar_index, cHole, na, line.style_solid, 1)
+
+if showH and newPivot
+    half  = math.max(1, math.floor(holeWin / 2))
+    cxBar = newPivBar + holeOff
+    fromB = cxBar - half
+    toB   = math.min(cxBar + half, bar_index)
+    float wh = -1.0e10
+    float wl =  1.0e10
+    if toB >= fromB
+        for b = fromB to toB
+            off = bar_index - b
+            if off >= 0 and off <= 1400
+                wh := math.max(wh, high[off])
+                wl := math.min(wl, low[off])
+    if holeMode != "Window high/low"
+        aOff = math.max(0, bar_index - newPivBar)
+        aV   = atrV[aOff]
+        ctr  = holeMode == "MA ± k·ATR" ? maV[aOff] : newPivPr
+        wh := ctr + holeK * aV
+        wl := ctr - holeK * aV
+    if wh > wl
+        cy = (wh + wl) / 2.0
+        ry = (wh - wl) / 2.0
+        array.push(hUp, wh)
+        array.push(hDn, wl)
+        array.push(hSt, 0)
+        array.push(hCnt, 0)
+        array.push(hCir, makeCircle(cxBar, cy, half, ry))
+        array.push(hCrs, line.new(cxBar - half, cy, cxBar + half, cy, xloc.bar_index, extend.none, cHole, line.style_solid, 1))
+        array.push(hCrs, line.new(cxBar, wh, cxBar, wl, xloc.bar_index, extend.none, cHole, line.style_solid, 1))
+        array.push(hUpL, line.new(cxBar, wh, bar_index, wh, xloc.bar_index, extend.none, cHole, line.style_solid, 1))
+        array.push(hDnL, line.new(cxBar, wl, bar_index, wl, xloc.bar_index, extend.none, cHole, line.style_solid, 1))
+        ctx = (newPivDir == 1 ? "top pivot · " : "bottom pivot · ") + (ribBull ? "red ribbon (topping watch)" : "blue ribbon (bottoming watch)")
+        txt = "Volatility hole IN FORCE · " + ctx + "\n▲ " + str.tostring(wh, format.mintick) + "   ▼ " + str.tostring(wl, format.mintick)
+        array.push(hLbl, label.new(bar_index, wh, txt, xloc.bar_index, yloc.price, color.new(cHole, 100), label.style_label_left, cHole, size.small))
+        while array.size(hUp) > maxHoles
+            deleteOldest()
+
+bool brokeUpNow = false
+bool brokeDnNow = false
+if array.size(hUp) > 0
+    for i = 0 to array.size(hUp) - 1
+        if array.get(hSt, i) == 0
+            up  = array.get(hUp, i)
+            dn  = array.get(hDn, i)
+            cnt = array.get(hCnt, i)
+            cnt := close > up ? (cnt > 0 ? cnt + 1 : 1) : close < dn ? (cnt < 0 ? cnt - 1 : -1) : 0
+            array.set(hCnt, i, cnt)
+            line.set_x2(array.get(hUpL, i), bar_index)
+            line.set_x2(array.get(hDnL, i), bar_index)
+            label.set_x(array.get(hLbl, i), bar_index)
+            if cnt >= confirmN
+                array.set(hSt, i, 1)
+                brokeUpNow := true
+                line.set_color(array.get(hUpL, i), cUp)
+                line.set_color(array.get(hDnL, i), cUp)
+                label.set_text(array.get(hLbl, i), "Hole BROKE UP ▲ " + str.tostring(up, format.mintick) + "  → surge watch")
+                label.set_textcolor(array.get(hLbl, i), cUp)
+            else if cnt <= -confirmN
+                array.set(hSt, i, -1)
+                brokeDnNow := true
+                line.set_color(array.get(hUpL, i), cDn)
+                line.set_color(array.get(hDnL, i), cDn)
+                label.set_text(array.get(hLbl, i), "Hole BROKE DOWN ▼ " + str.tostring(dn, format.mintick) + "  → plummet watch")
+                label.set_textcolor(array.get(hLbl, i), cDn)
+
+alertcondition(brokeUpNow, "Homily hole BROKE UP",   "Volatility hole: consistent close above upper boundary")
+alertcondition(brokeDnNow, "Homily hole BROKE DOWN", "Volatility hole: consistent close below lower boundary")
+
+var table tb = table.new(position.top_right, 1, 3, bgcolor=color.new(color.black, 35), border_width=1)
+if barstate.islast
+    n = array.size(hUp)
+    st = n == 0 ? 9 : array.get(hSt, n - 1)
+    txt1 = n == 0 ? "no volatility hole yet" : st == 0 ? "LAST HOLE: IN FORCE" : st == 1 ? "LAST HOLE: BROKE UP" : "LAST HOLE: BROKE DOWN"
+    txt2 = n == 0 ? "" : "▲ " + str.tostring(array.get(hUp, n - 1), format.mintick) + "   ▼ " + str.tostring(array.get(hDn, n - 1), format.mintick)
+    txt3 = (ribBull ? "ribbon: RED (mid-term up)" : "ribbon: BLUE (mid-term down)") + "   candle: " + (freshUp ? "RED" : freshDn ? "YELLOW" : jUp ? "DARK BLUE" : "LIGHT BLUE")
+    table.cell(tb, 0, 0, txt1, text_color=st == 1 ? cUp : st == -1 ? cDn : cHole, text_size=size.small)
+    table.cell(tb, 0, 1, txt2, text_color=cHole, text_size=size.small)
+    table.cell(tb, 0, 2, txt3, text_color=color.silver, text_size=size.small)
