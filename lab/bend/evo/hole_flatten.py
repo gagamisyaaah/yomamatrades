@@ -26,13 +26,15 @@ def te_slope(df: pd.DataFrame) -> np.ndarray:
     return ((v7 - v7.shift(1)) / ta.atr(df, 14)).values
 
 
-def simulate(o, h, l, c, hole_up, hole_dn, slope, entries, k, floor, max_bars):
+def simulate(o, h, l, c, hole_up, hole_dn, slope, entries, k, floor, max_bars, stop_atr=0.0, atr=None):
     n = len(c); rows = []
     for i in entries:
         if i + 2 >= n:
             continue
-        ent = o[i + 1]; peak = 0.0; j = i + 1; reason = "time"
+        ent = o[i + 1]; peak = 0.0; j = i + 1; reason = "time"; stop_px = ent - stop_atr * atr[i] if stop_atr > 0 and atr is not None else None
         while j < n - 1 and j - i <= max_bars:
+            if stop_px is not None and l[j] <= stop_px:
+                reason = "stop"; break
             s = slope[j]
             if not np.isnan(s):
                 peak = max(peak, s)
@@ -42,12 +44,13 @@ def simulate(o, h, l, c, hole_up, hole_dn, slope, entries, k, floor, max_bars):
                 reason = "hole down"; break
             j += 1
         j = min(j, n - 1)
-        rows.append({"bar": i, "exit_bar": j, "ret": (c[j] / ent - 1) * 100, "bars": j - i, "reason": reason, "mfe": (h[i + 1:j + 1].max() / ent - 1) * 100})
+        ret = (stop_px / ent - 1) * 100 if reason == "stop" else (c[j] / ent - 1) * 100
+        rows.append({"bar": i, "exit_bar": j, "ret": ret, "bars": j - i, "reason": reason, "mfe": (h[i + 1:j + 1].max() / ent - 1) * 100, "mae": (l[i + 1:j + 1].min() / ent - 1) * 100})
     return rows
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--k", type=float, default=0.3); ap.add_argument("--floor", type=float, default=0.02); ap.add_argument("--max-bars", type=int, default=60); ap.add_argument("--split", default="2024-01-01"); ap.add_argument("--dir", default="bend/data/D")
+    ap = argparse.ArgumentParser(); ap.add_argument("--k", type=float, default=0.3); ap.add_argument("--floor", type=float, default=0.02); ap.add_argument("--max-bars", type=int, default=60); ap.add_argument("--split", default="2024-01-01"); ap.add_argument("--dir", default="bend/data/D"); ap.add_argument("--stop", type=float, default=0.0, help="catastrophic stop in ATR below the entry (0 = none)"); ap.add_argument("--tag", default="")
     a = ap.parse_args(); d = ROOT / a.dir
     order = [ln.split()[0] for ln in (d / "list.txt").read_text().split("\n") if ln.strip()]
     w = np.frombuffer((d / "states.bin").read_bytes(), dtype="<u4"); pos = 0; states = {}
@@ -63,20 +66,20 @@ def main():
             continue
         if len(df) != len(f) or len(df) < 300:
             continue
-        hole_up = (f & 1) > 0; hole_dn = (f & 2) > 0; slope = te_slope(df)
+        hole_up = (f & 1) > 0; hole_dn = (f & 2) > 0; slope = te_slope(df); atrv = ta.atr(df, 14).values
         o, h, l, c = df.open.values, df.high.values, df.low.values, df.close.values
         rising = np.flatnonzero(hole_up & ~np.roll(hole_up, 1)); rising = rising[rising > 0]
         rand = np.flatnonzero(rng.rand(len(df)) < 0.03); rand = rand[rand > 250]
         for kind, ent in (("hole up", rising), ("random", rand)):
-            for r in simulate(o, h, l, c, hole_up, hole_dn, slope, ent, a.k, a.floor, a.max_bars):
+            for r in simulate(o, h, l, c, hole_up, hole_dn, slope, ent, a.k, a.floor, a.max_bars, a.stop, atrv):
                 rows.append({"ticker": t, "kind": kind, "date": df.date.iloc[r["bar"]], "cap": caps.get(t, np.nan), **r})
     T = pd.DataFrame(rows); T["band"] = pd.cut(T.cap, [0, 5e8, 2e9, 5e9, 1e15], labels=["100M-500M", "500M-2B", "2B-5B", ">5B"]); T["year"] = T.date.dt.year
-    T.to_csv(ROOT / "bend/data/hole_flatten.csv", index=False)
+    T.to_csv(ROOT / f"bend/data/hole_flatten{a.tag}.csv", index=False)
     pd.set_option("display.width", 250)
 
     def st(g):
         r = g.ret
-        return pd.Series({"trades": len(g), "avg%": r.mean(), "median%": r.median(), "win": (r > 0).mean(), "≥+20%": (r >= 20).mean(), "≥+50%": (r >= 50).mean(), "≥+200%": (r >= 200).mean(), "bars": g.bars.mean(), "mfe%": g.mfe.mean(), "PF": r[r > 0].sum() / max(1e-9, -r[r <= 0].sum())})
+        return pd.Series({"trades": len(g), "avg%": r.mean(), "median%": r.median(), "win": (r > 0).mean(), "≥+20%": (r >= 20).mean(), "≥+50%": (r >= 50).mean(), "≥+200%": (r >= 200).mean(), "bars": g.bars.mean(), "mfe%": g.mfe.mean(), "mae%": g.mae.mean(), "worst5%": r.quantile(0.05), "PF": r[r > 0].sum() / max(1e-9, -r[r <= 0].sum())})
     for per, sel in (("2016-23", T.date < a.split), ("2024+ holdout", T.date >= a.split)):
         print(f"\n===== {per}: entry = hole broke up (next open) · exit = TE slope flattens (k={a.k}, floor={a.floor} ATR/bar) or hole breaks down · random entries same exit =====")
         print(T[sel].groupby(["band", "kind"], observed=True).apply(st).round(3).to_string())

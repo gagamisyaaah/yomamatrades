@@ -87,7 +87,9 @@
   "engine": true,
   "pine": "dragon/DRAGON_TREE.pine (+ strategy_dragon_tree.pine)",
   "evidence": {
-   "why": "runner Δ collapses in long downtrends; washout stays ≥ 0 there"
+   "why": "runner Δ collapses in long downtrends; washout stays ≥ 0 there",
+   "live TradingView, same ten $300M–5B names 2016-26, $10k/trade": "CAUTION on bases: the plain-runner numbers (median +199 %, DD 44 %) come from the Homily twin with a $10k starting capital; TREE and its variants start with $100k, so their % are 10× smaller by construction. In dollars per $10k trade unit over the ten names: TREE ≈ $366k (10/10 profitable, ~58 trades/name, 44 % winners), regime-gated runner alone ≈ $328k (9/10, ~41 trades), plain runner ≈ $229k (9/10, ~28 trades, 2018+ window). Same-script three-way comparison in bend/data/live_tree_*.csv",
+   "same script, same base, ten names 2016-26 ($10k/trade, $100k base)": "runner ungated: $366k total, 10/10 profitable, ~64 trades/name, median DD 10.5 %, PF 1.68 · runner regime-gated: $328k, 9/10, ~41 trades, DD 6.1 %, PF 1.54 · TREE (gated runner + washout): $366k, 10/10, ~58 trades, DD 7.3 %, PF 1.48 → TREE keeps the ungated total with the drawdown cut by a third; the gate alone cuts drawdown but loses ~10 % of the total"
   }
  }
 }
