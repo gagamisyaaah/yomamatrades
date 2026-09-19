@@ -45,3 +45,11 @@ commission, orders on close.
 `legend-delete-action`, `legend-settings-action`) with text fallbacks. If a step fails, run
 `python3.12 -c "import tvh; tvh.connect(); tvh.open_chart(); print(tvh.probe())"` and paste the output —
 selectors are adjusted in one place.
+
+## Daily routine (the jev job)
+
+| when | command | output |
+|---|---|---|
+| after the close | `python3.12 -m mine.scan --refresh --top 40` | `mine/candidates_<date>.md` — every ticker in the cache read by DRAGON/DIAMOND, ranked (E+F > E > D+F > D > C+F > C), TypeSafe quality score |
+| 07:00–09:25 ET | `python3.12 -m mine.premarket --exit bracket --top 15` | `mine/premarket_<date>.md` — market guard, live/pre-market quote, gap in ATR, earnings inside 7 days, dollar volume, entry / target / stop / time stop, shares for your capital, expected win rate and edge from the holdout frontier |
+| weekly | `python3.12 -m mine.data --universe broad` then `mine.features --out=features_broad` and `mine.walkforward --features features_broad --holdout` | keeps the universe (S&P 500 + every US stock ≥ $2B) and the holdout numbers current |

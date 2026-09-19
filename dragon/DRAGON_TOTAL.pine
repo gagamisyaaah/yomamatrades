@@ -18,10 +18,12 @@
 //   below. Per-year test on 94 tickers: 2022 went from 237 trades at −9.6 % to 52 at −4.3 %, 2018 from −2.6 % to
 //   −0.2 %, while 2024+ stayed at +11 %. The reading is a bull-regime breakout system; the guard is what keeps it
 //   out of 2022-type years.
-// Exit frontier (same signals, 94 tickers, in AND out of sample): "Scalp +0.5 / −3 ATR" = 85–90 % of trades end
-//   profitable, about +0.1 ATR (≈ +0.5 %) per trade — a volume business; "Bracket +2 / −4 ATR" = 64–65 % winners at
-//   ≈ +0.3 ATR (+1.5 %) per trade; "Hole broke down" = 41 % winners at ≈ +2 ATR (+11 %) per trade. Pick the win rate you
-//   can live with; the panels set the edge, the exit sets the win rate. Use the scalp only with Tier E + ATR ≥ 5.
+// Exit frontier (same signals; 94 tuning tickers AND a 546-ticker holdout never used for tuning, in and out of
+//   sample): "Scalp +0.5 / −3 ATR" = 82–88 % of trades end profitable but only +0.03–0.09 ATR per trade (commission-thin
+//   on calm names); "Bracket +2 / −4 ATR" = 62–68 % winners at +0.15 ATR on calm names and +0.4 ATR (≈ +2 %) on names
+//   with ATR ≥ 5 %; "Hole broke down" = ~40 % winners at +2.4 % per trade on the holdout and +11.8 % on the volatile
+//   tuning set. The panels set the edge, the exit sets the win rate, and volatility sets the size of the edge:
+//   this reading pays on volatile names (Tier F). Use the scalp only where the per-trade profit clears your costs.
 // Alerts: DRAGON go / DRAGON out / DRAGON armed (5+ panels).  Table: every panel's state right now.
 indicator("DRAGON TOTAL", "DRAGON", overlay=true, max_bars_back=1500, max_labels_count=100)
 
