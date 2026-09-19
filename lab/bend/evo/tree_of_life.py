@@ -71,10 +71,11 @@ def draw(stdscr, sup, today, a):
         lane = TABS[tab]
         def in_lane(c):
             if lane == "RUNNER":
-                return c["family"] == "RUNNER" and c.get("in_universe", True)
+                return c["family"] == "RUNNER" and c.get("in_universe", True) and (c.get("cap_B") or 0) >= sup["RUNNER"]["universe"]["cap_min"] / 1e9
+            liquid = (c["context"].get("dvol20_M") or 0) >= 3.0
             if lane == "BASE-HIT":
-                return c["family"] != "RUNNER"
-            return c["family"] == lane
+                return c["family"] != "RUNNER" and liquid
+            return c["family"] == lane and liquid
         cands = [c for c in today["candidates"] if in_lane(c)]
         cands.sort(key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0) if lane == "RUNNER" else -c["atr_pct"]))
         sel = max(0, min(sel, len(cands) - 1))
@@ -153,14 +154,14 @@ def draw(stdscr, sup, today, a):
 def dump(sup, today, a):
     """--dump: print both lanes as text (for a report or a non-interactive terminal)"""
     g = today.get("guard"); print(f"TREE OF LIFE · {today['date']} · scanned {today['scanned']} · " + ("guard ON" if g and g["on"] else "guard OFF" if g else "guard not checked") + (f" (SPY {g['spy']:.0f} vs 200d {g['sma200']:.0f})" if g else ""))
-    run = [c for c in today["candidates"] if c["family"] == "RUNNER" and c.get("in_universe")]
+    run = [c for c in today["candidates"] if c["family"] == "RUNNER" and c.get("in_universe") and (c.get("cap_B") or 0) >= sup["RUNNER"]["universe"]["cap_min"] / 1e9]
     run.sort(key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0)))
-    print(f"\nRUNNER lane — hole broke up, in the universe ($300M–5B, ATR ≥ 5 %): {len(run)} names, {sum(c['new'] for c in run)} fresh (≤ 3 bars)")
+    print(f"\nRUNNER lane — hole broke up, in the universe (${sup['RUNNER']['universe']['cap_min']/1e9:.1f}B–5B, ATR ≥ 5 %): {len(run)} names, {sum(c['new'] for c in run)} fresh (≤ 3 bars)")
     print(f"  {'ticker':7s} {'cap$B':>6s} {'new':4s} {'close':>9s} {'ATR%':>5s} {'brk vol':>8s} {'bars':>5s} {'$M/day':>7s} {'52w%':>5s} {'earn7d':>6s}  plan")
     for c in run[:30]:
         print(f"  {c['ticker']:7s} {c.get('cap_B') or 0:6.2f} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:5.1f} {c.get('break_vol_ratio') or 0:8.2f} {c.get('bars_since_break', 0):5d} {c.get('dvol20_M') or 0:7.1f} {c['context']['hi252']:5.1f} {str(c.get('earnings_7d', '')):>6s}  entry next open · exit hole-down · size {int(a.capital * 0.01 / c['atr']) if c['atr'] else 0} sh")
-    base = [c for c in today["candidates"] if c["family"] != "RUNNER"]; base.sort(key=lambda c: (not c["new"], -c["atr_pct"]))
-    print(f"\nBASE-HIT lane — {len(base)} names ({', '.join(f'{k} {v}' for k, v in __import__('collections').Counter(c['family'] for c in base).items())}), {sum(c['new'] for c in base)} new")
+    base = [c for c in today["candidates"] if c["family"] != "RUNNER" and (c["context"].get("dvol20_M") or 0) >= 3.0]; base.sort(key=lambda c: (not c["new"], -(c["context"].get("dvol20_M") or 0)))
+    print(f"\nBASE-HIT lane (≥ $3M/day only) — {len(base)} names ({', '.join(f'{k} {v}' for k, v in __import__('collections').Counter(c['family'] for c in base).items())}), {sum(c['new'] for c in base)} new")
     print(f"  {'ticker':7s} {'family':10s} {'new':4s} {'close':>9s} {'ATR%':>5s} {'target':>9s} {'stop':>9s} {'$M/day':>7s} {'earn7d':>6s}")
     for c in base[:30]:
         print(f"  {c['ticker']:7s} {c['family']:10s} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:5.1f} {c['plan']['target'] or 0:9.2f} {c['plan']['stop']:9.2f} {c['context']['dvol20_M']:7.1f} {str(c.get('earnings_7d', '')):>6s}")

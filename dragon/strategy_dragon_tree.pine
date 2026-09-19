@@ -1,0 +1,81 @@
+//@version=5
+strategy("DRAGON TREE (strategy)", overlay=true, default_qty_type=strategy.cash, default_qty_value=10000, commission_type=strategy.commission.percent, commission_value=0.05, initial_capital=100000, pyramiding=0)
+// Strategy twin of DRAGON TREE. Runner trades (hole up → hole down) only outside a long downtrend; washout trades
+// (bracket +2/−4 ATR, 20 bars) only inside it. $10k per trade: read per-trade averages, not net % on one chart.
+holeK   = input.float(1.4, "Hole k·ATR", step=0.1)
+pivL    = input.int(4, "Hole pivot strength", minval=1)
+downPct = input.float(5.0, "Long downtrend: 21-SMA below 200-SMA by ≥ %", step=0.5)
+useRun  = input.bool(true, "Runner lane")
+useWash = input.bool(true, "Washout lane")
+atrMin  = input.float(0.0, "Runner only when ATR % ≥ (0 = off)", step=0.5)
+
+atrV = ta.atr(14)
+downtrend = ta.sma(close, 21) < ta.sma(close, 200) * (1 - downPct / 100)
+maV = ta.sma(close, 10)
+ph = ta.pivothigh(high, pivL, pivL)
+pl = ta.pivotlow(low, pivL, pivL)
+var float hUp = na
+var float hDn = na
+var int hState = 0
+var float pl_px = na
+if not na(pl)
+    pl_px := pl
+if not na(ph) or not na(pl)
+    hUp := maV[pivL] + holeK * atrV[pivL]
+    hDn := maV[pivL] - holeK * atrV[pivL]
+    hState := 0
+brokeUp = false
+brokeDn = false
+if hState == 0 and not na(hUp)
+    if close > hUp and close[1] > hUp
+        hState := 1
+        brokeUp := true
+    else if close < hDn and close[1] < hDn
+        hState := -1
+        brokeDn := true
+float drawup20 = 0.0
+float drawdown20 = 0.0
+float runmin20 = na
+float runmax20 = na
+for i = 19 to 0
+    c_ = close[i]
+    runmin20 := na(runmin20) ? c_ : math.min(runmin20, c_)
+    runmax20 := na(runmax20) ? c_ : math.max(runmax20, c_)
+    drawup20 := math.max(drawup20, c_ / runmin20 - 1)
+    drawdown20 := math.max(drawdown20, 1 - c_ / runmax20)
+asym20 = math.log((drawup20 + 0.01) / (drawdown20 + 0.01))
+washOn = asym20 <= -0.874 and (close - low) / (high - low) <= 0.08271 and (close - pl_px) / atrV <= 0.7581 and close / ta.lowest(low, 50) * 100 <= 105.7
+washEnter = washOn and not washOn[1] and downtrend
+atrOK = atrMin <= 0 or atrV / close * 100 >= atrMin
+
+var string lane = ""
+var float ent = na
+var int entBar = na
+var float entAtr = na
+if strategy.position_size == 0
+    if useRun and brokeUp and not downtrend and atrOK
+        strategy.entry("R", strategy.long)
+        lane := "R"
+    else if useWash and washEnter
+        strategy.entry("W", strategy.long)
+        lane := "W"
+        entAtr := atrV
+if strategy.position_size > 0 and na(ent)
+    ent := strategy.position_avg_price
+    entBar := bar_index
+if strategy.position_size > 0
+    if lane == "R" and brokeDn
+        strategy.close("R")
+    if lane == "W"
+        strategy.exit("WX", "W", limit=ent + 2 * entAtr, stop=ent - 4 * entAtr)
+        if bar_index - entBar >= 20
+            strategy.close("W")
+if strategy.position_size == 0
+    ent := na
+    entBar := na
+plot(hUp, color=color.new(color.orange, 30), style=plot.style_linebr)
+plot(hDn, color=color.new(color.orange, 30), style=plot.style_linebr)
+bgcolor(downtrend ? color.new(color.blue, 94) : na)
+plotshape(brokeUp and not downtrend, style=shape.triangleup, location=location.belowbar, color=color.lime, size=size.small)
+plotshape(brokeDn, style=shape.triangledown, location=location.abovebar, color=color.red, size=size.small)
+plotshape(washEnter, style=shape.diamond, location=location.belowbar, color=color.aqua, size=size.small)

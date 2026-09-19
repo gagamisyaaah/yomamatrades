@@ -1,0 +1,65 @@
+TREE OF LIFE · 2026-09-20 · scanned 3613 · guard ON (SPY 762 vs 200d 716)
+
+RUNNER lane — hole broke up, in the universe ($0.5B–5B, ATR ≥ 5 %): 28 names, 16 fresh (≤ 3 bars)
+  ticker   cap$B new      close  ATR%  brk vol  bars  $M/day  52w% earn7d  plan
+  SECZ      1.77 NEW      10.86   8.0     7.49     0    25.0  77.3  False  entry next open · exit hole-down · size 1156 sh
+  FRNM      1.84 NEW      17.11   5.3     5.87     0    16.2  99.2  False  entry next open · exit hole-down · size 1110 sh
+  SDGR      2.17 NEW      29.02   5.5     3.06     2    44.3  95.4  False  entry next open · exit hole-down · size 630 sh
+  PSIX      1.06 NEW      45.87   5.7     3.02     0    14.8  38.3  False  entry next open · exit hole-down · size 384 sh
+  DNA       0.51 NEW       7.88   6.2     2.27     0     8.4  44.8  False  entry next open · exit hole-down · size 2052 sh
+  BBNX      0.98 NEW      21.89   7.1     2.26     0    27.5  66.9  False  entry next open · exit hole-down · size 642 sh
+  FTRE      1.90 NEW      19.93   5.1     2.17     2    25.8  93.2  False  entry next open · exit hole-down · size 978 sh
+  RXT       0.97 NEW       3.80   8.9     1.94     0    25.7  44.2  False  entry next open · exit hole-down · size 2938 sh
+  CMPS      2.10 NEW      15.19   5.6     1.87     0    38.0  95.7  False  entry next open · exit hole-down · size 1171 sh
+  ABCL      4.09 NEW      12.63   5.9     1.68     0    55.8  95.8  False  entry next open · exit hole-down · size 1337 sh
+  NUTX      1.43 NEW     208.79   5.3     1.63     3    31.6  93.1  False  entry next open · exit hole-down · size 91 sh
+  WGS       3.02 NEW     101.10   5.1     1.61     2    48.9  59.2  False  entry next open · exit hole-down · size 193 sh
+  IOVA      4.64 NEW      10.25   5.4     1.45     3   123.5  93.4  False  entry next open · exit hole-down · size 1816 sh
+  FTK       1.14 NEW      31.40   6.2     1.19     1    11.7  79.2  False  entry next open · exit hole-down · size 517 sh
+  DK        4.78 NEW      78.12   5.4     0.96     2   185.9  95.0  False  entry next open · exit hole-down · size 238 sh
+  CRSR      1.45 NEW      13.38   5.0     0.92     2    14.6  89.3  False  entry next open · exit hole-down · size 1478 sh
+  ODD       1.03          18.11   7.9     8.37     6    30.8  28.5  False  entry next open · exit hole-down · size 701 sh
+  FEIM      0.96          85.53   6.2     4.97     4    26.5  95.3  False  entry next open · exit hole-down · size 187 sh
+  ASST      2.81          30.09   6.3     2.95    20   284.4  34.1  False  entry next open · exit hole-down · size 530 sh
+  MTC       0.69           6.89   8.1     2.74     8     0.1  75.8  False  entry next open · exit hole-down · size 1782 sh
+  BUUU      0.87          46.25   8.6     1.90     7     2.6  96.1  False  entry next open · exit hole-down · size 252 sh
+  ANGX      0.98           5.27   6.6     1.70     7     8.5  53.5  False  entry next open · exit hole-down · size 2868 sh
+  FMC       1.26          10.09   6.4     1.36    13    39.2  26.9  False  entry next open · exit hole-down · size 1553 sh
+  KPLT      0.81           9.50   6.8     1.26     9     1.7  44.8  False  entry next open · exit hole-down · size 1551 sh
+  LMB       0.62          51.74   5.5     1.15     9    21.7  45.0  False  entry next open · exit hole-down · size 353 sh
+  IMMX      0.89          12.50   6.4     1.07    27    20.9  82.8  False  entry next open · exit hole-down · size 1248 sh
+  AHCO      0.78           5.71   6.1     1.04     9    16.8  42.5  False  entry next open · exit hole-down · size 2850 sh
+  TSAT      1.77          48.83   6.5     0.81     4     6.6  79.3  False  entry next open · exit hole-down · size 317 sh
+
+BASE-HIT lane (≥ $3M/day only) — 111 names (FORCE 23, STRUCTURE 74, ENERGY 14), 88 new
+  ticker  family     new      close  ATR%    target      stop  $M/day earn7d
+  LRCX    FORCE      NEW     288.11   5.5    319.74    224.84  2499.3  False
+  PEP     STRUCTURE  NEW     129.75   1.8    134.36    120.53  1184.8  False
+  NKE     STRUCTURE  NEW      35.51   2.8     37.51     31.50  1146.1  False
+  FCX     FORCE      NEW      71.54   4.1     77.36     59.90  1085.7  False
+  DKS     STRUCTURE  NEW     121.15   5.5    134.54     94.37   790.4  False
+  WM      STRUCTURE  NEW     211.10   1.8    218.55    196.20   491.0  False
+  MMM     FORCE      NEW     165.89   2.1    173.03    151.60   475.0  False
+  CASY    STRUCTURE  NEW     597.48   4.9    655.93    480.58   439.8  False
+  NSC     STRUCTURE  NEW     314.16   1.8    325.71    291.06   375.1  False
+  GIS     STRUCTURE  NEW      36.32   3.0     38.51     31.94   346.7   True
+  FIVE    FORCE      NEW     234.14   4.2    253.89    194.64   330.7  False
+  CLX     STRUCTURE  NEW      83.10   3.2     88.37     72.56   308.4  False
+  STZ     STRUCTURE  NEW     118.97   2.8    125.52    105.87   295.7  False
+  CCJ     ENERGY     NEW      91.62   4.1     99.05     76.75   293.4  False
+  VMC     STRUCTURE  NEW     240.83   2.7    253.86    214.76   273.6  False
+  VICI    STRUCTURE  NEW      23.72   1.8     24.59     21.99   258.9  False
+  DKNG    STRUCTURE  NEW      21.75   5.2     24.03     17.18   245.1  False
+  SCCO    FORCE      NEW     195.70   4.3    212.37    162.36   238.6  False
+  ONON    ENERGY     NEW      27.26   3.9     29.39     23.01   225.5  False
+  IONS    STRUCTURE  NEW      44.44   5.6     49.44     34.43   202.2  False
+  CORT    FORCE      NEW     110.29   4.5    120.11     90.64   192.5  False
+  CORT    ENERGY     NEW     110.29   4.5    120.11     90.64   192.5  False
+  QXO     STRUCTURE  NEW      11.38   5.2     12.55      9.03   189.3  False
+  NLY     STRUCTURE  NEW      21.05   1.9     21.84     19.47   179.4  False
+  AEE     STRUCTURE  NEW     102.23   1.7    105.66     95.37   152.0  False
+  ARWR    STRUCTURE  NEW      66.48   6.1     74.57     50.31   148.2  False
+  STE     STRUCTURE  NEW     205.04   2.5    215.27    184.57   143.9  False
+  MAA     STRUCTURE  NEW     118.93   1.9    123.44    109.90   126.8  False
+  UEC     ENERGY     NEW       9.81   6.5     11.08      7.27   109.0   True
+  NEU     FORCE      NEW     891.87   2.8    941.48    792.66   107.0  False

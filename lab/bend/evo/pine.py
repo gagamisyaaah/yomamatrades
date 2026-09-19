@@ -136,8 +136,17 @@ dnv10 = math.sum(close < close[1] ? volume : 0, 10)
 shock = ta.change(close) / atr <= -2
 shock_bar = ta.valuewhen(shock, bar_index, 0)
 shock_px = ta.valuewhen(shock, close, 0)
-drawup20 = ta.highest(close, 20) / ta.lowest(close, 20) - 1
-drawdown20 = 1 - ta.lowest(close, 20) / ta.highest(close, 20)
+// path asymmetry: largest run-up from a running low vs largest drawdown from a running high, inside the last 20 bars
+float drawup20 = 0.0
+float drawdown20 = 0.0
+float runmin20 = na
+float runmax20 = na
+for i = 19 to 0
+    c_ = close[i]
+    runmin20 := na(runmin20) ? c_ : math.min(runmin20, c_)
+    runmax20 := na(runmax20) ? c_ : math.max(runmax20, c_)
+    drawup20 := math.max(drawup20, c_ / runmin20 - 1)
+    drawdown20 := math.max(drawdown20, 1 - c_ / runmax20)
 dev60 = close[1] - ta.sma(close, 60)[1]
 ou_speed60 = ta.correlation(ta.change(close), dev60, 60) * ta.stdev(ta.change(close), 60) / ta.stdev(dev60, 60)
 // last two swing sizes (for the damping ratio)
@@ -220,7 +229,8 @@ skew60 = ta.sma(math.pow((r1 - m60) / s60, 3), 60)
 var int bandwagon = 0
 bandwagon := close > close[1] and volume > volume[1] ? bandwagon + 1 : 0
 var float inertia = 0
-inertia := math.sign(ta.change(close)) == math.sign(ta.change(close)[1]) ? inertia + ta.change(close) / atr : ta.change(close) / atr
+chg1 = ta.change(close)
+inertia := math.sign(chg1) == math.sign(chg1[1]) ? inertia + chg1 / atr : chg1 / atr
 rng_slope20 = (ta.linreg(high - low, 20, 0) - ta.linreg(high - low, 20, 1)) / atr
 vol_slope20 = ta.linreg(volume / ta.sma(volume, 20), 20, 0) - ta.linreg(volume / ta.sma(volume, 20), 20, 1)
 anneal20 = -rng_slope20 * vol_slope20 * math.sign(vol_slope20) * math.sign(-rng_slope20)
