@@ -39,10 +39,21 @@ including random ones — earned the same, i.e. that profit is the exit plus the
 Shorting the mirrored readings lost money everywhere. The "overheated" exit that the miner suggested (price > 2 ATR
 above the gold band with the bubble > 8.7) *hurt* the Dragon winner (+7.65 → +3.9), so it is offered but not default.
 
-**On TradingView itself** (`lab/backtest_grid.csv`, 2018+, daily, $10 000 per trade, long only, 8 of your tickers):
-Dragon total (5 of 7) with the chandelier exit had a median profit factor of 2.5 with all 8 tickers above 1.0 and a
-median summed return of +337 % of one unit (e.g. SLNH +427 % over 38 trades while holding it lost 95 %, ONDS +221 %
-vs −45 %, CLSK +483 % vs −9 %). Rankings: `python3.12 lab/rank_grid.py lab/backtest_grid.csv`.
+**On TradingView itself** (`lab/backtest_grid.csv`, 96 backtests: 4 total readings × 3 exits × 8 of your tickers,
+2018+, daily, $10 000 per trade, long only, next-open fills; `lab/ranking.csv`):
+
+| reading / exit | median PF | tickers with PF > 1 | median summed return (one unit) | trades (8 tickers, 8.7 y) |
+|---|---|---|---|---|
+| Dragon total 5 of 7 / chandelier 3 ATR | 2.51 | 8 / 8 | +337 % | 288 |
+| Dragon total 5 of 7 / flip or chandelier | 2.40 | 7 / 8 | +250 % | 403 |
+| Dragon total all 7 / chandelier 3 ATR | 2.68 | 8 / 8 | +249 % | 178 |
+| Diamond total strict / chandelier 3 ATR | 4.24 | 6 / 8 | +121 % | 55 (≈ 7 per ticker) |
+| Diamond total 2 of 3 / chandelier 3 ATR | 2.30 | 7 / 8 | +229 % | 189 |
+
+Examples of the "stack the trades" number vs holding: SLNH +427 % over 38 Dragon trades while the stock lost 95 %;
+ONDS +221 % vs −45 %; CLSK +483 % vs −9 %; the strategies did not keep up with NVDA/PLTR buy-and-hold (fixed-size
+trades cannot compound like a 40× stock). The TradingView twins use the same formulas as the Python ports but a
+slightly different contract (2018 window, one position at a time), which is why the two tables differ in scale.
 
 **Caveats you must keep in mind.** The universe and the 2024–2026 window were strongly bullish; bear-regime samples
 out-of-sample are small (dip-and-rip episodes) so the bear rows are not a bear-market proof. Fills are next-open with

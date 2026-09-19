@@ -1,0 +1,3 @@
+file,title,lines,editor_ok,added_to_chart,verdict,typesafe,console
+DRAGON_TOTAL.pine,DRAGON,-1,False,True,compiled,compiled_clean (1.00); needs_code_change=0.45,Compiling... Compiled. Added to chart.
+DIAMOND_TOTAL.pine,DIAMOND,-1,False,True,compiled,compiled_clean (1.00); needs_code_change=0.49,Compiling... Compiled. Added to chart.

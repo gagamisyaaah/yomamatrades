@@ -1,5 +1,25 @@
-suite,signal,tf,cells,valid,median_pf,pf_gt1,median_net,median_dd,median_win,trades,typesafe_rob,score
-vcp,TTM squeeze,all,15,10,1.05,0.5,1.8,15.8,42.3,91,0.36,0.443
-vcp,TTM squeeze,240,5,4,0.72,0.25,-6.7,17.5,38.1,36,0.24,0.148
-vcp,TTM squeeze,D,5,4,1.45,0.5,14.6,20.5,37.5,46,0.55,0.576
-vcp,TTM squeeze,W,5,2,10.0,1.0,122.1,11.5,75.0,9,0.23,8.845
+suite,signal,tf,cells,valid,median_pf,pf_gt1,median_net,median_dd,median_win,trades,median_alpha,alpha_gt0,typesafe_rob,score
+startupio,Diamond total (strict) / Chandelier 3 ATR,all,8,8,4.24,0.75,120.8,29.3,42.9,55,-62.9,0.5,0.28,2.247
+startupio,Diamond total (strict) / Flip or chandelier,all,8,8,3.4,0.62,76.2,25.1,43.8,56,-52.4,0.5,0.26,1.59
+homily,Dragon total (all 7) / Chandelier 3 ATR,all,8,8,2.68,1.0,249.0,49.7,37.8,178,32.5,0.5,0.73,1.347
+homily,Dragon total (5 of 7) / Flip or chandelier,all,8,8,2.4,0.88,249.8,39.3,39.7,403,23.4,0.5,1.23,1.275
+homily,Dragon total (5 of 7) / Chandelier 3 ATR,all,8,8,2.51,1.0,337.5,51.6,36.7,288,57.1,0.5,0.85,1.213
+homily,Dragon total (5 of 7) / Signal flip,all,8,8,2.07,0.88,228.4,35.7,41.2,383,26.8,0.5,1.34,1.162
+homily,Dragon total (all 7) / Flip or chandelier,all,8,8,1.71,0.88,86.6,29.9,45.8,284,-53.4,0.5,1.23,1.051
+startupio,Diamond total (2 of 3) / Chandelier 3 ATR,all,8,8,2.3,0.88,229.3,51.1,34.5,189,-39.0,0.38,0.8,0.985
+homily,Dragon total (all 7) / Signal flip,all,8,8,1.48,0.88,51.8,36.1,43.8,283,-53.4,0.5,1.06,0.826
+startupio,Diamond total (2 of 3) / Flip or chandelier,all,8,8,2.06,0.62,195.8,40.9,34.8,214,-41.0,0.38,0.7,0.762
+startupio,Diamond total (strict) / Signal flip,all,8,8,1.94,0.5,86.6,25.7,35.4,54,-69.4,0.38,0.23,0.723
+startupio,Diamond total (2 of 3) / Signal flip,all,8,8,2.03,0.62,190.3,46.5,36.6,207,-44.0,0.38,0.58,0.678
+startupio,Diamond total (strict) / Chandelier 3 ATR,D,8,8,4.24,0.75,120.8,29.3,42.9,55,-62.9,0.5,0.28,2.247
+startupio,Diamond total (strict) / Flip or chandelier,D,8,8,3.4,0.62,76.2,25.1,43.8,56,-52.4,0.5,0.26,1.59
+homily,Dragon total (all 7) / Chandelier 3 ATR,D,8,8,2.68,1.0,249.0,49.7,37.8,178,32.5,0.5,0.73,1.347
+homily,Dragon total (5 of 7) / Flip or chandelier,D,8,8,2.4,0.88,249.8,39.3,39.7,403,23.4,0.5,1.23,1.275
+homily,Dragon total (5 of 7) / Chandelier 3 ATR,D,8,8,2.51,1.0,337.5,51.6,36.7,288,57.1,0.5,0.85,1.213
+homily,Dragon total (5 of 7) / Signal flip,D,8,8,2.07,0.88,228.4,35.7,41.2,383,26.8,0.5,1.34,1.162
+homily,Dragon total (all 7) / Flip or chandelier,D,8,8,1.71,0.88,86.6,29.9,45.8,284,-53.4,0.5,1.23,1.051
+startupio,Diamond total (2 of 3) / Chandelier 3 ATR,D,8,8,2.3,0.88,229.3,51.1,34.5,189,-39.0,0.38,0.8,0.985
+homily,Dragon total (all 7) / Signal flip,D,8,8,1.48,0.88,51.8,36.1,43.8,283,-53.4,0.5,1.06,0.826
+startupio,Diamond total (2 of 3) / Flip or chandelier,D,8,8,2.06,0.62,195.8,40.9,34.8,214,-41.0,0.38,0.7,0.762
+startupio,Diamond total (strict) / Signal flip,D,8,8,1.94,0.5,86.6,25.7,35.4,54,-69.4,0.38,0.23,0.723
+startupio,Diamond total (2 of 3) / Signal flip,D,8,8,2.03,0.62,190.3,46.5,36.6,207,-44.0,0.38,0.58,0.678
