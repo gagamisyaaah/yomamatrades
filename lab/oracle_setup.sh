@@ -13,11 +13,9 @@ sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq python3.11 python3.11
 python3.11 -m venv ~/venv && source ~/venv/bin/activate
 pip install -q -U pandas numpy pyarrow discord.py
 
-echo "== 2/6 · Bend 2 (ARM Linux build) =="
-curl -fsSL https://raw.githubusercontent.com/HigherOrderCO/bend/main/install.sh | bash   # installs into ~/.bend
-export PATH="$HOME/.bend/bin:$PATH" BEND_NO_TELEMETRY=1
-grep -q '.bend/bin' ~/.bashrc || echo 'export PATH="$HOME/.bend/bin:$PATH"; export BEND_NO_TELEMETRY=1' >> ~/.bashrc
-bend --version || { echo "Bend install failed — check the URL"; exit 1; }
+echo "== 2/6 · engine (pre-emitted C, compiled with clang) =="
+# The Bend engine is emitted to portable C on the founder's Mac and committed as bend/dragon.c;
+# the ARM box only needs clang to compile it. No Bend install needed here.
 
 echo "== 3/6 · repo =="
 [ -d ~/yomamatrades ] || git clone https://github.com/gagamisyaaah/yomamatrades.git ~/yomamatrades
@@ -36,9 +34,8 @@ mkdir -p mine/cache bend/data/D
 # Fetch every US common stock ≥ $100M via the Nasdaq screener + history API (parallel), then pack for the engine
 python3.11 -m mine.data --universe broad 2>&1 | tail -3
 python3.11 bend/pack.py --tf D 2>&1 | tail -1
-python3.11 bend/order.py bend/dragon.bend
-( cd bend && bend dragon.bend -o dragon ) 2>&1 | tail -1
-./bend/dragon bend/data/D --threads 3 | tail -1
+( cd bend && clang -O2 dragon.c -o dragon -lm -lpthread ) 2>&1 | tail -3 || { echo 'engine compile failed'; exit 1; }
+./bend/dragon bend/data/D --threads 3 | tail -3
 python3.11 bend/trades.py --dir bend/data/D --stats --out trades_D_full 2>&1 | tail -1
 python3.11 bend/evo/build_matrix.py --trades trades_D_full --out matrix_D_full --procs 3 2>&1 | tail -1
 
