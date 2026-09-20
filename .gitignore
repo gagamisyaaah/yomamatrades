@@ -1,0 +1,18 @@
+# Secrets — never commit
+.env
+.env.*
+*.token
+*_token.txt
+*api_key*
+*apikey*
+
+# Bot artifacts (per-machine)
+lab/bot.log
+lab/**/*.pkl
+lab/**/states.bin
+lab/**/*.bin
+lab/mine/cache/
+lab/venv/
+__pycache__/
+*.pyc
+.DS_Store
