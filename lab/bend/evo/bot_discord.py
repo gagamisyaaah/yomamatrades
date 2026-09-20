@@ -82,7 +82,50 @@ def render_board(text: str) -> bytes:
 
 async def post_board(channel, text: str, filename: str):
     png = await asyncio.to_thread(render_board, text)
-    await channel.send(file=discord.File(io.BytesIO(png), filename=filename))
+    view = LanesView()
+    await channel.send(file=discord.File(io.BytesIO(png), filename=filename), view=view)
+
+
+class LanesView(discord.ui.View):
+    """Navigable board: a select menu with today's names; tap one → the bot posts its card."""
+
+    def __init__(self):
+        super().__init__(timeout=None)
+        today = json.load(open(ROOT / "bend/data/today.json"))
+        run = [c for c in today["candidates"] if c["family"] == "RUNNER" and c.get("in_universe") and not c.get("downtrend")]
+        base = [c for c in today["candidates"] if c["family"] != "RUNNER" and (c["context"].get("dvol20_M") or 0) >= 3.0]
+        opts = []
+        for c in sorted(run, key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0)))[:12]:
+            opts.append(discord.SelectOption(label=f"🏃 {c['ticker']}  ${c['close']:.2f}  ATR {c['atr_pct']}%  vol {c.get('break_vol_ratio') or 0:.1f}×", value=f"RUNNER:{c['ticker']}"))
+        for c in sorted(base, key=lambda c: (not c["new"], -(c["context"].get("dvol20_M") or 0)))[:12]:
+            opts.append(discord.SelectOption(label=f"⚡ {c['ticker']} · {c['family']}  ${c['close']:.2f}", value=f"{c['family']}:{c['ticker']}"))
+        if opts:
+            self.add_item(TickerSelect(opts))
+
+
+class TickerSelect(discord.ui.Select):
+    def __init__(self, options):
+        super().__init__(placeholder="tap a name for the detail card", options=options[:25])
+
+    async def callback(self, interaction: discord.Interaction):
+        fam, t = self.values[0].split(":", 1)
+        today = json.load(open(ROOT / "bend/data/today.json")); sup = json.load(open(ROOT / "bend/data/supers.json"))
+        cs = [c for c in today["candidates"] if c["ticker"] == t and c["family"] == fam]
+        if not cs:
+            await interaction.response.send_message(f"{t} not in today's lanes anymore"); return
+        c = cs[0]; sm = sup.get(c["family"], {}); tp = c["plan"].get("target"); out = c["plan"].get("stop") or c["plan"].get("out_level"); px = c["close"]
+        e = discord.Embed(title=f"{'🏃 ' if fam == 'RUNNER' else '⚡ '}{t}  ·  {sm.get('name', fam)}", color=0x2E7D32 if fam == "RUNNER" else 0xC24A2E)
+        e.add_field(name="live", value=f"${px:.2f}  ·  ATR {c['atr_pct']}%  ·  ${c['context'].get('dvol20_M', 0)}M/day", inline=False)
+        if tp:
+            e.add_field(name="take-profit", value=f"${tp}  ({(tp / px - 1) * 100:+.1f}%)", inline=True)
+        if out and isinstance(out, (int, float)):
+            e.add_field(name="out at", value=f"${out}  ({(out / px - 1) * 100:+.1f}%)", inline=True)
+        else:
+            e.add_field(name="out", value=str(out)[:60], inline=True)
+        e.add_field(name="why", value="\n".join(f"**{b['block']}** {b['op']} {b['thr']}  ·  now {b['value']}" for b in c["blocks"][:6])[:1024], inline=False)
+        if sm.get("evidence"):
+            e.add_field(name="evidence", value="\n".join(f"**{k}** — {v[:150]}" for k, v in list(sm["evidence"].items())[:3])[:1024], inline=False)
+        await interaction.response.send_message(embed=e)
 
 
 @client.event
