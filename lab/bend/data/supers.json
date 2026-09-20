@@ -25,7 +25,9 @@
    "full universe 3,606 names, hole-down exit, holdout 2024+ (all ATR bands)": "hole-up vs random: $500M–2B +2.9 % vs +2.1 %, $2–5B +3.5 % vs +2.3 %, >$5B +2.6 % vs +1.7 %; ≥+20 % in 10–12 % of trades, ≥+50 % in 4–5 %, ≥+200 % in 0.3–0.6 %; $100M–500M no edge"
   },
   "pine": "dragon/DRAGON_RUNNER.pine (+ strategy_dragon_runner.pine)",
-  "regime": "no runner entries while the name is in a long downtrend (21-day SMA more than 5 % below the 200-day): the runner's gain over an in-force entry is +1.8 % outside that state and ≈ 0 inside it (holdout); DRAGON TREE hands the downtrend state to the washout lane"
+  "regime": "no runner entries while the name is in a long downtrend (21-day SMA more than 5 % below the 200-day): the runner's gain over an in-force entry is +1.8 % outside that state and ≈ 0 inside it (holdout); DRAGON TREE hands the downtrend state to the washout lane",
+  "typical_winner_pct": 10.3,
+  "winner_75th_pct": 24.2
  },
  "STRUCTURE": {
   "lane": "BASE-HIT",

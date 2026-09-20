@@ -22,6 +22,17 @@ from geometry import geometry  # noqa: E402
 from replay import parse  # noqa: E402
 
 
+def hole_levels(df: pd.DataFrame, piv: int = 4, k: float = 1.4):
+    """the hole's current upper/lower levels: MA10 ± k·ATR14 at the last confirmed pivot (same machine as the Pine)"""
+    ph = ta.pivothigh(df.high, piv, piv); pl = ta.pivotlow(df.low, piv, piv)
+    conf = ph.notna() | pl.notna()
+    if not conf.any():
+        return None, None
+    i = int(np.flatnonzero(conf.values)[-1]) - piv
+    ma10 = float(df.close.rolling(10).mean().iloc[i]); atr = float(ta.atr(df, 14).iloc[i])
+    return ma10 + k * atr, ma10 - k * atr
+
+
 def scan_one(args):
     """one ticker: every block family the rules need, on the last `tail` bars; returns the BASE-HIT candidates"""
     t, tail, rules, gold = args
@@ -86,10 +97,12 @@ def main():
             bvol = float(max(v.iloc[brk], v.iloc[brk - 1]) / sma20) if sma20 and sma20 > 0 else float("nan")
             dvol = float((df.close * df.volume).tail(20).mean() / 1e6)
             in_uni = (u["cap_min"] <= cap <= u["cap_max"]) and atr_pct >= u["atr_pct_min"] if not np.isnan(cap) else False
+            h_up, h_dn = hole_levels(df) if in_uni else (None, None)
+            goal = round(close * (1 + run.get("typical_winner_pct", 12.0) / 100), 2)
             out.append({"ticker": t, "family": "RUNNER", "new": (n - 1 - brk) <= 3, "date": str(df.date.iloc[-1].date()), "close": close, "atr": atr, "atr_pct": round(atr_pct, 2), "cap_B": round(cap / 1e9, 2) if not np.isnan(cap) else None, "in_universe": bool(in_uni), "downtrend": downtrend,
                         "bars_since_break": int(n - 1 - brk), "break_vol_ratio": round(bvol, 2), "dvol20_M": round(dvol, 1), "hole_level": round(float(df.close.iloc[brk]), 2),
                         "blocks": [{"block": "hole_up", "op": "=", "thr": 1, "value": 1}, {"block": "fresh", "op": "=", "thr": 1, "value": int((n - 1 - brk) <= 3)}, {"block": "break volume ×20d", "op": "≥", "thr": 1.5, "value": round(bvol, 2)}, {"block": "ATR %", "op": "≥", "thr": u["atr_pct_min"], "value": round(atr_pct, 2)}],
-                        "plan": {"entry": "next open (the break is confirmed at the close)", "target": None, "stop": "hole breaks down (two closes below the lower level) — the hold IS the trade", "time_stop_bars": None},
+                        "plan": {"entry": "next open (the break is confirmed at the close)", "target": goal, "target_note": f"typical winner +{run.get('typical_winner_pct', 12.0)} % (full-universe median winner); the hold has no fixed target", "stop": "hole breaks down (two closes below the lower level) — the hold IS the trade", "out_level": round(h_dn, 2) if h_dn else None, "hole_upper": round(h_up, 2) if h_up else None, "time_stop_bars": None},
                         "context": {"hi252": round(float(df.close.iloc[-1] / df.high.tail(252).max() * 100), 1), "struct": None, "retrace": None, "eff20": None, "rng20": None, "volr20": round(float(v.iloc[-1] / v.rolling(20).mean().iloc[-1]), 2), "dvol20_M": round(dvol, 1)}})
         print(f"RUNNER: {sum(1 for c in out if c['in_universe'])} in the universe, {sum(1 for c in out if c['new'] and c['in_universe'])} fresh; {len(out)} holes up overall ({time.time()-t0:.0f}s)", flush=True)
     tickers = sorted(p.stem for p in (ROOT / "mine/cache").glob("*.csv"))

@@ -4,7 +4,7 @@ TradingView is the main program (the three super indicators live there as Pine);
 across the whole universe, why (which building blocks hold, with their values), the evidence (the family's evolution
 record and holdout), the plan (entry, target, stop, time stop, size), and Jev's typed verdicts on the selected name.
 
-keys: ↑/↓ select · ←/→ lane (TREE / RUNNER / BASE-HIT / STRUCTURE / FORCE / ENERGY) · j ask Jev about the selected name · r rescan
+keys: ↑/↓ PgUp/PgDn Home/End select (the list scrolls) · ←/→ lane (TREE / RUNNER / BASE-HIT / STRUCTURE / FORCE / ENERGY) · l live prices · j ask Jev about the selected name · r rescan
       (runs today.py) · s size (cycle 0.5 % / 1 % / 2 % per ATR) · q quit
 usage: python3.12 bend/evo/tree_of_life.py [--capital 100000]"""
 from __future__ import annotations
@@ -58,11 +58,29 @@ def jev_verdict(c: dict, sup: dict) -> dict:
     })
 
 
+def refresh_live(cands):
+    """live last price (pre/post-market when the session is closed) from Nasdaq for the visible rows"""
+    from mine import premarket
+    import time as _t
+    for c in cands:
+        q = premarket.quote(c["ticker"]); px = q.get("pre") or q.get("last")
+        if px:
+            c["live"] = float(px); c["session"] = q.get("status")
+        _t.sleep(0.25)
+
+
+def tp_of(c):
+    """(take-profit $, out $) for a row: bracket target / stop for base-hits; typical-winner goal / hole lower level for runners"""
+    if c["family"] == "RUNNER":
+        return c["plan"].get("target"), c["plan"].get("out_level")
+    return c["plan"].get("target"), c["plan"].get("stop")
+
+
 def draw(stdscr, sup, today, a):
     curses.curs_set(0); curses.use_default_colors()
     curses.init_pair(1, curses.COLOR_GREEN, -1); curses.init_pair(2, curses.COLOR_YELLOW, -1); curses.init_pair(3, curses.COLOR_CYAN, -1); curses.init_pair(4, curses.COLOR_RED, -1); curses.init_pair(5, curses.COLOR_MAGENTA, -1)
     fam_col = {"RUNNER": 1, "STRUCTURE": 3, "FORCE": 2, "ENERGY": 5}
-    tab = 0; sel = 0; size_i = 1; verdicts = {}; msg = ""
+    tab = 0; sel = 0; off = 0; size_i = 1; verdicts = {}; msg = ""
     while True:
         stdscr.erase(); H, W = stdscr.getmaxyx()
         for i, ln in enumerate(LOGO.strip("\n").split("\n")):
@@ -84,19 +102,23 @@ def draw(stdscr, sup, today, a):
         sel = max(0, min(sel, len(cands) - 1))
         g = today.get("guard"); gtxt = "guard: not checked (rescan with quotes)" if not g else (f"guard ON  SPY {g['spy']:.0f} > 200d {g['sma200']:.0f}" if g["on"] else f"guard OFF SPY {g['spy']:.0f} < 200d {g['sma200']:.0f}")
         stdscr.addnstr(top, 0, f" {today['date']} · scanned {today['scanned']} · {gtxt} · size {SIZES[size_i]:.1%}/ATR of ${a.capital:,.0f} · " + "  ".join(("[" + t + "]") if i == tab else t for i, t in enumerate(TABS)), W - 1, curses.A_BOLD)
-        if lane in ("RUNNER", "TREE"):
-            stdscr.addnstr(top + 1, 0, f" {'ticker':7s} {'lane':8s} {'new':4s} {'close':>9s} {'ATR%':>6s} {'brk vol':>8s} {'bars':>5s} {'$M/day':>7s} {'shares':>7s}", W - 1, curses.A_UNDERLINE)
-        else:
-            stdscr.addnstr(top + 1, 0, f" {'ticker':7s} {'family':10s} {'new':4s} {'close':>9s} {'ATR%':>6s} {'target':>9s} {'stop':>9s} {'shares':>7s}", W - 1, curses.A_UNDERLINE)
-        lw = 70; rows = H - top - 4
-        for i, c in enumerate(cands[:rows]):
+        stdscr.addnstr(top + 1, 0, f" {'ticker':7s} {'lane':9s} {'new':4s} {'live $':>9s} {'TP $':>9s} {'→TP':>7s} {'out $':>9s} {'ATR%':>5s} {'brk':>5s} {'$M/d':>6s} {'sh':>6s}", W - 1, curses.A_UNDERLINE)
+        lw = 92; rows = max(1, H - top - 4)
+        # keep the selected row on screen: scroll the window, and show where we are in the list
+        if sel < off:
+            off = sel
+        if sel >= off + rows:
+            off = sel - rows + 1
+        off = max(0, min(off, max(0, len(cands) - rows)))
+        if cands:
+            stdscr.addnstr(top + 1, lw - 14, f"{sel + 1}/{len(cands)}" + (" ▲" if off > 0 else "  ") + (" ▼" if off + rows < len(cands) else "  "), 14, curses.A_DIM)
+        for i, c in enumerate(cands[off:off + rows], start=off):
             shares = int(a.capital * SIZES[size_i] / c["atr"]) if c["atr"] else 0
-            if lane in ("RUNNER", "TREE"):
-                lane_name = "runner" if c["family"] == "RUNNER" else "washout"
-                ln = f" {c['ticker']:7s} {lane_name:8s} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:6.2f} {c.get('break_vol_ratio') or 0:8.2f} {c.get('bars_since_break', 0):5d} {(c.get('dvol20_M') or c['context'].get('dvol20_M') or 0):7.1f} {shares:7d}"
-            else:
-                ln = f" {c['ticker']:7s} {c['family']:10s} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:6.2f} {c['plan']['target'] or 0:9.2f} {float(c['plan']['stop']) if isinstance(c['plan']['stop'], (int, float)) else 0:9.2f} {shares:7d}"
-            stdscr.addnstr(top + 2 + i, 0, ln, lw, (curses.A_REVERSE if i == sel else 0) | curses.color_pair(fam_col.get(c["family"], 0)))
+            lane_name = "runner" if c["family"] == "RUNNER" else c["family"].lower()
+            px = c.get("live") or c["close"]; tp, out = tp_of(c)
+            to_tp = f"{(tp / px - 1) * 100:+6.1f}%" if tp and px else "      —"
+            ln = f" {c['ticker']:7s} {lane_name:9s} {'NEW' if c['new'] else '':4s} {px:9.2f} {tp or 0:9.2f} {to_tp:>7s} {(out if isinstance(out, (int, float)) else 0) or 0:9.2f} {c['atr_pct']:5.1f} {c.get('break_vol_ratio') or 0:5.1f} {(c.get('dvol20_M') or c['context'].get('dvol20_M') or 0):6.1f} {shares:6d}"
+            stdscr.addnstr(top + 2 + i - off, 0, ln, lw, (curses.A_REVERSE if i == sel else 0) | curses.color_pair(fam_col.get(c["family"], 0)))
         if not cands:
             stdscr.addnstr(top + 2, 1, "no name meets a super indicator today — nothing to do is a valid day", W - 2, curses.color_pair(2))
         # detail
@@ -119,7 +141,8 @@ def draw(stdscr, sup, today, a):
             put("PLAN:")
             put(f"  entry {c['plan']['entry']}")
             if c["family"] == "RUNNER":
-                put(f"  exit: {c['plan']['stop']}   ·   hole level {c.get('hole_level')}   ·   break {c.get('bars_since_break')} bars ago on {c.get('break_vol_ratio')}× volume")
+                put(f"  goal: {c['plan'].get('target')} ({c['plan'].get('target_note', '')})   ·   OUT below {c['plan'].get('out_level')} (hole lower level; two closes below = exit)")
+                put(f"  break {c.get('bars_since_break')} bars ago at {c.get('hole_level')} on {c.get('break_vol_ratio')}× volume   ·   live {c.get('live') or '— (press l)'}")
                 put("  a runner: 42–46 % winners, big average, single-name drawdown ~40 % → many names, never one chart; skip if $M/day is thin for your size")
             else:
                 put(f"  target {c['plan']['target']} (+2 ATR)   stop {c['plan']['stop']} (−4 ATR)   time stop {c['plan']['time_stop_bars']} bars   exit early if the family's rule breaks (a lower pivot low / range expansion against you)")
@@ -129,7 +152,7 @@ def draw(stdscr, sup, today, a):
             if v:
                 sq, rf, er = v.get("setup_quality", {}), v.get("regime_fit", {}), v.get("event_risk", {})
                 put(f"  setup quality: {sq.get('score', sq)}   handling: {rf.get('choice')} ({rf.get('confidence', 0):.0%})   event risk: {er.get('noul', 0):.0%}")
-        stdscr.addnstr(H - 1, 0, (msg or " ↑↓ select  ←→ family  j Jev  r rescan  s size  q quit")[: W - 1], W - 1, curses.A_DIM)
+        live_n = sum(1 for c in cands if c.get("live")); stdscr.addnstr(H - 1, 0, (msg or f" ↑↓ select  ←→ lane  l live prices ({live_n}/{len(cands)} live{', ' + str(cands[0].get('session')) if cands and cands[0].get('session') else ''})  j Jev  r rescan  s size  q quit")[: W - 1], W - 1, curses.A_DIM)
         stdscr.refresh(); k = stdscr.getch()
         if k in (ord("q"), 27):
             break
@@ -137,12 +160,26 @@ def draw(stdscr, sup, today, a):
             sel -= 1
         elif k == curses.KEY_DOWN:
             sel += 1
+        elif k == curses.KEY_PPAGE:
+            sel -= rows
+        elif k == curses.KEY_NPAGE:
+            sel += rows
+        elif k == curses.KEY_HOME:
+            sel = 0
+        elif k == curses.KEY_END:
+            sel = len(cands) - 1
         elif k == curses.KEY_LEFT:
-            tab = (tab - 1) % len(TABS); sel = 0
+            tab = (tab - 1) % len(TABS); sel = 0; off = 0
         elif k == curses.KEY_RIGHT:
-            tab = (tab + 1) % len(TABS); sel = 0
+            tab = (tab + 1) % len(TABS); sel = 0; off = 0
         elif k == ord("s"):
             size_i = (size_i + 1) % len(SIZES)
+        elif k == ord("l") and cands:
+            msg = f"fetching live prices for {len(cands[off:off + rows])} names…"; stdscr.addnstr(H - 1, 0, msg, W - 1); stdscr.refresh()
+            try:
+                refresh_live(cands[off:off + rows]); msg = ""
+            except Exception as e:  # noqa: BLE001
+                msg = f"quotes unavailable: {str(e)[:50]}"
         elif k == ord("j") and cands:
             c = cands[sel]; msg = f"asking Jev about {c['ticker']}…"; stdscr.addnstr(H - 1, 0, msg, W - 1); stdscr.refresh()
             try:
@@ -163,20 +200,25 @@ def dump(sup, today, a):
     print(f"\nTREE view = runner outside a long downtrend ({len(run)}) + washout inside one ({len(wash_dn)}): " + ", ".join(c["ticker"] for c in wash_dn[:20]))
     run.sort(key=lambda c: (not c["new"], -(c.get("break_vol_ratio") or 0)))
     print(f"\nRUNNER lane — hole broke up, in the universe (${sup['RUNNER']['universe']['cap_min']/1e9:.1f}B–5B, ATR ≥ 5 %): {len(run)} names, {sum(c['new'] for c in run)} fresh (≤ 3 bars)")
-    print(f"  {'ticker':7s} {'cap$B':>6s} {'new':4s} {'close':>9s} {'ATR%':>5s} {'brk vol':>8s} {'bars':>5s} {'$M/day':>7s} {'52w%':>5s} {'earn7d':>6s}  plan")
+    print(f"  {'ticker':7s} {'cap$B':>6s} {'new':4s} {'live $':>9s} {'goal $':>9s} {'→goal':>7s} {'OUT $':>9s} {'ATR%':>5s} {'brk':>5s} {'bars':>5s} {'$M/day':>7s} {'earn7d':>6s}  size")
     for c in run[:30]:
-        print(f"  {c['ticker']:7s} {c.get('cap_B') or 0:6.2f} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:5.1f} {c.get('break_vol_ratio') or 0:8.2f} {c.get('bars_since_break', 0):5d} {c.get('dvol20_M') or 0:7.1f} {c['context']['hi252']:5.1f} {str(c.get('earnings_7d', '')):>6s}  entry next open · exit hole-down · size {int(a.capital * 0.01 / c['atr']) if c['atr'] else 0} sh")
+        px = c.get("live") or c["close"]; tp = c["plan"].get("target"); out = c["plan"].get("out_level")
+        print(f"  {c['ticker']:7s} {c.get('cap_B') or 0:6.2f} {'NEW' if c['new'] else '':4s} {px:9.2f} {tp or 0:9.2f} {((tp / px - 1) * 100 if tp else 0):+6.1f}% {out or 0:9.2f} {c['atr_pct']:5.1f} {c.get('break_vol_ratio') or 0:5.1f} {c.get('bars_since_break', 0):5d} {c.get('dvol20_M') or 0:7.1f} {str(c.get('earnings_7d', '')):>6s}  {int(a.capital * 0.01 / c['atr']) if c['atr'] else 0} sh")
     base = [c for c in today["candidates"] if c["family"] != "RUNNER" and (c["context"].get("dvol20_M") or 0) >= 3.0]; base.sort(key=lambda c: (not c["new"], -(c["context"].get("dvol20_M") or 0)))
     print(f"\nBASE-HIT lane (≥ $3M/day only) — {len(base)} names ({', '.join(f'{k} {v}' for k, v in __import__('collections').Counter(c['family'] for c in base).items())}), {sum(c['new'] for c in base)} new")
-    print(f"  {'ticker':7s} {'family':10s} {'new':4s} {'close':>9s} {'ATR%':>5s} {'target':>9s} {'stop':>9s} {'$M/day':>7s} {'earn7d':>6s}")
+    print(f"  {'ticker':7s} {'family':10s} {'new':4s} {'live $':>9s} {'TP $':>9s} {'→TP':>7s} {'stop $':>9s} {'ATR%':>5s} {'$M/day':>7s} {'regime':>9s} {'earn7d':>6s}")
     for c in base[:30]:
-        print(f"  {c['ticker']:7s} {c['family']:10s} {'NEW' if c['new'] else '':4s} {c['close']:9.2f} {c['atr_pct']:5.1f} {c['plan']['target'] or 0:9.2f} {c['plan']['stop']:9.2f} {c['context']['dvol20_M']:7.1f} {str(c.get('earnings_7d', '')):>6s}")
+        px = c.get("live") or c["close"]; tp = c["plan"]["target"]
+        print(f"  {c['ticker']:7s} {c['family']:10s} {'NEW' if c['new'] else '':4s} {px:9.2f} {tp or 0:9.2f} {((tp / px - 1) * 100 if tp else 0):+6.1f}% {c['plan']['stop']:9.2f} {c['atr_pct']:5.1f} {c['context']['dvol20_M']:7.1f} {'downtrend' if c.get('downtrend') else 'trend':>9s} {str(c.get('earnings_7d', '')):>6s}")
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--capital", type=float, default=100000); ap.add_argument("--dump", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--capital", type=float, default=100000); ap.add_argument("--dump", action="store_true"); ap.add_argument("--live", action="store_true", help="with --dump: fetch live prices for the listed names")
     a = ap.parse_args(); sup, today = load()
     if a.dump:
+        if a.live:
+            vis = [c for c in today["candidates"] if c["family"] == "RUNNER" and c.get("in_universe") and not c.get("downtrend")][:30] + [c for c in today["candidates"] if c["family"] != "RUNNER" and (c["context"].get("dvol20_M") or 0) >= 3.0][:30]
+            refresh_live(vis)
         dump(sup, today, a); return
     curses.wrapper(draw, sup, today, a)
 
