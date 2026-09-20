@@ -34,6 +34,7 @@ for ln in (ROOT / ".env").read_text().splitlines():
         k, v = ln.split("=", 1); os.environ.setdefault(k.strip(), v.strip().strip('"'))
 
 import discord  # noqa: E402  (pip install discord.py)
+from PIL import Image, ImageDraw, ImageFont  # noqa: E402 (pip install pillow)
 
 TREE_URL = "https://claude.ai/code/artifact/9de67f97-2444-4185-a830-e50458eb9caa"
 intents = discord.Intents.default(); intents.message_content = True
@@ -51,6 +52,39 @@ async def post(channel, text: str, name: str):
     await channel.send(f"```\n{head[:1800]}\n```", file=discord.File(io.BytesIO(text.encode()), filename=name))
 
 
+def render_board(text: str) -> bytes:
+    """Render the terminal text as a dark PNG the phone shows inline. Monospace, colored heads."""
+    lines = text.splitlines() or ["(empty)"]
+    for path in ("/usr/share/fonts/truetype/dejavu/DejaVuSansMono.ttf", "/System/Library/Fonts/Menlo.ttc", "/usr/share/fonts/truetype/liberation/LiberationMono-Regular.ttf"):
+        if Path(path).exists():
+            font = ImageFont.truetype(path, 14); bold = ImageFont.truetype(path, 14); break
+    else:
+        font = ImageFont.load_default(); bold = font
+    line_h = 18; w = max(min(1600, max(len(ln) for ln in lines) * 8 + 40), 720); h = 20 + len(lines[:80]) * line_h + 20
+    img = Image.new("RGB", (w, h), (14, 20, 28)); d = ImageDraw.Draw(img)
+    for i, ln in enumerate(lines[:80]):
+        color = (230, 236, 242)
+        if ln.startswith("TREE OF LIFE"):
+            color = (176, 148, 74)
+        elif "RUNNER lane" in ln or "TREE view" in ln:
+            color = (79, 194, 172)
+        elif "BASE-HIT" in ln:
+            color = (232, 132, 95)
+        elif ln.strip().startswith("ticker"):
+            color = (154, 169, 184)
+        elif " NEW " in ln:
+            color = (102, 187, 106)
+        elif ln.startswith("  "):
+            color = (200, 210, 220)
+        d.text((20, 20 + i * line_h), ln.rstrip()[:200], fill=color, font=font)
+    buf = io.BytesIO(); img.save(buf, format="PNG"); return buf.getvalue()
+
+
+async def post_board(channel, text: str, filename: str):
+    png = await asyncio.to_thread(render_board, text)
+    await channel.send(file=discord.File(io.BytesIO(png), filename=filename))
+
+
 @client.event
 async def on_ready():
     print(f"Tree of Life bot online as {client.user}")
@@ -65,14 +99,17 @@ async def on_message(m: discord.Message):
         return
     cmd, *rest = m.content[1:].split()
     if cmd == "help":
-        await m.channel.send("`!run` rescan (~25 min) · `!lanes` latest lanes · `!live` live prices · `!jev TICKER` verdict · `!tree` lineage page")
+        await m.channel.send("`!board` visual board (image) · `!lanes` latest lanes (text) · `!live` live prices · `!run` full rescan (~8 min) · `!jev TICKER` verdict · `!tree` lineage page")
+    elif cmd == "board":
+        await post_board(m.channel, await asyncio.to_thread(lanes_text, False), "tree_of_life.png")
     elif cmd == "tree":
         await m.channel.send(TREE_URL)
     elif cmd == "lanes":
         await post(m.channel, await asyncio.to_thread(lanes_text, False), "tree_of_life.txt")
     elif cmd == "live":
         await m.channel.send("fetching live prices…")
-        await post(m.channel, await asyncio.to_thread(lanes_text, True), "tree_of_life_live.txt")
+        text = await asyncio.to_thread(lanes_text, True)
+        await post_board(m.channel, text, "tree_of_life_live.png"); await post(m.channel, text, "tree_of_life_live.txt")
     elif cmd == "run":
         if busy.locked():
             await m.channel.send("a scan is already running"); return
@@ -82,7 +119,8 @@ async def on_message(m: discord.Message):
             out, _ = await proc.communicate()
             tail = out.decode(errors="ignore").strip().splitlines()[-1:] if out else ["(no output)"]
             await m.channel.send(f"scan done: {tail[0][:300]}")
-            await post(m.channel, await asyncio.to_thread(lanes_text, True), "tree_of_life_live.txt")
+            text = await asyncio.to_thread(lanes_text, True)
+            await post_board(m.channel, text, "tree_of_life_live.png"); await post(m.channel, text, "tree_of_life_live.txt")
     elif cmd == "jev" and rest:
         t = rest[0].upper()
         today = json.load(open(ROOT / "bend/data/today.json")); sup = json.load(open(ROOT / "bend/data/supers.json"))
